@@ -1,0 +1,276 @@
+@import "./base";
+@import "./component";
+
+.content-modal{
+  .inner-modal{
+    .content{
+      .add-to-cart {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 4px;
+          border: 1px solid rgb(107, 107, 107);
+          border-radius: 8px 10px;
+          height: 35px;
+          background-color: rgb(14 14 14 / 72%);
+          color: #fff;
+      }
+    }
+  }
+}
+
+.header-m-oprator{
+  .title{
+    display: flex;
+    align-items: center;
+    .icon-name{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .search{
+      padding: 7px;
+      border: 1px solid white;
+      border-radius: 25px;
+      display: flex;
+      justify-content: flex-end;
+      input{
+        outline: none;
+        color: #fff;
+      }
+      img{
+        padding: 5px;
+      }
+    }
+    .logo-item {
+      display: flex;
+      justify-content: flex-end;
+      height: 30%;
+      .logo-inner{
+        //height: 60%;
+        img{
+          //height: 60%;
+        }
+      }
+    
+    }
+  }
+}
+
+.menu-admin {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: -100%;
+    z-index: 100;
+    display: flex;
+    justify-content: end;
+    transition: all 500ms;
+    -webkit-transition: all 500ms;
+    -moz-transition: all 500ms;
+    -ms-transition: all 500ms;
+    -o-transition: all 500ms;
+    &.active {
+      right: 0;
+    }
+    .overlay-menu-mobile {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      backdrop-filter: blur(3px);
+    }
+    .inner-menu-mobile {
+      width: 250px;
+      height: 100%;
+      background-color: rgb(59, 57, 57);
+      border-radius: 20px;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      -ms-border-radius: 20px;
+      -o-border-radius: 20px;
+  
+      .list-menu-mobile {
+        padding: 10px 0;
+        height: calc(100% - 80px);
+        overflow-y: scroll;
+        height: 100%;
+        li {
+          margin: 20px 0;
+          padding: 0 10px;
+          font-size: 12px;
+          font-weight: 300;
+          position: relative;
+  
+          a {
+            display: block;
+            color: rgb(238, 232, 232);
+            padding: 5px 10px;
+            font-weight: 300;
+            border-radius: 30px;
+            text-decoration: none;
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            -ms-border-radius: 30px;
+            -o-border-radius: 30px;
+            &:hover {
+              background-color:$color-btn-uppackage;
+            }
+            &.active {
+              background-color: rgba($color-primary, 0.3);
+            }
+          }
+          img {
+            width: $w-img-two;
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+  
+  }
+
+
+.content-main{
+  padding: 0px 10px 70px 10px;
+  .custom-box-category{
+    justify-content: center;
+    .custom-box-img{
+        .inner-custom-box{
+            filter: brightness(100%);
+            cursor: pointer; 
+            .des-custom-box{
+              p{
+                margin: 0;
+              }
+            }  
+        }
+    }
+   
+  }
+  .new-products{
+    .new-products-content{
+        display: none;
+        &.active{
+            display: flex;
+        }
+        .new-product-item{
+            display: flex;
+            padding: 20px;
+           
+            .content-right{
+                display: flex;
+                flex-direction: column;
+                color: #fff;
+                h1{
+                    font-weight: bold;
+                    font-size: 4rem;
+                }
+            }
+            .content-left{
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                align-self: center;
+                .prices{
+                text-align: end;
+                padding-bottom: 20px;
+                }
+                .add-to-cart{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 4px;
+                    border: 1px solid #fff;
+                    border-radius: 8px 10px;
+                }
+            }
+        }
+    }
+    
+}
+.image-new-products{
+    display: flex;
+   overflow-x: scroll;
+   padding: 10px;
+   &::-webkit-scrollbar {
+    height: 10px;
+    width:10px;
+    background-color:rgba(177, 172, 177, 0.648);
+    border-radius: 50px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background:#ffffffb7;
+    width:8px;
+    height: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $color-primary;
+  }
+    .products-item{
+        &.active{
+            z-index:1;
+            transform: scale(1.08);
+            // border: 1px solid rgb(255, 255, 255);
+            // border-radius: 25px;
+        }
+     .image-products-item{
+        border: 1px solid rgb(112, 112, 112);
+        border-radius: 25px;
+        position: relative;
+        .up{
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            font-size: 0.9em;
+            .text{
+                display: flex;
+                align-items: center;
+            }
+        }
+        .image-cake{
+           
+            img{
+                border-bottom-left-radius: 25px;
+                border-bottom-right-radius: 25px;
+               
+            }
+        }
+        .img-title{
+            color: #fff;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            bottom: 5%;
+            right: 10%;
+            .cake-name{
+                font-size: 20px;
+            }
+        }
+     }
+    }
+    
+    
+}
+}
+
+ @import "./medias";
+
+ 
+
+
+

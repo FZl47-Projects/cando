@@ -1,0 +1,77 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.menu-bottom{
+    border-radius: 0;
+}
+.main {
+   .image-cake{
+    color: white;
+    padding-bottom: 45px;
+    margin-bottom: 35px;
+    .order-type{
+        display: flex;
+        flex-direction: column;
+        
+        select{
+            border: 1px solid rgb(112 112 112 / 82%);
+            border-radius: 10px;
+            height: 35px;
+            outline: none;
+            background-color: transparent;
+            color: #fff;
+            option{
+                color: black;
+            }
+        }
+    }
+   }
+   .image{
+    display: flex;
+    flex-wrap: wrap;
+    .name-taste{
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        label{
+            font-size: 12px;
+        }
+        .image-content{
+            display: flex;
+          
+        }
+        .img{
+            position: relative;
+            .bb{
+                &::before {
+                    content: "";
+                    display: block;
+                    width:60%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: $color-text-primary;
+                    background: linear-gradient(
+                      90deg,
+                      transparent 0%,
+                      rgba($color-text-primary, 0.1) 76%
+                    );
+                    opacity: 0;
+                  }
+
+            } 
+        }
+       
+    }
+    
+    
+   }
+   .btn-main{
+    background-color: $color-bg-birthday-package;
+}
+}
+@import "./medias";

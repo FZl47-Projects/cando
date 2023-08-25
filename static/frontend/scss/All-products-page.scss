@@ -1,0 +1,41 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+.main{
+    padding:10px 10px 70px 10px;
+    .category-product{
+        .close-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .product-item{
+            .moshakhaseh{
+                color: #fff;
+               align-items: flex-start;
+               text-align: right;
+               display: flex;
+               justify-content: right;
+               flex-direction: column;
+               .name-sweet{
+                   font-size: 20px;
+                   font-weight: bold;
+    
+               }
+               .the-details{
+                   font-size: 12px;
+    
+               }
+            }
+        }
+    }
+    
+}
+
+
+@import "./medias";

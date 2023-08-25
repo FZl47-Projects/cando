@@ -1,0 +1,47 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+.main {
+   .Sale-operator-content{
+    padding-bottom: 50px;
+    .text-top-head{
+        padding: 10px;
+        .desired-package{
+            label{
+                color: rgb(150, 146, 146);
+            }
+        }
+    }
+
+   .list-moshakhasat{
+    display: flex;
+    flex-wrap: wrap;
+    .list-moshakhasat-content{
+        display: flex;
+        flex-direction: column;
+        label{
+            color: #fff;
+            padding: 5px;
+            font-size: 0.9em;
+        }
+        input{
+            border: 1px solid rgb(112 112 112 / 82%);
+            border-radius: 10px;
+            height: 35px;
+            outline: none;
+            color: #fff;
+            padding: 5px;
+        }
+    }
+   }
+   display: none;
+   &.active{
+       display: block;
+   }
+}
+}
+@import "./medias";

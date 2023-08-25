@@ -1,0 +1,36 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+
+.header-m-oprator{
+    background-color: #eae2e2;
+    padding: 20px 5px 1px 0;
+    .title{
+      h5{
+        color: black;
+      } 
+    }
+}
+.menu-bottom{
+    border-radius: 0;
+}
+.main {
+    .content{
+        .information{
+            color: black;
+        }
+        .date-tasvir{
+            .tasvir{
+                width: 100%;
+            }
+        }
+    }
+    .btn-main{
+        background-color: $color-bg-birthday-package;
+    }
+}
+@import "./medias";

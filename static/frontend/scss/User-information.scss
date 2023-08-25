@@ -1,0 +1,32 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+.main {
+  .information-account{
+    .information-account-content{
+      border: 0;
+      .information-item {
+          span,input{
+            font-size: 0.8em;
+          }
+      }
+    }
+  }
+  .Previous-orders{
+    padding: 35px;
+    color: white;
+    .tracking{
+      label{
+        font-size: 0.9em;
+      }
+    }
+    .bb{
+        border-bottom: 0;
+    }
+  }
+}
+@import "./medias";

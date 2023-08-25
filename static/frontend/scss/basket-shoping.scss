@@ -1,0 +1,232 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+//style modal
+
+.content-modal{
+    background-color: rgb(0 0 0 / 39%);
+    .inner-modal{
+        .content{
+            .header-m-oprator{
+               .title{
+                h6{
+                    color: black;
+               }
+               
+            }
+            .line{
+                background-color:rgb(208 206 206 / 70%);
+               }
+            }
+            .content-price{
+                .price-item{
+                    border: 0;
+                    background-color: #fff;
+                    .detail{
+                        border: 0;
+                        background-color: #fff;
+                        .detail-item{
+                            color: black;
+                            font-size:1em;
+                            input{
+                                color: black;
+                            }
+                            .adres::placeholder
+                            {
+                                text-align: right;
+                            }
+                      }
+                    }
+                }
+               
+            }
+        }
+    }
+}
+//style modal
+.menu-bottom{
+    border-radius: 0;
+}
+.main {
+    .btn-top{
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        .btn-change{
+            .btn-orders{
+                text-align: center;
+                border-bottom-left-radius: 14px;
+                height: 45px;
+                border-bottom-right-radius: 14px;
+                border: 1px solid #e3e3e3;
+                &.active {
+                    background-color: $color-btn-uppackage;
+                    font-weight: 700;
+                  }
+            }
+           
+        }
+       
+       
+    }
+   .order{
+            display: flex;
+            flex-wrap: wrap;
+            padding-bottom: 65px;
+            background-color: #fff;
+            display: none;
+                    &.active{
+                        display: flex;
+                    }
+    .category-product{
+        .text-right{
+            @include flex-column-center;
+            
+        }
+        .product-item{
+           background-color: white;
+           border: 1px solid #ccc5c5a8;
+            .height{
+                position: relative;
+                .img-zarb{
+                    position: absolute;
+                    top: 0;
+                    right: 5%;
+
+                }
+            }
+            .text-right{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #818181cf;
+                height: 100%;
+                padding-right: 5px;
+                span{
+                    transform: rotate(180deg);
+                    width: 100%;
+                    display: inline-block;
+                    writing-mode: vertical-lr
+                }
+                
+            }
+            .moshakhaseh{
+                align-items: flex-start;
+                text-align: right;
+                display: flex;
+                justify-content: right;
+                flex-direction: column;
+                height: 100%;
+            
+            .name-sweet{
+                font-size: 20px;
+                font-weight: bold;
+                
+            }
+            .the-details{
+                font-size: 12px;
+
+            }
+         }
+            .price{
+                color: black;
+                .price-value{
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: column;
+                    align-items: flex-end;
+                }
+                .price-item{
+                    border: 1px solid rgb(92, 91, 91);
+                    border-radius: 5px;
+                    padding: 5px;
+                    display:flex;
+                    justify-content: space-around;
+                    .number{
+                        margin-top: 2px;
+                    }
+                }
+            }
+        }
+    
+    }
+    
+    .Wallet{ 
+        display: flex;
+        flex-wrap: wrap;
+        .Wallet-item{
+            .item{  
+                display: flex;
+                .Wallet-credit{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .image{
+                        text-align: center;
+                    }
+                    .Validity{
+                        display: flex;
+                        flex-direction: column;
+                        text-align: start;
+                        //color:#55BF63;
+                        .text{
+                            color: black;
+                        }
+                    }
+    
+                } 
+
+                .desired-package{
+                    justify-content: flex-end;
+                }
+
+
+                .code{
+                    display: flex;
+                    border: 1px solid #BBBBBB;
+                    border-radius:10px;
+                    .right{
+                        input{
+                            outline: none;
+                            width: 100%;
+                           text-align: center;
+                        }
+                    }
+                    .left{
+                        background-color: #BBBBBB;
+                        border-radius:8px;
+                        text-align: center;
+                    }
+                }  
+            }
+            
+
+        }
+    }
+
+    .list{
+        .content-list{
+            color: black;
+            .border-b{
+                border-bottom: 1px solid rgba(165, 163, 163, 0.589);
+            }
+            .credit{
+               // color:#55BF63;
+            }
+            .list-item{
+                display: flex;
+                justify-content: space-between;
+                .kif-pol{
+                    text-align: start;
+                }
+               
+            }
+
+        }
+    }    
+   }   
+}
+@import "./medias";

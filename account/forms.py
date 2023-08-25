@@ -29,17 +29,17 @@ class RegisterUserForm(forms.Form):
         return p2
 
 
+class LoginForm(forms.Form):
+    phonenumber = PhoneNumberField(region='IR')
+    password = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())
+
+
 class RegisterUserFullForm(forms.ModelForm):
-    email_error_messages = {
-        'invalid': 'ایمیل نامعتبر است',
-        'unique': 'این ایمیل توسط کاربر دیگه ای در حال استفاده است'
-    }
-    email = forms.EmailField(required=True, error_messages=email_error_messages)
     password2 = forms.CharField(max_length=64, min_length=8, required=True, widget=forms.PasswordInput())
 
     class Meta:
         model = User
-        exclude = ('date_joined',)
+        exclude = ('date_joined','role','email')
         error_messages = {
             'phonenumber': {
                 'invalid': 'شماره همراه نامعتبر است',
@@ -68,4 +68,3 @@ class ResetPasswordSetForm(forms.Form):
         if p1 != p2:
             raise forms.ValidationError('passwords is not same')
         return p2
-

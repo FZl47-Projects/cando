@@ -1,0 +1,46 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+.main {
+    .category-product{
+        .bbb{
+            .cart{
+                .cart-image-edit{
+                    width: 100%;
+                    height: 50%;
+                  @include flex-column-center;
+                }
+                .cart-image-trash{
+                @extend .cart-image-edit;
+                background-color: $color-bg-trash-image;
+                }
+
+            }
+        }
+        .product-item{
+            
+                .sweat-name{
+                    color:$color-white;
+                    font-size: 20px;
+                     font-weight: bold;
+                }
+                .description{
+                    .description-item{
+                        color:$color-white;
+                        font-size: 12px;
+                    }
+                }
+        }
+    }
+    .content-pakage{
+        display: none;
+        &.active{
+            display: flex;
+        }
+    }
+}
+@import "./medias";

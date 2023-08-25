@@ -1,0 +1,39 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.bg{
+    background-image: url("../images/bg.png");
+}
+
+
+
+
+.main{
+    padding: 20px 20px 0 20px;
+ .article{
+    width: 100%;
+    height: 90vh;
+    position: relative;
+    .article-content{
+        border: 1px solid rgb(194, 191, 191);
+        border-radius: 10px;
+        padding: 25px;
+        color: white;
+        background-color: rgb(97 92 97 / 47%);
+        position: absolute;
+        bottom: 0;
+        .subject{
+
+        }
+        .description{
+            font-size: 0.8em;
+        }
+    }
+ }
+}
+
+
+@import "./medias";

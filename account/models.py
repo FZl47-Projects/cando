@@ -49,12 +49,14 @@ class User(AbstractUser):
         ('super_user', 'super_user'),
     )
 
-    first_name = models.CharField("first name", max_length=150, blank=True, default="بدون نام")
+    name = models.CharField("name", max_length=150, blank=True, default="بدون نام")
     username = None
-    email = models.EmailField("email address", null=True, blank=True, unique=True)
+    first_name = None
+    last_name = None
+    email = models.EmailField("email address", null=True,default=None)
     phonenumber = PhoneNumberField(region='IR', unique=True)
     # type users|roles
-    role = models.CharField(max_length=20, choices=ROLE_USER_OPTIONS, default='normal_user')
+    role = models.CharField(max_length=20, choices=ROLE_USER_OPTIONS, default='user')
 
     USERNAME_FIELD = "phonenumber"
     REQUIRED_FIELDS = []
@@ -74,7 +76,7 @@ class User(AbstractUser):
         return p
 
     def get_full_name(self):
-        fl = f'{self.first_name} {self.last_name}'.strip() or 'بدون نام'
+        fl = f'{self.name}'.strip() or 'بدون نام'
         return fl
 
     def get_email(self):

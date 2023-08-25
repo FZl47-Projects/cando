@@ -1,0 +1,52 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.header-m-oprator{
+    .title{
+            color: white;
+    }
+}
+.main {
+    color: white;
+   
+    .category-product{
+        .text-right{
+            @include flex-column-center;
+            
+        }
+        .product-item{
+            height: 130px;
+           background-color: transparent;
+           border: 1px solid #ccc5c5a8;
+            .moshakhaseh{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+                padding: 9px;
+            
+            .the-details{
+                font-size: 12px;
+                .text{
+                    margin: 0;
+                }
+
+            }
+         }
+            .price{
+                height: 100%;
+                font-size: 9px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row
+            }
+        }
+    
+    }
+}
+    
+@import "./medias";

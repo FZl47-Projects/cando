@@ -1,0 +1,1047 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    شیرینی سرای کندو
+{% endblock %}
+
+{% block Link %}
+    <!-- Link Swiper's CSS -->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'frontend/styles/index.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}">
+{% endblock %}
+
+{% block Content %}
+    <body style="background-color: black;">
+
+    <!-- header -->
+    <header class="header-m-oprator">
+        <div class="title p-2">
+            <div class="icon-name col-1">
+                    <span class="p-2" id="hamburger"><img src="{% static 'frontend/images/icon/hamberger-icon.png' %}"
+                                                          alt="icon"
+                    /></span>
+
+            </div>
+            <div class="col-8 col-md-6 search">
+                <input class="col-10" type="text" name="input-search" id="search" placeholder="جستجو">
+                <img src="{% static 'frontend/images/icon/search.png' %}">
+            </div>
+            <div class="logo-item col-3 col-md-5">
+                <div class="logo-inner col-4 col-md-1 ">
+                    <img src="{% static 'frontend/images/icon/logo.png' %}">
+                </div>
+            </div>
+        </div>
+        <div class="The-dividing-line"></div>
+    </header>
+    <!-- header -->
+
+
+    <!-- modal -->
+    <div class="content-modal" id="modal-edit-showcase">
+        <div class="inner-modal">
+            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                <div class="col-12">
+                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                </div>
+                <form class="px-4 pt-2">
+                    <div class="col-12 px-4 py-2 ">
+                        <p>موجودی:3</p>
+                        <h2>نام محصول روز</h2>
+                    </div>
+                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
+                    </div>
+                    <div class="col-12 p-2 d-flex align-items-end">
+                        <div class="add-to-cart col-7 col-md-5">
+                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                        </div>
+                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
+                            <span>تاریخ پخت:</span>
+                            <span>صبح</span>
+                            <span>25آذر1401</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content-modal" id="modal-edit-showcase">
+        <div class="inner-modal">
+            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                <div class="col-12">
+                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                </div>
+                <form class="px-4 pt-2">
+                    <div class="col-12 px-4 py-2 ">
+                        <p>موجودی:3</p>
+                        <h2>نام محصول روز</h2>
+                    </div>
+                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
+                    </div>
+                    <div class="col-12 p-2 d-flex align-items-end">
+                        <div class="add-to-cart col-7 col-md-5">
+                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                        </div>
+                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
+                            <span>تاریخ پخت:</span>
+                            <span>صبح</span>
+                            <span>25آذر1401</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content-modal" id="modal-edit-showcase">
+        <div class="inner-modal">
+            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                <div class="col-12">
+                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                </div>
+                <form class="px-4 pt-2">
+                    <div class="col-12 px-4 py-2 ">
+                        <p>موجودی:3</p>
+                        <h2>نام محصول روز</h2>
+                    </div>
+                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
+                    </div>
+                    <div class="col-12 p-2 d-flex align-items-end">
+                        <div class="add-to-cart col-7 col-md-5">
+                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                        </div>
+                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
+                            <span>تاریخ پخت:</span>
+                            <span>صبح</span>
+                            <span>25آذر1401</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content-modal" id="modal-edit-showcase">
+        <div class="inner-modal">
+            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                <div class="col-12">
+                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                </div>
+                <form class="px-4 pt-2">
+                    <div class="col-12 px-4 py-2 ">
+                        <p>موجودی:3</p>
+                        <h2>نام محصول روز</h2>
+                    </div>
+                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
+                    </div>
+                    <div class="col-12 p-2 d-flex align-items-end">
+                        <div class="add-to-cart col-7 col-md-5">
+                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                        </div>
+                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
+                            <span>تاریخ پخت:</span>
+                            <span>صبح</span>
+                            <span>25آذر1401</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content-modal" id="modal-edit-showcase">
+        <div class="inner-modal">
+            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                <div class="col-12">
+                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                </div>
+                <form class="px-4 pt-2">
+                    <div class="col-12 px-4 py-2 ">
+                        <p>موجودی:3</p>
+                        <h2>نام محصول روز</h2>
+                    </div>
+                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
+                    </div>
+                    <div class="col-12 p-2 d-flex align-items-end">
+                        <div class="add-to-cart col-7 col-md-5">
+                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                        </div>
+                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
+                            <span>تاریخ پخت:</span>
+                            <span>صبح</span>
+                            <span>25آذر1401</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="content-modal" id="modal-edit-showcase">
+        <div class="inner-modal">
+            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                <div class="col-12">
+                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                </div>
+                <form class="px-4 pt-2">
+                    <div class="col-12 px-4 py-2 ">
+                        <p>موجودی:3</p>
+                        <h2>نام محصول روز</h2>
+                    </div>
+                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
+                    </div>
+                    <div class="col-12 p-2 d-flex align-items-end">
+                        <div class="add-to-cart col-7 col-md-5">
+                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                        </div>
+                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
+                            <span>تاریخ پخت:</span>
+                            <span>صبح</span>
+                            <span>25آذر1401</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal -->
+
+
+    <!-- START MENU-MOBILE -->
+    <div class="menu-admin">
+        <div class="overlay-menu-mobile"></div>
+        <div class="inner-menu-mobile">
+            <ul class="list-menu-mobile">
+                <li class="">
+                    <a href="basket-shoping.html">
+                        <span>سبد خرید</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="Favorite-cake.html" class="active">
+                        <span>کیک دلخواه</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="instruction.html">
+                        <span>آموزش هاو مقالات</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="Custom-box.html">
+                        <span>پکیج آماده تولد</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="Each-product-page.html">
+                        <span>صفحه هر محصول</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="Order-tracking.html">
+                        <span>پیگیری سفارشات</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="wallet.html">
+                        <span>کیف پول</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="Points-to-product.html">
+                        <span>امتیاز به محصول</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="Notification-page.html">
+                        <span>صفحه اعلان ها</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="tickets.html">
+                        <span>تیکت ها</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="profile.html">
+                        <span>پروفایل</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#" id="exit">
+                        <span>خروج</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END MENU-MOBILE -->
+    <!-- START MENU-BOTTOM -->
+    <div class="menu-bottom">
+        <ul class="list-bottom">
+            <li class="item-bottom active">
+                <a href="#">
+                    <img src="{% static 'frontend/images/icon/users.png' %}" alt="icon"/>
+                </a>
+            </li>
+            <li class="item-bottom">
+                <a href="#">
+                    <img src="{% static 'frontend/images/icon/home.png' %}" alt="icon"/>
+                </a>
+            </li>
+            <li class="item-bottom">
+                <a href="#">
+                    <img src="{% static 'frontend/images/icon/Bag.png' %}" alt="icon"/>
+                </a>
+            </li>
+            <li class="item-bottom">
+                <a href="#">
+                    <img src="{% static 'frontend/images/icon/hat.png' %}" alt="icon"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- END MENU-BOTTOM -->
+
+
+    <div class="content-main">
+        <!-- Swiper -->
+        <section class="category-story-kando ">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide test2">
+                        <div class="story-box">
+                            <img
+                                    src="{% static 'frontend/images/1.jpeg' %}"
+                                    class="img-story">
+                            <div class="content-story">
+                                <div class="title-sweet">نام محصول</div>
+                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
+                                    است.
+                                </p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide test2">
+                        <div class="story-box">
+                            <img
+                                    src="{% static 'frontend/images/1.jpeg' %}"
+                                    class="img-story">
+                            <div class="content-story">
+                                <div class="title-sweet">نام محصول</div>
+                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
+                                    است.
+                                </p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide test2">
+                        <div class="story-box">
+                            <img
+                                    src="{% static 'frontend/images/2.jpeg' %}"
+                                    class="img-story">
+                            <div class="content-story">
+                                <div class="title-sweet">نام محصول</div>
+                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
+                                    است.
+                                </p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide test2">
+                        <div class="story-box">
+                            <img
+                                    src="{% static 'frontend/images/3.jpeg' %}"
+                                    class="img-story">
+                            <div class="content-story">
+                                <div class="title-sweet">نام محصول</div>
+                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
+                                    است.
+                                </p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide test2">
+                        <div class="story-box">
+                            <img
+                                    src="{% static 'frontend/images/4.jpeg' %}"
+                                    class="img-story">
+                            <div class="content-story">
+                                <div class="title-sweet">نام محصول</div>
+                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
+                                    است.
+                                </p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide test2">
+                        <div class="story-box">
+                            <img
+                                    src="{% static 'frontend/images/5.jpeg' %}"
+                                    class="img-story">
+                            <div class="content-story">
+                                <div class="title-sweet">نام محصول</div>
+                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
+                                    است.
+                                </p> -->
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="swiper-pagination"></div>
+
+            </div>
+        </section>
+        <!-- Swiper -->
+
+        <div class="The-dividing-line"></div>
+        <!-- custom-box-category -->
+        <div class="col-12 d-flex justify-content-center p-2">
+            <section class="col-12 col-md-8 custom-box-category">
+                <div class="col-6 col-md-4 custom-box-img">
+                    <div class="inner-custom-box active">
+                        <img src="{% static 'frontend/images/index02.png' %}" alt="">
+                        <div class="des-custom-box">
+                            <p>سفارش ثبت شده</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-6 col-md-4 custom-box-img">
+                    <div class="inner-custom-box">
+                        <img src="{% static 'frontend/images/index01.png' %}" alt="">
+                        <div class="des-custom-box">
+                            <p>کیک تصویری و طرح دلخواه</p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </section>
+        </div>
+        <!-- custom-box-category -->
+        <div class="The-dividing-line"></div>
+
+        <!-- dastebandi -->
+        <div class="col-12 Grouping p-2 " style="margin-top: 15px;">
+            <div class="col-2 group-item mx-1 p-1  active sweet"><span>کیک</span></div>
+            <div class="col-2 group-item mx-1 p-1 sweet"><span>لوازم عروسی</span></div>
+            <div class="col-2 group-item mx-1 p-1 sweet"><span>لوازم قنادی</span></div>
+            <div class="col-2 group-item mx-1 p-1 sweet"><span>سوغات</span></div>
+            <div class="col-2 group-item mx-1 p-1 sweet"><span>شیرینی</span></div>
+            <div class="col-2 group-item mx-1 p-1 sweet"><span>آجیل</span></div>
+        </div>
+        <!-- dastebandi -->
+
+        <!-- جدید ترین محصولات -->
+        <section class="new-products p-2">
+            <div class="new-products-content active" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>توت فرنگی</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>پرتقال</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>توت فرنگی</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="new-products-content" id="new-product">
+                <div class="col-12 new-product-item ">
+                    <div class="col-8 content-right p-2">
+                        <h1>کیک <br>لیمو</h1>
+                        <div class="product-des">
+                            <p>لورم ایپسوم متن ساختگی با تولید
+                                سادگی نامفهوم از صنعت چاپ، و با
+                                استفاده از طراحان گرافیک است،
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 content-left p-2">
+                        <div class="prices ">
+                            <div>120</div>
+                            <div>هزارتومان</div>
+
+                        </div>
+                        <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                            <div class="img-cart p-1">
+                                <img src="{% static 'frontend/images/kharid.png' %}">
+
+                            </div>
+                            <div>افزودن به سبد خرید</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- جدید ترین محصولات -->
+        <section class="image-new-products ">
+            <div class="products-item col-4 col-md-2 m-2 active" id="image-product">
+                <div class="image-products-item ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>پرتقال
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>لیمو
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="products-item col-4 col-md-2 m-2 " id="image-product">
+                <div class="image-products-item  ">
+                    <div class="up p-1">
+                        <div class="up-image p-1">
+                            <img src="{% static 'frontend/images/pakage.png' %}">
+                        </div>
+                        <div class="text">تهیه پکیج آماده</div>
+                    </div>
+                    <div class="image-cake">
+                        <img src="{% static 'frontend/images/two.png' %}">
+                    </div>
+                    <div class="img-title">
+                        <div class="cake-name">
+                            کیک <br>توت فرنگی
+                        </div>
+                        <div class="heart">
+                            <img src="{% static 'frontend/images/heart.png' %}">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <div class="The-dividing-line"></div>
+        <!-- custom-box-category bottom -->
+        <div class="col-12 d-flex justify-content-center p-2">
+            <section class="col-12 col-md-8  custom-box-category">
+                <div class="col-6 col-md-4 custom-box-img">
+                    <div class="inner-custom-box active">
+                        <img src="{% static 'frontend/images/index02.png' %}" alt="">
+                        <div class="des-custom-box">
+                            <p>جعبه شیرینی دلخواه</p>
+                            <p>ازهرنوع شیرینی که بخوای تویه جعبه</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-6 col-md-4 custom-box-img">
+                    <div class="inner-custom-box">
+                        <img src="{% static 'frontend/images/index01.png' %}" alt="">
+                        <div class="des-custom-box">
+                            <p>پکیج آماده تولد</p>
+                            <p>همه وسایل تولد را یک جا سفارش بده</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </section>
+        </div>
+        <!-- custom-box-category bottom -->
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script src="{% static 'frontend/js/home.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,66 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.main{
+    .content{
+        .content-orders{
+            .content-item{
+                display: flex;
+                flex-wrap: wrap;
+                .all-order-item{
+                    .order{
+                        border: 1px solid rgb(112 112 112 / 82%);
+                        border-radius: 5px;
+                        .txt-top{
+                            display: flex;
+                            justify-content: flex-end;
+                            color: #fff;
+                            font-size: 12px;
+                            .text-left{
+                               
+                                text-align: end;
+                                color: $color-bg-birthday-package;
+                            }
+                        }
+                        .txt-main{
+                            color: #fff;
+                            .main-content{
+                            display: flex;
+                            flex-wrap: wrap;
+                            border-bottom: 1px solid rgb(112 112 112 / 82%);
+                            padding-bottom: 5px;
+                            font-size: 12px;
+                            .txt-end{
+                                text-align: end;
+                            }
+                            }
+                           .border-product{
+                            border-bottom: 0;
+                            padding-bottom: 0;
+                           }
+        
+                          }
+                          .Total-price{
+                            display: flex;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                            font-size: 12px;
+                            .num{
+                                text-align: left;
+                            }
+                          }
+                        }
+                }
+            }
+        }
+        display: none;
+        &.active{
+            display: flex;
+        }
+    }
+   
+}
+@import "./medias";

@@ -1,0 +1,109 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.container-admin{
+    .header-m-oprator{
+        .title{
+         h5{
+             color: black;
+         }
+        }
+        .line{
+            background-color:rgb(208 206 206 / 70%);
+           }
+     }
+}
+
+.content-modal{
+    .inner-modal{
+        .content{
+            .top-modal{
+                text-align: center;
+            }
+            .center-content{
+                .item{
+                    display: flex;
+                justify-content: space-between;
+                input{
+                    outline: none;
+                }
+                .free{
+                    text-align: end;
+                }
+                }
+              
+            }
+        }
+    }
+}
+.menu-bottom{
+    border-radius: 0;
+   }
+.main {
+    .content-page{
+        padding-bottom: 45px;
+        margin-bottom: 50px;
+        .content-up-page{
+            display: flex;
+            flex-wrap: wrap;
+                .content-up-page-item{
+                    display: flex;
+                    justify-content: space-between;
+                    input{
+                        border: 1px solid #d6cdcd;
+                        outline: none;
+                        border-radius: 6px;
+                        padding: 6px;
+                    }
+                }
+                .address{
+                    display: flex;
+                    flex-direction: column;
+                }
+           }
+           .center{
+                height: 3px;
+            }
+            .content-center-page{
+                display: flex;
+                flex-wrap: wrap;
+                .page-item{
+                
+                    input{
+                        width: 100%;
+                        border: 1px solid #d6cdcd;
+                        border-radius: 5px;
+                        outline: none;
+                        padding: 6px;
+                    }
+                    select{
+                        border: 1px solid #d6cdcd;
+                        width: 100%;
+                        background-color: #fff;
+                        border-radius: 5px;
+                        outline: none;
+                        padding: 5px;
+                    }
+                    .arz{
+                        height: 40px;
+                    }
+                    .timesend{
+                       // background-color: rgba(67, 69, 68, 0.6078431373);
+                        color: rgb(0, 0, 0);
+                    }
+                }
+                
+            }
+          
+    }
+   
+    .btn-main{
+        background-color: $color-bg-birthday-package;
+       }
+   
+   
+}
+@import "./medias";

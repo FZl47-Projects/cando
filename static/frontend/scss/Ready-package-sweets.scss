@@ -1,0 +1,82 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.bg{
+    background-image: url(../images/icon/bg.png);
+}
+.menu-bottom{
+  border-radius: 0;
+}
+.main{
+    .content-ready{
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+        .main-ready{
+            border: 1px solid  rgba(172, 171, 171, 0.82);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-color: #1d1c1db3;
+            position: absolute;
+            bottom: 0;
+            margin: 0 5px 0 5px;
+            .sweets-des{
+                .package-sweet{
+                    display: flex;
+                    .clock{
+                      @include centering();
+                        color: #fff;
+                        span{
+                          display: flex;
+                          align-items: center;
+                        }
+                    }
+                  }
+                  .equipment{
+                    .equipment-item{
+                        color: #fff;
+                        font-size: 0.8em;
+                        border: 1px solid  rgba(172, 171, 171, 0.82);
+                        border-radius: 5px;
+                        background-color: #00000099;
+                    }
+                  }
+            }
+         
+          .footer{
+            position: relative;
+            border-top-left-radius: 15px;
+             border-top-right-radius: 15px;
+             background-color:rgb(255 255 255 / 25%);
+             bottom: 0 !important;
+
+            .footer-item{
+                .btn-bottom{
+                    .text-btn{
+                        font-size: 10px;
+                        padding-top: 8px;
+                    }
+                }
+                .txt-left{
+                    @include centering();
+                    P{
+                      color: #fff;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+          }
+            
+          
+           
+        }
+       
+      }
+      
+}
+
+@import "./medias";

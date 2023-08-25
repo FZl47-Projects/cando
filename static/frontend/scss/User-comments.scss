@@ -1,0 +1,64 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.main{
+
+    .content-package{
+        .category-product{
+            .product-item{
+                position:relative;
+                border:1px solid $color-border-user-comments;
+                border-radius: 10px;
+                height: 130px;
+                .image{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                }
+                .text-image{
+                    position: absolute;
+                    bottom: 24%;
+                    right: 10%;
+                   span{
+                    color:#fff;
+                   } 
+                }
+                .user-name{
+                    padding: 5px;
+                    color:#fff;
+                }
+                .detail{
+                    border: 1px solid $color-border-user-comments;
+                    border-radius: 10px;
+                    background-color:#70707060;
+                    color:#fff;
+                    padding: 5px;
+                    font-size: 12px;
+                }
+                .check{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    
+                    .right{
+                        border: 1px solid $color-border-user-comments;
+                        border-radius: 5px;
+                        background-color: $color-bg-btn-user-comments-right;
+                    }
+                    .left{
+                        border: 1px solid $color-border-user-comments;
+                        border-radius: 5px;
+                        background-color: $color-bg-btn-user-comments-left;
+                    }
+                }
+
+            }
+
+        }
+    }
+    
+}
+@import "./medias";

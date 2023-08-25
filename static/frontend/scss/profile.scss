@@ -1,0 +1,38 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+
+.main {
+.profile{
+    display: flex;
+    flex-wrap: wrap;
+    border:1px solid rgb(124, 124, 124);
+    border-radius: 5px;
+    .down{
+        border-bottom: 1px solid rgb(90, 90, 90);
+    }
+    .profile-item{
+        display: flex;
+       
+        .text-img{
+            @include centering;
+        }
+        .value{
+            color: white;
+            font-size: 1em;
+        }
+        .left{
+            @include centering();
+            cursor: pointer;
+            text-align: center;
+        }
+    }
+}
+
+
+
+}
+@import "./medias";

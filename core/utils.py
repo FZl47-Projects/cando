@@ -12,32 +12,41 @@ from django.contrib import messages
 
 def send_sms(sms_type, phonenumber, **kwargs):
 
-    def handler(pattern_code, values):
-        payload = json.dumps({
-            "pattern_code": pattern_code,
-            "originator": settings.SMS_CONFIG['ORIGINATOR'],
-            "recipient": phonenumber,
-            "values": values
-        })
-        headers = {
-            'Authorization': f"AccessKey {settings.SMS_CONFIG['API_KEY']}",
-            'Content-Type': 'application/json'
-        }
-        response = requests.request("POST", settings.SMS_CONFIG['API_URL'], headers=headers, data=payload)
+    pattern_code = None
+    values = {}
 
     def handle_register_code():
+        global pattern_code, values
         values = {
-            'code': kwargs.get('code')
+            'verification-code': kwargs.get('code')
         }
-        handler('5w5hru1e0w05yrc', values)
+        pattern_code = '5w5hru1e0w05yrc'
 
     SMS_TYPES = {
         'register_code': handle_register_code
     }
+
     handle_type = SMS_TYPES.get(sms_type)
     if handle_type:
         handle_type()
-        return True
+
+    payload = json.dumps({
+        "pattern_code": pattern_code,
+        "originator": settings.SMS_CONFIG['ORIGINATOR'],
+        "recipient": phonenumber,
+        "values": values
+    })
+
+    headers = {
+        'Authorization': f"AccessKey {settings.SMS_CONFIG['API_KEY']}",
+        'Content-Type': 'application/json'
+    }
+    async_task(requests.request,
+               'POST',
+               settings.SMS_CONFIG['API_URL'],
+               headers=headers,
+               data=payload
+               )
 
 
 def send_email(email, content, **kwargs):
@@ -105,3 +114,7 @@ def form_validate_err(request, form):
             messages.error(request, 'دیتای ورودی نامعتبر است')
         return False
     return True
+
+
+def get_raw_phonenumber(phonenumber):
+    return str(phonenumber).replace('+98','')

@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     # Apps
     'core',
     'account',
-    'public'
+    'public',
+    'product'
 ]
 
 MIDDLEWARE = [
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,6 +126,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -163,4 +167,4 @@ SMS_CONFIG = {
 }
 
 AUTH_USER_MODEL = 'account.User'
-LOGIN_URL = '/u/login-register'
+LOGIN_URL = '/u/login'

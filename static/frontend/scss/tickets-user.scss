@@ -1,0 +1,97 @@
+@import "./base";
+@import "./colors";
+@import "./variables";
+@import "./mixns";
+@import "./component";
+
+.menu-bottom{
+    border-radius: 0;
+}
+.main {
+    padding: 30px;
+    position: relative;
+    height: 93vh;
+    .information-main{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 0px 25px;
+        .information-account{
+            padding: 0;
+            position: relative;
+            .content-ticket {
+                padding:10px 10px 35px 10px;
+                border: 1px solid rgb(60 ,59, 59);
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+                .text-header{
+                    color: #fff;
+                    text-align: center;
+                }
+                .information-item{
+                
+                    .value-item{
+                        input{
+                            text-align: start;
+                            width: 100%;
+                            padding: 5px;
+                            border-radius: 5px;
+                            border: 1px solid rgb(60 ,59, 59);
+                            outline: none;
+                            background-color: #44444487;
+                        }
+                    }
+                   .text-des{
+                            width: 100%;
+                            background-color: transparent;
+                            font-size: 1.1em;
+                            color: #fff;
+                            outline: none;
+                            padding: 5px;
+                            border-radius: 5px;
+                            background-color: #44444487;
+                            border: 1px solid rgb(60 ,59, 59);
+                           
+                      }
+                    }
+            }
+          
+            
+            }
+            .btn-down{
+                display: flex;
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                .btn-right{
+                   @extend .btn-left;
+                    background-color: $color-bg-birthday-package;
+                    span{
+                       display: flex;
+                       justify-content: center;
+                        color: white;
+                        font-size: 11px;
+                    }
+                }
+                .btn-left{
+                    border: 1px solid rgb(150, 148, 148);
+                    height: 35px;
+                    border-top-left-radius:15px ;
+                    border-top-right-radius:15px ;
+                    padding: 7px;
+                    span{
+                       display: flex;
+                       justify-content: center;
+                        color: white;
+                        font-size: 11px;
+                    }
+    
+                }
+            }
+    }
+    
+    }
+
+
+@import "./medias";

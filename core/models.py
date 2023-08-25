@@ -8,6 +8,12 @@ def upload_file_src(instance, path):
     return f'files/{tm}/{random_str()}.{frmt}'
 
 
+def upload_image_src(instance, path):
+    frmt = str(path).split('.')[-1]
+    tm = get_time('%Y-%m-%d')
+    return f'images/{tm}/{random_str()}.{frmt}'
+
+
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -30,3 +36,13 @@ class File(models.Model):
 
     def __str__(self):
         return f'#{self.id} File'
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to=upload_image_src, max_length=400)
+
+    class Meta:
+        ordering = '-id',
+
+    def __str__(self):
+        return f'#{self.id} Image'
