@@ -14,8 +14,8 @@ class Product(BaseModel):
     description = models.TextField(null=True, blank=True)
     price = models.PositiveBigIntegerField()
     stock = models.PositiveIntegerField(default=1)
-    categories = models.ManyToManyField('Category')
-    image = models.ImageField(upload_to=upload_src)
+    category = models.ForeignKey('Category',on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=upload_src,max_length=400)
 
     class Meta:
         ordering = '-id',
@@ -23,12 +23,23 @@ class Product(BaseModel):
     def __str__(self):
         return self.name
 
+    def get_image_url(self):
+        try:
+            return self.image.url
+        except:
+            # default image
+            # TODO: should be completed
+            return ''
+
 
 class Category(BaseModel):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
+    def get_products(self):
+        return self.product_set.all()
 
 
 class CustomOrderProduct(BaseModel):

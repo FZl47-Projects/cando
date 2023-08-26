@@ -6,14 +6,14 @@ let overalyModals = document.querySelectorAll("#modal-products-list .inner-modal
 btnsShowModal.forEach((item,index)=>{
   item.addEventListener("click", () => {
    
-    modals[index].classList.add("active");
+    modals[0].classList.add("active");
   });
 });
 overalyModals.forEach((item,index)=>{
 
   item.addEventListener("click", (e) => {
     if (e.target.className === "inner-modal"){
-      modals[index].classList.remove("active");
+      modals[0].classList.remove("active");
     }
   });
 })

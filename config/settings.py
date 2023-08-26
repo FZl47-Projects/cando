@@ -168,3 +168,9 @@ SMS_CONFIG = {
 
 AUTH_USER_MODEL = 'account.User'
 LOGIN_URL = '/u/login'
+
+
+ADMIN_ROLES = (
+    'admin',
+    'super_user'
+)

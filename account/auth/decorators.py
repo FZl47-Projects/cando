@@ -13,11 +13,12 @@ def user_role_required_cbv(roles):
             role = user.role
             if not (role in roles):
                 raise PermissionDenied
-            department = getattr(user,'department',None)
-            if department is None:
-                raise PermissionDenied
             return func(self, request, *args, **kwargs)
 
         return inner
 
     return wrapper
+
+
+def admin_role_required_cbv(func):
+    return user_role_required_cbv(settings.ADMIN_ROLES)(func)

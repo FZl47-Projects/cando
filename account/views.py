@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from core.utils import form_validate_err
+from account.auth.decorators import admin_role_required_cbv
+from product.models import Category
 from . import forms, models
 
 
@@ -41,17 +43,34 @@ class Register(View):
     def get(self, request):
         return render(request, self.template_name)
 
-    def post(self,request):
+    def post(self, request):
         data = request.POST
         f = forms.RegisterUserFullForm(data)
-        if form_validate_err(request,f) is False:
-            return render(request,self.template_name)
+        if form_validate_err(request, f) is False:
+            return render(request, self.template_name)
         data = f.cleaned_data
         user = models.User.objects.create_user(
             name=data.get('name'),
             phonenumber=data.get('phonenumber'),
             password=data.get('password')
         )
-        login(request,user)
+        login(request, user)
         messages.success(request, 'حساب شما با موفقیت ساخته شد')
         return redirect('public:index')
+
+
+class DashboardAdmin(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        return render(request, 'account/dashboard/admin/index.html')
+
+
+class DashboardAdminProducts(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        context = {
+            'categories': Category.objects.all()
+        }
+        return render(request, 'account/dashboard/admin/products.html',context)

@@ -46,6 +46,7 @@ class SuperUserManager(models.Manager):
 class User(AbstractUser):
     ROLE_USER_OPTIONS = (
         ('user', 'normal_user'),
+        ('admin', 'admin'),
         ('super_user', 'super_user'),
     )
 

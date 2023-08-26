@@ -1,0 +1,213 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    محصولات
+{% endblock %}
+
+{% block Link %}
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/products-List.css' %}"/>
+
+{% endblock %}
+
+{% block Style %}
+    <style>
+        .product-item {
+            min-width: 300px;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+
+    <!-- START content modal cake-->
+    <div class="content-modal" id="modal-products-list">
+        <div class="inner-modal">
+            <div class="content">
+                <form class="px-4 pt-2" action="{% url 'product:create' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="uplode-image mx-4 my-2">
+              <span>
+                <img src="{% static 'frontend/images/plus.png' %}">
+              </span>
+                        <p class="mb-0">
+                            افزودن محصول
+                        </p>
+                    </div>
+                    <div class="col-12 px-4 py-2 ">
+                        <input class="form-control" name="name" id="package-name" required type="text"
+                               placeholder="نام محصول"
+                               aria-label=".form-control-lg example">
+                    </div>
+                    <div class="col-12 px-4 py-2 ">
+                        <textarea class="description-textarea form-control" required name="description" cols="50"
+                                  rows="4" placeholder="توضیحات"></textarea>
+                    </div>
+                    <div class="col-12 px-4 py-2 ">
+                        <input type="file" required name="image" class="form-control">
+                    </div>
+                    <div class="col-12 px-4 py-2 ">
+                        <input type="number" required name="stock" class="form-control" placeholder="موجودی">
+                    </div>
+                    <div class="col-12 px-4 py-2 ">
+                        <select class="form-control form-select" name="category">
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <!-- TODO: will complete in feature -->
+                    <div class="col-12 px-4 py-2 d-none">
+                        <input class="form-control " name="value-price" id="price" type="text"
+                               placeholder="قیمت هر کیلو" aria-label=".form-control-lg example">
+                    </div>
+                    <div class="col-12 px-4 py-2 d-none">
+                        <input class="form-control " name="value-wholesale" id="wholesale-price" type="text"
+                               placeholder="قیمت عمده" aria-label=".form-control-lg example">
+                    </div>
+
+
+                    <div class="col-12 px-4 py-2 ">
+                        <input class="form-control " name="price" id="inventory-price" type="number"
+                               placeholder="قیمت " aria-label=".form-control-lg example">
+                    </div>
+                    <button class="btn birthday-package mt-2 col-12 position-relative">
+                        <p>افزودن محصول جدید</p>
+                    </button>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- End content modal cake-->
+
+
+    <!-- START Header products list-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="../assets/images/icon/Group 1900.png"
+                                  alt="icon"
+          /></span>
+                <h5>لیست تمام محصولات</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header products list-->
+
+        <!-- START MAIN -->
+        <main class="main p-2">
+            <!-- menu top -->
+            <div class="col-12 Grouping ">
+                <div class="col-2 group-item mx-1 p-1">
+                    <span class="plus">+</span>
+                    <span>دسته جدید</span>
+                </div>
+                {% for category in categories %}
+                    <div class="col-2 group-item mx-1 p-1 sweet {% if forloop.first %}active{% endif %}">
+                        <span>{{ category.name }}</span></div>
+                {% endfor %}
+            </div>
+            <!-- content main -->
+            {% for category in categories %}
+                <div class="content-pakage {% if forloop.first %}active{% endif %}" id="content-wedding">
+                    <section class="category-product">
+                        <!-- start -->
+                        {% for product in category.get_products %}
+                            <div class="col-12 col-md-6 p-2 pp">
+                                <div class="product-item">
+                                    <div class="col-4 height">
+                                        <div class="img-product"><img
+                                                src="{{ product.get_image_url }}"
+                                                alt="{{ product.name }}"></div>
+                                    </div>
+                                    <div class="col-6 col-md-5 moshakhaseh">
+                                        <div class="description">
+                                            <div class="description-item col-12">
+                                                <span>
+                                                    نام محصول:
+                                                    {{ product.name }}
+                                                </span>
+                                            </div>
+                                            <div class="description-item col-12">
+                                                <span>
+                                                    موجودی:
+                                                    {{ product.stock }}
+                                                </span>
+                                            </div>
+                                            <div class="description-item col-12">
+                                                <span>
+                                                    قیمت:
+                                                    {{ product.price }}
+                                                    تومان
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-1 bbb">
+                                        <div class="cart">
+                                            <form action="{% url 'product:delete' product_id=product.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button class="cart-image-trash btn">
+                                                    <i class="fa fa-trash text-white"></i>
+                                                </button>
+                                            </form>
+                                            <div class="cart-image-edit"><img
+                                                    src="{% static 'frontend/images/edit.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="container-not-found-base">
+                                <p>چیزی یافت نشد</p>
+                            </div>
+                        {% endfor %}
+
+
+                    </section>
+                    <div class="btn-main col-12 " id="new-cake-btn">
+                        <div class="btn-main-content">
+               <span>
+                 <img src="{% static 'frontend/images/plus1.png' %}">
+               </span>
+                            <p class="mb-0 me-1">افزودن محصول</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+
+        </main>
+
+    </div>
+
+
+    </body>
+{% endblock %}
+
+{% block Script %}
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+    <script src="{% static 'frontend/js/admin/products-List.js' %}" type="module"></script>
+{% endblock %}
