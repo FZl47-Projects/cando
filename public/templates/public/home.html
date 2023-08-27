@@ -18,25 +18,7 @@
 {% block Style %}
     <style>
 
-        .mySwiper {
-            height: 450px;
-        }
 
-        .content-story {
-            position: initial !important;
-        }
-
-        @media screen and (max-width: 992px) {
-            .mySwiper {
-                height: 300px;
-            }
-        }
-
-        @media screen and (max-width: 470px) {
-            .mySwiper {
-                height: 200px;
-            }
-        }
 
     </style>
 {% endblock %}
@@ -521,74 +503,89 @@
         <!-- custom-box-category -->
         <div class="The-dividing-line"></div>
 
+
         <!-- dastebandi -->
         <div class="col-12 Grouping p-2 " style="margin-top: 15px;">
             {% for category in categories %}
-                <div class="col-2 group-item mx-1 p-1 sweet {% if forloop.first %}active{% endif %}">
+                <div class="col-2 group-item mx-1 p-1 btn-change-category {% if forloop.first %}active{% endif %}">
                     <span>{{ category.name }}</span></div>
             {% endfor %}
         </div>
-        <!-- dastebandi -->
 
-        <!-- جدید ترین محصولات -->
-        <section class="new-products p-2">
-            {% for product in products %}
-                <div class="new-products-content {% if forloop.first %}active{% endif %}" id="new-product">
-                    <div class="col-12 new-product-item ">
-                        <div class="col-8 content-right p-2">
-                            <h1>{{ product.name }}</h1>
-                            <div class="product-des">
-                                <p>
-                                    {{ product.description }}
-                                </p>
+        {% for category in categories %}
+            <div class="category-container {% if forloop.first %}active{% endif %}">
+                <!-- dastebandi -->
+                <!-- جدید ترین محصولات -->
+                <section class="new-products p-2">
+                    {% for product in category.get_products %}
+                        <div class="new-products-content {% if forloop.first %}active{% endif %}" id="new-product">
+                            <div class="col-12 new-product-item ">
+                                <div class="col-8 content-right p-2">
+                                    <h1>{{ product.name }}</h1>
+                                    <div class="product-des">
+                                        <p>
+                                            {{ product.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-4 content-left p-2">
+                                    <div class="prices ">
+                                        <div>{{ product.price }}</div>
+                                        <div>تومان</div>
+
+                                    </div>
+                                    <div class="add-to-cart col-12 col-md-8 col-lg-6">
+                                        <div class="img-cart p-1">
+                                            <img src="{% static 'frontend/images/kharid.png' %}">
+
+                                        </div>
+                                        <div class="">
+                                            <a href="#" class="text-white text-decoration-none">افزودن به سبد خرید</a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="col-4 content-left p-2">
-                            <div class="prices ">
-                                <div>{{ product.price }}</div>
-                                <div>تومان</div>
-
-                            </div>
-                            <div class="add-to-cart col-12 col-md-8 col-lg-6">
-                                <div class="img-cart p-1">
-                                    <img src="{% static 'frontend/images/kharid.png' %}">
+                    {% endfor %}
+                </section>
+                <!-- جدید ترین محصولات -->
+                <section class="image-new-products ">
+                    {% for product in category.get_products %}
+                        <div class="products-item col-11 col-md-3 col-lg-2 m-2 active" id="image-product">
+                            <div class="image-products-item ">
+                                <div class="up p-1">
+                                    <div class="up-image p-1">
+                                        <img src="{{ product.get_image_url }}">
+                                    </div>
+                                    {#                            <div class="text">تهیه پکیج آماده</div>#}
+                                </div>
+                                <div class="img-title">
+                                    <div class="cake-name">
+                                        {{ product.name }}
+                                    </div>
+                                    <div class="heart">
+                                        <img src="{% static 'frontend/images/heart.png' %}">
+                                    </div>
 
                                 </div>
-                                <div class="">
-                                    <a href="#" class="text-white text-decoration-none">افزودن به سبد خرید</a>
-                                </div>
+
                             </div>
                         </div>
+                    {% endfor %}
+                </section>
+            </div>
+        {% endfor %}
 
-                    </div>
-                </div>
-            {% endfor %}
-        </section>
-        <!-- جدید ترین محصولات -->
-        <section class="image-new-products ">
-            {% for product in products %}
-                <div class="products-item col-11 col-md-3 col-lg-2 m-2 active" id="image-product">
-                    <div class="image-products-item ">
-                        <div class="up p-1">
-                            <div class="up-image p-1">
-                                <img src="{{ product.get_image_url }}">
-                            </div>
-                            {#                            <div class="text">تهیه پکیج آماده</div>#}
-                        </div>
-                        <div class="img-title">
-                            <div class="cake-name">
-                                {{ product.name }}
-                            </div>
-                            <div class="heart">
-                                <img src="{% static 'frontend/images/heart.png' %}">
-                            </div>
 
-                        </div>
 
-                    </div>
-                </div>
-            {% endfor %}
-        </section>
+
+
+
+
+
+
+
         <div class="The-dividing-line"></div>
         <!-- custom-box-category bottom -->
         <div class="col-12 d-flex justify-content-center p-2">
