@@ -3157,5 +3157,5 @@ input {
 /* custom */
 .products-item .up-image img{
   height: 250px;
-  object-fit: cover;
+  /*object-fit: cover;*/
 }

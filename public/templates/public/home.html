@@ -15,8 +15,34 @@
     <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}">
 {% endblock %}
 
+{% block Style %}
+    <style>
+
+        .mySwiper {
+            height: 450px;
+        }
+
+        .content-story {
+            position: initial !important;
+        }
+
+        @media screen and (max-width: 992px) {
+            .mySwiper {
+                height: 300px;
+            }
+        }
+
+        @media screen and (max-width: 470px) {
+            .mySwiper {
+                height: 200px;
+            }
+        }
+
+    </style>
+{% endblock %}
+
 {% block Content %}
-    <body style="background-color: black;">
+    <body class="bg">
 
     <!-- header -->
     <header class="header-m-oprator">
@@ -256,8 +282,13 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="{% url 'product:custom_order_product' %}" class="active">
+                    <a href="{% url 'product:custom_order_product' %}">
                         <span>کیک دلخواه</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'product:factor_cake_image' %}">
+                        <span>تصویر دلخواه کیک</span>
                     </a>
                 </li>
                 <li class="">
@@ -313,7 +344,7 @@
                     </li>
                 {% else %}
                     <li class="">
-                        <a href="{% url 'account:login' %}" >
+                        <a href="{% url 'account:login' %}">
                             <span>ورود</span>
                         </a>
                     </li>
@@ -536,7 +567,7 @@
         <!-- جدید ترین محصولات -->
         <section class="image-new-products ">
             {% for product in products %}
-                <div class="products-item col-4 col-md-2 m-2 active" id="image-product">
+                <div class="products-item col-11 col-md-3 col-lg-2 m-2 active" id="image-product">
                     <div class="image-products-item ">
                         <div class="up p-1">
                             <div class="up-image p-1">
@@ -564,7 +595,7 @@
             <section class="col-12 col-md-8  custom-box-category">
                 <div class="col-6 col-md-4 custom-box-img">
                     <div class="inner-custom-box active">
-                        <img src="{% static 'frontend/images/index02.png' %}" alt="">
+                        <img src="{% static 'frontend/images/index4.png' %}" alt="">
                         <div class="des-custom-box">
                             <p>جعبه شیرینی دلخواه</p>
                             <p>ازهرنوع شیرینی که بخوای تویه جعبه</p>
@@ -575,7 +606,7 @@
 
                 <div class="col-6 col-md-4 custom-box-img">
                     <div class="inner-custom-box">
-                        <img src="{% static 'frontend/images/index01.png' %}" alt="">
+                        <img src="{% static 'frontend/images/index3.png' %}" alt="">
                         <div class="des-custom-box">
                             <p>پکیج آماده تولد</p>
                             <p>همه وسایل تولد را یک جا سفارش بده</p>
