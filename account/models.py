@@ -76,6 +76,12 @@ class User(AbstractUser):
         p = str(self.phonenumber).replace('+98', '')
         return p
 
+    def get_phonenumber(self):
+        return str(self.phonenumber)
+
+    def get_phonenumber_with_prefix(self):
+        return self.get_raw_phonenumber().replace('+','')
+
     def get_full_name(self):
         fl = f'{self.name}'.strip() or 'بدون نام'
         return fl

@@ -100,7 +100,7 @@
     <div class="container-fluid container-admin" style="position:relative ;">
         <header class="header-m-oprator">
             <div class="title">
-          <span class="back"><img src="../assets/images/icon/Group 1900.png"
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
                                   alt="icon"
           /></span>
                 <h5>لیست تمام محصولات</h5>
@@ -113,12 +113,8 @@
         <main class="main p-2">
             <!-- menu top -->
             <div class="col-12 Grouping ">
-                <div class="col-2 group-item mx-1 p-1">
-                    <span class="plus">+</span>
-                    <span>دسته جدید</span>
-                </div>
                 {% for category in categories %}
-                    <div class="col-2 group-item mx-1 p-1 sweet {% if forloop.first %}active{% endif %}">
+                    <div class="col-2 group-item mx-1 p-3 sweet {% if forloop.first %}active{% endif %}">
                         <span>{{ category.name }}</span></div>
                 {% endfor %}
             </div>
@@ -163,7 +159,7 @@
                                         <div class="cart">
                                             <form action="{% url 'product:delete' product_id=product.id %}" method="post">
                                                 {% csrf_token %}
-                                                <button class="cart-image-trash btn">
+                                                <button class="cart-image-trash">
                                                     <i class="fa fa-trash text-white"></i>
                                                 </button>
                                             </form>

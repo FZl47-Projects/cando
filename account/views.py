@@ -3,8 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from core.utils import form_validate_err
+from core.notify import send_sms
 from account.auth.decorators import admin_role_required_cbv
-from product.models import Category
+from product.models import (
+    Category, CustomOrderProduct,
+    FactorCakeImage,
+)
 from . import forms, models
 
 
@@ -56,6 +60,7 @@ class Register(View):
         )
         login(request, user)
         messages.success(request, 'حساب شما با موفقیت ساخته شد')
+        send_sms('welcome', user.phonenumber, name=user.name)
         return redirect('public:index')
 
 
@@ -73,4 +78,34 @@ class DashboardAdminProducts(View):
         context = {
             'categories': Category.objects.all()
         }
-        return render(request, 'account/dashboard/admin/products.html',context)
+        return render(request, 'account/dashboard/admin/products.html', context)
+
+
+class DashboardAdminCategories(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        context = {
+            'categories': Category.objects.all()
+        }
+        return render(request, 'account/dashboard/admin/categories.html', context)
+
+
+class DashboardAdminCustomOrders(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        context = {
+            'orders': CustomOrderProduct.objects.filter(is_checked=False)
+        }
+        return render(request, 'account/dashboard/admin/custom-order-product.html', context)
+
+
+class DashboardAdminFactorCakeImage(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        context = {
+            'factors': FactorCakeImage.objects.all()
+        }
+        return render(request, 'account/dashboard/admin/factor-cake-image.html', context)

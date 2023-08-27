@@ -1,62 +1,8 @@
-import json
-import requests
 import string
 import random
 import datetime
 from django.utils import timezone
-from django.core.mail import send_mail as _send_email_django
-from django.conf import settings
-from django_q.tasks import async_task
 from django.contrib import messages
-
-
-def send_sms(sms_type, phonenumber, **kwargs):
-
-    pattern_code = None
-    values = {}
-
-    def handle_register_code():
-        global pattern_code, values
-        values = {
-            'verification-code': kwargs.get('code')
-        }
-        pattern_code = '5w5hru1e0w05yrc'
-
-    SMS_TYPES = {
-        'register_code': handle_register_code
-    }
-
-    handle_type = SMS_TYPES.get(sms_type)
-    if handle_type:
-        handle_type()
-
-    payload = json.dumps({
-        "pattern_code": pattern_code,
-        "originator": settings.SMS_CONFIG['ORIGINATOR'],
-        "recipient": phonenumber,
-        "values": values
-    })
-
-    headers = {
-        'Authorization': f"AccessKey {settings.SMS_CONFIG['API_KEY']}",
-        'Content-Type': 'application/json'
-    }
-    async_task(requests.request,
-               'POST',
-               settings.SMS_CONFIG['API_URL'],
-               headers=headers,
-               data=payload
-               )
-
-
-def send_email(email, content, **kwargs):
-    # send email in background
-    async_task(_send_email_django,
-               settings.EMAIL_SUBJECT,
-               content,
-               settings.EMAIL_HOST_USER,
-               [email]
-               )
 
 
 def random_str(size=15, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
@@ -117,4 +63,4 @@ def form_validate_err(request, form):
 
 
 def get_raw_phonenumber(phonenumber):
-    return str(phonenumber).replace('+98','')
+    return str(phonenumber).replace('+98', '')

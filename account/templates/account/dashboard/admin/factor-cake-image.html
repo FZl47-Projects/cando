@@ -1,0 +1,137 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    طرح های روی کیک - فاکتور
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/Price-request.css' %}"/>
+
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+
+    <!-- START Header Package Price request-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>عکس های طرح بر روی کیک</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header Package Price request-->
+
+        <!-- START MAIN -->
+        <main class="main p-3">
+            <!-- START BTNS  -->
+            <!-- END BTNS  -->
+            <!-- start content favorite cake  -->
+            <div class="content-price active">
+                <div class="category-price p-1">
+                    <!-- start -->
+                    {% for factor in factors %}
+                        <div class="col-12 col-md-6 px-1 py-1">
+                            <div class="price-item ">
+                                <div class="p-3 col-12">
+                                    <div class="col-12 detail">
+
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">تاریخ و زمان ثبت:</label>
+                                            <input class="col-8 text-left" type="text" name="ِDate" id="date-item"
+                                                   placeholder="شنبه 23 آبان-9 تا 12 صبح"
+                                                   value="{{ factor.get_created_at_timepast }}"
+                                                   title="{{ factor.created_at }}" disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">نام کاربر :</label>
+                                            <input class="col-8 text-left" type="text" name="Delivery"
+                                                   id="Delivery-information"
+                                                   placeholder="نام ونام خانوادگی 09122254545"
+                                                   value="{{ factor.user_name }}"
+                                                   disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="moshakhasat py-1">
+
+                                            <div class="col-12 py-1 px-1">
+                                                <div class="moshakhasat-item ">
+                                                    <div class="col-6 right p-1">
+                                                        <span>کد فاکتور</span>
+
+                                                    </div>
+                                                    <div class="col-6 left p-1">
+                                                        <input type="text" name="value-sponge" id="sponge"
+                                                               placeholder="000"
+                                                               value="{{ factor.track_code }}" disabled>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-12 py-1 px-1">
+                                                <div class="moshakhasat-item ">
+                                                    <div class="col-6 right p-1">
+                                                        <span>عکس</span>
+                                                    </div>
+                                                    <div class="col-6 left p-1">
+                                                        <a class="btn btn-warning p-1 col-12" href="{{ factor.get_image_url }}">عکس</a>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-12 py-1 px-1">
+                                                <div class="moshakhasat-item ">
+                                                    <div class="col-6 right p-1">
+                                                        <span>توضیحات</span>
+                                                    </div>
+                                                    <div class="col-6 left p-1">
+                                                        <input type="text" name="value-cream" id="cream"
+                                                               placeholder="توضیحی ثبت نشده است"
+                                                               value="{{ factor.description }}" disabled>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="container-not-found-base">
+                            <p>چیزی یافت نشد</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- End content favorite cake  -->
+        </main>
+
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+
+    <script src="{% static 'frontend/js/admin/Price-request.js' %}" type="module"></script>
+{% endblock %}

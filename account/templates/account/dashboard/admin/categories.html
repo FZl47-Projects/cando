@@ -1,0 +1,145 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    دسته بندی ها
+{% endblock %}
+
+{% block Link %}
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/products-List.css' %}"/>
+
+{% endblock %}
+
+{% block Style %}
+    <style>
+        .product-item {
+            min-width: 300px;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+
+    <!-- START content modal cake-->
+    <div class="content-modal" id="modal-products-list">
+        <div class="inner-modal">
+            <div class="content">
+                <form class="px-4 pt-2" action="{% url 'product:category_create' %}" method="post">
+                    {% csrf_token %}
+                    <div class="uplode-image mx-4 my-2">
+              <span>
+                <img src="{% static 'frontend/images/plus.png' %}">
+              </span>
+                        <p class="mb-0">
+                            افزودن دسته بندی
+                        </p>
+                    </div>
+                    <div class="col-12 px-4 py-2 ">
+                        <input class="form-control" name="name" id="package-name" required type="text"
+                               placeholder="نام دسته بندی"
+                               aria-label=".form-control-lg example">
+                    </div>
+                    <button class="btn birthday-package mt-2 col-12 position-relative">
+                        <p>افزودن دسته بندی جدید</p>
+                    </button>
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!-- End content modal cake-->
+
+
+    <!-- START Header products list-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>لیست دسته بندی ها</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header products list-->
+
+        <!-- START MAIN -->
+        <main class="main p-2">
+
+            <!-- content main -->
+            {% for category in categories %}
+                <div class="content-pakage active" id="content-wedding">
+                    <section class="category-product">
+                        <!-- start -->
+                        <div class="col-12 col-md-6 p-2 pp">
+                            <div class="product-item">
+                                <div class="col-6 col-md-5 moshakhaseh">
+                                    <div class="description">
+                                        <div class="description-item col-12">
+                                                <span>
+                                                    نام دسته بندی:
+                                                    {{ category.name }}
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1 bbb">
+                                    <div class="cart">
+                                        <form action="{% url 'product:category_delete' category_id=category.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <button class="cart-image-trash">
+                                                <i class="fa fa-trash text-white"></i>
+                                            </button>
+                                        </form>
+                                        <div class="cart-image-edit"><img
+                                                src="{% static 'frontend/images/edit.png' %}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                    <div class="btn-main col-12 " id="new-cake-btn">
+                        <div class="btn-main-content">
+               <span>
+                 <img src="{% static 'frontend/images/plus1.png' %}">
+               </span>
+                            <p class="mb-0 me-1">افزودن دسته بندی</p>
+
+                        </div>
+
+                    </div>
+                </div>
+            {% empty %}
+                <div class="container-not-found-base">
+                    <p>چیزی یافت نشد</p>
+                </div>
+            {% endfor %}
+
+        </main>
+
+    </div>
+
+
+    </body>
+{% endblock %}
+
+{% block Script %}
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+    <script src="{% static 'frontend/js/admin/products-List.js' %}" type="module"></script>
+{% endblock %}

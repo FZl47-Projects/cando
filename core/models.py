@@ -46,3 +46,11 @@ class Image(models.Model):
 
     def __str__(self):
         return f'#{self.id} Image'
+
+    def get_image_url(self):
+        try:
+            return self.image.url
+        except:
+            # default image
+            # TODO: should be completed
+            return ''

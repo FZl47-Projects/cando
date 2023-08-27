@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import View
-from core.utils import send_sms
+from product.models import Category, Product
 
 
 class Index(View):
 
     def get(self, request):
-        return render(request,'public/home.html')
-
+        context = {
+            'categories': Category.objects.all(),
+            'products': Product.objects.all()[:10]
+        }
+        return render(request, 'public/home.html', context)
