@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تایید کد</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/disposable-code.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+    integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+
+
+  </head>
+
+  <body class="bg">
+
+    
+
+     
+    <div class="container-fluid container-admin" style="position:relative ;">
+   
+   
+
+      <!-- START MAIN -->
+      <main class="main p-3">
+        
+        <!-- START form disposable-->
+      
+        <!-- start logo -->
+        <section class="col-12 logo">
+            <img src="/assets/frontend/images/logo.png">
+        </section>
+        <!-- end logo -->
+
+        <div class="forms">
+            <form class="form form-disposable-code
+                active">
+                <div style="padding: 20px;">
+                    <div>
+                        <div class="group-form">
+                            <input type="text"
+                                id="numberPhone"
+                                name="numberPhone">
+                            <label for="numberPhone"> :شماره
+                                همراه</label>
+                        </div>
+                        <small></small>
+                    </div>
+            
+            
+            
+            
+            
+                    <button type="submit" class="btn-submit" style="background-color:  rgb(43 42 42 / 36%);">ارسال کد</button>
+                </div>
+                
+                <div class="btn-koli">
+                    <button type="submit" class="btn-submit" style="background-color: #a7a2a2;border: 0;color: black;">ثبت نام</button>
+                    <div class="d-flex justify-content-center align-items-center py-3  form-text-3 ">
+                        <a href="./login.html" style="text-decoration:none">ورود</a>
+                    </div>
+        
+                </div>
+            </form>
+        
+            <form class="form form-confirm-code">
+                <div style="padding: 20px;">
+                    <div>
+                        <div class="group-form">
+                            <input type="text" id="code"
+                                name="numberPhone">
+                            <label for="code"> :کد ارسال شده
+                            </label>
+                        </div>
+                        <small></small>
+                    </div>
+            
+            
+                    <button type="submit"
+                        class="btn-submit" style="background-color:  rgb(43 42 42 / 36%);">ارسال</button>
+                </div>
+                
+                <div class="d-flex
+                justify-content-end
+                    py-3 px-3 form-text-3">
+                    <div class="timer d-flex
+                        justify-content-between
+                        align-items-center">
+                        <div class="time" id="time">
+                            <span id="minute"></span> :
+                            <span id="second"></span>
+                        </div>
+        
+                        <button type="button"
+                            class="btn-timer mx-2"
+                            id="btn-timer" disabled>درخواست مجدد فرستادن کد</button>
+                    </div>
+                </div>
+                <div class="btn-koli">
+                    <button type="submit" class="btn-submit" style="background-color: #a7a2a2;border: 0;color: black;">ثبت نام</button>
+                    <div class="d-flex justify-content-center align-items-center py-3  form-text-3 ">
+                        <a href="./log-in.html" style="text-decoration:none">ورود</a>
+                    </div>
+        
+                </div>
+            </form>
+        </div>
+            
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="/assets/frontend/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+    
+    <script
+    src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js"></script>
+
+    <script src="/assets/frontend/js/Services.js" type="module"></script>
+    <script src="/assets/frontend/js/disposable-code.js" type="module"></script>
+
+  </body>
+</html>

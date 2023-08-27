@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اپراتور جدید</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="../assets/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="../assets/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../assets/styles/New-operator.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+
+     <!-- START Header new operator-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="../assets/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>تعریف اپراتور جدید</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header new operator-->
+
+      <!-- START MAIN -->
+      <main class="main p-3">
+          <!-- START BTNS  -->
+          <div class="btns">
+            <div class="btn-change col-6 text-center active" id="btn-birth">اپراتور فروش</div>
+            <div class="btn-change col-6 text-center " id="make-sweet">اپراتور کیک</div>
+          </div>
+          <!-- END BTNS  -->
+           
+          <section class="Sale-operator-content active">
+            <div class="col-12 text-top-head">
+                <div class="desired-package" onclick="validate()">
+                  <label>دسترسی به تایید یا عدم تایید درخواست ها</label>
+                  <label class="btn-package-desired">
+                      <input class="inpute-checkbox" type="checkbox" id="check-input">
+                      <span class="circle-in" id="small-circle"></span>
+                      <span class="circle-out" id="circle-bironi"></span>
+              
+                  </label>
+              </div>
+
+            </div>
+            <div class="list-moshakhasat">
+              <!-- start -->
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>نام اپراتور</label>
+                    <input name="Noperator" id="operator-name" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>کد پرسنلی</label>
+                    <input name="codeoperator" id="operator-code" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>شماره موبایل</label>
+                    <input name="phoneoperator" id="operator-phone" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>کد ملی</label>
+                    <input name="code" id="code-meli" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>رمز عبور</label>
+                    <input name="passoperator" id="operator-password" >
+
+                </div>
+            </div>
+            <div class="btn-main col-12 " id="new-sweet-btn">
+                <div class="btn-main-content">
+                 <span>
+                   <img src="../assets/images/plus1.png">
+                 </span>
+                 <p class="mb-0 me-1">ثبت تغییرات</p>
+   
+                </div>
+                 
+               </div>
+
+
+          </section>
+          <section class="Sale-operator-content">
+            <div class="col-12 text-top-head">
+                <div class="desired-package" onclick="validate()">
+                  <label>دسترسی به تایید یا عدم تایید درخواست ها</label>
+                  <label class="btn-package-desired">
+                      <input class="inpute-checkbox" type="checkbox" id="check-inputs">
+                      <span class="circle-in" id="small-circles"></span>
+                      <span class="circle-out" id="circle-bironis"></span>
+                  </label>
+              </div>
+
+            </div>
+            <div class="list-moshakhasat">
+              <!-- start -->
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>نام اپراتور</label>
+                    <input name="Noperator" id="operator-name" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>کد پرسنلی</label>
+                    <input name="codeoperator" id="operator-code" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>شماره موبایل</label>
+                    <input name="phoneoperator" id="operator-phone" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>کد ملی</label>
+                    <input name="code" id="code-meli" >
+
+                </div>
+                <div class="col-12 col-md-6 list-moshakhasat-content py-2 px-2">
+                    <label>رمز عبور</label>
+                    <input name="passoperator" id="operator-password" >
+
+                </div>
+            </div>
+            <div class="btn-main col-12 " id="new-sweet-btn">
+                <div class="btn-main-content">
+                 <span>
+                   <img src="../assets/images/plus1.png">
+                 </span>
+                 <p class="mb-0 me-1">ثبت تغییرات</p>
+   
+                </div>
+                 
+               </div>
+
+
+          </section>
+          
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="../assets/js/admin/New-operator.js" ></script>
+  </body>
+</html>

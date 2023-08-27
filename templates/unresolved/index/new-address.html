@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>آدرس من</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/new-address.css" />
+
+ <!--bootstrap for map  -->
+ <link rel="stylesheet" href="/assets/frontend/vendors/map/dist/css/mapp.min.css">
+ <link rel="stylesheet" href="/assets/frontend/vendors/map/dist/css/fa/style.css">
+
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="">
+
+  
+
+
+
+     
+    <div class="container-fluid container-admin" style="position:relative ;">
+
+
+      <!-- START MAIN -->
+      <main class="main">
+       <!-- START Header address-->
+        <div class="header-top p-3">
+          <div class="title p-2">
+            <h5>آدرس من</h5>
+            <span class="back">
+              <img src="/assets/frontend/images/flashleft.png"
+                alt="icon"/>
+            </span>
+          </div>
+        </div>
+        <!-- START Header address-->
+        <!-- start -->
+        <div class="map-content">
+          <div id="app"></div>
+        </div>
+    
+          <!-- start section bottom -->
+      <div class="btn-bottom ">
+          <div class="col-12 txt-top p-3">جزئیات آدرس</div>
+      
+          <div class="col-12 city p-1">
+            <div class="col-6 State p-1">
+              <label>استان</label>
+              <select name="state" id="states">
+                <option value="کرمان">کرمان</option>
+                <option value="تهران">تهران</option>
+                <option value="یزد">یزد</option>
+                <option value="اصفهان">اصفهان</option>
+              </select>
+      
+            </div>
+            <div class="col-6 State p-1">
+              <label>استان</label>
+              <select name="city" id="cities">
+                <option value="کرمان">کرمان</option>
+                <option value="تهران">تهران</option>
+                <option value="یزد">یزد</option>
+                <option value="اصفهان">اصفهان</option>
+              </select>
+      
+            </div>
+            
+      
+          </div>
+          <div class="col-12  address p-1">
+            <label>آدرس</label>
+              <textarea class="address" rows="3"></textarea>
+          </div>
+          <div class="col-12 description p-1">
+            <div class="col-4 col-md-5 description-item  p-2">
+              <label>پلاک</label>
+              <input type="text" name="pelak" id="pelakN">
+      
+            </div>
+            <div class="col-4 col-md-5 description-item  p-2">
+              <label>کدپستی</label>
+              <input type="text" name="code" id="Postal-code">
+      
+            </div>
+            <div class="col-4 col-md-5  description-item  p-2">
+              <label>نام گیرنده</label>
+              <input type="text" name="name" id="name-receive">
+      
+            </div>
+            <div class="col-4 col-md-5  description-item  p-2">
+              <label>شماره گیرنده</label>
+              <input type="text" name="number" id="number-receive">
+      
+            </div>
+           
+            <div class="col-12 btn p-3">
+              <div class="col-3 btn-sabt"><span>ثبت آدرس</span></div>
+      
+            </div>
+      
+          </div>
+      
+      
+        </div>
+  
+          
+      </main>
+
+    </div>
+    <script src="/assets/frontend/vendors/map/dist/js/jquery-3.2.1.min.js"></script>
+    <!--BOOTSTRAP -->
+    <script src="/assets/frontend/vendors/bootstrap.min.js"></script>
+
+
+
+    <!--js for map  -->
+    <script src="/assets/frontend/vendors/map/dist/js/mapp.env.js"></script>
+    <script src="/assets/frontend/vendors/map/dist/js/mapp.min.js"></script>
+   
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/new-address.js" type="module"></script>
+  </body>
+</html>

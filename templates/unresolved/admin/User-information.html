@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="../assets/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="../assets/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../assets/styles/User-information.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+
+
+     <!-- START Header Package user information-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="../assets/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>اطلاعات فردی</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header Package user information-->
+
+      <!-- START MAIN -->
+      <main class="main">
+
+        <section class="information-account ">
+            <!-- start -->
+            <div class="information-account-content">
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="information-item p-1">
+                          <div class="col-5  p-1 value">
+                              <span>نام و نام خانوادگی</span>
+                          </div>
+                        <div class="col-7 p-1 value-item">
+                          <input type="text" placeholder="نام و نام خانوادگی">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 p-2 ">
+                      <div class="information-item p-1">
+                            <div class="col-5  p-1 value">
+                                <span>شهر</span>
+                            </div>
+                          <div class="col-7 p-1 value-item">
+                            <input type="text" placeholder="کرمان">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4 p-2 ">
+                      <div class="information-item p-1">
+                            <div class="col-5  p-1 value">
+                                <span>شماره تلفن</span>
+                            </div>
+                          <div class="col-7 p-1 value-item">
+                            <input type="text" placeholder="0912-002-0202">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4 p-2 ">
+                      <div class="information-item p-1">
+                            <div class="col-5  p-1 value">
+                                <span>رمز عبور</span>
+                            </div>
+                          <div class="col-7 p-1 value-item">
+                            <input type="text" placeholder="password">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4 p-2 ">
+                      <!-- <div class="information-item p-1">
+                            <div class="col-11  p-1 value">
+                                <span>شماره کارت جهت بازگرداندن وجه</span>
+                            </div>
+                          <div class="col-1 p-1 value-item">
+                              <img src="./assets/images/icon/Group 1900.png" alt="">
+                        </div>
+                      </div> -->
+                      <div class="information-item p-1">
+                          <div class="col-6 col-md-8  p-1 value">
+                              <span>شماره کارت جهت بازگرداندن وجه</span>
+                          </div>
+                        <div class="col-6 col-md-4 p-1 value-item">
+                          <input type="text" placeholder="60375585854545">
+                      </div>
+                    </div>
+                    </div>
+            </div>
+          </section>
+          <div class="The-dividing-line"></div>
+          <section class="Previous-orders ">
+            <!-- start -->
+            <div class="col-12 p-2">
+                <span style="font-size: 0.9em;">خرید های کاربر</span>
+
+            </div>
+            <div class="col-12 col-md-6 p-2">
+                <div class="content-orders bottomborder">
+                    <div class="col-12 Tracking-Code p-2">
+                        <div class="col-7 tracking">
+                            <label class="col-5">کد رهگیری</label>
+                            <input class="col-7" name="code-rahgiri" id="Track-code" type="text" placeholder="45880215">
+                        </div>
+                        <div class="col-5 date">
+                            <span>شنبه23آبان-9تا12صبح</span>
+                        </div>
+
+                    </div>
+                    <div class="col-12 images p-2">
+                        <div class="col-9 image-item p-2">
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+    
+                        </div>
+                        <div class="col-3 left-item p-2">
+                            <div class="price-value">
+                                <h4 class="mb-0">۱۲۰</h4>
+                                <p class="text">هزارتومان</p>
+                        </div>
+    
+                        </div>
+                    </div>
+                   
+
+                </div>
+
+            </div>
+            <div class="col-12 col-md-6 p-2">
+                <div class="content-orders bottomborder">
+                    <div class="col-12 Tracking-Code p-2">
+                        <div class="col-7 tracking">
+                            <label class="col-5">کد رهگیری</label>
+                            <input class="col-7" name="code-rahgiri" id="Track-code" type="text" placeholder="45880215">
+                        </div>
+                        <div class="col-5 date">
+                            <span>شنبه23آبان-9تا12صبح</span>
+                        </div>
+
+                    </div>
+                    <div class="col-12 images p-2">
+                        <div class="col-9 image-item p-2">
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+    
+                        </div>
+                        <div class="col-3 left-item p-2">
+                            <div class="price-value">
+                                <h4 class="mb-0">۱۲۰</h4>
+                                <p class="text">هزارتومان</p>
+                        </div>
+    
+                        </div>
+                    </div>
+                   
+
+                </div>
+
+            </div>
+            <div class="col-12 col-md-6 p-2">
+                <div class="content-orders bb">
+                    <div class="col-12 Tracking-Code p-2">
+                        <div class="col-7 tracking">
+                            <label class="col-5">کد رهگیری</label>
+                            <input class="col-7" name="code-rahgiri" id="Track-code" type="text" placeholder="45880215">
+                        </div>
+                        <div class="col-5 date">
+                            <span>شنبه23آبان-9تا12صبح</span>
+                        </div>
+
+                    </div>
+                    <div class="col-12 images p-2">
+                        <div class="col-9 image-item p-2">
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+                            <div class="col-3 p-2">
+                                <img src="../assets/images/pic5.png">
+                            </div>
+    
+                        </div>
+                        <div class="col-3 left-item p-2">
+                            <div class="price-value">
+                                <h4 class="mb-0">۱۲۰</h4>
+                                <p class="text">هزارتومان</p>
+                        </div>
+    
+                        </div>
+                    </div>
+                   
+
+                </div>
+
+            </div>
+
+           </section>
+
+
+
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="../assets/js/admin/Package-definition.js" type="module"></script>
+  </body>
+</html>

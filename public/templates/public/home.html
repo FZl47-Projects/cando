@@ -251,65 +251,78 @@
         <div class="inner-menu-mobile">
             <ul class="list-menu-mobile">
                 <li class="">
-                    <a href="basket-shoping.html">
+                    <a href="{% url 'basket_shoping' %}">
                         <span>سبد خرید</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="Favorite-cake.html" class="active">
+                    <a href="{% url 'product:custom_order_product' %}" class="active">
                         <span>کیک دلخواه</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="instruction.html">
+                    <a href="{% url 'instruction' %}">
                         <span>آموزش هاو مقالات</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="Custom-box.html">
+                    <a href="{% url 'custom_box' %}">
                         <span>پکیج آماده تولد</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="Each-product-page.html">
+                    <a href="{% url 'each_product_page' %}">
                         <span>صفحه هر محصول</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="Order-tracking.html">
+                    <a href="{% url 'order_tracking' %}">
                         <span>پیگیری سفارشات</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="wallet.html">
+                    <a href="{% url 'wallet' %}">
                         <span>کیف پول</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="Points-to-product.html">
+                    <a href="{% url 'points_to_product' %}">
                         <span>امتیاز به محصول</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="Notification-page.html">
+                    <a href="{% url 'notification_page' %}">
                         <span>صفحه اعلان ها</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="tickets.html">
+                    <a href="{% url 'tickets' %}">
                         <span>تیکت ها</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="profile.html">
-                        <span>پروفایل</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{% url 'account:logout' %}" id="exit">
-                        <span>خروج</span>
-                    </a>
-                </li>
+                {% if user.is_anonymous is False %}
+                    <li class="">
+                        <a href="{% url 'profile' %}">
+                            <span>پروفایل</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'account:logout' %}" id="exit">
+                            <span>خروج</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="">
+                        <a href="{% url 'account:login' %}" >
+                            <span>ورود</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'account:register' %}">
+                            <span>ایجاد حساب</span>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -529,7 +542,7 @@
                             <div class="up-image p-1">
                                 <img src="{{ product.get_image_url }}">
                             </div>
-{#                            <div class="text">تهیه پکیج آماده</div>#}
+                            {#                            <div class="text">تهیه پکیج آماده</div>#}
                         </div>
                         <div class="img-title">
                             <div class="cake-name">

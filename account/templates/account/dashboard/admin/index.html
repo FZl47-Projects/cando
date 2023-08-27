@@ -189,8 +189,8 @@
                     </div>
                 </form>
                 <div class="section-bottom mt-2" style="display: flex;">
-                    <div class="col-6 edit"><img class="p-2 " src="../assets/images/small-edit.png"></div>
-                    <div class="col-6 trash"><img class="p-2" src="../assets/images/small-trash.png"></div>
+                    <div class="col-6 edit"><img class="p-2 " src="{% static 'frontend/images/small-edit.png' %}"></div>
+                    <div class="col-6 trash"><img class="p-2" src="{% static 'frontend/images/small-trash.png' %}"></div>
                 </div>
             </div>
 
@@ -208,7 +208,7 @@
                 <form class="px-4 pt-2">
                     <div class="uplode-image mx-4 my-2">
             <span>
-              <img src="../assets/images/plus.png">
+              <img src="{% static 'frontend/images/plus.png' %}">
             </span>
                         <p class="mb-0">عکس محصول را<br> اضافه کنید</p>
                     </div>
@@ -255,52 +255,52 @@
             <div class="inner-menu-mobile">
                 <ul class="list-menu-mobile">
                     <li class="">
-                        <a href="tickets-admin.html">
+                        <a href="{% url 'tickets_admin' %}">
                             <span>تیکت ها</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="Package-definition.html" class="active">
+                        <a href="{% url 'package_definition' %}" class="active">
                             <span>تعریف پکیج</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="Education.html">
+                        <a href="{% url 'eduaction' %}">
                             <span>مقالات وآموزش ها</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="List-of-operators.html">
+                        <a href="{% url 'list_operators' %}">
                             <span>لیست اپراتورها</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="List-of-users.html">
+                        <a href="{% url 'list_users' %}">
                             <span>لیست کاربران</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="User-comments.html">
+                        <a href="{% url 'user_comments' %}">
                             <span>نظرات کاربران</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="Admin-manual-settings.html">
+                        <a href="{% url 'admin_settings' %}">
                             <span>تنظیمات دستی ادمین</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="List-of-orders.html">
+                        <a href="{% url 'list_orders' %}">
                             <span>لیست سفارشات</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="Monitoring-operators.html">
+                        <a href="{% url 'monitoring_operators' %}">
                             <span>مانیتورینگ اپراتور ها</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="Financial-monitoring.html">
+                        <a href="{% url 'monitoring_financial' %}">
                             <span>مانیتورینگ مالی</span>
                         </a>
                     </li>

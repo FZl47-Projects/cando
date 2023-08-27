@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تنظیمات دستی ادمین</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Admin-manual-settings.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="bg">
+
+    <!-- START Header Admin manual settings-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+                <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png" alt="icon" /></span>
+                <h5>تنظیمات دستی ادمین</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header Admin manual settings-->
+
+        <!-- START MAIN -->
+        <main class="main p-2">
+            <div class="content-package ">
+                <div class="col-9 p-1 me-3">
+                    <span>میزان بیعانه</span>
+                </div>
+                <!--start deposit amount-->
+                <div class="deposit-amount bottomborder p-2">
+                    <!-- start -->
+                    <div class="col-12 col-md-6 p-2">
+
+                        <div class="deposit-item p-2">
+                            <div class="col-12 p-1">
+                                <span>میزان بیعانه سفارشات عادی</span>
+                            </div>
+                            <div class="col-12 detail-item p-1">
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid">
+                            <label class=" col-4">درصد از خرید کل</label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <div class="deposit-item p-2">
+                            <div class="col-12 p-1">
+                                <span>میزان بیعانه کیک دلخواه</span>
+                            </div>
+                            <div class="col-12 detail-item p-1">
+                                <input class="col-8" type="text" name="value-kharid-cake" id="darsad-kharid-cake" >
+                            <label class=" col-4">درصد از خرید کل</label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <div class="deposit-item p-2">
+                            <div class="col-12 p-1">
+                                <span>میزان بیعانه جعبه شیرینی میکس</span>
+                            </div>
+                            <div class="col-12 detail-item p-1">
+                                <input class="col-8" type="text" name="value-kharid-boxsweet" id="darsad-kharid-boxsweet">
+                            <label class=" col-4">درصد از خرید کل</label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                 <!--end deposit amount-->
+                <!--start free delivery-->
+                <div class="col-9 p-1 me-3">
+                    <span>ارسال رایگان</span>
+                </div>
+                <div class="deposit-amount bottomborder p-2">
+                    <!-- start -->
+                    <div class="col-12 col-md-6 p-2">
+
+                        <div class="deposit-item p-2">
+                            <div class="col-12 p-1">
+                                <span>خرید های بالای</span>
+                            </div>
+                            <div class="col-12 detail-item p-1">
+                                <input class="col-8" type="text" name="value-kharid-free" id="darsad-kharid-free ">
+                            <label class=" col-4">تومان</label>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--free delivery-->
+                </div>
+                <!--end free delivery-->
+                <!--start Recharge wallet-->
+                <div class="col-9 p-1 me-3">
+                    <span>شارژ کیف پول</span>
+                </div>
+                <div class="deposit-amount bottomborder p-2">
+                    <!-- start -->
+                    <div class="col-12 col-md-6 p-2">
+
+                        <div class="deposit-item p-2">
+
+                            <div class="col-12 detail-item p-1">
+                                <input class="col-8" type="text" name="value-kharid-wallet" id="darsad-kharid-wallet ">
+                                <label class=" col-4">درصد از خرید کل</label>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!--end Recharge wallet-->
+
+                <!-- start Unbookable dates -->
+                <div class="col-9 p-1 me-3">
+                    <span>تاریخ های غیر قابل رزرو</span>
+                </div>
+                <div class="deposit-amount  p-2">
+                    <!-- start -->
+                    <div class="col-12 col-md-6 p-2">
+                        <div class="deposit-item p-2">
+
+                            <div class="col-12  p-1">
+                                <select name="date" id="Reservation-date">
+                                    <option value="date">شنبه 23 آبان</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- end Unbookable dates -->
+
+
+
+
+        </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+
+    <script src="/assets/frontend/js/admin/Package-definition.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سبد خرید</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Proceed-to-pay.css" />
+
+    <link rel="stylesheet" href="/assets/frontend/static/css/lib/persian-datepicker.min.css">
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+
+
+
+
+
+ <!-- START content modal submit time-->
+ <div class="content-modal" id="modal-submit-time">
+    <div class="inner-modal">
+      <div class="content p-3">
+        <div class="col-12 top-modal">
+            
+            <img src="/assets/frontend/images/Path 3147.png">
+            <input class="col-5 text-center" type="text" placeholder="شنبه23آبان">
+            <img src="/assets/frontend/images/Path 3148.png">
+        </div>
+
+        <div class="col-12 center-content">
+            <div class="col-12 item">
+                <input class="col-6 p-2 " type="text" value="ساعت4تا6" readonly>
+                <input class="col-6 p-2 free" type="text" value="رایگان" readonly>
+            </div>
+            <div class="col-12 item">
+                <input class="col-6 p-2 " type="text" value="ساعت6تا10" readonly>
+                <input class="col-6 p-2 free" type="text" value="40,500تومان" readonly>
+            </div>
+            <div class="col-12 item">
+                <input class="col-6 p-2 " type="text" value="ساعت4تا6" readonly>
+                <input class="col-6 p-2 free" type="text" value="رایگان" readonly>
+            </div>
+            <div class="col-12 item">
+                <input class="col-6 p-2 " type="text" value="ساعت4تا6" readonly>
+                <input class="col-6 p-2 free" type="text" value="رایگان" readonly>
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+<!-- End content modal  submit time-->
+
+
+
+
+
+
+
+
+
+
+  <!-- START Header proceed to pay-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+              <span class="back"><img src="/assets/frontend/images/black.f.png"
+                  alt="icon"
+                  /></span>
+              <h5>اقدام به پرداخت</h5>
+            </div>
+            <div class="line"></div>
+          </header>
+            <!-- end  Header proceed to pay-->
+
+ <!-- START MENU-BOTTOM -->
+ <div class="menu-bottom">
+    <ul class="list-bottom">
+      <li class="item-bottom active">
+        <a href="#">
+          <img src="/assets/frontend/images/icon/users.png" alt="icon" />
+        </a>
+      </li>
+      <li class="item-bottom">
+        <a href="#">
+          <img src="/assets/frontend/images/icon/home.png" alt="icon" />
+        </a>
+      </li>
+      <li class="item-bottom">
+        <a href="#">
+          <img src="/assets/frontend/images/icon/Bag.png" alt="icon" />
+        </a>
+      </li>
+      <li class="item-bottom">
+        <a href="#">
+          <img src="/assets/frontend/images/icon/hat.png" alt="icon" />
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- END MENU-BOTTOM -->
+
+      <!-- START MAIN -->
+      <main class="main">
+        <div class="content-page">
+            <!-- start -->
+            <div class="col-12 content-up-page p-3">
+                <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                    <span>کیک دلخواه</span>
+                    <span>120,000تومان</span>
+    
+                </div>
+                <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                    <span>شیرینی رولت خامه ای*2</span>
+                    <span>120,000تومان</span>
+    
+                </div>
+                <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                    <span>شیرینی رولت خامه ای</span>
+                    <span>120,000تومان</span>
+    
+                </div>
+    
+            </div>
+            <div class="line center"></div>
+            <div class="col-12 content-up-page p-3">
+                <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                    <span class="d-flex align-items-center">قیمت کل</span>
+                    <span class="d-flex align-items-center">850,000تومان</span>
+    
+                </div>
+                <div class="col-12 col-md-6 py-1 px-2 content-up-page-item address">
+                    <span class="p-1">هزینه ارسال(خریدهای بالای300هزارتومان رایگان)</span>
+                    <input  type="text" name="address-value" id="address">
+    
+                </div>
+                <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
+                    <span>مجموع</span>
+                    <span>850,000تومان</span>
+    
+                </div>
+    
+            </div>
+            <div class="line center"></div>
+            <div class="col-12 content-center-page paddingbottom p-3">
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">نام و نام خانوادگی</label>
+                    <input  type="text" name="Fname-value" id="fname">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">استان</label>
+                    <select  name="state" id="states">
+                        <option value="کرمان">کرمان</option>
+                        <option value="تهران">تهران</option>
+                        <option value="یزد">یزد</option>
+                        <option value="اصفهان">اصفهان</option>
+                      </select>
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">شهر</label>
+                    <select  name="state" id="states">
+                        <option value="کرمان">کرمان</option>
+                        <option value="تهران">تهران</option>
+                        <option value="یزد">یزد</option>
+                        <option value="اصفهان">اصفهان</option>
+                      </select>
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">آدرس کامل</label>
+                    <input class="arz" type="text" name="Fname-value" id="fname">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">کدپستی</label>
+                    <input  type="text" name="Fname-value" id="fname">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item ">
+                    <label class="p-1">نوع ارسال</label>
+                    <select class="timesend" name="state" id="noe-ersal">
+                        <option value="tahvil-imterneti">تحویل اینترنتی</option>
+                        <option value="tahvil-hozori">تحویل حضوری</option>
+                      </select>
+                </div>
+            
+
+                <div class="col-12 col-md-6 py-1 px-1 page-item internet-delivery active">
+                    <label  for="persianDatapicker" class="p-1">تاریخ ارسال</label>
+                    <input  type="text" name="persianDatapicker" id="persianDatapicker">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item active" id="submit-time">
+                    <label  for="persianDatapicker" class="p-1">زمان ارسال</label>
+                    <input  type="text" name="persianDatapicker" id="persianDatapicker">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">شماره موبایل</label>
+                    <input  type="text" name="Fname-value" id="fname">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">آدرس ایمیل(اختیاری)</label>
+                    <input  type="text" name="Fname-value" id="fname">
+                </div>
+                <div class="col-12 col-md-6 py-1 px-1 page-item">
+                    <label class="p-1">یاداشت(اختیاری)</label>
+                    <input class="arz" type="text" name="Fname-value" id="fname">
+                </div>
+    
+    
+    
+    
+                
+            </div>
+        </div>
+       
+        <div class="btn-main col-12 " id="new-sweet-btn">
+            <div class="btn-main-content">
+             <p class="mb-0 me-1">پرداخت</p>
+
+            </div>
+             
+        </div>
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="/assets/frontend/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+
+    <script src="/assets/frontend/static/js/lib/jquery-3.2.1.min.js"></script>
+    <script src="/assets/frontend/static/js/lib/persian-date.min.js"></script>
+    <script src="/assets/frontend/static/js/lib/persian-datepicker.min.js"></script>
+    <script src="/assets/frontend/static/js/app.js"></script>
+
+
+    <script src="/assets/frontend/js/Proceed-to-pay.js" type="module"></script>
+  </body>
+</html>

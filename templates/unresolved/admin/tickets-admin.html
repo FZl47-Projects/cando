@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تیکت ها</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/tickets.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+<!-- start modal response-tickets -->
+<div class="content-modal" id="modal-ticket">
+  <div class="inner-modal">
+    <div class="content">
+      <form class="px-4 pt-2">
+        <div class="py-2">
+          <div class="name">نام ونام خانوادگی</div>
+          <div class="title">
+            موضوع
+          </div>
+          <textarea name="modal" class="input-modal" cols="30" rows="7" placeholder="پاسخ تیکت"></textarea>
+        </div>
+        <div class="btns-modal">
+          <div class="btn-modal after col-6">
+            <span class="btn-send-modal" onclick="sendTicket(5)">ارسال</span>
+          </div>
+          <div class="btn-modal close-modal-adamtaeid col-6">
+            <span>لغو</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- end modal response-tickets -->
+
+
+
+
+
+
+
+
+
+
+
+
+     <!-- START Header content tickets-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>تیکت ها</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header content tickets-->
+
+      <!-- START MAIN -->
+      <main class="main p-2">
+          <!-- START BTNS  -->
+          <div class="btns">
+            <div class="btn-change col-6 text-center active" id="btn-birth">تیکت های جدید</div>
+            <div class="btn-change col-6 text-center " id="make-sweet">همه تیکت ها</div>
+          </div>
+          <!-- END BTNS  -->
+         <!-- START CONTENT new tickets  -->
+         <div class="content-tickets active">
+            <section class="content-items w-100 " >
+                <div class="items-ersal w-100 d-flex flex-wrap"id="row-all">
+                  <div class="item-all-ticket col-12 col-md-6 p-1 ">
+                    <div class="item-ticket">
+                      <div class="title d-flex justify-content-between align-items-center my-2">
+                        <span>نام و نام خانوادگی</span>
+                        <span>09120020202</span>
+                      </div>
+                      <div class="des-2">
+                        <div class="des-item p-3">
+                          <div class="col-12">
+                            <h6>موضوع خرابی سایت</h3>
+                          </div>
+                          <div class="col-12">
+                              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان    
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 Response-tickets p-1" id="response">
+                          پاسخ تیکت
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-all-ticket col-12 col-md-6 p-1 ">
+                    <div class="item-ticket">
+                      <div class="title d-flex justify-content-between align-items-center my-2">
+                        <span>نام و نام خانوادگی</span>
+                        <span>09120020202</span>
+                      </div>
+                      <div class="des-2">
+                        <div class="des-item p-3">
+                          <div class="col-12">
+                            <h6>موضوع خرابی سایت</h3>
+                          </div>
+                          <div class="col-12">
+                              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان    
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 Response-tickets p-1" id="response">
+                          پاسخ تیکت
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item-all-ticket col-12 col-md-6 p-1 ">
+                    <div class="item-ticket">
+                      <div class="title d-flex justify-content-between align-items-center my-2">
+                        <span>نام و نام خانوادگی</span>
+                        <span>09120020202</span>
+                      </div>
+                      <div class="des-2">
+                        <div class="des-item p-3">
+                          <div class="col-12">
+                            <h6>موضوع خرابی سایت</h3>
+                          </div>
+                          <div class="col-12">
+                              لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان    
+                          </div>
+                        </div>
+                        
+                        <div class="col-12 Response-tickets p-1" id="response">
+                          پاسخ تیکت
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+         </div>
+         
+          <!-- End CONTENT new tickets  -->
+
+        <!-- START CONTENT all tickets  -->
+        <div class="content-tickets">
+            <section class="content-items w-100" >
+                <div class="items-ersal w-100 d-flex flex-wrap"id="row-all">
+                    <div class="item-all-ticket col-12 col-md-6 p-1 ">
+                        <div class="item-ticket">
+                          <div class="title d-flex justify-content-between align-items-center my-2">
+                            <span>نام و نام خانوادگی</span>
+                            <span>09120020202</span>
+                          </div>
+                          <div class="des ">
+                            <div class="col-12 p-2 des-content">
+                                <div class="col-12">
+                                    <h6>موضوع خرابی سایت</h3>
+                                </div>
+                                <div class="col-12">
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان    
+                                </div>
+                            </div>
+                            <div class="col-12 des-item p-2">
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+    
+                            </div>
+                           
+                          </div>
+                        </div>
+                      </div>
+                      <div class="item-all-ticket col-12 col-md-6 p-1 ">
+                        <div class="item-ticket">
+                          <div class="title d-flex justify-content-between align-items-center my-2">
+                            <span>نام و نام خانوادگی</span>
+                            <span>09120020202</span>
+                          </div>
+                          <div class="des ">
+                            <div class="col-12 p-2 des-content">
+                                <div class="col-12">
+                                    <h6>موضوع خرابی سایت</h3>
+                                </div>
+                                <div class="col-12">
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان    
+                                </div>
+                            </div>
+                            <div class="col-12 des-item p-2">
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+    
+                            </div>
+                           
+                          </div>
+                        </div>
+                      </div>
+                      <div class="item-all-ticket col-12 col-md-6 p-1 ">
+                        <div class="item-ticket">
+                          <div class="title d-flex justify-content-between align-items-center my-2">
+                            <span>نام و نام خانوادگی</span>
+                            <span>09120020202</span>
+                          </div>
+                          <div class="des ">
+                            <div class="col-12 p-2 des-content">
+                                <div class="col-12">
+                                    <h6>موضوع خرابی سایت</h3>
+                                </div>
+                                <div class="col-12">
+                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان    
+                                </div>
+                            </div>
+                            <div class="col-12 des-item p-2">
+                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
+    
+                            </div>
+                           
+                          </div>
+                        </div>
+                      </div>
+                
+                </div>
+            </section>
+        </div>
+       
+        <!-- End CONTENT all tickets  -->
+
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/admin/tickets.js" type="module"></script>
+  </body>
+</html>

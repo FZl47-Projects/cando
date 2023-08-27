@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لیست تمام سفارشات</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/List-of-orders.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+
+     <!-- START Header General orders-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>لیست تمام سفارشات</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header General orders-->
+
+      <!-- START MAIN -->
+      <main class="main p-3">
+          <!-- START BTNS  -->
+          <div class="btns">
+            <div class="btn-change col-6 text-center active" id="btn-birth">سفارشات عمومی</div>
+            <div class="btn-change col-6 text-center " id="make-sweet">ویترین روز</div>
+          </div>
+          <!-- END BTNS  -->
+          <!-- start content General orders  -->
+          <div class="content-price active">
+            <section class="category-price p-1">
+              <!-- start -->
+              <div class="col-12 col-md-6 px-1 py-1">
+                <div class="price-item ">
+                    <div class="p-3 col-12">
+                        <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 address" type="text" name="value-kharid" id="darsad-kharid" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                        </div>
+                        <div class="col-12">
+                            <div class="moshakhasat py-1">
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content">
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای*2</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 Total-price pt-1">
+                                        <div class="col-12 item-list p-1">
+                                            <span>بیعانه</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="col-12 btn-bottom p-2">
+                        <span>تخمین قیمت و آماده سازی</span>
+
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 px-1 py-1">
+                <div class="price-item ">
+                    <div class="p-3 col-12">
+                        <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 address" type="text" name="value-kharid" id="darsad-kharid" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                        </div>
+                        <div class="col-12">
+                            <div class="moshakhasat py-1">
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content">
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای*2</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 Total-price pt-1">
+                                        <div class="col-12 item-list p-1">
+                                            <span>بیعانه</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="col-12 btn-bottom p-2">
+                        <span>تخمین قیمت و آماده سازی</span>
+
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 px-1 py-1">
+                <div class="price-item ">
+                    <div class="p-3 col-12">
+                        <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 address" type="text" name="value-kharid" id="darsad-kharid" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                        </div>
+                        <div class="col-12">
+                            <div class="moshakhasat py-1">
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content">
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای*2</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 Total-price pt-1">
+                                        <div class="col-12 item-list p-1">
+                                            <span>بیعانه</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="col-12 btn-bottom p-2">
+                        <span>تخمین قیمت و آماده سازی</span>
+
+                    </div>
+                </div>
+              </div>
+             
+            </section>
+        </div>
+          <!-- End content General orders  -->
+           <!-- start content showcase of the day  -->
+           <div class="content-price ">
+            <section class="category-price p-1">
+              <!-- start -->
+              <div class="col-12 col-md-6 px-1 py-1">
+                <div class="price-item ">
+                    <div class="p-3 col-12">
+                        <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 address" type="text" name="value-kharid" id="darsad-kharid" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                        </div>
+                        <div class="col-12">
+                            <div class="moshakhasat py-1">
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content">
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای*2</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 Total-price pt-1">
+                                        <div class="col-12 item-list p-1">
+                                            <span>بیعانه</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="col-12 btn-bottom p-2">
+                        <span>تخمین قیمت و آماده سازی</span>
+
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 px-1 py-1">
+                <div class="price-item ">
+                    <div class="p-3 col-12">
+                        <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 address" type="text" name="value-kharid" id="darsad-kharid" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                        </div>
+                        <div class="col-12">
+                            <div class="moshakhasat py-1">
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content">
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای*2</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 Total-price pt-1">
+                                        <div class="col-12 item-list p-1">
+                                            <span>بیعانه</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="col-12 btn-bottom p-2">
+                        <span>تخمین قیمت و آماده سازی</span>
+
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 px-1 py-1">
+                <div class="price-item ">
+                    <div class="p-3 col-12">
+                        <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 address" type="text" name="value-kharid" id="darsad-kharid" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                        </div>
+                        <div class="col-12">
+                            <div class="moshakhasat py-1">
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content">
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای*2</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                        <div class="col-12 col-md-6 item-list p-1">
+                                            <span>شیرینی رولت خامه ای</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 Total-price pt-1">
+                                        <div class="col-12 item-list p-1">
+                                            <span>بیعانه</span>
+                                            <span>85,000تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="col-12 btn-bottom p-2">
+                        <span>تخمین قیمت و آماده سازی</span>
+
+                    </div>
+                </div>
+              </div>
+             
+            </section>
+        </div>
+          <!-- End content showcase of the day  -->
+
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/admin/List-of-orders.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مانیتورینگ اپراتورها</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Monitoring-operators.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+     <!-- START Header Monitoring-operators-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>مانیتورینگ اپراتور ها</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header Monitoring-operators-->
+
+      <!-- START MAIN -->
+      <main class="main">
+          <!-- START BTNS  -->
+          <div class="btns">
+            <div class="btn-change col-6 text-center active" id="btn-birth">سفارش ها</div>
+            <div class="btn-change col-6 text-center " id="make-sweet">افزودن محصول</div>
+          </div>
+          <!-- END BTNS  -->
+          <!-- start content orders -->
+          <div class="content active">
+            <section class="content-orders">
+                <div class="content-item p-2">
+                    <div class="all-order-item col-12 col-md-6 p-1">
+                        <div class="order p-2">
+                            <div class="col-12 txt-top">
+                                <span>تایید و تخمین قیمت-نام اپراتور</span>
+        
+                            </div>
+                            <div class="col-12 txt-main p-2">
+                                <div class="col-12">
+                                    <h6>کیک دلخواه</h6>
+                                </div>
+                                <div class="main-content">
+                                    <div class="col-6">وزن:2کیلو گرم</div>
+                                    <div class="col-6 txt-end">اسفنج کیک:نسکافه</div>
+                                    <div class="col-6">فیلینگ:آناناس،گردو</div>
+                                    <div class="col-6 txt-end">طعم خامه:وانیل،کم خامه</div>
+        
+                                </div>
+                                <div class="col-12 Total-price pt-1">
+                                    <div class="col-6">بیعانه</div>
+                                    <div class="col-6 num">85,000</div>
+                                    <div class="col-6">تخمین قیمت نهایی</div>
+                                    <div class="col-6 num">85,000</div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="all-order-item col-12 col-md-6 p-1">
+                        <div class="order p-2">
+                            <div class="col-12 txt-top">
+                                <span>تایید و تخمین قیمت-نام اپراتور</span>
+        
+                            </div>
+                            <div class="col-12 txt-main p-2">
+                                <div class="col-12">
+                                    <h6>کیک دلخواه</h6>
+                                </div>
+                                <div class="main-content">
+                                    <div class="col-6">وزن:2کیلو گرم</div>
+                                    <div class="col-6 txt-end">اسفنج کیک:نسکافه</div>
+                                    <div class="col-6">فیلینگ:آناناس،گردو</div>
+                                    <div class="col-6 txt-end">طعم خامه:وانیل،کم خامه</div>
+        
+                                </div>
+                                <div class="col-12 Total-price pt-1">
+                                    <div class="col-6">بیعانه</div>
+                                    <div class="col-6 num">85,000</div>
+                                    <div class="col-6">تخمین قیمت نهایی</div>
+                                    <div class="col-6 num">85,000</div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="all-order-item col-12 col-md-6 p-1">
+                        <div class="order p-2">
+                            <div class="col-12 txt-top">
+                                <span>تایید و تخمین قیمت-نام اپراتور</span>
+        
+                            </div>
+                            <div class="col-12 txt-main p-2">
+                                <div class="col-12">
+                                    <h6>کیک دلخواه</h6>
+                                </div>
+                                <div class="main-content">
+                                    <div class="col-6">وزن:2کیلو گرم</div>
+                                    <div class="col-6 txt-end">اسفنج کیک:نسکافه</div>
+                                    <div class="col-6">فیلینگ:آناناس،گردو</div>
+                                    <div class="col-6 txt-end">طعم خامه:وانیل،کم خامه</div>
+        
+                                </div>
+                                <div class="col-12 Total-price pt-1">
+                                    <div class="col-6">بیعانه</div>
+                                    <div class="col-6 num">85,000</div>
+                                    <div class="col-6">تخمین قیمت نهایی</div>
+                                    <div class="col-6 num">85,000</div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+             </section>
+          </div>
+          
+        <!-- end content orders -->
+
+        <!-- start content Add product -->
+            <div class="content">
+                <section class="content-orders">
+                    <div class="content-item p-2">
+                        <div class="all-order-item col-12 col-md-6 p-1">
+                            <div class="order p-2">
+                                <div class="col-12 txt-top">
+                                    <span class="col-5">دسته بندی:شیرینی تر</span>
+                                    <span class="col-7 text-left">تایید و تخمین قیمت-نام اپراتور</span>
+                                </div>
+                                <div class="col-12">
+                                    <img class="w-100" src="/assets/frontend/images/pic10.png">
+
+                                </div>
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content border-product">
+                                        <div class="col-6">نام محصول:چیز کیک لیمویی</div>
+                                        <div class="col-6 txt-end">قیمت هر کیلو:120,000تومان</div>
+                                        <div class="col-6">موجودی:12عدد</div>
+                                        <div class="col-6 txt-end">قیمت عمده:185,000تومان</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="all-order-item col-12 col-md-6 p-1">
+                            <div class="order p-2">
+                                <div class="col-12 txt-top">
+                                    <span class="col-5">دسته بندی:شیرینی تر</span>
+                                    <span class="col-7 text-left">تایید و تخمین قیمت-نام اپراتور</span>
+                                </div>
+                                <div class="col-12">
+                                    <img class="w-100" src="/assets/frontend/images/pic10.png">
+
+                                </div>
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content border-product">
+                                        <div class="col-6">نام محصول:چیز کیک لیمویی</div>
+                                        <div class="col-6 txt-end">قیمت هر کیلو:120,000تومان</div>
+                                        <div class="col-6">موجودی:12عدد</div>
+                                        <div class="col-6 txt-end">قیمت عمده:185,000تومان</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="all-order-item col-12 col-md-6 p-1">
+                            <div class="order p-2">
+                                <div class="col-12 txt-top">
+                                    <span class="col-5">دسته بندی:شیرینی تر</span>
+                                    <span class="col-7 text-left">تایید و تخمین قیمت-نام اپراتور</span>
+                                </div>
+                                <div class="col-12">
+                                    <img class="w-100" src="/assets/frontend/images/pic10.png">
+
+                                </div>
+                                <div class="col-12 txt-main p-2">
+                                    <div class="main-content border-product">
+                                        <div class="col-6">نام محصول:چیز کیک لیمویی</div>
+                                        <div class="col-6 txt-end">قیمت هر کیلو:120,000تومان</div>
+                                        <div class="col-6">موجودی:12عدد</div>
+                                        <div class="col-6 txt-end">قیمت عمده:185,000تومان</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </section>
+            </div>
+        <!-- end content Add product -->
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/admin/Monitoring-operators.js" type="module"></script>
+  </body>
+</html>

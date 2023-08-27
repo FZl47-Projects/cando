@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تعریف پکیج تولد</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Package-definition.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+
+     <!-- START content modal Package definition-->
+    <div class="content-modal" id="modal-newbirth-pakage">
+      <div class="inner-modal">
+        <div class="content">
+          <form class="px-4 pt-2">
+            <div class="uplode-image mx-4 my-2">
+              <span>
+                <img src="/assets/frontend/images/plus.png">
+              </span>
+              <p class="mb-0">عکس را<br> اضافه کنید</p>
+            </div>
+          <div class="col-12 px-4 py-2 ">
+            <input class="form-control" name="package" id="package-name" type="text" placeholder="اسم پکیج" aria-label=".form-control-lg example">
+          </div>
+          <div class="col-12  px-4 py-2">
+            <select name="brand" id="brand-birth">
+              <option value="Candle">شمع</option>
+              <option value="balloon">بادکنک</option>
+            </select>
+        </div>
+
+
+            <div class="col-12 px-4 py-2 ">
+              <input class="form-control " name="value-price" id="price" type="text" placeholder="قیمت (تومان)" aria-label=".form-control-lg example">
+            </div>
+
+        </form>
+        <div class="birthday-package mt-2">
+          <p>تعریف پکیج تولد</p>
+        </div>
+        </div>
+        
+
+      </div>
+
+    </div>
+ <!-- End content modal Package definition-->
+
+  <!-- START content modal  pakage making sweets-->
+  <div class="content-modal" id="modal-making-sweets">
+    <div class="inner-modal">
+      <div class="content">
+        <form class="px-4 pt-2">
+        <div class="col-12  px-4 py-2">
+          <select name="brand" id="brand-mobile">
+            <option value="education">نام آموزش</option>
+          </select>
+      </div>
+        <div class="col-12  px-4 py-2">
+          <select name="equipment" id="Equipment">
+            <option value="funnel">قیف</option>
+            <option value="cake-powder">پودر کیک</option>
+          </select>
+         </div>
+
+          <div class="col-12 px-4 py-2 ">
+            <input class="form-control " type="text" placeholder="قیمت (تومان)" aria-label=".form-control-lg example">
+          </div>
+
+      </form>
+      <div class="birthday-package mt-2">
+        <p>تعریف پکیج ساخت شیرینی</p>
+      </div>
+      </div>
+    </div>
+
+  </div>
+<!-- End content modal  pakage making sweets-->
+
+
+
+
+
+
+     <!-- START Header Package definition-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>تعریف پکیج</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header Package definition-->
+
+      <!-- START MAIN -->
+      <main class="main">
+          <!-- START BTNS  -->
+          <div class="btns">
+            <div class="btn-change col-6 text-center active" id="btn-birth">آماده تولد</div>
+            <div class="btn-change col-6 text-center " id="make-sweet">ساخت شیرینی</div>
+          </div>
+          <!-- END BTNS  -->
+           <!-- start content pakage birthday -->
+          <div class="content-pakage active" id="content-birth">
+            <section class="category-product">
+              <!-- start -->
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/five.jpg"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="name-product">تم لوکس</div>
+                    <div class="ajza">
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/3.png" alt="">
+                        <span>بادکنک</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/2.png" alt="">
+                        <span>بشقاب و چنگال</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/1.png" alt="">
+                        <span>شمع</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/1.png" alt="">
+                        <span>ریسه آویز</span>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/five.jpg"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="name-product">تم لوکس</div>
+                    <div class="ajza">
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/3.png" alt="">
+                        <span>بادکنک</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/2.png" alt="">
+                        <span>بشقاب و چنگال</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/1.png" alt="">
+                        <span>شمع</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/1.png" alt="">
+                        <span>ریسه آویز</span>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                      <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/five.jpg"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="name-product">تم لوکس</div>
+                    <div class="ajza">
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/3.png" alt="">
+                        <span>بادکنک</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/2.png" alt="">
+                        <span>بشقاب و چنگال</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/1.png" alt="">
+                        <span>شمع</span>
+                      </div>
+                      <div class="ajzaitem col-6">
+                        <img src="/assets/frontend/images/icon/1.png" alt="">
+                        <span>ریسه آویز</span>
+                      </div>
+  
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+            </section>
+            <div class="btn-main col-12 active" id="new-birth-btn">
+              <div class="btn-main-content">
+                <span>
+                  <img src="/assets/frontend/images/plus1.png">
+                </span>
+                <p class="mb-0 me-1">پکیج تولد جدید</p>
+
+              </div>
+                
+            </div>
+          </div>
+            <!-- END content pakage birthday -->
+
+            <!-- Start content pakage making sweets -->
+          <div class="content-pakage" id="content-sweet">
+            <section class="category-product">
+              <!-- start -->
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/pic3.png"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="sweat-name">چیز کیک ژاپنی</div>
+                    <div class="description">
+                      <div class="description-item col-12">
+                        <span>بیکینگ پودر</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>قیف</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>خامه شیرینی</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/pic3.png"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="sweat-name">چیز کیک ژاپنی</div>
+                    <div class="description">
+                      <div class="description-item col-12">
+                        <span>بیکینگ پودر</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>قیف</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>خامه شیرینی</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                      <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/pic3.png"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="sweat-name">چیز کیک ژاپنی</div>
+                    <div class="description">
+                      <div class="description-item col-12">
+                        <span>بیکینگ پودر</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>قیف</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>خامه شیرینی</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+              <div class="col-12 col-md-6 p-2 pp">
+                <div class="product-item">
+                  <div class="col-3 col-md-4 height">
+                    <div class="img-product"><img src="/assets/frontend/images/pic3.png"
+                        alt=""></div>
+                  </div>
+                  <div class="col-6 col-md-5 moshakhaseh">
+                    <div class="sweat-name">چیز کیک ژاپنی</div>
+                    <div class="description">
+                      <div class="description-item col-12">
+                        <span>بیکینگ پودر</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>قیف</span>
+                      </div>
+                      <div class="description-item col-12">
+                        <span>خامه شیرینی</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-2 price">
+                    120<br />هزارتومان
+                  </div>
+                  <div class="col-1 bbb">
+                    <div class="cart">
+                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
+                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+              </div>
+            </section>
+            <div class="btn-main col-12 " id="new-sweet-btn">
+              <div class="btn-main-content">
+               <span>
+                 <img src="/assets/frontend/images/plus1.png">
+               </span>
+               <p class="mb-0 me-1">پکیج ساخت شیرینی جدید</p>
+ 
+              </div>
+               
+             </div>
+          </div>
+             <!-- End content pakage making sweets -->
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/admin/Package-definition.js" type="module"></script>
+  </body>
+</html>

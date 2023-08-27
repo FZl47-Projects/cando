@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>امتیاز به محصول</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Points-to-product.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="bg">
+
+     <!-- START Header points-to-product-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title mx-1">
+          <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>کیک لیمو</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header  points-to-product-->
+
+ <!-- START MENU-BOTTOM -->
+ <div class="menu-bottom">
+  <ul class="list-bottom">
+    <li class="item-bottom active">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/users.png" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/home.png" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/Bag.png" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/hat.png" alt="icon" />
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- END MENU-BOTTOM -->
+
+
+      <!-- START MAIN -->
+      <main class="main">
+          
+        <section class="point-product">
+          <!-- start -->
+          <div class="col-12 col-md-7 ranges py-1">
+            <div class="col-12 p-2 ranges-content">
+                <label>امتیاز کلی به این محصول</label>
+                <div class="range-item col-12">
+                    <div class="col-12 select-range">
+                        <input type="range"  id="score-product" name="score" list="slist" step="25">
+                        <datalist id="slist">
+                            <option value="0" label="ضعیف"></option>
+                            <option value="25" label="متوسط"></option>
+                            <option value="50" label="خوب"></option>
+                            <option value="75" label="خیلی خوب"></option>
+                            <option value="100" label="عالی"></option>
+                        </datalist>
+                    </div>
+  
+                </div>
+  
+            </div>
+        </div>
+        <div class="col-12  information py-1">
+          <div class="col-12 col-md-7 p-2">
+            <label>عنوان دیدگاه</label>
+            <input name="opinion-value" id="opinion" type="text" >
+        </div>
+          <div class="col-12 col-md-7 p-2">
+            <label>توضیحات</label>
+              <textarea  class="des" name="des-value" id="description" rows="3"></textarea>
+          </div>
+      </div>
+      <div class="col-12 ranges py-1">
+        <div class="col-12 col-md-6 p-3 ranges-content">
+            <label>کیفیت محصول</label>
+            <div class="range-item col-12">
+                <div class="col-12 select-range">
+                    <input type="range"  id="cake-quality" name="quality" list="wlist" step="25">
+                    <datalist id="wlist">
+                        <option value="0" label="ضعیف"></option>
+                        <option value="25" label="متوسط"></option>
+                        <option value="50" label="خوب"></option>
+                        <option value="75" label="خیلی خوب"></option>
+                        <option value="100" label="عالی"></option>
+                    </datalist>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-12 col-md-6 p-3 ranges-content">
+          <label>بسته بندی</label>
+          <div class="range-item col-12">
+              <div class="col-12 select-range">
+                  <input type="range"  id="packing" name="packing-pro" list="plist" step="25">
+                  <datalist id="plist">
+                      <option value="0" label="ضعیف"></option>
+                      <option value="25" label="متوسط"></option>
+                      <option value="50" label="خوب"></option>
+                      <option value="75" label="خیلی خوب"></option>
+                      <option value="100" label="عالی"></option>
+                  </datalist>
+              </div>
+
+          </div>
+
+      </div>
+      <div class="col-12 col-md-6 p-3 ranges-content">
+        <label>ارزش خرید</label>
+        <div class="range-item col-12">
+            <div class="col-12 select-range">
+                <input type="range"  id="worth-buying" name="buying" list="blist" step="25">
+                <datalist id="blist">
+                    <option value="0" label="ضعیف"></option>
+                    <option value="25" label="متوسط"></option>
+                    <option value="50" label="خوب"></option>
+                    <option value="75" label="خیلی خوب"></option>
+                    <option value="100" label="عالی"></option>
+                </datalist>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+   
+        </section>
+        <!-- start btn bottom -->
+        <div class="btn-main col-12 ">
+          <div class="btn-main-content">
+           <span>
+             <img src="/assets/frontend/images/plus1.png">
+           </span>
+           <p class="mb-0 me-1">ثبت دیدگاه</p>
+    
+          </div>
+           
+         </div>
+
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="/assets/frontend/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+  </body>
+</html>

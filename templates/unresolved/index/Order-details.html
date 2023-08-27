@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سبد خرید</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Order-details.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- start modal Order details -->
+    <div class="content-modal" id="modal-Order-details">
+        <div class="inner-modal">
+          <div class="content">
+              <div class="content-price active">
+                <section class="category-price p-1">
+                  <div class="col-12 px-1 py-1">
+                    <div class="price-item ">
+                        <div class="col-12 detail">
+                                <div class="col-12 detail-item p-2">
+                                    <label class=" col-4">کد رهگیری:</label>
+                                    <input class="col-8" type="text" name="code" id="code-rahgiri" placeholder="45880215">
+                                </div>
+                                <div class="col-12 detail-item p-2">
+                                    <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                    <input class="col-8" type="text" name="value-date" id="date-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                                </div>
+                                <div class="col-12 detail-item p-2">
+                                    <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                    <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                                </div>
+                                <div class="col-12 detail-item p-2">
+                                    <input class="col-12 adres" type="text" name="value-address" id="address" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                                </div>
+                                
+        
+                        </div>
+                    </div>
+                  </div>
+                </section>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- end modal Order details -->
+
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <!-- start header -->
+        <header class="header-m-oprator">
+            <div class="title">
+              <span class="back"><img src="/assets/frontend/images/black.f.png"
+                  alt="icon"
+                  /></span>
+              <h5>جزئیات سفارش</h5>
+            </div>
+            <div class="line"></div>
+          </header>
+        <!-- start header -->
+ <!-- START MENU-BOTTOM -->
+ <div class="menu-bottom">
+  <ul class="list-bottom">
+    <li class="item-bottom active">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/users.png" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/home.png" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/Bag.png" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="/assets/frontend/images/icon/hat.png" alt="icon" />
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- END MENU-BOTTOM -->
+      <!-- START MAIN -->
+      <main class="main">
+        <div class="content-price active">
+            <section class="category-price p-1">
+              <div class="col-12 px-1 py-1">
+                <div class="price-item ">
+                    <div class="col-12 detail">
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">کد رهگیری:</label>
+                                <input class="col-8" type="text" name="code" id="code-rahgiri" placeholder="45880215">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                <input class="col-8" type="text" name="value-date" id="date-kharid" placeholder="شنبه 23 آبان-9 تا 12 صبح">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                <input class="col-8" type="text" name="value-kharid" id="darsad-kharid" placeholder="نام ونام خانوادگی 09122254545">
+                            </div>
+                            <div class="col-12 detail-item p-2">
+                                <input class="col-12 adres" type="text" name="value-address" id="address" placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
+                            </div>
+                            
+    
+                    </div>
+                </div>
+              </div>
+            </section>
+        </div>
+        <div class="line"></div>
+
+       <!-- start content orders detail-->
+       <div class="order active">
+        <section class="category-product p-2 ">
+            <!-- start -->
+            <div class="col-12 col-md-6 p-2 ">
+                <div class="product-item">
+                  <div class="col-4 col-md-4 height">
+                    <div class="img-product">
+                      <img src="/assets/frontend/images/6.jpeg"
+                        alt="">
+                      </div>
+                  </div>
+                  <div class="col-5 col-md-4 moshakhaseh">
+                    <div class="name-sweet"><h4>کیک لیمو</h4></div>
+                      <div class="the-details">
+                        <span>وزن:2کیلوگرم</span>
+                        <span>فیلینگ:آناناس،گردو</span>
+                        <span>اسفنج کیک:نسکافه</span>
+                        <span>طعم خامه:وانیل-کم خامه</span>
+                      </div>
+                  </div>
+                  <div class="col-3 p-2 price">
+                      <div class="price-value" >
+                              <h4 class="mb-0" >۱۲۰</h4>
+                              <p class="text">هزارتومان</p>
+                      </div>  
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-12 col-md-6 p-2 ">
+                <div class="product-item">
+                  <div class="col-4 col-md-4 height">
+                    <div class="img-product">
+                      <img src="/assets/frontend/images/6.jpeg"
+                        alt="">
+                      </div>
+                  </div>
+                  <div class="col-5 col-md-4 moshakhaseh">
+                    <div class="name-sweet"><h4>کیک لیمو</h4></div>
+                      <div class="the-details">
+                        <span>وزن:2کیلوگرم</span>
+                        <span>فیلینگ:آناناس،گردو</span>
+                        <span>اسفنج کیک:نسکافه</span>
+                        <span>طعم خامه:وانیل-کم خامه</span>
+                      </div>
+                  </div>
+                  <div class="col-3 p-2 price">
+                      <div class="price-value" >
+                              <h4 class="mb-0" >۱۲۰</h4>
+                              <p class="text">هزارتومان</p>
+                      </div>  
+                  </div>
+  
+                </div>
+              </div>
+              <div class="col-12 col-md-6 p-2 ">
+                <div class="product-item">
+                  <div class="col-4 col-md-4 height">
+                    <div class="img-product">
+                      <img src="/assets/frontend/images/6.jpeg"
+                        alt="">
+                      </div>
+                  </div>
+                  <div class="col-5 col-md-4 moshakhaseh">
+                    <div class="name-sweet"><h4>کیک لیمو</h4></div>
+                      <div class="the-details">
+                        <span>وزن:2کیلوگرم</span>
+                        <span>فیلینگ:آناناس،گردو</span>
+                        <span>اسفنج کیک:نسکافه</span>
+                        <span>طعم خامه:وانیل-کم خامه</span>
+                      </div>
+                  </div>
+                  <div class="col-3 p-2 price">
+                      <div class="price-value" >
+                              <h4 class="mb-0" >۱۲۰</h4>
+                              <p class="text">هزارتومان</p>
+                      </div>  
+                  </div>
+  
+                </div>
+              </div>
+              
+          </section>
+          <div class="col-12 p-2">
+            <div class="line"></div>
+             <!--start content list wallet  -->
+            <section class="list">
+                <div class="col-12 ">
+                    <div class="content-list p-2">
+                        <div class="col-12 p-2">
+                            <div class="list-item">
+                                <span>قیمت کالا ها</span>
+                                <span>850,000تومان</span>
+    
+                            </div>
+    
+                        </div>
+                        <div class="col-12 p-2">
+                            <div class="list-item">
+                                <span>تخفیف کالا ها</span>
+                                <span>10,000تومان</span>
+    
+                            </div>
+    
+                        </div>
+                        <div class="col-12 border-b p-2">
+                            <div class="list-item credit" id="texts-etebar">
+                                <span >هزینه ارسال</span>
+                                <span >10,000تومان</span>
+    
+                            </div>
+    
+                        </div>
+                        <div class="col-12  p-2">
+                            <div class="list-item">
+                                <span>جمع سبد خرید</span>
+                                <span>840,000تومان</span>
+    
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                </div>
+            </section>
+            <!--end content list wallet  -->
+          </div>
+       </div>
+          
+           <!-- end content orders detail -->
+
+
+           
+               
+    
+    
+
+
+
+
+      
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="/assets/frontend/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+    <script src="/assets/frontend/js/basket-shoping.js" ></script>
+  </body>
+</html>

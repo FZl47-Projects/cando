@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>پیگیری سفارش</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/Order-tracking.css" />
+
+ <!--bootstrap for map  -->
+ <link rel="stylesheet" href="/assets/frontend/vendors/map/dist/css/mapp.min.css">
+ <link rel="stylesheet" href="/assets/frontend/vendors/map/dist/css/fa/style.css">
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body class="">
+
+  
+
+
+
+    
+    <div class="container-fluid container-admin" style="position:relative ;">
+
+      <!-- START MAIN -->
+      <main class="main">
+        <!-- start -->
+      
+        <div class="map-content">
+          <div id="app"></div>
+        </div>
+    
+          
+      <div class="btn-bottom ">
+          <div class="col-12 txt-top p-3"> 
+            <span>زمان تقریبی رسیدن کالا30دقیقه</span>
+            <span style="color: rgb(180, 180, 179);">مرحله خروج از مرکز پردازش</span>
+          </div>
+      
+          <div class="col-12 city p-1">
+           <div class="col-3 images">
+            <div class="col-8 aks">
+              <img src="/assets/frontend/images/icon/time.png">
+              <span class="py-2 color-span">در صف بررسی</span>
+            </div>
+            <div class="col-4 point">
+              <img src="/assets/frontend/images/icon/point.png">
+            </div>
+
+           </div>
+           <div class="col-3 images">
+            <div class="col-8 aks">
+              <i class="bi bi-check-circle checks"></i>
+              <span class="py-2 color-span">تاییدسفارش</span>
+            </div>
+            <div class="col-4 point">
+              <img src="/assets/frontend/images/icon/point.png">
+            </div>
+
+           </div>
+           <div class="col-3 images">
+            <div class="col-8 aks">
+              <img src="/assets/frontend/images/icon/car.png ">
+              <span class="py-2 color-span">خروج از مرکز سفارش</span>
+            </div>
+            <div class="col-4 point">
+              <img src="/assets/frontend/images/icon/pointw.png">
+            </div>
+
+           </div>
+           <div class="col-3 images">
+            <div class="col-8 aks">
+              <img src="/assets/frontend/images/icon/box.png">
+              <span class="py-2 colors-span">تحویل به مشتری</span>
+            </div>
+           </div>
+          </div>
+          <!-- <div class="col-12 text-item p-2">
+            <div class="col-3  textdown">
+            <span>در صف بررسی</span>
+            </div>
+            <div class="col-3  textdown">
+                <span>تاییدسفارش</span>
+            </div>
+            <div class="col-3  textdown">
+                <span>خروج از مرکز سفارش</span>
+            </div>
+            <div class="col-3  textdown">
+                <span>تحویل به مشتری</span>
+            </div>
+        </div> -->
+        <div class="col-12  address p-2">
+            <div class="col-12 addres-item">
+                <span>کرمان،کرمان،نرسیده به بلوار،خیابان فیروزه3جنب مطب قهاری پلاک25،کدپستی2585759663</span>
+            </div>
+            <div class="col-12 moshakhasat-item p-2">
+                <div class="fname col-6" >
+                    <img class="p-1" src="/assets/frontend/images/icon/mobile.png">
+                    <span class="p-1">نام گیرنده</span>
+                </div>
+                <div class="fname col-6" >
+                    <img class="p-1" src="/assets/frontend/images/icon/call.png">
+                    <span class="p-1">شماره گیرنده</span>
+                </div>
+            </div>
+        </div>
+      </div>
+
+  
+          
+      </main>
+
+    </div>
+    <script src="/assets/frontend/vendors/map/dist/js/jquery-3.2.1.min.js"></script>
+    <!--BOOTSTRAP -->
+    <script src="/assets/frontend/vendors/bootstrap.min.js"></script>
+
+
+
+    <!--js for map  -->
+    <script src="/assets/frontend/vendors/map/dist/js/mapp.env.js"></script>
+    <script src="/assets/frontend/vendors/map/dist/js/mapp.min.js"></script>
+   
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/new-address.js" type="module"></script>
+  </body>
+</html>
