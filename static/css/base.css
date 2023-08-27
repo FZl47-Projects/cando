@@ -17,6 +17,15 @@ body {
     text-align: left;
 }
 
+.text-center{
+    text-align: center;
+}
+
+.mx-auto{
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .d-none{
     display: none;
 }
