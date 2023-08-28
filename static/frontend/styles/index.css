@@ -2976,8 +2976,6 @@ input {
 
 .content-main .image-new-products .products-item .image-products-item .up {
     color: #fff;
-    display: flex;
-    justify-content: center;
     font-size: 0.9em;
 }
 
@@ -3695,8 +3693,19 @@ input {
 /* custom */
 .products-item .up-image img {
     height: 250px;
-    /*object-fit: cover;*/
+    /*object-fit: cover;
+    */border-radius: 25px;
+    width: 100%;
 }
+@media screen and (max-width: 500px) {
+    .products-item .up-image img {
+        height: 180px;
+        /*object-fit: cover;
+        */border-radius: 25px;
+        width: 100%;
+    }
+    }
+
 
 .category-container {
     display: none;
