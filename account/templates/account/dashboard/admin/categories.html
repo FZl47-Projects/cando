@@ -111,7 +111,12 @@
                             </div>
                         </div>
                     </section>
-                    <div class="btn-main col-12 " id="new-cake-btn">
+            {% empty %}
+                <div class="container-not-found-base">
+                    <p>چیزی یافت نشد</p>
+                </div>
+            {% endfor %}
+            <div class="btn-main col-12 " id="new-cake-btn">
                         <div class="btn-main-content">
                <span>
                  <img src="{% static 'frontend/images/plus1.png' %}">
@@ -122,12 +127,6 @@
 
                     </div>
                 </div>
-            {% empty %}
-                <div class="container-not-found-base">
-                    <p>چیزی یافت نشد</p>
-                </div>
-            {% endfor %}
-
         </main>
 
     </div>
