@@ -552,10 +552,10 @@
                 <!-- جدید ترین محصولات -->
                 <section class="image-new-products ">
                     {% for product in category.get_products %}
-                        <div class="products-item col-11 col-md-3 col-lg-2 m-2 active" id="image-product">
+                        <div class="products-item col-6 col-md-3 col-lg-2 m-2 active p-1" id="image-product">
                             <div class="image-products-item ">
-                                <div class="up p-1">
-                                    <div class="up-image p-1">
+                                <div class="up">
+                                    <div class="up-image">
                                         <img src="{{ product.get_image_url }}">
                                     </div>
                                     {#                            <div class="text">تهیه پکیج آماده</div>#}
