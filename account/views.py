@@ -31,6 +31,8 @@ class Login(View):
             return redirect('account:login')
         login(request, user)
         messages.success(request, 'خوش امدید')
+        if user.role in ('super_user',):
+            return redirect('account:dashboard_admin')
         return redirect('public:index')
 
 
