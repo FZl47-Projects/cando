@@ -3,7 +3,6 @@ from functools import wraps
 from django.conf import settings
 
 
-
 def user_role_required_cbv(roles):
     def wrapper(func):
         @wraps(func)

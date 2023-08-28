@@ -146,11 +146,14 @@ overalyModals.forEach((item, index) => {
 })
 
 /*------------------exit menu-admin ------------------- */
-let exit = document.getElementById("exit");
-let menu = document.querySelector(".menu-admin");
-exit.addEventListener("click", (e) => {
-    menu.classList.remove("active");
-})
+try {
+    let exit = document.getElementById("exit");
+    let menu = document.querySelector(".menu-admin");
+    exit.addEventListener("click", (e) => {
+        menu.classList.remove("active");
+    })
+} catch (e) {
+}
 /*------------------exit menu-admin ------------------- */
 
 
