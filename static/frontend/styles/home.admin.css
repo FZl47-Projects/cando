@@ -1692,12 +1692,16 @@ input {
   position: relative;
 }
 .custom-box-category .custom-box-img .inner-custom-box {
-  border-radius: 20px;
+  border-radius: 30px;
   overflow: hidden;
   border: 1px solid #fff;
   position: relative;
   filter: brightness(40%);
   cursor: pointer;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
 }
 .custom-box-category .custom-box-img .inner-custom-box.active {
   filter: brightness(100%);
