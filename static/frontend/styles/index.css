@@ -3735,3 +3735,15 @@ input {
         height: 200px;
     }
 }
+@media screen and (max-width: 767px) {
+    .products-item{
+        max-width: 50%;
+        margin: 0 !important;
+    }
+}
+@media screen and (max-width: 400px) {
+    .products-item{
+        max-width: 100%;
+        margin: 0 !important;
+    }
+}
