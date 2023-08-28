@@ -210,7 +210,8 @@
                             <div class="col-6 time p-1">
                                 <label>ساعت دریافت</label>
                                 <div class="col-12 content-time">
-                                    <input class="col-4 mx-1" type="text" name="hour" id="times" placeholder="ساعت" required>
+                                    <input class="col-4 mx-1" type="text" name="hour" id="times" placeholder="ساعت"
+                                           required>
                                     <span class="m-1">:</span>
                                     <input class="col-4 mx-1" type="text" name="minute" id="minutes"
                                            placeholder="دقیقه" required>
@@ -221,11 +222,14 @@
 
                         </div>
                         <div class="col-12 col-md-4 tasvir-content">
-                            <div class=" tasvir p-1">
+                            <div class="container-image-fields tasvir p-1">
                                 <label>تصویر</label>
-                                <input type="file" name="image" id="imgfile" required>
+                                <div>
+                                    <input type="file" class="my-1" name="image" id="imgfile" required>
+                                </div>
                             </div>
-                            <div id="btn-add-image-field" class="p-2" style="margin: 10px;margin-top: 25px;color: #18dc3f;cursor: pointer">
+                            <div id="btn-add-image-field" class="p-2"
+                                 style="margin: 10px;margin-top: 25px;color: #18dc3f;cursor: pointer">
                                 <i class="fa fa-plus"></i>
                             </div>
                         </div>
@@ -307,28 +311,4 @@
 
     <script src="{% static 'frontend/js/Favorite-cake.js' %}"></script>
 
-    <script>
-        let type_order_select = document.querySelector('#Order')
-        type_order_select.addEventListener('change', function (e) {
-            e = e.target
-            let option = e.options[e.selectedIndex]
-            let key = option.getAttribute('key')
-            if (key == '') {
-
-            }
-        })
-
-        $('.esfang-div').on('click', function (e) {
-            document.querySelector('input[name="taste_spongy"]').value = this.querySelector('.Ntaste').innerText
-        })
-
-        $('.filing-div').on('click', function (e) {
-            document.querySelector('input[name="filing_cake"]').value = this.querySelector('.Ntaste').innerText
-        })
-
-        $('.cream-div').on('click', function (e) {
-            document.querySelector('input[name="taste_cream"]').value = this.querySelector('.Ntaste').innerText
-        })
-
-    </script>
 {% endblock %}
