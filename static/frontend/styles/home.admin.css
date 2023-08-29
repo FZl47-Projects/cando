@@ -1683,7 +1683,6 @@ input {
   bottom: 10%;
   left: 10%;
   color: #fff;
-  height: 100% !important;
 }
 
 .custom-box-category {
@@ -1934,6 +1933,11 @@ input {
     width: 35px;
     height: 40px;
     font-weight: bold;
+  }
+}
+@media (max-width: 600px) {
+  .category-story-kando .swiper{
+    height: 200px !important;
   }
 }
 /*----------------START 1250px---------------------*/
