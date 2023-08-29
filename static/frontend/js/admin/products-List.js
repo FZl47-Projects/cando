@@ -40,3 +40,18 @@ btns.forEach((item, index) => {
   });
 });
 // change content pakage main new-birth and  new sweet
+
+let btnseditModal = document.querySelectorAll(".cart-image-edit");
+let modalseditproduct = document.querySelector("#product-edit-modal");
+let overalyModalseditproduct = document.querySelector("#product-edit-modal .inner-modal");
+
+btnseditModal.forEach((item,index)=>{
+  item.addEventListener("click", () => { 
+    modalseditproduct.classList.add("active");
+  });
+});
+  overalyModalseditproduct.addEventListener("click", (e) => {
+    if (e.target.className === "inner-modal"){
+      modalseditproduct.classList.remove("active");
+    }
+  });

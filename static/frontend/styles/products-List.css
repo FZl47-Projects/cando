@@ -463,7 +463,7 @@ input {
   background-color: rgba(142, 140, 143, 0.451);
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   border-top-right-radius: 10px;
