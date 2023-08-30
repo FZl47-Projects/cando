@@ -1,4 +1,4 @@
 # cando
 
 ### TODO
-   - [ ] change structure customer order (factor|cart)
+   - [x] change structure customer order (factor|cart)
