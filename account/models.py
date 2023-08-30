@@ -3,6 +3,8 @@ from django.shortcuts import reverse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
+from product.models import Cart
+
 
 
 class CustomBaseUserManager(BaseUserManager):
@@ -103,3 +105,9 @@ class User(AbstractUser):
             # TODO should be completed
             pass
         return url
+
+    def get_or_create_cart(self):
+        cart = self.cart_set.filter(is_active=True).first()
+        if cart is None:
+            cart = Cart.objects.create(user=self)
+        return cart

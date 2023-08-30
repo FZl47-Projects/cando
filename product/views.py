@@ -59,18 +59,15 @@ class CustomOrderProductFactorCreate(View):
         if not price or str(price).isdigit() is False:
             messages.success(request, 'لطفا فیلد قیمت را به درستی پرنمایید')
             return redirect(referer_url or '/error')
-
         order_obj = get_object_or_404(models.CustomOrderProduct, id=order_id)
-        factor = models.Factor.objects.create(
-            user=order_obj.user,
-            price=price
-        )
-        order_obj.factor = factor
+        cart = order_obj.user.get_or_create_cart()
+        order_obj.cart = cart
+        order_obj.price = price
         order_obj.is_checked = True
         order_obj.save()
         # send notif
-        send_sms('factor_created', order_obj.user.get_phonenumber(), factor_link=factor.get_payment_link())
-        messages.success(request, 'فاکتور با موفقیت ساخته شد')
+        send_sms('custom_order_estimated', order_obj.user.get_phonenumber(), cart_link=cart.get_absolute_url())
+        messages.success(request, 'تخمین قیمت سفارش با موفقیت ثبت شد')
         return redirect(referer_url or '/success')
 
 
