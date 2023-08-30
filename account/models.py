@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
@@ -93,3 +94,12 @@ class User(AbstractUser):
         if self.last_login:
             return self.last_login.strftime('%Y-%m-%d %H:%M:%S')
         return '-'
+
+    def get_dashboard_absolute_url(self):
+        url = '#'
+        if self.role in ('super_user','admin'):
+            url = reverse('account:dashboard_admin')
+        elif self.role in ('user',):
+            # TODO should be completed
+            pass
+        return url

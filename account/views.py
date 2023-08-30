@@ -7,7 +7,8 @@ from core.notify import send_sms
 from account.auth.decorators import admin_role_required_cbv
 from product.models import (
     Category, CustomOrderProduct,
-    FactorCakeImage,
+    FactorCakeImage, Product,
+    ShowCase
 )
 from . import forms, models
 
@@ -66,11 +67,17 @@ class Register(View):
         return redirect('public:index')
 
 
+# Dashboard admin
+
 class DashboardAdmin(View):
 
     @admin_role_required_cbv
     def get(self, request):
-        return render(request, 'account/dashboard/admin/index.html')
+        context = {
+            'products': Product.objects.all(),
+            'showcase': ShowCase.objects.first()
+        }
+        return render(request, 'account/dashboard/admin/index.html', context)
 
 
 class DashboardAdminProducts(View):

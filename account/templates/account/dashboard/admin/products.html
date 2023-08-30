@@ -27,80 +27,84 @@
 
 {% block Content %}
     <body class="bg">
-   <!-- START modal edit product-->
-   {% for category in categories %}
+    <!-- START modal edit product-->
+    {% for category in categories %}
         {% for product in category.get_products %}
             <div class="content-modal product-edit-modal" id="product-edit-modal">
-    <div class="inner-modal">
-        <div class="content">
-            <form class="px-4 pt-2" action="{% url 'product:update' product_id=product.id %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="uplode-image mx-4 my-2">
+                <div class="inner-modal">
+                    <div class="content">
+                        <form class="px-4 pt-2" action="{% url 'product:update' product_id=product.id %}" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="uplode-image mx-4 my-2">
           <span>
             <img src="{% static 'frontend/images/plus.png' %}">
           </span>
-                    <p class="mb-0">
-                        ویرایش محصول
-                    </p>
-                </div>
-                <div class="col-12 px-4 py-2 ">
-                    <input class="form-control" name="name" id="package-name" required type="text"
-                           placeholder="نام محصول"
-                           aria-label=".form-control-lg example" value="{{ product.name }}">
-                </div>
-                <div class="col-12 px-4 py-2 ">
+                                <p class="mb-0">
+                                    ویرایش محصول
+                                </p>
+                            </div>
+                            <div class="col-12 px-4 py-2 ">
+                                <input class="form-control" name="name" id="package-name" required type="text"
+                                       placeholder="نام محصول"
+                                       aria-label=".form-control-lg example" value="{{ product.name }}">
+                            </div>
+                            <div class="col-12 px-4 py-2 ">
                     <textarea class="description-textarea form-control" required name="description" cols="50"
                               rows="4" placeholder="توضیحات">{{ product.description }}</textarea>
-                </div>
-                <div class="col-12 px-4 py-2 ">
-                    {% if product.get_image_url %}
-                        <a class="fs-6 m-2 text-primary" href="{{ product.get_image_url }}">عکس</a>
-                    {% endif %}
-                    <input type="file" name="image" class="form-control">
-                </div>
-                <div class="col-12 px-4 py-2 ">
-                    <input type="number" required name="stock" class="form-control" placeholder="موجودی" value="{{ product.stock }}">
-                </div>
-                <div class="col-12 px-4 py-2 ">
-                    <select class="form-control form-select" name="category">
-                        {% for category in categories %}
-                            <option value="{{ category.id }}" {% if product.category == category %}selected{% endif %}>
-                                {{ category.name }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
+                            </div>
+                            <div class="col-12 px-4 py-2 ">
+                                {% if product.get_image_url %}
+                                    <a class="fs-6 m-2 text-primary" href="{{ product.get_image_url }}">عکس</a>
+                                {% endif %}
+                                <input type="file" name="image" class="form-control">
+                            </div>
+                            <div class="col-12 px-4 py-2 ">
+                                <input type="number" required name="stock" class="form-control" placeholder="موجودی"
+                                       value="{{ product.stock }}">
+                            </div>
+                            <div class="col-12 px-4 py-2 ">
+                                <select class="form-control form-select" name="category">
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}"
+                                                {% if product.category == category %}selected{% endif %}>
+                                            {{ category.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
 
-                <!-- TODO: will complete in feature -->
-                <div class="col-12 px-4 py-2 d-none">
-                    <input class="form-control " name="value-price" id="price" type="text"
-                           placeholder="قیمت هر کیلو" aria-label=".form-control-lg example">
+                            <!-- TODO: will complete in feature -->
+                            <div class="col-12 px-4 py-2 d-none">
+                                <input class="form-control " name="value-price" id="price" type="text"
+                                       placeholder="قیمت هر کیلو" aria-label=".form-control-lg example">
+                            </div>
+                            <div class="col-12 px-4 py-2 d-none">
+                                <input class="form-control " name="value-wholesale" id="wholesale-price" type="text"
+                                       placeholder="قیمت عمده" aria-label=".form-control-lg example">
+                            </div>
+
+
+                            <div class="col-12 px-4 py-2 ">
+                                <input class="form-control " name="price" id="inventory-price" type="number"
+                                       placeholder="قیمت " aria-label=".form-control-lg example"
+                                       value="{{ product.price }}">
+                            </div>
+                            <button class="btn birthday-package mt-2 col-12 position-relative">
+                                <p>ثبت ویرایشات</p>
+                            </button>
+                        </form>
+                    </div>
+
+
                 </div>
-                <div class="col-12 px-4 py-2 d-none">
-                    <input class="form-control " name="value-wholesale" id="wholesale-price" type="text"
-                           placeholder="قیمت عمده" aria-label=".form-control-lg example">
-                </div>
 
-
-                <div class="col-12 px-4 py-2 ">
-                    <input class="form-control " name="price" id="inventory-price" type="number"
-                           placeholder="قیمت " aria-label=".form-control-lg example" value="{{ product.price }}">
-                </div>
-                <button class="btn birthday-package mt-2 col-12 position-relative">
-                    <p>ثبت ویرایشات</p>
-                </button>
-            </form>
-        </div>
-
-
-    </div>
-
-    </div>
+            </div>
         {% endfor %}
-   {% endfor %}
+    {% endfor %}
 
-  <!-- End modal edit product-->
+    <!-- End modal edit product-->
 
     <!-- START content modal cake-->
     <div class="content-modal" id="modal-products-list">
@@ -231,7 +235,8 @@
                                     </div>
                                     <div class="col-1 bbb">
                                         <div class="cart">
-                                            <form action="{% url 'product:delete' product_id=product.id %}" method="post">
+                                            <form action="{% url 'product:delete' product_id=product.id %}"
+                                                  method="post">
                                                 {% csrf_token %}
                                                 <button class="cart-image-trash">
                                                     <i class="fa fa-trash text-white"></i>
@@ -265,9 +270,11 @@
                     </div>
                 </div>
             {% empty %}
-                 <div class="container-not-found-base">
-                     <p>دسته بندی یافت نشد - برای افزودن محصول ابتدا باید یک دسته بندی ایجاد کنید</p>
-                 </div>
+                <div class="container-not-found-base">
+                    <p>دسته بندی یافت نشد - برای افزودن محصول ابتدا باید یک
+                        <a href="{% url 'account:dashboard_admin__categories' %}" class="text-primary">دسته بندی</a>
+                        ایجاد کنید</p>
+                </div>
             {% endfor %}
 
         </main>

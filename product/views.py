@@ -62,6 +62,7 @@ class CustomOrderProductFactorCreate(View):
 
         order_obj = get_object_or_404(models.CustomOrderProduct, id=order_id)
         factor = models.Factor.objects.create(
+            user=order_obj.user,
             price=price
         )
         order_obj.factor = factor
@@ -109,9 +110,9 @@ class ProductCreate(View):
 class ProductUpdate(View):
 
     @admin_role_required_cbv
-    def post(self, request,product_id):
+    def post(self, request, product_id):
         referer_url = request.META.get('HTTP_REFERER')
-        product_obj = get_object_or_404(models.Product,id=product_id)
+        product_obj = get_object_or_404(models.Product, id=product_id)
         data = request.POST
         f = forms.ProductUpdateForm(data, request.FILES, instance=product_obj)
         if form_validate_err(request, f) is False:
@@ -154,4 +155,20 @@ class CategoryDelete(View):
         category = get_object_or_404(models.Category, id=category_id)
         category.delete()
         messages.success(request, 'دسته بندی با موفقیت حذف شد')
+        return redirect(referer_url or '/success')
+
+
+class ShowCaseCreate(View):
+
+    @admin_role_required_cbv
+    def post(self, request):
+        referer_url = request.META.get('HTTP_REFERER')
+        data = request.POST
+        product_ids = data.getlist('products',[])
+        products_objs = models.Product.objects.filter(id__in=product_ids)
+        showcase_obj = models.ShowCase.objects.first()
+        if showcase_obj is None:
+            showcase_obj = models.ShowCase.objects.create()
+        showcase_obj.products.set(products_objs)
+        messages.success(request, 'ویترین با موفقیت بروزرسانی شد')
         return redirect(referer_url or '/success')

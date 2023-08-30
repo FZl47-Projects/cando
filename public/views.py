@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
-from product.models import Category, Product
+from product.models import Category, Product, ShowCase
 
 
 class Success(View):
@@ -17,6 +17,7 @@ class Index(View):
 
     def get(self, request):
         context = {
+            'showcase': ShowCase.objects.first(),
             'categories': Category.objects.all(),
             'products': Product.objects.all()[:10]
         }

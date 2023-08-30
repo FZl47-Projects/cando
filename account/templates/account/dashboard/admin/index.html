@@ -27,7 +27,7 @@
 
 {% block Content %}
     <body class="bg">
-    
+
     <!-- START content modal takhmin gheymat-->
     <div class="content-modals" id="modal-newbirth-pakage">
         <div class="inner-modals">
@@ -190,7 +190,8 @@
                 </form>
                 <div class="section-bottom mt-2" style="display: flex;">
                     <div class="col-6 edit"><img class="p-2 " src="{% static 'frontend/images/small-edit.png' %}"></div>
-                    <div class="col-6 trash"><img class="p-2" src="{% static 'frontend/images/small-trash.png' %}"></div>
+                    <div class="col-6 trash"><img class="p-2" src="{% static 'frontend/images/small-trash.png' %}">
+                    </div>
                 </div>
             </div>
 
@@ -205,42 +206,27 @@
     <div class="content-modal" id="modal-add-showcase-of-the-day">
         <div class="inner-modal">
             <div class="content" style="width: 550px;">
-                <form class="px-4 pt-2">
+                <form class="" action="{% url 'product:showcase_create' %}" method="post">
+                    {% csrf_token %}
                     <div class="uplode-image mx-4 my-2">
-            <span>
-              <img src="{% static 'frontend/images/plus.png' %}">
-            </span>
-                        <p class="mb-0">عکس محصول را<br> اضافه کنید</p>
+                        <h4>ویترین</h4>
                     </div>
-                    <div class="col-12 px-4 py-2 ">
-                        <input class="form-control" name="package" id="package-name" type="text" placeholder="نام محصول"
-                               aria-label=".form-control-lg example">
-                    </div>
-                    <div class="col-12 px-4 py-2 ">
-                        <textarea class="description-textarea " cols="50" rows="5" placeholder="توضیحات"></textarea>
-                    </div>
-                    <div class="col-12  px-4 py-2">
-                        <select name="equipment" id="Equipment">
-                            <option value="funnel">زمان پخت</option>
-                            <option value="cake-powder">زمان پخت</option>
+                    <div class="m-4">
+                        <label for="">
+                            محصولات مورد نظر را انتخاب کنید
+                        </label>
+                        <select class="form-control form-select p-2" multiple name="products" id="">
+                            {% for product in products %}
+                                <option value="{{ product.id }}"
+                                        {% if product in showcase.get_products %}selected{% endif %}>{{ product.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
-                    <div class="col-12 px-4 py-2 ">
-                        <input class="form-control " name="value-price" id="price" type="text" placeholder="تاریخ پخت"
-                               aria-label=".form-control-lg example">
+                    <div class="birthday-package mt-2">
+                        <button class="btn col-12 text-white" type="submit">ثبت</button>
                     </div>
-                    <div class="col-12 px-4 py-2 ">
-                        <input class="form-control" name="package" id="package-name" type="text" placeholder="موجودی"
-                               aria-label=".form-control-lg example">
-                    </div>
-
                 </form>
-                <div class="birthday-package mt-2">
-                    <p>تعریف محصول جدید</p>
-                </div>
             </div>
-
-
         </div>
 
     </div>
@@ -304,12 +290,12 @@
                             <span>مانیتورینگ مالی</span>
                         </a>
                     </li>
-                     <li class="">
+                    <li class="">
                         <a href="{% url 'account:dashboard_admin__custom_orders' %}">
                             <span>درخواست قیمت و سفارشات دلخواه</span>
                         </a>
                     </li>
-                     <li class="">
+                    <li class="">
                         <a href="{% url 'account:dashboard_admin__factor_cake_image' %}">
                             <span>عکس های طرح کیک(فاکتور)</span>
                         </a>
@@ -374,105 +360,29 @@
                   <span>
                     <img src="{% static 'frontend/images/Group 1472.png' %}">
                   </span>
-                                <span class="mb-0">اضافه کردن <br>به ویترین روز</span>
+                                <span class="mb-0">ویترین روز</span>
                             </div>
                         </div>
                         <div class="col-9 m-1">
                             <section class="category-story-kando">
                                 <div class="swiper mySwiper">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide test2">
-                                            <div class="story-box">
-                                                <img
-                                                        src="{% static 'frontend/images/1.jpeg' %}"
-                                                        class="img-story">
-                                                <div class="content-story">
-                                                    <div class="title-sweet">نام محصول</div>
-                                                    <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                                        از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                                        است.
-                                                    </p> -->
+                                        {% for product in showcase.get_products %}
+                                            <div class="swiper-slide test2">
+                                                <div class="story-box">
+                                                    <img
+                                                            src="{{ product.get_image_url }}"
+                                                            class="img-story">
+                                                    <div class="content-story">
+                                                        <div class="title-sweet">{{ product.name }}</div>
+                                                    </div>
                                                 </div>
-
                                             </div>
-                                        </div>
-                                        <div class="swiper-slide test2">
-                                            <div class="story-box">
-                                                <img
-                                                        src="{% static 'frontend/images/1.jpeg' %}"
-                                                        class="img-story">
-                                                <div class="content-story">
-                                                    <div class="title-sweet">نام محصول</div>
-                                                    <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                                        از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                                        است.
-                                                    </p> -->
-                                                </div>
-
+                                        {% empty %}
+                                            <div class="container-not-found-base">
+                                                <p>چیزی یافت نشد</p>
                                             </div>
-                                        </div>
-                                        <div class="swiper-slide test2">
-                                            <div class="story-box">
-                                                <img
-                                                        src="{% static 'frontend/images/2.jpeg' %}"
-                                                        class="img-story">
-                                                <div class="content-story">
-                                                    <div class="title-sweet">نام محصول</div>
-                                                    <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                                        از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                                        است.
-                                                    </p> -->
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide test2">
-                                            <div class="story-box">
-                                                <img
-                                                        src="{% static 'frontend/images/3.jpeg' %}"
-                                                        class="img-story">
-                                                <div class="content-story">
-                                                    <div class="title-sweet">نام محصول</div>
-                                                    <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                                        از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                                        است.
-                                                    </p> -->
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide test2">
-                                            <div class="story-box">
-                                                <img
-                                                        src="{% static 'frontend/images/4.jpeg' %}"
-                                                        class="img-story">
-                                                <div class="content-story">
-                                                    <div class="title-sweet">نام محصول</div>
-                                                    <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                                        از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                                        است.
-                                                    </p> -->
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide test2">
-                                            <div class="story-box">
-                                                <img
-                                                        src="{% static 'frontend/images/5.jpeg' %}"
-                                                        class="img-story">
-                                                <div class="content-story">
-                                                    <div class="title-sweet">نام محصول</div>
-                                                    <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                                        از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                                        است.
-                                                    </p> -->
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
+                                        {% endfor %}
                                     </div>
                                     <div class="swiper-pagination"></div>
 

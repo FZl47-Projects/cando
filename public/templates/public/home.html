@@ -19,7 +19,6 @@
     <style>
 
 
-
     </style>
 {% endblock %}
 
@@ -315,7 +314,7 @@
                 </li>
                 {% if user.is_anonymous is False %}
                     <li class="">
-                        <a href="{% url 'profile' %}">
+                        <a href="{{ user.get_dashboard_absolute_url }}">
                             <span>پروفایل</span>
                         </a>
                     </li>
@@ -369,107 +368,28 @@
 
 
     <div class="content-main">
-         <section class="category-story-kando ">
+        <section class="category-story-kando ">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide test2">
-                        <div class="story-box">
-                            <img
-                                    src="{% static 'frontend/images/1.jpeg' %}"
-                                    class="img-story">
-                            <div class="content-story">
-                                <div class="title-sweet">نام محصول</div>
-                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                    است.
-                                </p>  -->
+                    {% for product in showcase.get_products %}
+                        <div class="swiper-slide test2">
+                            <div class="story-box">
+                                <img
+                                        src="{{ product.get_image_url }}"
+                                        class="img-story">
+                                <div class="content-story">
+                                    <div class="title-sweet">{{ product.name }}</div>
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
-                    <div class="swiper-slide test2">
-                        <div class="story-box">
-                            <img
-                                    src="{% static 'frontend/images/1.jpeg' %}"
-                                    class="img-story">
-                            <div class="content-story">
-                                <div class="title-sweet">نام محصول</div>
-                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                    است.
-                                </p>  -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide test2">
-                        <div class="story-box">
-                            <img
-                                    src="{% static 'frontend/images/2.jpeg' %}"
-                                    class="img-story">
-                            <div class="content-story">
-                                <div class="title-sweet">نام محصول</div>
-                                 <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                    است.
-                                </p>  -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide test2">
-                        <div class="story-box">
-                            <img
-                                    src="{% static 'frontend/images/3.jpeg' %}"
-                                    class="img-story">
-                            <div class="content-story">
-                                <div class="title-sweet">نام محصول</div>
-                                 <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                    است.
-                                </p>  -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide test2">
-                        <div class="story-box">
-                            <img
-                                    src="{% static 'frontend/images/4.jpeg' %}"
-                                    class="img-story">
-                            <div class="content-story">
-                                <div class="title-sweet">نام محصول</div>
-                                <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                    است.
-                                </p>  -->
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide test2">
-                        <div class="story-box">
-                            <img
-                                    src="{% static 'frontend/images/5.jpeg' %}"
-                                    class="img-story">
-                            <div class="content-story">
-                                <div class="title-sweet">نام محصول</div>
-                                 <!-- <p class="des-sweet">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                                    از صنعت چاپ، و با استفاده از طراحان گرافیک
-                                    است.
-                                </p> -->
-                            </div>
-
-                        </div>
-                    </div>
-
-
+                    {% endfor %}
                 </div>
                 <div class="swiper-pagination"></div>
 
             </div>
-          </section> 
-       
+        </section>
+
 
         <div class="The-dividing-line"></div>
         <!-- custom-box-category -->

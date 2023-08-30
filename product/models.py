@@ -64,9 +64,11 @@ class CustomOrderProduct(BaseModel):
 
 class Factor(BaseModel):
     # TODO: should be completed
+    user = models.ForeignKey('account.User', on_delete=models.CASCADE)
     track_code = models.CharField(default=random_str, max_length=20)
     price = models.PositiveBigIntegerField()
     price_paid = models.PositiveBigIntegerField(default=0)
+    description = models.TextField(null=True)
     address = None
     ...
 
@@ -92,3 +94,22 @@ class FactorCakeImage(BaseModel, Image):
 
     def __str__(self):
         return self.user_name
+
+
+class ShowCase(BaseModel):
+    """
+        Singleton Model
+    """
+    products = models.ManyToManyField('Product')
+
+    def __str__(self):
+        return 'show case'
+
+    def get_products(self):
+        return self.products.all()
+
+    def save(self, *args, **kwargs):
+        if ShowCase.objects.count() > 0:
+            ShowCase.objects.all().delete()
+        super(ShowCase, self).save(*args, **kwargs)
+
