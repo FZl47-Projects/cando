@@ -140,6 +140,8 @@ Q_CLUSTER = {
     'orm': 'default',
 }
 
+
+
 REDIS_CONFIG = {
     'HOST': 'localhost',
     'PORT': '6379'
@@ -174,3 +176,7 @@ ADMIN_ROLES = (
     'admin',
     'super_user'
 )
+
+
+if DEBUG:
+    Q_CLUSTER['workers'] = 2
