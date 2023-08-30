@@ -106,6 +106,21 @@ class ProductCreate(View):
         return redirect(referer_url or '/success')
 
 
+class ProductUpdate(View):
+
+    @admin_role_required_cbv
+    def post(self, request,product_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        product_obj = get_object_or_404(models.Product,id=product_id)
+        data = request.POST
+        f = forms.ProductUpdateForm(data, request.FILES, instance=product_obj)
+        if form_validate_err(request, f) is False:
+            return redirect(referer_url or '/error')
+        f.save()
+        messages.success(request, 'محصول با موفقیت بروزرسانی شد')
+        return redirect(referer_url or '/success')
+
+
 class ProductDelete(View):
 
     @admin_role_required_cbv

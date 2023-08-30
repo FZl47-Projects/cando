@@ -8,6 +8,12 @@ class ProductCreateForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ProductUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.Product
+        fields = '__all__'
+
+
 class CategoryCreateForm(forms.ModelForm):
     class Meta:
         model = models.Category
