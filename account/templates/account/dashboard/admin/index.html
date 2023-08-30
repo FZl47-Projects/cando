@@ -211,20 +211,27 @@
                     <div class="uplode-image mx-4 my-2">
                         <h4>ویترین</h4>
                     </div>
-                    <div class="m-4">
-                        <label for="">
-                            محصولات مورد نظر را انتخاب کنید
-                        </label>
-                        <select class="form-control form-select p-2" multiple name="products" id="">
-                            {% for product in products %}
-                                <option value="{{ product.id }}"
-                                        {% if product in showcase.get_products %}selected{% endif %}>{{ product.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="birthday-package mt-2">
-                        <button class="btn col-12 text-white" type="submit">ثبت</button>
-                    </div>
+                    {% if products.count > 0 %}
+                        <div class="m-4">
+                            <label for="">
+                                محصولات مورد نظر را انتخاب کنید
+                            </label>
+                            <select class="form-control form-select p-2" multiple name="products" id="">
+                                {% for product in products %}
+                                    <option value="{{ product.id }}"
+                                            {% if product in showcase.get_products %}selected{% endif %}>{{ product.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="birthday-package mt-2">
+                            <button class="btn col-12 text-white" type="submit">ثبت</button>
+                        </div>
+                    {% else %}
+                        <div class="container-not-found-base">
+                            <p>محصولی یافت نشد</p>
+                            <a href="{% url 'product:create' %}" class="text-primary">ایجاد محصول</a>
+                        </div>
+                    {% endif %}
                 </form>
             </div>
         </div>
