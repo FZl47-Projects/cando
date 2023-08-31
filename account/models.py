@@ -75,6 +75,10 @@ class User(AbstractUser):
     def __str__(self):
         return f'{self.role} - {self.phonenumber}'
 
+    @property
+    def cart(self):
+        return self.get_or_create_cart()
+
     def get_raw_phonenumber(self):
         p = str(self.phonenumber).replace('+98', '')
         return p

@@ -64,3 +64,7 @@ def form_validate_err(request, form):
 
 def get_raw_phonenumber(phonenumber):
     return str(phonenumber).replace('+98', '')
+
+
+def url_with_host(request,url):
+    return request.build_absolute_uri(url)

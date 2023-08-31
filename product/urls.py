@@ -17,5 +17,11 @@ urlpatterns = [
     path('category/create', views.CategoryCreate.as_view(), name='category_create'),
     path('category/delete/<int:category_id>', views.CategoryDelete.as_view(), name='category_delete'),
 
-    path('showcase/create', views.ShowCaseCreate.as_view(), name='showcase_create')
+    path('showcase/create', views.ShowCaseCreate.as_view(), name='showcase_create'),
+
+    path('cart',views.Cart.as_view(),name='cart'),
+    path('cart/add/<int:product_id>',views.CartAdd.as_view(),name='cart_add'),
+    path('cart/remove/order/<int:order_id>',views.CartRemoveOrder.as_view(),name='cart_remove_order'),
+    path('cart/remove/custom-order/<int:order_id>',views.CartRemoveCustomOrder.as_view(),name='cart_remove_custom_order'),
+    path('cart/process-payment',views.CartProcessPayment.as_view(),name='cart_process_payment'),
 ]

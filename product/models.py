@@ -84,9 +84,23 @@ class Cart(BaseModel):
     def __str__(self):
         return f'#{self.id} cart - {self.user}'
 
-    def get_absolute_url(self):
-        # TODO should be completed
-        return '#'
+    def get_orders(self):
+        return self.order_set.all()
+
+    def get_custom_orders(self):
+        return self.customorderproduct_set.all()
+
+    def get_total_price(self):
+        return self.get_orders_price() + self.get_custom_orders_price()
+
+    def get_orders_price(self):
+        return self.get_orders().aggregate(p=models.Sum(
+            models.F('product__price') * models.F('count')
+        )
+        )['p'] or 0
+
+    def get_custom_orders_price(self):
+        return self.get_custom_orders().aggregate(p=models.Sum('price'))['p'] or 0
 
 
 class Order(BaseModel):
@@ -96,6 +110,9 @@ class Order(BaseModel):
 
     def __str__(self):
         return f'#{self.id} order - {self.product} - {self.cart.user}'
+
+    def get_total_price(self):
+        return self.product.price * self.count
 
 
 class CustomOrderProduct(BaseModel):
@@ -118,8 +135,11 @@ class CustomOrderProduct(BaseModel):
     def get_images(self):
         return self.images.all()
 
+    def get_image_cover(self):
+        return self.get_images().first()
 
-class Payment(BaseModel):
+
+class Factor(BaseModel):
     # TODO: should be completed
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
     cart = models.OneToOneField('Cart', on_delete=models.CASCADE)

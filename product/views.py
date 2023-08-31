@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
 from core.models import Image
-from core.utils import form_validate_err
+from core.utils import form_validate_err, url_with_host
 from core.notify import send_sms
 from account.auth.decorators import admin_role_required_cbv
 from . import models, forms
@@ -66,9 +66,68 @@ class CustomOrderProductFactorCreate(View):
         order_obj.is_checked = True
         order_obj.save()
         # send notif
-        send_sms('custom_order_estimated', order_obj.user.get_phonenumber(), cart_link=cart.get_absolute_url())
+        send_sms('custom_order_estimated', order_obj.user.get_phonenumber(),
+                 cart_link=url_with_host(request,reverse('product:cart')))
         messages.success(request, 'تخمین قیمت سفارش با موفقیت ثبت شد')
         return redirect(referer_url or '/success')
+
+
+class Cart(LoginRequiredMixin, View):
+
+    def get(self, request):
+        return render(request, 'product/cart.html')
+
+
+class CartAdd(LoginRequiredMixin, View):
+
+    def get(self, request, product_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        product_obj = get_object_or_404(models.Product, id=product_id)
+        cart = request.user.get_or_create_cart()
+        # check product is stock
+        if product_obj.stock <= 0:
+            messages.error(request, 'محصول ناموجود میباشد')
+            return redirect(referer_url or '/error')
+        # check for duplicate product in cart
+        if cart.get_orders().filter(product=product_obj).exists() is False:
+            order_obj = models.Order.objects.create(
+                cart=cart,
+                product=product_obj,
+                count=1
+            )
+        else:
+            # product is duplicate
+            pass
+        messages.success(request, 'محصول به سبد خرید اضافه شد')
+        return redirect(referer_url or '/success')
+
+
+class CartRemoveOrder(LoginRequiredMixin, View):
+
+    def get(self, request, order_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        user = request.user
+        order_obj = get_object_or_404(models.Order, id=order_id, cart__user=user)
+        order_obj.delete()
+        messages.success(request, 'محصول از سبد خرید حذف شد')
+        return redirect(referer_url or '/success')
+
+
+class CartRemoveCustomOrder(LoginRequiredMixin, View):
+
+    def get(self, request, order_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        user = request.user
+        order_obj = get_object_or_404(models.CustomOrderProduct, id=order_id, cart__user=user)
+        order_obj.delete()
+        messages.success(request, 'محصول از سبد خرید حذف شد')
+        return redirect(referer_url or '/success')
+
+
+class CartProcessPayment(LoginRequiredMixin, View):
+
+    def get(self, request):
+        return render(request, 'product/cart-process-payment.html')
 
 
 class FactorCakeImage(LoginRequiredMixin, View):
@@ -161,7 +220,7 @@ class ShowCaseCreate(View):
     def post(self, request):
         referer_url = request.META.get('HTTP_REFERER')
         data = request.POST
-        product_ids = data.getlist('products',[])
+        product_ids = data.getlist('products', [])
         products_objs = models.Product.objects.filter(id__in=product_ids)
         showcase_obj = models.ShowCase.objects.first()
         if showcase_obj is None:

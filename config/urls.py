@@ -37,7 +37,9 @@ urlpatterns.extend([
     path('monitoring-financial',TemplateView.as_view(template_name='unresolved/admin/Financial-monitoring.html'),name='monitoring_financial'),
 
     # public index(home)
-    path('basket-shoping',TemplateView.as_view(template_name='unresolved/index/basket-shoping.html'),name='basket_shoping'),
+
+    # path('basket-shoping',TemplateView.as_view(template_name='unresolved/index/basket-shoping.html'),name='basket_shoping'),
+
     path('instruction',TemplateView.as_view(template_name='unresolved/index/instruction.html'),name='instruction'),
     path('custom-box',TemplateView.as_view(template_name='unresolved/index/Custom-box.html'),name='custom_box'),
     path('each-product-page',TemplateView.as_view(template_name='unresolved/index/Each-product-page.html'),name='each_product_page'),

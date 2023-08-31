@@ -1,0 +1,26 @@
+{% load static %}
+<div class="menu-bottom">
+    <ul class="list-bottom">
+        <li class="item-bottom">
+            <a href="
+                    {% if user.is_anonymous is False %}{{ user.get_dashboard_absolute_url }}{% else %}{% url 'account:login' %}{% endif %}">
+                <img src="{% static 'frontend/images/icon/users.png' %}" alt="icon"/>
+            </a>
+        </li>
+        <li class="item-bottom">
+            <a href="{% url 'public:index' %}">
+                <img src="{% static 'frontend/images/icon/home.png' %}" alt="icon"/>
+            </a>
+        </li>
+        <li class="item-bottom">
+            <a href="{% url 'product:cart' %}">
+                <img src="{% static 'frontend/images/icon/Bag.png' %}" alt="icon"/>
+            </a>
+        </li>
+        <li class="item-bottom">
+            <a href="#">
+                <img src="{% static 'frontend/images/icon/hat.png' %}" alt="icon"/>
+            </a>
+        </li>
+    </ul>
+</div>
