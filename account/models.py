@@ -122,7 +122,7 @@ class User(AbstractUser):
         return cart
 
     def get_archived_carts(self):
-        return self.cart_set.all().filter(is_active=True)
+        return self.cart_set.all().filter(is_active=False)
 
     def get_addresses(self):
         return self.address_set.all()
