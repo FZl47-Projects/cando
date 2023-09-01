@@ -24,4 +24,6 @@ urlpatterns = [
     path('cart/remove/order/<int:order_id>',views.CartRemoveOrder.as_view(),name='cart_remove_order'),
     path('cart/remove/custom-order/<int:order_id>',views.CartRemoveCustomOrder.as_view(),name='cart_remove_custom_order'),
     path('cart/process-payment',views.CartProcessPayment.as_view(),name='cart_process_payment'),
+    path('cart/payment/<int:factor_id>',views.FactorPayment.as_view(),name='factor_payment'),
+    path('cart/payment/verify',views.FactorPaymentVerify.as_view(),name='factor_payment_verify'),
 ]

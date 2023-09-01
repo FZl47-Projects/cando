@@ -115,11 +115,14 @@ class User(AbstractUser):
             cart = Cart.objects.create(user=self)
         return cart
 
-    def get_current_cart(self,raise_err=False):
+    def get_current_cart(self, raise_err=False):
         cart = self.cart_set.filter(is_active=True).first()
         if cart is None and raise_err:
             raise Http404
         return cart
+
+    def get_archived_carts(self):
+        return self.cart_set.all().filter(is_active=True)
 
     def get_addresses(self):
         return self.address_set.all()

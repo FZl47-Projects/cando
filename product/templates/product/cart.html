@@ -18,8 +18,64 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock %}
 
+{% block Style %}
+    <style>
+        .detail-item input {
+            text-align: left;
+            color: #777;
+        }
+    </style>
+{% endblock %}
+
 {% block Content %}
     <body>
+
+    {% for cart in user.get_archived_carts %}
+        <div class="content-modal" id="modal-Order-details">
+            <div class="inner-modal">
+                <div class="content">
+                    <header class="header-m-oprator">
+                        <div class="title">
+                            <span class="back"><img src="{% static 'frontend/images/black.f.png' %}" alt="icon"></span>
+                            <h6>جزئیات سفارش</h6>
+                        </div>
+                        <div class="line"></div>
+                    </header>
+                    <div class="content-price active">
+                        <section class="category-price p-1">
+                            <div class="col-12 px-1 py-1">
+                                <div class="price-item ">
+                                    <div class="col-12 detail">
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">کد رهگیری:</label>
+                                            <input class="col-8" type="text" name="code" id="code-rahgiri"
+                                                   placeholder="45880215" value="{{ cart.get_track_code_payment }}" disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                            <input class="col-8" type="text" name="value-date" id="date-kharid"
+                                                   placeholder="شنبه 23 آبان-9 تا 12 صبح"
+                                                   value="{{ cart.factor.created_at }}" disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                            <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
+                                                   placeholder="نام ونام خانوادگی 09122254545" value="{{ cart.get_receiver_user_info }}" disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <input class="col-12 adres" type="text" name="value-address" id="address"
+                                                   placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25" value="{{ cart.factor.address.address }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 
 
     <div class="container-fluid container-admin" style="position:relative ;">
@@ -31,8 +87,18 @@
         <!-- START MAIN -->
         <main class="main">
             <div class="header">
-                <div class="text-center m-4">
-                    <h3>سبد خرید</h3>
+                <div class="btn-top">
+                    <div class="col-6 mx-0 py-2 btn-change">
+                        <div class="pt-2 btn-orders active  ">
+                            سفارش های فعال
+                        </div>
+
+                    </div>
+                    <div class="col-6 mx-0 py-2 btn-change">
+                        <div class="pt-2 btn-orders">
+                            سفارش های قبلی
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -266,8 +332,63 @@
                     </div>
                 {% endif %}
             {% endwith %}
-        </main>
 
+            <div class="order text-center">
+                <section class="Previous-orders col-12">
+                    {% for cart in user.get_archived_carts %}
+                        <div class="col-12 col-md-6 p-2" id="order-content">
+                            <div class="content-orders bottomborder">
+                                <div class="col-12 Tracking-Code p-2">
+                                    <div class="col-7 tracking">
+                                        <label class="col-5">کد رهگیری</label>
+                                        <input class="col-7" name="code-rahgiri" id="Track-code" type="text"
+                                               placeholder="45880215" value="{{ cart.get_track_code_payment }}">
+                                    </div>
+                                    <div class="col-5 date">
+                                        <span>
+                                            {{ cart.factor.get_created_at_timepast }}
+                                            <span class="font-70">({{ cart.factor.created_at }})</span>
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="col-12 images p-2">
+                                    <div class="col-9 image-item p-2 overflow-auto">
+                                        {% for order in cart.get_orders %}
+                                            <div class="col-3 p-2">
+                                                <img src="{{ order.product.get_image_url }}"
+                                                     alt="{{ order.product.name }}" title="{{ order.product.name }}">
+                                            </div>
+                                        {% endfor %}
+                                        {% for order in cart.get_custom_orders %}
+                                            <div class="col-3 p-2">
+                                                <img src="{{ order.get_image_cover.get_image_url }}"
+                                                     alt="سفارش دلخواه {{ forloop.counter }}"
+                                                     title="سفارش دلخواه {{ forloop.counter }}">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-3 left-item p-2">
+                                        <div class="price-value">
+                                            <h4 class="mb-0 price-el">{{ cart.factor.price }}</h4>
+                                            <p class="text">هزارتومان</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    {% empty %}
+                        <div class="container-not-found-base">
+                            <p>چیزی یافت نشد</p>
+                        </div>
+                    {% endfor %}
+                </section>
+            </div>
+        </main>
     </div>
     </body>
 {% endblock %}

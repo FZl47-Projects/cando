@@ -34,3 +34,11 @@ class FactorCreateForm(forms.ModelForm):
     class Meta:
         model = models.Factor
         exclude = ('track_code',)
+
+
+class FactorCreateNonAddressForm(forms.ModelForm):
+    note = forms.CharField(required=False)
+
+    class Meta:
+        model = models.Factor
+        exclude = ('track_code', 'address')

@@ -182,8 +182,18 @@ USER_ROLES = (
 if DEBUG:
     Q_CLUSTER['workers'] = 2
 
-
 TRANSPORTATION_CONFIG = {
     'fee': 25_000,
     'free_if_price_more_than': 300_000,
 }
+
+# Portal Bank
+SANDBOX = False
+ZP_API_PREFIX = 'sandbox' if SANDBOX else 'api'
+MERCHANT = os.environ.get('MERCHANT_KEY')
+ZP_API_REQUEST = f"https://{ZP_API_PREFIX}.zarinpal.com/pg/v4/payment/request.json"
+ZP_API_VERIFY = f"https://{ZP_API_PREFIX}.zarinpal.com/pg/v4/payment/verify.json"
+ZP_API_STARTPAY = f"https://{'sandbox' if SANDBOX else 'www'}.zarinpal.com/pg/StartPay/" + "{authority}"
+ZP_DESCRIPTION = """
+    خرید از شیرینی سرای کندو
+"""

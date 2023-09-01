@@ -6,18 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="84594771-052b-41e5-9130-cd30acbbdf23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/auth/decorators.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/auth/decorators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/notify.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/notify.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/templates/product/cart-process-payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/product/templates/product/cart-process-payment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/templates/product/custom-order-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/product/templates/product/custom-order-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/templates/product/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/product/templates/product/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +132,8 @@
       <workItem from="1693364436919" duration="171000" />
       <workItem from="1693364654240" duration="875000" />
       <workItem from="1693414798184" duration="21085000" />
-      <workItem from="1693517599319" duration="13573000" />
+      <workItem from="1693517599319" duration="13933000" />
+      <workItem from="1693592158555" duration="12856000" />
     </task>
     <servers />
   </component>

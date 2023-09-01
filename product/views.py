@@ -1,3 +1,4 @@
+import json, requests
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -132,15 +133,17 @@ class CartProcessPayment(LoginRequiredMixin, View):
         cart = request.user.get_current_cart(raise_err=True)
         if cart.have_orders is False:
             return redirect('product:cart')
+        factor = getattr(cart,'factor',None)
+        if factor and factor.process_to_payment:
+            factor.delete()
         context = {
-            'settings':settings
+            'settings': settings
         }
         return render(request, 'product/cart-process-payment.html', context)
 
     def post(self, request):
         referer_url = request.META.get('HTTP_REFERER')
         data = request.POST.copy()
-        # set values
         user = request.user
         cart = user.get_current_cart()
         if cart is None:
@@ -155,24 +158,103 @@ class CartProcessPayment(LoginRequiredMixin, View):
             return redirect('product:cart')
         # orders_is_available is True or product name
         if orders_is_available is not True:
-            messages.error(request,f" محصول {orders_is_available} ناموجود است ")
+            messages.error(request, f" محصول {orders_is_available} ناموجود است ")
             return redirect('product:cart')
 
+        # set values
         total_price = cart.get_total_price_for_payment()
         data['user'] = user
         data['cart'] = cart
         data['price'] = total_price
         data['detail'] = cart.get_dict_detail_orders()
-        f = forms.FactorCreateForm(data)
+        delivery_type = data.get('delivery_type')
+        if delivery_type == 'online':
+            f = forms.FactorCreateForm(data)
+        elif delivery_type == 'in-person':
+            f = forms.FactorCreateNonAddressForm(data)
+        else:
+            return redirect(referer_url or '/error')
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
         factor_obj = f.save()
-        cart.is_active = False
-        cart.save()
-        # TODO: redirect to portal payment
-        # return redirect(factor_obj.get_payment_link())
-        send_sms('factor_created',user.get_phonenumber(),factor_link=factor_obj.get_payment_link())
-        return redirect('public:index')
+        send_sms('factor_created', user.get_phonenumber(), factor_link=factor_obj.get_payment_link())
+        return redirect(factor_obj.get_payment_link())
+
+
+class FactorPayment(View):
+
+    def get(self, request, factor_id):
+        factor_obj = get_object_or_404(models.Factor, id=factor_id, factorpayment=None)
+        data = {
+            "merchant_id": settings.MERCHANT,
+            "amount": factor_obj.get_price_rial(),
+            "description": settings.ZP_DESCRIPTION,
+            "phone": factor_obj.user.get_phonenumber(),
+            "callback_url": url_with_host(request, reverse('product:factor_payment_verify')),
+        }
+        data = json.dumps(data)
+        # set content length by data
+        headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+        try:
+            response = requests.post(settings.ZP_API_REQUEST, data=data, headers=headers, timeout=10)
+            if response.status_code == 200:
+                response = response.json()
+                response_data = response.get('data', {})
+                status_code_zp = response_data.get('code', 0)
+                if status_code_zp == 100:
+                    authority = str(response_data.get('authority'))
+                    factor_obj.process_to_payment = True
+                    factor_obj.save()
+                    return redirect(settings.ZP_API_STARTPAY.format(authority=authority))
+        except Exception as e:
+            pass
+        # if pay failed then delete factor
+        # and for next payment create new factor
+        factor_obj.delete()
+        return redirect('public:error')
+
+
+class FactorPaymentVerify(View):
+
+    def get(self, request):
+        authority = request.GET.get('Authority')
+        status = request.GET.get('Status')
+        user = request.user
+        cart = user.get_current_cart(raise_err=True)
+        factor = getattr(cart,'factor',None)
+        if factor is None:
+            return redirect(reverse('public:error') + '?message=فاکتوری برای سبد خرید شما یافت نشد')
+        if status == 'OK':
+            data = {
+                "merchant_id": settings.MERCHANT,
+                "amount": factor.get_price_rial(),
+                "authority": authority
+            }
+            data = json.dumps(data)
+            # set content length by data
+            headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+            response = requests.post(settings.ZP_API_VERIFY, data=data, headers=headers)
+            status_code = response.status_code
+            if status_code != 200:
+                return redirect(reverse('public:error') + '?message=مشکلی در عملیات پرداخت پیش امده است')
+            response = response.json()
+            response_data = response.get('data', {})
+            status_code_zp = response_data.get('code', 0)
+            if status_code_zp != 100:
+                return redirect(reverse('public:error') + '?message=مشکلی در عملیات پرداخت پیش امده است')
+
+            # TODO add response and create factor payment
+            ref_id = response_data.get('RefID',None)
+            factor.process_to_payment = False
+            factor.save()
+            print(response_data)
+
+        else:
+            # canceled by user
+            factor = getattr(cart,'factor',None)
+            if factor:
+                factor.delete()
+            return redirect(reverse('public:error') + '?message=درخواست توسط کاربر لغو شد')
 
 
 class FactorCakeImage(LoginRequiredMixin, View):

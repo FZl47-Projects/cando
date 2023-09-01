@@ -1,4 +1,5 @@
 from jsonfield import JSONField
+from django.shortcuts import reverse
 from django.db import models
 from django.conf import settings
 from core.models import BaseModel, Image
@@ -144,6 +145,16 @@ class Cart(BaseModel):
             'orders': orders
         }
 
+    def get_track_code_payment(self):
+        try:
+            return self.factor.factorpayment.authority
+        except:
+            return 'چیزی یافت نشد'
+
+    def get_receiver_user_info(self):
+        address = self.factor.address
+        return f'{address.receiver_phonenumber} - {address.receiver_name}'
+
 
 class Order(BaseModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
@@ -213,6 +224,7 @@ class Factor(BaseModel):
     note = models.TextField(null=True)
     address = models.ForeignKey('transportation.Address', null=True, on_delete=models.SET_NULL)
     delivery_type = models.CharField(choices=DELIVERY_TYPE_OPTIONS, max_length=10)
+    process_to_payment = models.BooleanField(default=False) # True if processing to payment(redirected to bank portal)
     ...
 
     class Meta:
@@ -221,15 +233,16 @@ class Factor(BaseModel):
     def __str__(self):
         return self.track_code
 
-
     def get_payment_link(self):
-        # TODO should be completed
-        return 'fzlm.ir'
+        return reverse('product:factor_payment', args=(self.id,))
+
+    def get_price_rial(self):
+        return self.price * 10
 
 
 class FactorPayment(BaseModel):
     factor = models.OneToOneField('Factor', on_delete=models.CASCADE)
-    track_code = models.CharField(max_length=30)
+    authority = models.CharField(max_length=50)
     detail = models.TextField(null=True)
     price_paid = models.PositiveBigIntegerField()
 
