@@ -1,0 +1,114 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    افزودن ادرس
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/new-address.css' %}"/>
+
+    <!--bootstrap for map  -->
+    <!-- TODO will be used in future (map address) -->
+    {#    <link rel="stylesheet" href="{% static 'frontend/vendors/map/dist/css/mapp.min.css' %}">#}
+    {#    <link rel="stylesheet" href="{% static 'frontend/vendors/map/dist/css/fa/style.css' %}">#}
+
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Content %}
+    <body class="">
+
+
+    <div class="container-fluid container-admin" style="position:relative ;">
+
+
+        <!-- START MAIN -->
+        <main class="main">
+            <!-- START Header address-->
+            <div class="header-top p-3">
+                <div class="title p-2">
+                    <h5>آدرس من</h5>
+                    <span class="back">
+              <img src="{% static 'frontend/images/flashleft.png' %}"
+                   alt="icon"/>
+            </span>
+                </div>
+            </div>
+            <!-- START Header address-->
+            <!-- start -->
+            <div class="map-content">
+                <div id="app"></div>
+            </div>
+
+            <!-- start section bottom -->
+            <div class="btn-bottom active">
+                <div class="col-12 txt-top p-3">جزئیات آدرس</div>
+
+                <form action="{% url 'transportation:address_create' %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-12  address p-1">
+                        <label>آدرس</label>
+                        <textarea class="address" name="address" rows="3" required></textarea>
+                    </div>
+                    <div class="col-12 description p-1">
+                        <div class="col-4 col-md-5 description-item  p-2">
+                            <label>پلاک</label>
+                            <input type="text" name="plate" id="pelakN" required>
+
+                        </div>
+                        <div class="col-4 col-md-5 description-item  p-2">
+                            <label>کدپستی</label>
+                            <input type="text" name="postal_code" id="Postal-code" required>
+
+                        </div>
+                        <div class="col-4 col-md-5  description-item  p-2">
+                            <label>نام گیرنده</label>
+                            <input type="text" name="receiver_name" id="receiver_name" required>
+
+                        </div>
+                        <div class="col-4 col-md-5  description-item  p-2">
+                            <label>شماره گیرنده</label>
+                            <input type="text" name="receiver_phonenumber" id="receiver_phonenumber" required>
+
+                        </div>
+                    </div>
+                    <div class="text-left mt-5">
+                        <button class="btn py-2 col-12 col-md-2 col-lg-1 bg-warning">
+                            ثبت ادرس
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+        </main>
+
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+    <script src="{% static 'frontend/vendors/map/dist/js/jquery-3.2.1.min.js' %}"></script>
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+
+    <!-- TODO will be used in future (map address) -->
+    <!--js for map  -->
+    {#    <script src="{% static 'frontend/vendors/map/dist/js/mapp.env.js' %}"></script>#}
+    {#    <script src="{% static 'frontend/vendors/map/dist/js/mapp.min.js' %}"></script>#}
+
+
+    <!-- MAIN JS -->
+
+    <script src="{% static 'frontend/js/new-address.js' %}" type="module"></script>
+{% endblock %}
