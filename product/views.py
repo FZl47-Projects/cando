@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
+from django.conf import settings
 from core.models import Image
 from core.utils import form_validate_err, url_with_host
 from core.notify import send_sms
@@ -67,7 +68,7 @@ class CustomOrderProductFactorCreate(View):
         order_obj.save()
         # send notif
         send_sms('custom_order_estimated', order_obj.user.get_phonenumber(),
-                 cart_link=url_with_host(request,reverse('product:cart')))
+                 cart_link=url_with_host(request, reverse('product:cart')))
         messages.success(request, 'تخمین قیمت سفارش با موفقیت ثبت شد')
         return redirect(referer_url or '/success')
 
@@ -127,7 +128,51 @@ class CartRemoveCustomOrder(LoginRequiredMixin, View):
 class CartProcessPayment(LoginRequiredMixin, View):
 
     def get(self, request):
-        return render(request, 'product/cart-process-payment.html')
+        # check for active cart and have orders
+        cart = request.user.get_current_cart(raise_err=True)
+        if cart.have_orders is False:
+            return redirect('product:cart')
+        context = {
+            'settings':settings
+        }
+        return render(request, 'product/cart-process-payment.html', context)
+
+    def post(self, request):
+        referer_url = request.META.get('HTTP_REFERER')
+        data = request.POST.copy()
+        # set values
+        user = request.user
+        cart = user.get_current_cart()
+        if cart is None:
+            messages.error(request, 'سبد خرید فعالی یافت نشد')
+            return redirect('product:cart')
+
+        # TODO maybe need to refactor or change some structure in future
+        orders_is_available = cart.orders_is_available
+        # check cart have orders
+        if cart.have_orders is False:
+            messages.error(request, f"محصولی در سبد خرید شما یافت نشد")
+            return redirect('product:cart')
+        # orders_is_available is True or product name
+        if orders_is_available is not True:
+            messages.error(request,f" محصول {orders_is_available} ناموجود است ")
+            return redirect('product:cart')
+
+        total_price = cart.get_total_price_for_payment()
+        data['user'] = user
+        data['cart'] = cart
+        data['price'] = total_price
+        data['detail'] = cart.get_dict_detail_orders()
+        f = forms.FactorCreateForm(data)
+        if form_validate_err(request, f) is False:
+            return redirect(referer_url or '/error')
+        factor_obj = f.save()
+        cart.is_active = False
+        cart.save()
+        # TODO: redirect to portal payment
+        # return redirect(factor_obj.get_payment_link())
+        send_sms('factor_created',user.get_phonenumber(),factor_link=factor_obj.get_payment_link())
+        return redirect('public:index')
 
 
 class FactorCakeImage(LoginRequiredMixin, View):

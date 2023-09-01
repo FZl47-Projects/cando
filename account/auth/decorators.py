@@ -3,7 +3,7 @@ from functools import wraps
 from django.conf import settings
 
 
-def user_role_required_cbv(roles):
+def role_required_cbv(roles):
     def wrapper(func):
         @wraps(func)
         def inner(self, request, *args, **kwargs):
@@ -21,4 +21,8 @@ def user_role_required_cbv(roles):
 
 
 def admin_role_required_cbv(func):
-    return user_role_required_cbv(settings.ADMIN_ROLES)(func)
+    return role_required_cbv(settings.ADMIN_ROLES)(func)
+
+
+def user_role_required_cbv(func):
+    return role_required_cbv(settings.USER_ROLES)(func)

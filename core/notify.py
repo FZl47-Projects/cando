@@ -19,11 +19,11 @@ def send_sms(sms_type, phonenumber, **kwargs):
         values = {
             'verification-code': kwargs.get('code')
         }
-    # elif sms_type == 'factor_created':
-    #     pattern_code = 'e4fxpbh5ol0kpju'
-    #     values = {
-    #         'factor-payment-link': kwargs.get('factor_link')
-    #     }
+    elif sms_type == 'factor_created':
+        pattern_code = 'e4fxpbh5ol0kpju'
+        values = {
+            'factor-payment-link': kwargs.get('factor_link')
+        }
     elif sms_type == 'custom_order_estimated':
         pattern_code = 'jpp8qhmry1kbf4q'
         values = {

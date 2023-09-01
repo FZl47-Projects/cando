@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -9,6 +8,7 @@ urlpatterns = [
     path('',include('public.urls',namespace='public')),
     path('p/',include('product.urls',namespace='product')),
     path('u/',include('account.urls',namespace='account')),
+    path('t/',include('transportation.urls',namespace='transportation')),
     path('admin/', admin.site.urls),
 ]
 
@@ -39,6 +39,7 @@ urlpatterns.extend([
     # public index(home)
 
     # path('basket-shoping',TemplateView.as_view(template_name='unresolved/index/basket-shoping.html'),name='basket_shoping'),
+    # path('profile',TemplateView.as_view(template_name='unresolved/index/profile.html'),name='profile'),
 
     path('instruction',TemplateView.as_view(template_name='unresolved/index/instruction.html'),name='instruction'),
     path('custom-box',TemplateView.as_view(template_name='unresolved/index/Custom-box.html'),name='custom_box'),
@@ -48,7 +49,6 @@ urlpatterns.extend([
     path('points-to-product',TemplateView.as_view(template_name='unresolved/index/Points-to-product.html'),name='points_to_product'),
     path('notification-page',TemplateView.as_view(template_name='unresolved/index/Notification-page.html'),name='notification_page'),
     path('tickets',TemplateView.as_view(template_name='unresolved/index/tickets.html'),name='tickets'),
-    path('profile',TemplateView.as_view(template_name='unresolved/index/profile.html'),name='profile'),
 
 
 ])

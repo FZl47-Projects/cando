@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'core',
     'account',
     'public',
-    'product'
+    'product',
+    'transportation'
 ]
 
 MIDDLEWARE = [
@@ -140,8 +141,6 @@ Q_CLUSTER = {
     'orm': 'default',
 }
 
-
-
 REDIS_CONFIG = {
     'HOST': 'localhost',
     'PORT': '6379'
@@ -171,12 +170,20 @@ SMS_CONFIG = {
 AUTH_USER_MODEL = 'account.User'
 LOGIN_URL = '/u/login'
 
-
 ADMIN_ROLES = (
     'admin',
     'super_user'
 )
 
+USER_ROLES = (
+    'user',
+)
 
 if DEBUG:
     Q_CLUSTER['workers'] = 2
+
+
+TRANSPORTATION_CONFIG = {
+    'fee': 25_000,
+    'free_if_price_more_than': 300_000,
+}

@@ -109,8 +109,8 @@
             height: 1000px;
             transform: translateX(-100%);
         }
-        
-        .btn-main{
+
+        .btn-main {
             position: initial;
         }
 
@@ -220,14 +220,12 @@
                         <div class="col-12 col-md-6 py-1 px-2 content-up-page-item">
                             <span class="d-flex align-items-center">هزینه ارسال</span>
                             <span class="d-flex align-items-center font-80">
-                                <!-- TODO use global settings for shipping or etc -->
-                                {% if cart.get_total_price > 300 %}
+                                {% if cart.get_total_price > settings.TRANSPORTATION_CONFIG.free_if_price_more_than %}
                                     <span class="text-bg-success p-1" style="border-radius: 5px">رایگان</span>
 
-                                    <span class="font-80">(ارسال های بالا 300,000 تومان)</span>
+                                    <span class="font-80">(ارسال های بالا <span class="price-el">{{ settings.TRANSPORTATION_CONFIG.free_if_price_more_than }}</span> تومان)</span>
                                 {% else %}
-                                    <!-- TODO use global settings for shipping or etc -->
-                                    <span class="price-el">25,000</span>
+                                    <span class="price-el">{{ settings.TRANSPORTATION_CONFIG.fee }}</span>
                                     <span>تومان</span>
                                 {% endif %}
                             </span>
@@ -236,8 +234,7 @@
                         <div class="col-12 col-md-6 py-1 px-2 content-up-page-item fs-5">
                             <span>مجموع</span>
                             <div>
-                                <!-- TODO use global settings for shipping or etc -->
-                                <span class="price-el">{{ cart.get_total_price|add:'25000' }}</span>
+                                <span class="price-el">{{ cart.get_total_price_for_payment }}</span>
                                 <span>تومان</span>
                             </div>
 
@@ -268,13 +265,16 @@
                         <div class="content_container">
                             <div class="content_inner_container">
                                 <div id="page-one" class="content">
-                                    <form action="">
+                                    <form action="{% url 'product:cart_process_payment' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delivery_type" value="online">
                                         <div class="col-12 content-center-page paddingbottom p-3">
                                             <div class="col-12 col-md-12 py-1 px-1">
                                                 <div class="col-12 d-flex justify-content-between">
                                                     <p>ادرس مورد نظر را انتخاب کنید</p>
                                                     <div>
-                                                        <a href="#" class="btn btn-warning mb-4">
+                                                        <a href="{% url 'transportation:address_create' %}"
+                                                           class="btn btn-warning mb-4">
                                                             افزودن ادرس
                                                             <i class="fa fa-location"></i>
                                                         </a>
@@ -283,8 +283,9 @@
                                                 <div class="col-12">
                                                     <select class="form-control form-select col-12" name="address"
                                                             required>
-                                                        <option>awd</option>
-                                                        <option>aw12321</option>
+                                                        {% for address in user.get_addresses %}
+                                                            <option value="{{ address.id }}">{{ address.address|truncatechars:70 }}</option>
+                                                        {% endfor %}
                                                     </select>
                                                 </div>
                                             </div>
@@ -293,22 +294,40 @@
                                                 <textarea class="form-control col-12" name="note" rows="8"></textarea>
                                             </div>
                                         </div>
-                                        <div class="btn-main col-12 " id="new-sweet-btn">
-                                            <div class="btn-main-content">
-                                                <button class="col-12 btn text-white p-0">پرداخت</button>
+                                        {% if user.get_addresses.count > 0 %}
+                                            <div class="btn-main col-12" id="new-sweet-btn">
+                                                <div class="btn-main-content">
+                                                    <button class="col-12 btn text-white p-0">پرداخت</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        {% else %}
+                                            <p class="text-danger">ادرسی یافت نشد برای ادامه لطفا یک ادرس اضافه کنید</p>
+                                            <div class="btn-main col-12" id="new-sweet-btn" style="opacity: .7;cursor:not-allowed;">
+                                                <div class="btn-main-content">
+                                                    <button class="col-12 btn text-white p-0 disabled" type="button">
+                                                        پرداخت
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        {% endif %}
                                     </form>
                                 </div>
                                 <div id="page-two" class="content">
-                                    <form action="">
+                                    <form action="{% url 'product:cart_process_payment' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="delivery_type" value="in-person">
                                         <div class="text-center fs-4">
                                             <p>ادرس محل دریافت</p>
                                             کرمان خیابان ...
                                         </div>
-                                        <div class="btn-main col-12 " id="new-sweet-btn">
+                                        <div class="col-12 col-md-12 py-1 px-1 page-item">
+                                            <label class="p-1">یاداشت(اختیاری)</label>
+                                            <textarea class="form-control col-12" name="note" rows="8"></textarea>
+                                        </div>
+                                        <div class="btn-main col-12 mt-3" id="new-sweet-btn">
                                             <div class="btn-main-content">
-                                                <p class="mb-0 me-1">پرداخت</p>
+                                                <button class="col-12 btn text-white p-0">پرداخت</button>
                                             </div>
                                         </div>
                                     </form>

@@ -12,4 +12,6 @@ urlpatterns = [
     path('d/admin/categories',views.DashboardAdminCategories.as_view(),name='dashboard_admin__categories'),
     path('d/admin/custom-orders',views.DashboardAdminCustomOrders.as_view(),name='dashboard_admin__custom_orders'),
     path('d/admin/factor-cake-image',views.DashboardAdminFactorCakeImage.as_view(),name='dashboard_admin__factor_cake_image'),
+
+    path('d/user', views.DashboardUser.as_view(),name='dashboard_user')
 ]

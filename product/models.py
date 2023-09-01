@@ -1,5 +1,6 @@
 from jsonfield import JSONField
 from django.db import models
+from django.conf import settings
 from core.models import BaseModel, Image
 from core.utils import random_str
 
@@ -30,6 +31,9 @@ class Product(BaseModel):
             # default image
             # TODO: should be completed
             return ''
+
+    def get_price(self):
+        return self.price
 
 
 class Category(BaseModel):
@@ -84,6 +88,22 @@ class Cart(BaseModel):
     def __str__(self):
         return f'#{self.id} cart - {self.user}'
 
+    @property
+    def orders_is_available(self) -> bool | str:
+        orders = self.get_orders()
+        for order in orders:
+            if order.product.stock < order.count:
+                return order.product.name
+        return True
+
+    @property
+    def have_orders(self):
+        orders = self.get_orders()
+        custom_orders = self.get_custom_orders()
+        if orders.count() == 0 and custom_orders.count() == 0:
+            return False
+        return True
+
     def get_orders(self):
         return self.order_set.all()
 
@@ -93,6 +113,18 @@ class Cart(BaseModel):
     def get_total_price(self):
         return self.get_orders_price() + self.get_custom_orders_price()
 
+    def get_total_price_for_payment(self):
+        tp_conf = settings.TRANSPORTATION_CONFIG
+        """
+            calculate discount and transportation price or ..
+        """
+        cart_total = self.get_total_price()
+        fee = tp_conf['fee']
+        if cart_total > tp_conf['free_if_price_more_than']:
+            fee = 0
+        total = cart_total + fee
+        return total
+
     def get_orders_price(self):
         return self.get_orders().aggregate(p=models.Sum(
             models.F('product__price') * models.F('count')
@@ -101,6 +133,16 @@ class Cart(BaseModel):
 
     def get_custom_orders_price(self):
         return self.get_custom_orders().aggregate(p=models.Sum('price'))['p'] or 0
+
+    def get_dict_detail_orders(self):
+        orders = []
+        # orders
+        [orders.append(order.get_dict_detail()) for order in self.get_orders()]
+        # custom orders
+        [orders.append(order.get_dict_detail()) for order in self.get_custom_orders()]
+        return {
+            'orders': orders
+        }
 
 
 class Order(BaseModel):
@@ -113,6 +155,15 @@ class Order(BaseModel):
 
     def get_total_price(self):
         return self.product.price * self.count
+
+    def get_dict_detail(self):
+        return {
+            'product': self.product.name,
+            'product_price': self.product.get_price(),
+            'product_image': self.product.get_image_url(),
+            'product_category': self.product.category.name,
+            'count': self.count
+        }
 
 
 class CustomOrderProduct(BaseModel):
@@ -138,16 +189,30 @@ class CustomOrderProduct(BaseModel):
     def get_image_cover(self):
         return self.get_images().first()
 
+    def get_dict_detail(self):
+        return {
+            'product': 'سفارش دلخواه',
+            'product_price': self.price,
+            'product_image': self.get_image_cover(),
+            'product_category': 'دسته بندی سفارش دلخواه',
+            'count': 1
+        }
+
 
 class Factor(BaseModel):
-    # TODO: should be completed
+    DELIVERY_TYPE_OPTIONS = (
+        ('online', 'online'),
+        ('in-person', 'in-person'),
+    )
+
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
     cart = models.OneToOneField('Cart', on_delete=models.CASCADE)
     track_code = models.CharField(default=random_str, max_length=20)
     price = models.PositiveBigIntegerField()
-    price_paid = models.PositiveBigIntegerField(default=0)
-    description = models.TextField(null=True)
-    address = None
+    detail = JSONField()
+    note = models.TextField(null=True)
+    address = models.ForeignKey('transportation.Address', null=True, on_delete=models.SET_NULL)
+    delivery_type = models.CharField(choices=DELIVERY_TYPE_OPTIONS, max_length=10)
     ...
 
     class Meta:
@@ -156,9 +221,23 @@ class Factor(BaseModel):
     def __str__(self):
         return self.track_code
 
+
     def get_payment_link(self):
         # TODO should be completed
         return 'fzlm.ir'
+
+
+class FactorPayment(BaseModel):
+    factor = models.OneToOneField('Factor', on_delete=models.CASCADE)
+    track_code = models.CharField(max_length=30)
+    detail = models.TextField(null=True)
+    price_paid = models.PositiveBigIntegerField()
+
+    class Meta:
+        ordering = '-id',
+
+    def __str__(self):
+        return f'#{self.id} factor payment'
 
 
 class Discount(BaseModel):
@@ -169,3 +248,6 @@ class Discount(BaseModel):
 
     class Meta:
         ordering = '-id',
+
+    def __str__(self):
+        return self.code

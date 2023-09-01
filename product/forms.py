@@ -26,3 +26,11 @@ class FactorCakeImageForm(forms.ModelForm):
     class Meta:
         model = models.FactorCakeImage
         fields = '__all__'
+
+
+class FactorCreateForm(forms.ModelForm):
+    note = forms.CharField(required=False)
+
+    class Meta:
+        model = models.Factor
+        exclude = ('track_code',)

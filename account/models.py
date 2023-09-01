@@ -1,10 +1,10 @@
 from django.db import models
+from django.http import Http404
 from django.shortcuts import reverse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from product.models import Cart
-
 
 
 class CustomBaseUserManager(BaseUserManager):
@@ -57,7 +57,7 @@ class User(AbstractUser):
     username = None
     first_name = None
     last_name = None
-    email = models.EmailField("email address", null=True,default=None)
+    email = models.EmailField("email address", null=True, default=None)
     phonenumber = PhoneNumberField(region='IR', unique=True)
     # type users|roles
     role = models.CharField(max_length=20, choices=ROLE_USER_OPTIONS, default='user')
@@ -87,7 +87,7 @@ class User(AbstractUser):
         return str(self.phonenumber)
 
     def get_phonenumber_with_prefix(self):
-        return self.get_raw_phonenumber().replace('+','')
+        return self.get_raw_phonenumber().replace('+', '')
 
     def get_full_name(self):
         fl = f'{self.name}'.strip() or 'بدون نام'
@@ -103,11 +103,10 @@ class User(AbstractUser):
 
     def get_dashboard_absolute_url(self):
         url = '#'
-        if self.role in ('super_user','admin'):
+        if self.role in ('super_user', 'admin'):
             url = reverse('account:dashboard_admin')
         elif self.role in ('user',):
-            # TODO should be completed
-            pass
+            url = reverse('account:dashboard_user')
         return url
 
     def get_or_create_cart(self):
@@ -115,3 +114,12 @@ class User(AbstractUser):
         if cart is None:
             cart = Cart.objects.create(user=self)
         return cart
+
+    def get_current_cart(self,raise_err=False):
+        cart = self.cart_set.filter(is_active=True).first()
+        if cart is None and raise_err:
+            raise Http404
+        return cart
+
+    def get_addresses(self):
+        return self.address_set.all()

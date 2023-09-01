@@ -1,0 +1,197 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/profile.css' %}"/>
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+    <!-- START Header profile-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/pic7.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>پروفایل من </h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!-- end Header profile-->
+        <!-- START MENU-BOTTOM -->
+        {% include 'base/menu-mobile.html' %}
+        <!-- END MENU-BOTTOM -->
+
+
+        <!-- START MAIN -->
+        <main class="main p-3">
+
+            <!-- start content profile -->
+            <section class="profile">
+                <!-- start -->
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <div class="text-img col-11 ">
+                            <div class="col-1 image-btn left p-1">
+                                <img src="{% static 'frontend/images/icon/karbar.png' %}" alt="">
+                            </div>
+                            <div class="col-10 value p-1">
+                                <div class="name-sweet"><a href="User-account-information.html">اطلاعات حساب کاربری</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-1 left">
+                            <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <div class="text-img col-11 ">
+                            <div class="col-1 image-btn left p-1">
+                                <img src="{% static 'frontend/images/icon/peygiri.png' %}" alt="">
+                            </div>
+                            <div class="col-10 value p-1">
+                                <div class="name-sweet">پیگیری سفارش</div>
+                            </div>
+                        </div>
+
+                        <div class="col-1 left">
+                            <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <div class="text-img col-11 ">
+                            <div class="col-1 image-btn left p-1">
+                                <img src="{% static 'frontend/images/icon/wallet.png' %}" alt="">
+                            </div>
+                            <div class="col-10 value p-1">
+                                <div class="name-sweet">کیف پول</div>
+                            </div>
+                        </div>
+
+                        <div class="col-1 left">
+                            <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <div class="text-img col-11 ">
+                            <div class="col-1 image-btn left p-1">
+                                <img src="{% static 'frontend/images/icon/favorite.png' %}" alt="">
+                            </div>
+                            <div class="col-10 value p-1">
+                                <div class="name-sweet">علاقه مندی ها</div>
+                            </div>
+                        </div>
+
+                        <div class="col-1 left">
+                            <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <a href="{% url 'transportation:address_create' %}" class="profile-item col-12">
+                            <div class="text-img col-11 ">
+                                <div class="col-1 image-btn left p-1">
+                                    {#                                <img src="{% static 'frontend/images/icon/favorite.png' %}" alt="">#}
+                                    <i class="fa fa-location text-white"></i>
+                                </div>
+                                <div class="col-10 value p-1">
+                                    <div class="name-sweet">ادرس ها</div>
+                                </div>
+                            </div>
+
+                            <div class="col-1 left">
+                                <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <div class="text-img col-11 ">
+                            <div class="col-1 image-btn left p-1">
+                                <img src="{% static 'frontend/images/icon/send-ticket.png' %}" alt="">
+                            </div>
+                            <div class="col-10 value p-1">
+                                <div class="name-sweet">ارسال تیکت</div>
+                            </div>
+                        </div>
+
+                        <div class="col-1 left">
+                            <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item down">
+                        <a href="{% url 'public:index' %}" class="profile-item col-12">
+                            <div class="text-img col-11 ">
+                                <div class="col-1 image-btn left p-1">
+                                    {#                                    <img src="{% static 'frontend/images/icon/about-us.png' %}" alt="">#}
+                                    <i class="fa fa-home text-white"></i>
+                                </div>
+                                <div class="col-10 value p-1">
+                                    <div class="name-sweet">خانه</div>
+                                </div>
+                            </div>
+
+                            <div class="col-1 left">
+                                <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 p-2 ">
+                    <div class="profile-item">
+                        <a href="{% url 'account:logout' %}" class="profile-item col-12">
+                            <div class="text-img col-11 ">
+                                <div class="col-1 image-btn left p-1">
+                                    <img src="{% static 'frontend/images/icon/exit.png' %}" alt="">
+                                </div>
+                                <div class="col-10 value p-1">
+                                    <div class="name-sweet">خروج</div>
+                                </div>
+                            </div>
+
+                            <div class="col-1 left">
+                                <img src="{% static 'frontend/images/icon/Group 1900.png' %}">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </section>
+            <!-- end content profile -->
+        </main>
+
+    </div>
+
+
+    </body>
+{% endblock %}
+
+{% block Script %}
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+{% endblock %}

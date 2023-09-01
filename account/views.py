@@ -2,9 +2,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from core.utils import form_validate_err
 from core.notify import send_sms
-from account.auth.decorators import admin_role_required_cbv
+from account.auth.decorators import admin_role_required_cbv, user_role_required_cbv
 from product.models import (
     Category, CustomOrderProduct,
     FactorCakeImage, Product,
@@ -118,3 +119,10 @@ class DashboardAdminFactorCakeImage(View):
             'factors': FactorCakeImage.objects.all()
         }
         return render(request, 'account/dashboard/admin/factor-cake-image.html', context)
+
+
+class DashboardUser(LoginRequiredMixin, View):
+
+    @user_role_required_cbv
+    def get(self, request):
+        return render(request, 'account/dashboard/user/index.html')
