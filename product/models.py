@@ -90,7 +90,7 @@ class Cart(BaseModel):
         return f'#{self.id} cart - {self.user}'
 
     @property
-    def orders_is_available(self) -> bool | str:
+    def orders_is_available(self):
         orders = self.get_orders()
         for order in orders:
             if order.product.stock < order.count:
