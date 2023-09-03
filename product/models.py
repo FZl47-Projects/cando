@@ -36,6 +36,10 @@ class Product(BaseModel):
     def get_price(self):
         return self.price
 
+    @property
+    def is_in_stock(self):
+        return True if self.stock > 0 else False
+
 
 class Category(BaseModel):
     name = models.CharField(max_length=100)
@@ -235,7 +239,7 @@ class Factor(BaseModel):
     note = models.TextField(null=True)
     address = models.ForeignKey('transportation.Address', null=True, on_delete=models.SET_NULL)
     delivery_type = models.CharField(choices=DELIVERY_TYPE_OPTIONS, max_length=10)
-    process_to_payment = models.BooleanField(default=False) # True if processing to payment(redirected to bank portal)
+    process_to_payment = models.BooleanField(default=False)  # True if processing to payment(redirected to bank portal)
     ...
 
     class Meta:

@@ -87,7 +87,7 @@ class CartAdd(LoginRequiredMixin, View):
         product_obj = get_object_or_404(models.Product, id=product_id)
         cart = request.user.get_or_create_cart()
         # check product is stock
-        if product_obj.stock <= 0:
+        if product_obj.is_in_stock:
             messages.error(request, 'محصول ناموجود میباشد')
             return redirect(referer_url or '/error')
         # check for duplicate product in cart
@@ -182,7 +182,7 @@ class CartProcessPayment(LoginRequiredMixin, View):
         return redirect(factor_obj.get_payment_link())
 
 
-class FactorPayment(View):
+class FactorPayment(LoginRequiredMixin, View):
 
     def get(self, request, factor_id):
         factor_obj = get_object_or_404(models.Factor, id=factor_id, factorpayment=None)
@@ -215,7 +215,7 @@ class FactorPayment(View):
         return redirect('public:error')
 
 
-class FactorPaymentVerify(View):
+class FactorPaymentVerify(LoginRequiredMixin, View):
 
     def get(self, request):
         authority = request.GET.get('Authority')
