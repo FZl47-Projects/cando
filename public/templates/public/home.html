@@ -431,13 +431,20 @@
 
                                     </div>
                                     <div class="add-to-cart col-12 col-md-8 col-lg-6">
-                                        <div class="img-cart p-1">
-                                            <img src="{% static 'frontend/images/kharid.png' %}">
-
-                                        </div>
-                                        <div class="">
-                                            <a href="{% url 'product:cart_add' product_id=product.id %}" class="text-white text-decoration-none">افزودن به سبد خرید</a>
-                                        </div>
+                                        {% if not product.is_in_stock %}
+                                            <div class="img-cart p-1">
+                                                <img src="{% static 'frontend/images/kharid.png' %}">
+                                            </div>
+                                            <div class="">
+                                                <a href="{% url 'product:cart_add' product_id=product.id %}"
+                                                   class="text-white text-decoration-none">افزودن به سبد خرید</a>
+                                                <p>محصول ناموجود است</p>
+                                            </div>
+                                            {% else %}
+                                                <p class="mt-3 text-danger">
+                                                    محصول ناموجود است
+                                                </p>
+                                        {% endif %}
                                     </div>
                                 </div>
 
