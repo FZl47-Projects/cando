@@ -24,6 +24,11 @@ def send_sms(sms_type, phonenumber, **kwargs):
         values = {
             'factor-payment-link': kwargs.get('factor_link')
         }
+    elif sms_type == 'factor_paid':
+        pattern_code = 'v6eivl9au53zxhs'
+        values = {
+            'ref-id': kwargs.get('ref_id')
+        }
     elif sms_type == 'custom_order_estimated':
         pattern_code = 'jpp8qhmry1kbf4q'
         values = {
@@ -42,12 +47,14 @@ def send_sms(sms_type, phonenumber, **kwargs):
         'Authorization': f"AccessKey {settings.SMS_CONFIG['API_KEY']}",
         'Content-Type': 'application/json'
     }
-    async_task(requests.request,
-               'POST',
-               settings.SMS_CONFIG['API_URL'],
-               headers=headers,
-               data=payload
-               )
+    try:
+        async_task(requests.request,
+                   'POST',
+                   settings.SMS_CONFIG['API_URL'],
+                   headers=headers,
+                   data=payload
+                   )
+    except:pass
 
 
 def send_email(email, content, **kwargs):

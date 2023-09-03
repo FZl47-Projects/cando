@@ -133,7 +133,7 @@ class CartProcessPayment(LoginRequiredMixin, View):
         cart = request.user.get_current_cart(raise_err=True)
         if cart.have_orders is False:
             return redirect('product:cart')
-        factor = getattr(cart,'factor',None)
+        factor = getattr(cart, 'factor', None)
         if factor and factor.process_to_payment:
             factor.delete()
         context = {
@@ -177,7 +177,8 @@ class CartProcessPayment(LoginRequiredMixin, View):
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
         factor_obj = f.save()
-        send_sms('factor_created', user.get_phonenumber(), factor_link=factor_obj.get_payment_link())
+        send_sms('factor_created', user.get_phonenumber(),
+                 factor_link=url_with_host(request, factor_obj.get_payment_link()))
         return redirect(factor_obj.get_payment_link())
 
 
@@ -221,40 +222,51 @@ class FactorPaymentVerify(View):
         status = request.GET.get('Status')
         user = request.user
         cart = user.get_current_cart(raise_err=True)
-        factor = getattr(cart,'factor',None)
+        factor = getattr(cart, 'factor', None)
         if factor is None:
             return redirect(reverse('public:error') + '?message=فاکتوری برای سبد خرید شما یافت نشد')
-        if status == 'OK':
-            data = {
-                "merchant_id": settings.MERCHANT,
-                "amount": factor.get_price_rial(),
-                "authority": authority
-            }
-            data = json.dumps(data)
-            # set content length by data
-            headers = {'content-type': 'application/json', 'content-length': str(len(data))}
-            response = requests.post(settings.ZP_API_VERIFY, data=data, headers=headers)
-            status_code = response.status_code
-            if status_code != 200:
-                return redirect(reverse('public:error') + '?message=مشکلی در عملیات پرداخت پیش امده است')
-            response = response.json()
-            response_data = response.get('data', {})
-            status_code_zp = response_data.get('code', 0)
-            if status_code_zp != 100:
-                return redirect(reverse('public:error') + '?message=مشکلی در عملیات پرداخت پیش امده است')
-
-            # TODO add response and create factor payment
-            ref_id = response_data.get('RefID',None)
-            factor.process_to_payment = False
-            factor.save()
-            print(response_data)
-
-        else:
+        if status != 'OK':
             # canceled by user
-            factor = getattr(cart,'factor',None)
+            factor = getattr(cart, 'factor', None)
             if factor:
                 factor.delete()
             return redirect(reverse('public:error') + '?message=درخواست توسط کاربر لغو شد')
+        orders_is_available = cart.orders_is_available
+        if orders_is_available is not True:
+            messages.error(request, f" محصول {orders_is_available} ناموجود است ")
+            return redirect('product:cart')
+        data = {
+            "merchant_id": settings.MERCHANT,
+            "amount": factor.get_price_rial(),
+            "authority": authority
+        }
+        data = json.dumps(data)
+        # set content length by data
+        headers = {'content-type': 'application/json', 'content-length': str(len(data))}
+        response = requests.post(settings.ZP_API_VERIFY, data=data, headers=headers)
+        status_code = response.status_code
+        if status_code != 200:
+            return redirect(reverse('public:error') + '?message=مشکلی در عملیات پرداخت پیش امده است')
+        response = response.json()
+        response_data = response.get('data', {})
+        status_code_zp = response_data.get('code', 0)
+        if status_code_zp != 100:
+            return redirect(reverse('public:error') + '?message=مشکلی در عملیات پرداخت پیش امده است')
+        ref_id = response_data.get('ref_id', None)
+        factor.process_to_payment = False
+        factor.save()
+        models.FactorPayment.objects.create(
+            factor=factor,
+            ref_id=ref_id,
+            price_paid=factor.price
+        )
+        # update stock products
+        cart.decrease_stock_products()
+        cart.is_active = False
+        cart.save()
+        messages.success(request, 'سفارش شما با موفقیت پرداخت و ثبت شد')
+        send_sms('factor_paid', user.get_phonenumber(), ref_id=ref_id)
+        return redirect('public:index')
 
 
 class FactorCakeImage(LoginRequiredMixin, View):

@@ -24,6 +24,10 @@
             text-align: left;
             color: #777;
         }
+
+        .main .order:not(.active){
+            display: none!important;
+        }
     </style>
 {% endblock %}
 
@@ -325,7 +329,7 @@
                         <!-- end btn bottom -->
                     </div>
                 {% else %}
-                    <div class="container-not-found-base">
+                    <div class="order active container-not-found-base" style="display:block;">
                         <img src="{% static 'frontend/images/empty-cart.png' %}" alt="empty cart"
                              style="width: 160px;height: auto">
                         <p class="mt-4">سبد خرید شما خالی است</p>
@@ -376,12 +380,9 @@
 
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
-                    {% empty %}
+                        {% empty %}
                         <div class="container-not-found-base">
                             <p>چیزی یافت نشد</p>
                         </div>

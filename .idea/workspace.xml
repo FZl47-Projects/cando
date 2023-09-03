@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="84594771-052b-41e5-9130-cd30acbbdf23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/notify.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/notify.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/templates/product/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/product/templates/product/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/frontend/js/basket-shoping.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/frontend/js/basket-shoping.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +132,9 @@
       <workItem from="1693414798184" duration="21085000" />
       <workItem from="1693517599319" duration="13933000" />
       <workItem from="1693592158555" duration="12932000" />
-      <workItem from="1693611252221" duration="23000" />
+      <workItem from="1693611252221" duration="74000" />
+      <workItem from="1693720003076" duration="704000" />
+      <workItem from="1693731063926" duration="4762000" />
     </task>
     <servers />
   </component>

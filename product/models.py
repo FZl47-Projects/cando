@@ -80,7 +80,7 @@ class ShowCase(BaseModel):
 
 class Cart(BaseModel):
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
-    discount = models.ForeignKey('Discount', null=True, on_delete=models.SET_NULL)
+    discount = models.ForeignKey('Discount', null=True, blank=True, on_delete=models.SET_NULL)
     is_active = models.BooleanField(default=True)
 
     class Meta:
@@ -147,13 +147,20 @@ class Cart(BaseModel):
 
     def get_track_code_payment(self):
         try:
-            return self.factor.factorpayment.authority
+            return self.factor.factorpayment.ref_id
         except:
             return 'چیزی یافت نشد'
 
     def get_receiver_user_info(self):
         address = self.factor.address
         return f'{address.receiver_phonenumber} - {address.receiver_name}'
+
+    def decrease_stock_products(self):
+        orders = self.get_orders()
+        for order in orders:
+            product = order.product
+            product.stock -= order.count
+            product.save()
 
 
 class Order(BaseModel):
@@ -175,6 +182,10 @@ class Order(BaseModel):
             'product_category': self.product.category.name,
             'count': self.count
         }
+
+    @property
+    def product_is_available(self):
+        return self.product.stock >= self.count and self.product.stock > 0
 
 
 class CustomOrderProduct(BaseModel):
@@ -242,7 +253,7 @@ class Factor(BaseModel):
 
 class FactorPayment(BaseModel):
     factor = models.OneToOneField('Factor', on_delete=models.CASCADE)
-    authority = models.CharField(max_length=50)
+    ref_id = models.CharField(max_length=50)
     detail = models.TextField(null=True)
     price_paid = models.PositiveBigIntegerField()
 

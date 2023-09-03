@@ -183,7 +183,8 @@ if DEBUG:
     Q_CLUSTER['workers'] = 2
 
 TRANSPORTATION_CONFIG = {
-    'fee': 25_000,
+    # 'fee': 25_000,
+    'fee': 0,
     'free_if_price_more_than': 300_000,
 }
 
