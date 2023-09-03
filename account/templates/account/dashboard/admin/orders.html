@@ -1,0 +1,206 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    سفارشات
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/List-of-orders.css' %}"/>
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+
+{% block Content %}
+    <body class="bg">
+
+    <!-- START Header General orders-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>لیست تمام سفارشات</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header General orders-->
+        <!-- START MAIN -->
+        <main class="main p-3">
+            <!-- START BTNS  -->
+            <div class="btns">
+                <div class="btn-change col-6 text-center active" id="btn-birth">سفارشات فعال</div>
+                <div class="btn-change col-6 text-center " id="make-sweet">سفارشات موفق</div>
+            </div>
+            <!-- END BTNS  -->
+            <!-- start content General orders  -->
+
+            <!-- End content General orders  -->
+            <!-- start content showcase of the day  -->
+            <div class="content-price active">
+                <section class="category-price p-1 col-12">
+                    <!-- start -->
+                    {% for cart in carts %}
+                        <div class="col-12 col-md-6 px-1 py-1">
+                            <div class="price-item ">
+                                <div class="p-3 col-12">
+                                    <div class="col-12 detail">
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">کد رهگیری:</label>
+                                            <input class="col-8" type="text" name="code" id="code-rahgiri"
+                                                   placeholder="45880215" value="{{ cart.get_track_code }}"
+                                                   disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                            <input class="col-8" type="text" name="value-date" id="date-kharid"
+                                                   placeholder="شنبه 23 آبان-9 تا 12 صبح"
+                                                   value="{{ cart.get_time_submited }}({{ cart.get_timepast_submited }})"
+                                                   disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                            <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
+                                                   placeholder="نام ونام خانوادگی 09122254545"
+                                                   value="{{ cart.get_receiver_user_info }}" disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <input class="col-12 adres" type="text" name="value-address" id="address"
+                                                   placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25"
+                                                   value="{{ cart.factor.address.address }}" disabled>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="moshakhasat py-1">
+                                            <div class="col-12 txt-main p-2">
+                                                <div class="col-12 Total-price pt-1">
+                                                    <div class="col-12 item-list p-1">
+                                                        <span>مجموع</span>
+                                                        <div>
+                                                            <span class="price-el">{{ cart.factor.price }}</span>
+                                                            <span>تومان</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between col-12 p-3 mb-2">
+                                        <div>
+                                            <div class="order-status-label {{ cart.cartstatus.status }}">
+                                                {{ cart.cartstatus.get_status_label }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-success p-2">
+                                                تخمین و وضعیت
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 btn-bottom p-2">
+                                    <a href="{{ cart.get_absolute_url }}" class="col-12 d-block">جزئیات</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="container-not-found-base">
+                            <p>چیزی یافت نشد</p>
+                        </div>
+                    {% endfor %}
+
+                </section>
+            </div>
+            <div class="content-price">
+                <section class="category-price p-1 col-12">
+                    <!-- start -->
+                    {% for cart in carts_delivered %}
+                        <div class="col-12 col-md-6 px-1 py-1">
+                            <div class="price-item ">
+                                <div class="p-3 col-12">
+                                    <div class="col-12 detail">
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">کد رهگیری:</label>
+                                            <input class="col-8" type="text" name="code" id="code-rahgiri"
+                                                   placeholder="45880215" value="{{ cart.get_track_code }}"
+                                                   disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                            <input class="col-8" type="text" name="value-date" id="date-kharid"
+                                                   placeholder="شنبه 23 آبان-9 تا 12 صبح"
+                                                   value="{{ cart.get_time_submited }}({{ cart.get_timepast_submited }})"
+                                                   disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <label class=" col-4">اطلاعات تحویل گیرنده:</label>
+                                            <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
+                                                   placeholder="نام ونام خانوادگی 09122254545"
+                                                   value="{{ cart.get_receiver_user_info }}" disabled>
+                                        </div>
+                                        <div class="col-12 detail-item p-2">
+                                            <input class="col-12 adres" type="text" name="value-address" id="address"
+                                                   placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25"
+                                                   value="{{ cart.factor.address.address }}" disabled>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="moshakhasat py-1">
+                                            <div class="col-12 txt-main p-2">
+                                                <div class="col-12 Total-price pt-1">
+                                                    <div class="col-12 item-list p-1">
+                                                        <span>مجموع</span>
+                                                        <div>
+                                                            <span class="price-el">{{ cart.factor.price }}</span>
+                                                            <span>تومان</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-12 btn-bottom p-2">
+                                    <a href="{{ cart.get_absolute_url }}" class="col-12 d-block">جزئیات</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="container-not-found-base">
+                            <p>چیزی یافت نشد</p>
+                        </div>
+                    {% endfor %}
+
+                </section>
+            </div>
+
+            <!-- End content showcase of the day  -->
+        </main>
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+
+    <script src="{% static 'frontend/js/admin/List-of-orders.js' %}" type="module"></script>
+{% endblock %}

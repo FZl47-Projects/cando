@@ -1,6 +1,6 @@
 import json, requests
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.shortcuts import render, redirect, get_object_or_404, reverse, Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
 from django.conf import settings
@@ -166,6 +166,7 @@ class CartProcessPayment(LoginRequiredMixin, View):
         data['user'] = user
         data['cart'] = cart
         data['price'] = total_price
+        data['shipping_fee'] = cart.get_shipping_fee()
         data['detail'] = cart.get_dict_detail_orders()
         delivery_type = data.get('delivery_type')
         if delivery_type == 'online':
@@ -227,9 +228,7 @@ class FactorPaymentVerify(LoginRequiredMixin, View):
             return redirect(reverse('public:error') + '?message=فاکتوری برای سبد خرید شما یافت نشد')
         if status != 'OK':
             # canceled by user
-            factor = getattr(cart, 'factor', None)
-            if factor:
-                factor.delete()
+            factor.delete()
             return redirect(reverse('public:error') + '?message=درخواست توسط کاربر لغو شد')
         orders_is_available = cart.orders_is_available
         if orders_is_available is not True:
@@ -264,9 +263,26 @@ class FactorPaymentVerify(LoginRequiredMixin, View):
         cart.decrease_stock_products()
         cart.is_active = False
         cart.save()
+        models.CartStatus.objects.create(
+            cart=cart
+        )
         messages.success(request, 'سفارش شما با موفقیت پرداخت و ثبت شد')
         send_sms('factor_paid', user.get_phonenumber(), ref_id=ref_id)
-        return redirect('public:index')
+        return redirect(cart.get_status_absolute_url())
+
+
+class CartDetail(LoginRequiredMixin, View):
+
+    def get(self, request, cart_id):
+        user = request.user
+        cart = get_object_or_404(models.Cart, id=cart_id, is_active=False)
+        # only owner cart can access and admin
+        if cart.user != user and user.is_admin is False:
+            raise Http404
+        context = {
+            'cart': cart
+        }
+        return render(request, 'product/order-detail.html', context)
 
 
 class FactorCakeImage(LoginRequiredMixin, View):

@@ -28,6 +28,33 @@
         .main .order:not(.active){
             display: none!important;
         }
+
+        .order-status-label{
+            padding: 5px 6px;
+            border-radius: 7px;
+            border: 1px solid #f0f0f0;
+            text-align: center;
+            width: 100px;
+            font-size: 90%;
+            color: #fff;
+        }
+
+        .checking{
+            background: #eaaf2d;
+        }
+
+        .accepted{
+            background: #53ccba;
+        }
+
+        .send{
+            background: #194cdc;
+        }
+
+        .delivered{
+            background: #00eb67;
+        }
+
     </style>
 {% endblock %}
 
@@ -53,7 +80,7 @@
                                         <div class="col-12 detail-item p-2">
                                             <label class=" col-4">کد رهگیری:</label>
                                             <input class="col-8" type="text" name="code" id="code-rahgiri"
-                                                   placeholder="45880215" value="{{ cart.get_track_code_payment }}" disabled>
+                                                   placeholder="45880215" value="{{ cart.get_track_code }}" disabled>
                                         </div>
                                         <div class="col-12 detail-item p-2">
                                             <label class=" col-4">تاریخ و زمان سفارش:</label>
@@ -340,13 +367,13 @@
             <div class="order text-center">
                 <section class="Previous-orders col-12">
                     {% for cart in user.get_archived_carts %}
-                        <div class="col-12 col-md-6 p-2" id="order-content">
+                        <div class="col-12 col-md-6 p-2" id="order-content" style="border: 1px solid #eee">
                             <div class="content-orders bottomborder">
                                 <div class="col-12 Tracking-Code p-2">
                                     <div class="col-7 tracking">
                                         <label class="col-5">کد رهگیری</label>
                                         <input class="col-7" name="code-rahgiri" id="Track-code" type="text"
-                                               placeholder="45880215" value="{{ cart.get_track_code_payment }}">
+                                               placeholder="45880215" value="{{ cart.get_track_code }}">
                                     </div>
                                     <div class="col-5 date">
                                         <span>
@@ -377,8 +404,13 @@
                                             <h4 class="mb-0 price-el">{{ cart.factor.price }}</h4>
                                             <p class="text">هزارتومان</p>
                                         </div>
-
+                                        <div class="order-status-label {{ cart.cartstatus.status }}">
+                                            {{ cart.cartstatus.get_status_label }}
+                                        </div>
                                     </div>
+                                </div>
+                                <div>
+                                    <a href="{{ cart.get_absolute_url }}" class="btn btn-primary col-12">جزئیات</a>
                                 </div>
                             </div>
                         </div>

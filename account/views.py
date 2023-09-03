@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from core.utils import form_validate_err
@@ -121,8 +122,26 @@ class DashboardAdminFactorCakeImage(View):
         return render(request, 'account/dashboard/admin/factor-cake-image.html', context)
 
 
+class DashboardAdminOrders(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        context = {
+            'carts': models.Cart.objects.exclude(factor__factorpayment=None).exclude(cartstatus__status='delivered'),
+            'carts_delivered': models.Cart.objects.filter(cartstatus__status='delivered'),
+        }
+        return render(request, 'account/dashboard/admin/orders.html', context)
+
+
 class DashboardUser(LoginRequiredMixin, View):
 
     @user_role_required_cbv
     def get(self, request):
         return render(request, 'account/dashboard/user/index.html')
+
+
+class DashboardUserOrders(LoginRequiredMixin, View):
+
+    @user_role_required_cbv
+    def get(self, request):
+        return render(request, 'account/dashboard/user/orders.html')

@@ -119,16 +119,20 @@ class Cart(BaseModel):
         return self.get_orders_price() + self.get_custom_orders_price()
 
     def get_total_price_for_payment(self):
-        tp_conf = settings.TRANSPORTATION_CONFIG
         """
-            calculate discount and transportation price or ..
+            calculate discount and shipping price or ..
         """
         cart_total = self.get_total_price()
-        fee = tp_conf['fee']
-        if cart_total > tp_conf['free_if_price_more_than']:
-            fee = 0
+        fee = self.get_shipping_fee()
         total = cart_total + fee
         return total
+
+    def get_shipping_fee(self):
+        tp_conf = settings.TRANSPORTATION_CONFIG
+        fee = tp_conf['fee']
+        if self.get_total_price() > tp_conf['free_if_price_more_than']:
+            fee = 0
+        return fee
 
     def get_orders_price(self):
         return self.get_orders().aggregate(p=models.Sum(
@@ -149,9 +153,9 @@ class Cart(BaseModel):
             'orders': orders
         }
 
-    def get_track_code_payment(self):
+    def get_track_code(self):
         try:
-            return self.factor.factorpayment.ref_id
+            return self.factor.track_code
         except:
             return 'چیزی یافت نشد'
 
@@ -165,6 +169,42 @@ class Cart(BaseModel):
             product = order.product
             product.stock -= order.count
             product.save()
+
+    def get_absolute_url(self):
+        return reverse('product:cart_detail', args=(self.id,))
+
+    def get_time_submited(self):
+        try:
+            return self.factor.factorpayment.get_created_at()
+        except:
+            return 'ثبت نشده است'
+
+    def get_timepast_submited(self):
+        try:
+            return self.factor.factorpayment.get_created_at_timepast()
+        except:
+            return ''
+
+
+class CartStatus(BaseModel):
+    STATUS_OPTIONS = (
+        ('checking', 'در حال بررسی'),
+        ('accepted', 'تایید'),
+        ('send', 'خروج از مرکز سفارش'),
+        ('delivered', 'تحویل به مشتری'),
+    )
+    status = models.CharField(max_length=20, choices=STATUS_OPTIONS, default='checking')
+    cart = models.OneToOneField('Cart', on_delete=models.CASCADE)
+    delivery_time = models.IntegerField(null=True)  # approximate delivery time by minute
+
+    class Meta:
+        ordering = '-id',
+
+    def __str__(self):
+        return f'{self.cart} - {self.status}'
+
+    def get_status_label(self):
+        return self.get_status_display()
 
 
 class Order(BaseModel):
@@ -235,6 +275,7 @@ class Factor(BaseModel):
     cart = models.OneToOneField('Cart', on_delete=models.CASCADE)
     track_code = models.CharField(default=random_str, max_length=20)
     price = models.PositiveBigIntegerField()
+    shipping_fee = models.PositiveBigIntegerField(default=0)
     detail = JSONField()
     note = models.TextField(null=True)
     address = models.ForeignKey('transportation.Address', null=True, on_delete=models.SET_NULL)

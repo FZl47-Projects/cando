@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import reverse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
 from product.models import Cart
 
@@ -121,8 +122,15 @@ class User(AbstractUser):
             raise Http404
         return cart
 
+    def get_carts(self):
+        return self.cart_set.all()
+
     def get_archived_carts(self):
         return self.cart_set.all().filter(is_active=False)
 
     def get_addresses(self):
         return self.address_set.all()
+
+    @property
+    def is_admin(self):
+        return True if self.role in settings.ADMIN_ROLES else False
