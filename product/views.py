@@ -87,7 +87,7 @@ class CartAdd(LoginRequiredMixin, View):
         product_obj = get_object_or_404(models.Product, id=product_id)
         cart = request.user.get_or_create_cart()
         # check product is stock
-        if product_obj.is_in_stock:
+        if product_obj.is_in_stock is False:
             messages.error(request, 'محصول ناموجود میباشد')
             return redirect(referer_url or '/error')
         # check for duplicate product in cart
