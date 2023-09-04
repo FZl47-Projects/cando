@@ -1127,6 +1127,7 @@ input {
 .image-taste .img {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 .image-taste .img.active {
   border: 1px solid #fff;
