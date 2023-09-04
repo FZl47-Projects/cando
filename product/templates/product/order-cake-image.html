@@ -1299,7 +1299,7 @@
         <!-- END MENU-BOTTOM -->
 
         <!-- START MAIN -->
-        <main class="main">
+        <main class="main" style="padding-bottom:70px ;">
             <form action="{% url 'product:factor_cake_image_submit' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="information-main">
@@ -1332,7 +1332,7 @@
                                       rows="7" cols="50"></textarea>
                         </div>
                     </section>
-                    <div class="p-4">
+                    <div class="d-flex justify-content-center p-1">
                         <button class="submit-form">ثبت</button>
                     </div>
                     <!-- end content tickets -->
