@@ -3,6 +3,7 @@ import random
 import datetime
 from django.utils import timezone
 from django.contrib import messages
+from django.conf import settings
 
 
 def random_str(size=15, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
@@ -54,7 +55,7 @@ def form_validate_err(request, form):
             for field, err in errors.items():
                 err = str(err[0])
                 err = err.replace('[', '').replace(']', '')
-                err = err.replace("'", '').replace('This','')
+                err = err.replace("'", '').replace('This', '')
                 err = f'{field} {err}'
                 messages.error(request, err)
         else:
@@ -67,5 +68,5 @@ def get_raw_phonenumber(phonenumber):
     return str(phonenumber).replace('+98', '')
 
 
-def url_with_host(request,url):
-    return request.build_absolute_uri(url)
+def url_with_host(url):
+    return settings.HOST_ADDRESS + url

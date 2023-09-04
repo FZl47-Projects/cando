@@ -69,7 +69,7 @@ class CustomOrderProductFactorCreate(View):
         order_obj.save()
         # send notif
         send_sms('custom_order_estimated', order_obj.user.get_phonenumber(),
-                 cart_link=url_with_host(request, reverse('product:cart')))
+                 cart_link=url_with_host(reverse('product:cart')))
         messages.success(request, 'تخمین قیمت سفارش با موفقیت ثبت شد')
         return redirect(referer_url or '/success')
 
@@ -179,7 +179,7 @@ class CartProcessPayment(LoginRequiredMixin, View):
             return redirect(referer_url or '/error')
         factor_obj = f.save()
         send_sms('factor_created', user.get_phonenumber(),
-                 factor_link=url_with_host(request, factor_obj.get_payment_link()))
+                 factor_link=url_with_host(factor_obj.get_payment_link()))
         return redirect(factor_obj.get_payment_link())
 
 
@@ -192,7 +192,7 @@ class FactorPayment(LoginRequiredMixin, View):
             "amount": factor_obj.get_price_rial(),
             "description": settings.ZP_DESCRIPTION,
             "phone": factor_obj.user.get_phonenumber(),
-            "callback_url": url_with_host(request, reverse('product:factor_payment_verify')),
+            "callback_url": url_with_host(reverse('product:factor_payment_verify')),
         }
         data = json.dumps(data)
         # set content length by data
