@@ -1,0 +1,103 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    لیست علاقه مندی ها
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/Favorites.css' %}"/>
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Content %}
+
+    <body class="bg">
+    <!-- START Header favorites-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>علاقمندی ها</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!-- end Header favorites-->
+        <!-- START MENU-BOTTOM -->
+        {% include 'base/menu-mobile.html' %}
+        <!-- END MENU-BOTTOM -->
+
+
+        <!-- START MAIN -->
+        <main class="main">
+
+
+            <section class="category-product">
+                <!-- start -->
+                {% for product in products %}
+                    <div class="col-12 col-md-6 col-lg-4 p-2 pp">
+                        <div class="product-item">
+                            <div class="col-1 close-btn">
+                                <a href="{% url 'product:favorite_remove' product_id=product.id %}">
+                                    <img src="{% static 'frontend/images/icon/close.png' %}" alt="">
+                                </a>
+                            </div>
+                            <div class="col-4 col-md-4 height">
+                                <div class="img-product"><img src="{{ product.get_image_url }}"
+                                                              alt=""></div>
+                            </div>
+                            <div class="col-4 col-md-4 moshakhaseh">
+                                <div class="name-sweet">{{ product.name }}</div>
+                                <a href="#">
+                                    <div class="the-details">{{ product.description|truncatechars:60 }}</div>
+                                </a>
+                            </div>
+                            <div class="col-2 price">
+                                <span class="price-el">{{ product.price }}</span>
+                                <span>تومان</span>
+                            </div>
+                            <div class="col-1 bbb">
+                                {% if product.is_in_stock %}
+                                    <a href="{% url 'product:cart_add' product_id=product.id %}">
+                                        <div class="cart">
+                                            <img src="{% static 'frontend/images/icon/cart.png' %}" alt="">
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="container-not-found-base">
+                        <p>چیزی یافت نشد</p>
+                    </div>
+                {% endfor %}
+            </section>
+        </main>
+
+    </div>
+
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+    <script src="{% static 'frontend/js/Custom-box.js' %}" type="module"></script>
+    <script src="{% static 'frontend/js/index.js' %}" type="module"></script>
+{% endblock %}
+
+

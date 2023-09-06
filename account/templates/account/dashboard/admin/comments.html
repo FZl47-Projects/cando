@@ -1,0 +1,120 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    نظرات کاربران
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'frontend/styles/User-comments.css' %}"/>
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Style %}
+    <style>
+        .text-image{
+            position: initial!important;
+            text-align:  center;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+
+    <!-- START Header Package User-comments-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+                                  alt="icon"
+          /></span>
+                <h5>نظرات کاربران</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header Package User-comments-->
+
+        <!-- START MAIN -->
+        <main class="main p-2">
+            <!-- START content Package User-comments-->
+            <div class="content-package">
+                <div class="category-product p-2">
+                    <!-- start -->
+                    {% for comment in comments_need_to_check %}
+                        <div class="col-12 col-md-6 p-2">
+                            <div class="product-item p-2">
+                                <div class="col-4">
+                                    <div class="image">
+                                        <img src="{{ comment.product.get_image_url }}" alt="{{ comment.product.name }}">
+                                    </div>
+                                    <div class="text-image">
+                                        <span>{{ comment.product.name }}</span>
+                                    </div>
+
+                                </div>
+                                <div class="col-8 p-1">
+                                    <div class="col-12 user-name">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                {{ comment.user.name }} - {{ comment.user.get_raw_phonenumber }}
+                                            </div>
+                                            <div>
+                                                <i class="fa fa-star"></i>
+                                                <span>{{ comment.rate }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="detail ">
+                                        <span class="fs-6">{{ comment.title }}</span>
+                                        <br>
+                                        <span>{{ comment.description }}</span>
+
+                                    </div>
+                                    <div class="col-12 check">
+                                        <div class="p-2 ">
+                                            <a href="{% url 'product:comment_accept' comment_id=comment.id %}">
+                                                <img class="right p-1" src="{% static 'frontend/images/check.png' %}">
+                                            </a>
+                                        </div>
+                                        <div class="p-2 ">
+                                            <a href="{% url 'product:comment_delete' comment_id=comment.id %}">
+                                                <img class="left p-1" src="{% static 'frontend/images/zarb.png' %}">
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    {% empty %}
+                        <div class="container-not-found-base">
+                            <p>چیزی یافت نشد</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- End content Package User-comments-->
+        </main>
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+
+{% endblock %}

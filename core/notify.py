@@ -10,7 +10,7 @@ def send_sms(sms_type, phonenumber, **kwargs):
     values = {}
 
     if sms_type == 'welcome':
-        pattern_code = 'lr6jafxick9jwie'
+        pattern_code = '6f3lm0gumxkgvo6'
         values = {
             'user-name': kwargs.get('name')
         }
@@ -20,19 +20,26 @@ def send_sms(sms_type, phonenumber, **kwargs):
             'verification-code': kwargs.get('code')
         }
     elif sms_type == 'factor_created':
-        pattern_code = 'e4fxpbh5ol0kpju'
+        pattern_code = '4561bzqjdmt4560'
         values = {
             'factor-payment-link': kwargs.get('factor_link')
         }
     elif sms_type == 'factor_paid':
-        pattern_code = 'v6eivl9au53zxhs'
+        pattern_code = 'f2kkytqxlc7eufy'
         values = {
             'ref-id': kwargs.get('ref_id')
         }
     elif sms_type == 'custom_order_estimated':
-        pattern_code = 'jpp8qhmry1kbf4q'
+        pattern_code = 'cy5hiao50pbbf6j'
         values = {
             'cart-link': kwargs.get('cart_link')
+        }
+    elif sms_type == 'cart_status':
+        pattern_code = 'h9w1yvq12mntzpp'
+        values = {
+            'user-name': kwargs.get('user_name'),
+            'track-code': kwargs.get('track_code'),
+            'status-text': kwargs.get('status_text'),
         }
 
     phonenumber = str(phonenumber).replace('+', '')
@@ -54,7 +61,8 @@ def send_sms(sms_type, phonenumber, **kwargs):
                    headers=headers,
                    data=payload
                    )
-    except:pass
+    except:
+        pass
 
 
 def send_email(email, content, **kwargs):

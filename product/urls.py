@@ -19,12 +19,23 @@ urlpatterns = [
 
     path('showcase/create', views.ShowCaseCreate.as_view(), name='showcase_create'),
 
-    path('cart',views.Cart.as_view(),name='cart'),
-    path('cart/add/<int:product_id>',views.CartAdd.as_view(),name='cart_add'),
-    path('cart/remove/order/<int:order_id>',views.CartRemoveOrder.as_view(),name='cart_remove_order'),
-    path('cart/remove/custom-order/<int:order_id>',views.CartRemoveCustomOrder.as_view(),name='cart_remove_custom_order'),
-    path('cart/process-payment',views.CartProcessPayment.as_view(),name='cart_process_payment'),
-    path('cart/payment/<int:factor_id>',views.FactorPayment.as_view(),name='factor_payment'),
-    path('cart/payment/verify',views.FactorPaymentVerify.as_view(),name='factor_payment_verify'),
-    path('cart/<int:cart_id>',views.CartDetail.as_view(),name='cart_detail'),
+    path('cart', views.Cart.as_view(), name='cart'),
+    path('cart/add/<int:product_id>', views.CartAdd.as_view(), name='cart_add'),
+    path('cart/remove/order/<int:order_id>', views.CartRemoveOrder.as_view(), name='cart_remove_order'),
+    path('cart/remove/custom-order/<int:order_id>', views.CartRemoveCustomOrder.as_view(),
+         name='cart_remove_custom_order'),
+    path('cart/process-payment', views.CartProcessPayment.as_view(), name='cart_process_payment'),
+    path('cart/payment/<int:factor_id>', views.FactorPayment.as_view(), name='factor_payment'),
+    path('cart/payment/verify', views.FactorPaymentVerify.as_view(), name='factor_payment_verify'),
+    path('cart/<int:cart_id>', views.CartDetail.as_view(), name='cart_detail'),
+    path('cart/<int:cart_id>/status', views.CartStatus.as_view(), name='cart_status'),
+
+    path('favorite/<int:product_id>/add', views.ProductFavoriteAdd.as_view(), name='favorite_add'),
+    path('favorite/<int:product_id>/remove', views.ProductFavoriteRemove.as_view(), name='favorite_remove'),
+
+    path('detail/<int:product_id>', views.ProductDetail.as_view(), name='detail'),
+
+    path('comment/<int:product_id>/add', views.CommentAdd.as_view(), name='comment_add'),
+    path('comment/<int:comment_id>/accept', views.CommentAccept.as_view(), name='comment_accept'),
+    path('comment/<int:comment_id>/delete', views.CommentDelete.as_view(), name='comment_delete'),
 ]

@@ -37,9 +37,9 @@
                               enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="uplode-image mx-4 my-2">
-          <span>
-            <img src="{% static 'frontend/images/plus.png' %}">
-          </span>
+                            <span>
+                                <img src="{% static 'frontend/images/plus.png' %}">
+                            </span>
                                 <p class="mb-0">
                                     ویرایش محصول
                                 </p>
@@ -50,8 +50,9 @@
                                        aria-label=".form-control-lg example" value="{{ product.name }}">
                             </div>
                             <div class="col-12 px-4 py-2 ">
-                    <textarea class="description-textarea form-control" required name="description" cols="50"
-                              rows="4" placeholder="توضیحات">{{ product.description }}</textarea>
+                                <textarea class="description-textarea form-control" required name="description"
+                                          cols="50"
+                                          rows="4" placeholder="توضیحات">{{ product.description }}</textarea>
                             </div>
                             <div class="col-12 px-4 py-2 ">
                                 {% if product.get_image_url %}
@@ -96,8 +97,6 @@
                             </button>
                         </form>
                     </div>
-
-
                 </div>
 
             </div>
@@ -205,16 +204,18 @@
                             <div class="col-12 col-md-6 p-2 pp">
                                 <div class="product-item">
                                     <div class="col-4 height">
-                                        <div class="img-product"><img
-                                                src="{{ product.get_image_url }}"
-                                                alt="{{ product.name }}"></div>
+                                        <a href="{{ product.get_absolute_url }}">
+                                            <div class="img-product"><img
+                                                    src="{{ product.get_image_url }}"
+                                                    alt="{{ product.name }}"></div>
+                                        </a>
                                     </div>
                                     <div class="col-6 col-md-5 moshakhaseh">
                                         <div class="description">
                                             <div class="description-item col-12">
                                                 <span>
                                                     نام محصول:
-                                                    {{ product.name }}
+                                                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
                                                 </span>
                                             </div>
                                             <div class="description-item col-12">

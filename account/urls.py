@@ -13,7 +13,10 @@ urlpatterns = [
     path('d/admin/custom-orders',views.DashboardAdminCustomOrders.as_view(),name='dashboard_admin__custom_orders'),
     path('d/admin/factor-cake-image',views.DashboardAdminFactorCakeImage.as_view(),name='dashboard_admin__factor_cake_image'),
     path('d/admin/orders',views.DashboardAdminOrders.as_view(),name='dashboard_admin__orders'),
+    path('d/admin/comments',views.DashboardAdminComments.as_view(),name='dashboard_admin__comments'),
+
 
     path('d/user', views.DashboardUser.as_view(),name='dashboard_user'),
     path('d/user/orders', views.DashboardUserOrders.as_view(),name='dashboard_user__orders'),
+    path('d/user/favorites', views.DashboardUserProductFavorites.as_view(),name='dashboard_user__favorites'),
 ]

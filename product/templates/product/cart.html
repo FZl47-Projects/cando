@@ -25,11 +25,11 @@
             color: #777;
         }
 
-        .main .order:not(.active){
-            display: none!important;
+        .main .order:not(.active) {
+            display: none !important;
         }
 
-        .order-status-label{
+        .order-status-label {
             padding: 5px 6px;
             border-radius: 7px;
             border: 1px solid #f0f0f0;
@@ -39,19 +39,19 @@
             color: #fff;
         }
 
-        .checking{
+        .checking {
             background: #eaaf2d;
         }
 
-        .accepted{
+        .accepted {
             background: #53ccba;
         }
 
-        .send{
+        .send {
             background: #194cdc;
         }
 
-        .delivered{
+        .delivered {
             background: #00eb67;
         }
 
@@ -91,11 +91,13 @@
                                         <div class="col-12 detail-item p-2">
                                             <label class=" col-4">اطلاعات تحویل گیرنده:</label>
                                             <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
-                                                   placeholder="نام ونام خانوادگی 09122254545" value="{{ cart.get_receiver_user_info }}" disabled>
+                                                   placeholder="نام ونام خانوادگی 09122254545"
+                                                   value="{{ cart.get_receiver_user_info }}" disabled>
                                         </div>
                                         <div class="col-12 detail-item p-2">
                                             <input class="col-12 adres" type="text" name="value-address" id="address"
-                                                   placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25" value="{{ cart.factor.address.address }}" disabled>
+                                                   placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25"
+                                                   value="{{ cart.factor.address.address }}" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -142,10 +144,12 @@
                                 <div class="col-12 col-md-6 p-2 ">
                                     <div class="product-item">
                                         <div class="col-4 col-md-4 height">
-                                            <div class="img-product">
-                                                <img src="{{ order.product.get_image_url }}"
-                                                     alt="{{ order.product.name }}">
-                                            </div>
+                                            <a href="{{ order.product.get_absolute_url }}">
+                                                <div class="img-product">
+                                                    <img src="{{ order.product.get_image_url }}"
+                                                         alt="{{ order.product.name }}">
+                                                </div>
+                                            </a>
                                             <div class="img-zarb mt-2"
                                                  style="background: rgba(0,0,0,0.35);padding: 3px;border-radius: 5px">
                                                 <a href="{% url 'product:cart_remove_order' order_id=order.id %}">
@@ -154,7 +158,9 @@
                                             </div>
                                         </div>
                                         <div class="col-4 col-md-4 moshakhaseh">
-                                            <div class="name-sweet">{{ order.product.name }}</div>
+                                            <div class="name-sweet">
+                                                <a href="{{ order.product.get_absolute_url }}">{{ order.product.name }}</a>
+                                            </div>
                                             <a href="#">
                                                 <div class="the-details">{{ order.product.description }}</div>
                                             </a>
@@ -373,7 +379,7 @@
                                     <div class="col-7 tracking">
                                         <label class="col-5">کد رهگیری</label>
                                         <input class="col-7" name="code-rahgiri" id="Track-code" type="text"
-                                               placeholder="45880215" value="{{ cart.get_track_code }}">
+                                               placeholder="45880215" value="{{ cart.get_track_code }}" disabled>
                                     </div>
                                     <div class="col-5 date">
                                         <span>
@@ -414,7 +420,7 @@
                                 </div>
                             </div>
                         </div>
-                        {% empty %}
+                    {% empty %}
                         <div class="container-not-found-base">
                             <p>چیزی یافت نشد</p>
                         </div>

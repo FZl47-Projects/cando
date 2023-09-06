@@ -50,205 +50,41 @@
 
 
     <!-- modal -->
-    <div class="content-modal" id="modal-edit-showcase">
-        <div class="inner-modal">
-            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
-                <div class="col-12">
-                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
-                </div>
-                <form class="px-4 pt-2">
-                    <div class="col-12 px-4 py-2 ">
-                        <p>موجودی:3</p>
-                        <h2>نام محصول روز</h2>
+    {% for product in showcase.get_products %}
+        <div class="content-modal" id="modal-edit-showcase">
+            <div class="inner-modal">
+                <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                    <div class="col-12">
+                        <img style="width: 100%;height: 250px;" src="{{ product.get_image_url }}">
                     </div>
-                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
-                    </div>
-                    <div class="col-12 p-2 d-flex align-items-end">
-                        <div class="add-to-cart col-7 col-md-5">
-                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
-                            <div class="img-cart p-1">
-                                <img src="{% static 'frontend/images/kharid.png' %}">
-
+                    <form class="px-4 pt-2">
+                        <div class="col-12 px-4 py-2 ">
+                            <p> موجودی : {{ product.stock }}</p>
+                            <h2>{{ product.name }}</h2>
+                        </div>
+                        <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
+                            <span>{{ product.description }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center p-2">
+                            <div class="col-10 d-flex align-items-end">
+                                <a href="{% url 'product:cart_add' product_id=product.id %}"
+                                   class="add-to-cart col-7 col-md-5 text-decoration-none">
+                                    <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
+                                    <div class="img-cart p-1">
+                                        <img src="{% static 'frontend/images/kharid.png' %}">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-2 p-1 text-center">
+                                {% include 'product/components/favorite-btn.html' with product=product %}
                             </div>
                         </div>
-                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
-                            <span>تاریخ پخت:</span>
-                            <span>صبح</span>
-                            <span>25آذر1401</span>
-                        </div>
-                    </div>
 
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="content-modal" id="modal-edit-showcase">
-        <div class="inner-modal">
-            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
-                <div class="col-12">
-                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
+                    </form>
                 </div>
-                <form class="px-4 pt-2">
-                    <div class="col-12 px-4 py-2 ">
-                        <p>موجودی:3</p>
-                        <h2>نام محصول روز</h2>
-                    </div>
-                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
-                    </div>
-                    <div class="col-12 p-2 d-flex align-items-end">
-                        <div class="add-to-cart col-7 col-md-5">
-                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
-                            <div class="img-cart p-1">
-                                <img src="{% static 'frontend/images/kharid.png' %}">
-
-                            </div>
-                        </div>
-                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
-                            <span>تاریخ پخت:</span>
-                            <span>صبح</span>
-                            <span>25آذر1401</span>
-                        </div>
-                    </div>
-
-                </form>
             </div>
         </div>
-    </div>
-    <div class="content-modal" id="modal-edit-showcase">
-        <div class="inner-modal">
-            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
-                <div class="col-12">
-                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
-                </div>
-                <form class="px-4 pt-2">
-                    <div class="col-12 px-4 py-2 ">
-                        <p>موجودی:3</p>
-                        <h2>نام محصول روز</h2>
-                    </div>
-                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
-                    </div>
-                    <div class="col-12 p-2 d-flex align-items-end">
-                        <div class="add-to-cart col-7 col-md-5">
-                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
-                            <div class="img-cart p-1">
-                                <img src="{% static 'frontend/images/kharid.png' %}">
-
-                            </div>
-                        </div>
-                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
-                            <span>تاریخ پخت:</span>
-                            <span>صبح</span>
-                            <span>25آذر1401</span>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="content-modal" id="modal-edit-showcase">
-        <div class="inner-modal">
-            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
-                <div class="col-12">
-                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
-                </div>
-                <form class="px-4 pt-2">
-                    <div class="col-12 px-4 py-2 ">
-                        <p>موجودی:3</p>
-                        <h2>نام محصول روز</h2>
-                    </div>
-                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
-                    </div>
-                    <div class="col-12 p-2 d-flex align-items-end">
-                        <div class="add-to-cart col-7 col-md-5">
-                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
-                            <div class="img-cart p-1">
-                                <img src="{% static 'frontend/images/kharid.png' %}">
-
-                            </div>
-                        </div>
-                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
-                            <span>تاریخ پخت:</span>
-                            <span>صبح</span>
-                            <span>25آذر1401</span>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="content-modal" id="modal-edit-showcase">
-        <div class="inner-modal">
-            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
-                <div class="col-12">
-                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
-                </div>
-                <form class="px-4 pt-2">
-                    <div class="col-12 px-4 py-2 ">
-                        <p>موجودی:3</p>
-                        <h2>نام محصول روز</h2>
-                    </div>
-                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
-                    </div>
-                    <div class="col-12 p-2 d-flex align-items-end">
-                        <div class="add-to-cart col-7 col-md-5">
-                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
-                            <div class="img-cart p-1">
-                                <img src="{% static 'frontend/images/kharid.png' %}">
-
-                            </div>
-                        </div>
-                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
-                            <span>تاریخ پخت:</span>
-                            <span>صبح</span>
-                            <span>25آذر1401</span>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="content-modal" id="modal-edit-showcase">
-        <div class="inner-modal">
-            <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
-                <div class="col-12">
-                    <img style="width: 100%;height: 250px;" src="{% static 'frontend/images/icon/vitrinrooz.png' %}">
-                </div>
-                <form class="px-4 pt-2">
-                    <div class="col-12 px-4 py-2 ">
-                        <p>موجودی:3</p>
-                        <h2>نام محصول روز</h2>
-                    </div>
-                    <div class="col-12 col-md-8 px-4 py-2" style="font-size: 15px;">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از</span>
-                    </div>
-                    <div class="col-12 p-2 d-flex align-items-end">
-                        <div class="add-to-cart col-7 col-md-5">
-                            <div style="font-size: 0.8em;">افزودن به سبد خرید</div>
-                            <div class="img-cart p-1">
-                                <img src="{% static 'frontend/images/kharid.png' %}">
-
-                            </div>
-                        </div>
-                        <div class="col-5 col-md-7 d-flex flex-column align-items-end">
-                            <span>تاریخ پخت:</span>
-                            <span>صبح</span>
-                            <span>25آذر1401</span>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-
+    {% endfor %}
     <!-- modal -->
 
 
@@ -272,44 +108,39 @@
                         <span>تصویر دلخواه کیک</span>
                     </a>
                 </li>
-                <li class="">
+                <li class="future-item">
                     <a href="{% url 'instruction' %}">
                         <span>آموزش هاو مقالات</span>
                     </a>
                 </li>
-                <li class="">
+                <li class="future-item">
                     <a href="{% url 'custom_box' %}">
                         <span>پکیج آماده تولد</span>
                     </a>
                 </li>
                 <li class="">
-                    <a href="{% url 'each_product_page' %}">
-                        <span>صفحه هر محصول</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{% url 'order_tracking' %}">
+                    <a href="{% url 'account:dashboard_user__orders' %}">
                         <span>پیگیری سفارشات</span>
                     </a>
                 </li>
-                <li class="">
+                <li class="future-item">
                     <a href="{% url 'wallet' %}">
                         <span>کیف پول</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="{% url 'points_to_product' %}">
-                        <span>امتیاز به محصول</span>
-                    </a>
-                </li>
-                <li class="">
+                <li class="future-item">
                     <a href="{% url 'notification_page' %}">
                         <span>صفحه اعلان ها</span>
                     </a>
                 </li>
-                <li class="">
+                <li class="future-item">
                     <a href="{% url 'tickets' %}">
                         <span>تیکت ها</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'account:dashboard_user__favorites' %}">
+                        <span>لیست علاقه مندی ها</span>
                     </a>
                 </li>
                 {% if user.is_anonymous is False %}
@@ -373,27 +204,26 @@
         <div class="col-12 d-flex justify-content-center flex-wrap p-2">
             <section class="col-12 col-md-8 custom-box-category justify-content-center flex-wrap">
                 <div class="col-12 col-md-4 custom-box-img">
-                    <div class="inner-custom-box active">
-                        <img src="{% static 'frontend/images/index02.png' %}" alt="">
-                        <div class="des-custom-box">
-                            <p>سفارش ثبت شده</p>
+                    <a href="{% url 'account:dashboard_user__orders' %}">
+                        <div class="inner-custom-box active">
+                            <img src="{% static 'frontend/images/index02.png' %}" alt="">
+                            <div class="des-custom-box">
+                                <p>سفارشات ثبت شده</p>
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                 </div>
 
                 <div class="col-12 col-md-4 custom-box-img">
-                    <div class="inner-custom-box">
-                        <img src="{% static 'frontend/images/index01.png' %}" alt="">
-                        <div class="des-custom-box">
-                            <p>کیک تصویری و طرح دلخواه</p>
-
+                    <a href="{% url 'product:factor_cake_image' %}">
+                        <div class="inner-custom-box">
+                            <img src="{% static 'frontend/images/index01.png' %}" alt="">
+                            <div class="des-custom-box">
+                                <p>کیک تصویری و طرح دلخواه</p>
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                 </div>
-
-
             </section>
         </div>
         <!-- custom-box-category -->
@@ -426,7 +256,7 @@
                                 </div>
                                 <div class="col-4 content-left p-2">
                                     <div class="prices ">
-                                        <div>{{ product.price }}</div>
+                                        <div class="price-el">{{ product.price }}</div>
                                         <div>تومان</div>
 
                                     </div>
@@ -439,10 +269,10 @@
                                                 <a href="{% url 'product:cart_add' product_id=product.id %}"
                                                    class="text-white text-decoration-none">افزودن به سبد خرید</a>
                                             </div>
-                                            {% else %}
-                                                <p class="mt-3 text-danger">
-                                                    محصول ناموجود است
-                                                </p>
+                                        {% else %}
+                                            <p class="mt-3 text-danger">
+                                                محصول ناموجود است
+                                            </p>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -464,12 +294,12 @@
                                 </div>
                                 <div class="img-title">
                                     <div class="cake-name">
-                                        {{ product.name }}
+                                        <a class="text-white text-decoration-none"
+                                           href="{{ product.get_absolute_url }}">
+                                            {{ product.name }}
+                                        </a>
                                     </div>
-                                    <div class="heart">
-                                        <img src="{% static 'frontend/images/heart.png' %}">
-                                    </div>
-
+                                    {% include 'product/components/favorite-btn.html' with product=product %}
                                 </div>
 
                             </div>
@@ -493,28 +323,28 @@
         <div class="col-12 d-flex justify-content-center flex-wrap p-2">
             <section class=" d-flex justify-content-center flex-wrap col-12 col-md-8  custom-box-category">
                 <div class="col-12 col-md-4 custom-box-img">
-                    <div class="inner-custom-box active">
-                        <img src="{% static 'frontend/images/index4.png' %}" alt="">
-                        <div class="des-custom-box">
-                            <p>جعبه شیرینی دلخواه</p>
-                            <p>ازهرنوع شیرینی که بخوای تویه جعبه</p>
+                    <a href="{% url 'custom_box' %}">
+                        <div class="inner-custom-box active">
+                            <img src="{% static 'frontend/images/index4.png' %}" alt="">
+                            <div class="des-custom-box">
+                                <p>جعبه شیرینی دلخواه</p>
+                                <p>ازهرنوع شیرینی که بخوای تویه جعبه</p>
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                 </div>
 
                 <div class="col-12 col-md-4 custom-box-img">
-                    <div class="inner-custom-box">
-                        <img src="{% static 'frontend/images/index3.png' %}" alt="">
-                        <div class="des-custom-box">
-                            <p>پکیج آماده تولد</p>
-                            <p>همه وسایل تولد را یک جا سفارش بده</p>
+                    <a href="{% url 'package_definition' %}">
+                        <div class="inner-custom-box">
+                            <img src="{% static 'frontend/images/index3.png' %}" alt="">
+                            <div class="des-custom-box">
+                                <p>پکیج آماده تولد</p>
+                                <p>همه وسایل تولد را یک جا سفارش بده</p>
+                            </div>
                         </div>
-                    </div>
-
+                    </a>
                 </div>
-
-
             </section>
         </div>
         <!-- custom-box-category bottom -->

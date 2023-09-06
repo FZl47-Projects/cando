@@ -247,37 +247,37 @@
             <div class="overlay-menu-mobile"></div>
             <div class="inner-menu-mobile">
                 <ul class="list-menu-mobile">
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'tickets_admin' %}">
                             <span>تیکت ها</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'package_definition' %}">
                             <span>تعریف پکیج</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'eduaction' %}">
                             <span>مقالات وآموزش ها</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'list_operators' %}">
                             <span>لیست اپراتورها</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'list_users' %}">
                             <span>لیست کاربران</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="{% url 'user_comments' %}">
+                        <a href="{% url 'account:dashboard_admin__comments' %}">
                             <span>نظرات کاربران</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'admin_settings' %}">
                             <span>تنظیمات دستی ادمین</span>
                         </a>
@@ -287,12 +287,12 @@
                             <span>لیست سفارشات</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'monitoring_operators' %}">
                             <span>مانیتورینگ اپراتور ها</span>
                         </a>
                     </li>
-                    <li class="">
+                    <li class="future-item">
                         <a href="{% url 'monitoring_financial' %}">
                             <span>مانیتورینگ مالی</span>
                         </a>
@@ -410,8 +410,10 @@
                         <span>درحال آماده سازی</span>
                         <div class="view-all">
                             <a class="view">
-                                <span>مشاهده همه محصولات</span>
-                                <img src="{% static 'frontend/images/icon/flash-l.png' %}">
+                                <a href="{% url 'account:dashboard_admin__orders' %}">
+                                    <span>مشاهده همه سفارشات</span>
+                                    <img src="{% static 'frontend/images/icon/flash-l.png' %}">
+                                </a>
                             </a>
 
                         </div>
@@ -421,235 +423,58 @@
                     <div class="swiper swiper-gh mt-3" id="ghateh">
                         <div class="swiper-wrapper">
                             <!-- START SLIDE -->
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
+                            {% for cart in carts_processing %}
+                                <div class="swiper-slide">
+                                    <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
+                                        <div class="content-item-o-p p-2">
+                                            <div class="right col-12">
+                                                <!-- start -->
+                                                {% for order in cart.get_orders %}
+                                                    <div class="col-12 right-item p-1">
+                                                        <span>
+                                                            {{ order.product.name }}
+                                                            *{{ order.count }}
+                                                        </span>
+                                                        <div>
+                                                            <span class="price-el">{{ order.get_total_price }}</span>
+                                                            <span>تومان</span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                {% for order in cart.get_custom_orders %}
+                                                    <div class="col-12 right-item p-1">
+                                                        <span>
+                                                            سفارش دلخواه {{ forloop.counter }}
+                                                        </span>
+                                                        <div>
+                                                            <span class="price-el">{{ order.price }}</span>
+                                                            <span>تومان</span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                <div class="border-bottom"></div>
+                                                <div class="col-12 right-item p-1 ">
+                                                    <span>مبلغ کل</span>
+                                                    <div>
+                                                        <span class="price-el">{{ cart.factor.price }}</span>
+                                                        <span>تومان</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
+                                        </div>
+                                        <div class="up p-2">
+                                        </div>
+                                        <div class="information">
+                                            <a href="{{ cart.get_absolute_url }}">جزئیات</a>
                                         </div>
                                     </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
+                            {% empty %}
+                                <div class="container-not-found-base">
+                                    <p>چیزی یافت نشد</p>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information">در حال آماده سازی</div>
-                                </div>
-                            </div>
-
-
+                            {% endfor %}
                             <!-- END SLIDE -->
-
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -658,260 +483,6 @@
                 </div>
                 <!-- --------------------------------------------------------- -->
 
-                <!-- ---------------------------اسلایدر سفارشات ویترین روز------------------------------ -->
-                <div class="list-content list-tickets col-12">
-                    <!-- title -->
-                    <div class="title">
-                        <span>سفارشات ویترین روز</span>
-                        <div class="view-all">
-                            <a class="view">
-                                <span>مشاهده همه سفارشات ویترین روز</span>
-                                <img src="{% static 'frontend/images/icon/flash-l.png' %}">
-                            </a>
-
-                        </div>
-
-                    </div>
-                    <!-- slider -->
-                    <div class="swiper swiper-gh mt-3" id="ghateh">
-                        <div class="swiper-wrapper">
-                            <!-- START SLIDE -->
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">آماده سازی</div>
-                                </div>
-                            </div>
-
-
-                            <!-- END SLIDE -->
-
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                    <div class="The-dividing-line"></div>
-                </div>
-                <!-- --------------------------------------------------------- -->
 
                 <!-- -----------------------------اسلایدر لیست سفارشات---------------------------- -->
                 <div class="list-content list-tickets col-12">
@@ -919,11 +490,10 @@
                     <div class="title">
                         <span>لیست سفارشات</span>
                         <div class="view-all">
-                            <a class="view">
+                            <a href="{% url 'account:dashboard_admin__orders' %}" class="view">
                                 <span>مشاهده همه سفارشات</span>
                                 <img src="{% static 'frontend/images/icon/flash-l.png' %}">
                             </a>
-
                         </div>
 
                     </div>
@@ -931,268 +501,58 @@
                     <div class="swiper swiper-gh mt-3" id="ghateh">
                         <div class="swiper-wrapper">
                             <!-- START SLIDE -->
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>تحویل حضوری</span>
+                            {% for cart in carts %}
+                                <div class="swiper-slide">
+                                    <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
+                                        <div class="content-item-o-p p-2">
+                                            <div class="right col-12">
+                                                <!-- start -->
+                                                {% for order in cart.get_orders|slice:':4' %}
+                                                    <div class="col-12 right-item p-1">
+                                                        <span>
+                                                            {{ order.product.name }}
+                                                            *{{ order.count }}
+                                                        </span>
+                                                        <div>
+                                                            <span class="price-el">{{ order.get_total_price }}</span>
+                                                            <span>تومان</span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                {% for order in cart.get_custom_orders %}
+                                                    <div class="col-12 right-item p-1">
+                                                        <span>
+                                                            سفارش دلخواه {{ forloop.counter }}
+                                                        </span>
+                                                        <div>
+                                                            <span class="price-el">{{ order.price }}</span>
+                                                            <span>تومان</span>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                <div class="border-bottom"></div>
+                                                <div class="col-12 right-item p-1 ">
+                                                    <span>مبلغ کل</span>
+                                                    <div>
+                                                        <span class="price-el">{{ cart.factor.price }}</span>
+                                                        <span>تومان</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
+                                        </div>
+                                        <div class="up p-2">
+                                        </div>
+                                        <div class="information bg-color">
+                                            <a href="{{ cart.get_absolute_url }}">جزئیات</a>
                                         </div>
                                     </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>تحویل حضوری</span>
-                                            </div>
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
+                            {% empty %}
+                                <div class="container-not-found-base">
+                                    <p>چیزی یافت نشد</p>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>تحویل حضوری</span>
-                                            </div>
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start  -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start  -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-
+                            {% endfor %}
                             <!-- END SLIDE -->
-
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
@@ -1207,504 +567,63 @@
                     <div class="title">
                         <span>درخواست های قیمت</span>
                         <div class="view-all">
-                            <a class="view">
+                            <a href="{% url 'account:dashboard_admin__custom_orders' %}" class="view">
                                 <span>مشاهده همه درخواست</span>
                                 <img src="{% static 'frontend/images/icon/flash-l.png' %}">
                             </a>
-
                         </div>
-
                     </div>
                     <!-- start slider -->
                     <div class="swiper swiper-gh mt-3" id="ghateh">
                         <div class="swiper-wrapper">
                             <!-- START SLIDE -->
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>تحویل حضوری</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
+                            {% for custom_order in custom_orders|slice:':4' %}
+                                <div class="swiper-slide">
+                                    <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
+                                        <div class="content-item-o-p p-2">
+                                            <div class="right col-12">
+                                                <!-- start title -->
+                                                <div class="col-12 right-title p-1">
+                                                    <span>سفارش دلخواه</span>
+                                                </div>
+                                                <!-- start item -->
+                                                <div class="col-12 right-item p-1">
+                                                    <span>نوع سفارش</span>
+                                                    <span>{{ custom_order.detail.type_order }}</span>
+                                                </div>
+                                                <div class="col-12 right-item p-1">
+                                                    <span>نوشته برروی کیک</span>
+                                                    <span>{{ custom_order.detail.writing_on_cake }}</span>
 
+                                                </div>
+                                                <div class="col-12 right-item p-1 border-bottom">
+                                                    <span>توضیحات</span>
+                                                    <span>{{ custom_order.detail.description|truncatechars:10 }}</span>
+                                                </div>
                                             </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
+                                        </div>
+                                        <div class="up p-2">
+                                        </div>
+                                        <div class="information bg-color">
+                                            <a href="{% url 'account:dashboard_admin__custom_orders' %}">تخمین قیمت
+                                                وآماده سازی</a>
                                         </div>
                                     </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>تحویل حضوری</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
+                            {% empty %}
+                                <div class="container-not-found-base">
+                                    <p>چیزی یافت نشد</p>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>تحویل حضوری</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p p-2">
-                                        <div class="right col-12">
-                                            <!-- start title -->
-                                            <div class="col-12 right-title p-1">
-                                                <span>زمان تحویل سه شنبه26آبان-9تا12ظهر</span>
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>نام شیرینی</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>شیرینی رولت خامه ای*2</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>شیرینی رولت خامه ای</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>مبلغ کل</span>
-                                                <span>85,000تومان</span>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-2">
-                                    </div>
-                                    <div class="information bg-color">تخمین قیمت وآماده سازی</div>
-                                </div>
-                            </div>
-
+                            {% endfor %}
                             <!-- END SLIDE -->
-
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
                     <div class="The-dividing-line"></div>
                 </div>
-
-                <!-- --------------------------------------------------------- -->
-                <!-- -----------------------------اسلایدر   مانیتورینگ اپراتور ها---------------------------- -->
-                <div class="list-content list-tickets col-12">
-                    <!-- start title -->
-                    <div class="title">
-                        <span>مانیتورینگ اپراتور ها</span>
-                        <div class="view-all">
-                            <a class="view">
-                                <span>مشاهده همه</span>
-                                <img src="{% static 'frontend/images/icon/flash-l.png' %}">
-                            </a>
-
-                        </div>
-
-                    </div>
-                    <!-- start slider -->
-                    <div class="swiper swiper-gh mt-3" id="ghateh">
-                        <div class="swiper-wrapper">
-                            <!-- START SLIDE -->
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p down p-2">
-                                        <!-- start title -->
-                                        <div class="col-12 title p-1">
-                                            <span>تایید و تخمین قیمت-نام اپراتور</span>
-                                        </div>
-                                        <!-- start item -->
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>کیک دلخواه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>وزن:2کیلو گرم</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>فیلینگ:آناناس،گردو</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>اسفنج کیک:نسکافه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>طعم خامه:وانیل-کم خامه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>بیعانه</span>
-                                                <span>85,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>تخمین قیمت نهایی</span>
-                                                <span>85,000تومان</span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-4">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p down p-2">
-                                        <!-- start title -->
-                                        <div class="col-12 title p-1">
-                                            <span>تایید و تخمین قیمت-نام اپراتور</span>
-                                        </div>
-                                        <!-- start item -->
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>کیک دلخواه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>وزن:2کیلو گرم</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>فیلینگ:آناناس،گردو</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>اسفنج کیک:نسکافه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>طعم خامه:وانیل-کم خامه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>بیعانه</span>
-                                                <span>85,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>تخمین قیمت نهایی</span>
-                                                <span>85,000تومان</span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-4">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p down ">
-                                        <!-- start title -->
-                                        <div class="col-12 title p-1">
-                                            <span>تایید و تخمین قیمت-نام اپراتور</span>
-                                        </div>
-                                        <!-- start item -->
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <img src="../assets/images/icon/home-admin.png" style="width: 100%;">
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>دسته بندی:شیرینی تر</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>نام محصول:چیزکیک لیمویی</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>قیمت هرکیلو:120,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>قیمت عمده:185,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>موجودی:12عدد</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p down p-2">
-                                        <!-- start title -->
-                                        <div class="col-12 title p-1">
-                                            <span>تایید و تخمین قیمت-نام اپراتور</span>
-                                        </div>
-                                        <!-- start item -->
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <span>کیک دلخواه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>وزن:2کیلو گرم</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>فیلینگ:آناناس،گردو</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>اسفنج کیک:نسکافه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 border-bottom">
-                                                <span>طعم خامه:وانیل-کم خامه</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>بیعانه</span>
-                                                <span>85,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>تخمین قیمت نهایی</span>
-                                                <span>85,000تومان</span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="up p-4">
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="item-darkhast-moshavereh item-list-1 item-list-gh p-0">
-                                    <div class="content-item-o-p down ">
-                                        <!-- start title -->
-                                        <div class="col-12 title p-1">
-                                            <span>تایید و تخمین قیمت-نام اپراتور</span>
-                                        </div>
-                                        <!-- start image -->
-                                        <div class="right col-12">
-                                            <div class="col-12 right-item p-1">
-                                                <img src="../assets/images/icon/home-admin.png" style="width: 100%;">
-                                            </div>
-                                            <!-- start item -->
-                                            <div class="col-12 right-item p-1">
-                                                <span>دسته بندی:شیرینی تر</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>نام محصول:چیزکیک لیمویی</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>قیمت هرکیلو:120,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1 ">
-                                                <span>قیمت عمده:185,000تومان</span>
-                                            </div>
-                                            <div class="col-12 right-item p-1">
-                                                <span>موجودی:12عدد</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- END SLIDE -->
-
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                </div>
-
-                <!-- --------------------------------------------------------- -->
-
             </section>
-
-
         </main>
-
     </div>
 
 

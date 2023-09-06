@@ -209,19 +209,19 @@ const swiperTicket = new Swiper('#swiper-ticket', {
 
 
 //کلیک کردن روی عکس های اسلایدر و پاپ اپ باز شدن
-let slider = document.querySelectorAll(".test2");
-let modal_vitrin = document.querySelector(" #modal-edit-showcase");
-let overalys = document.querySelector("#modal-edit-showcase .inner-modal");
-
-slider.forEach((item, index) => {
- item.addEventListener("click", () => {
-   modal_vitrin.classList.add("active");
- });
- 
-});
-overalys.addEventListener("click", (e) => {
-    if (e.target.className === "inner-modal"){
-        modal_vitrin.classList.remove("active");
-    }
-  });
+// let slider = document.querySelectorAll(".test2");
+// let modal_vitrin = document.querySelector(" #modal-edit-showcase");
+// let overalys = document.querySelector("#modal-edit-showcase .inner-modal");
+//
+// slider.forEach((item, index) => {
+//  item.addEventListener("click", () => {
+//    modal_vitrin.classList.add("active");
+//  });
+//
+// });
+// overalys.addEventListener("click", (e) => {
+//     if (e.target.className === "inner-modal"){
+//         modal_vitrin.classList.remove("active");
+//     }
+//   });
 

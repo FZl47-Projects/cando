@@ -30,6 +30,18 @@ body {
     display: none;
 }
 
+.fa-heart{
+    color: #eb3f42;
+}
+
+.fa-heart.fill{
+    background: #eb3f42;
+}
+
+.fa-star{
+    color: #ffbc2f;
+}
+
 .border-1-gray{
     border: 1px solid #ddd;
 }
@@ -250,3 +262,8 @@ body {
     border: 1px solid #08a673 !important;
     color: #fff;
 }
+
+.future-item{
+    display: none!important;
+}
+

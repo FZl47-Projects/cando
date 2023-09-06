@@ -5,7 +5,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from phonenumber_field.modelfields import PhoneNumberField
-from product.models import Cart
+from product.models import Cart, ProductFavoriteList
 
 
 class CustomBaseUserManager(BaseUserManager):
@@ -80,6 +80,10 @@ class User(AbstractUser):
     def cart(self):
         return self.get_or_create_cart()
 
+    @property
+    def is_admin(self):
+        return True if self.role in settings.ADMIN_ROLES else False
+
     def get_raw_phonenumber(self):
         p = str(self.phonenumber).replace('+98', '')
         return p
@@ -131,6 +135,14 @@ class User(AbstractUser):
     def get_addresses(self):
         return self.address_set.all()
 
-    @property
-    def is_admin(self):
-        return True if self.role in settings.ADMIN_ROLES else False
+    def get_or_create_product_favorite_list(self):
+        try:
+            return self.productfavoritelist
+        except:
+            return ProductFavoriteList.objects.create(user=self)
+
+    def get_product_favorites_list_ids(self):
+        favorite_list = self.get_or_create_product_favorite_list()
+        ids = list(favorite_list.products.values_list('id',flat=True))
+        return ids
+

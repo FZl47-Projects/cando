@@ -10,7 +10,8 @@ from account.auth.decorators import admin_role_required_cbv, user_role_required_
 from product.models import (
     Category, CustomOrderProduct,
     FactorCakeImage, Product,
-    ShowCase
+    ShowCase, Cart,
+    Comment
 )
 from . import forms, models
 
@@ -77,7 +78,10 @@ class DashboardAdmin(View):
     def get(self, request):
         context = {
             'products': Product.objects.all(),
-            'showcase': ShowCase.objects.first()
+            'showcase': ShowCase.objects.first(),
+            'custom_orders': CustomOrderProduct.objects.filter(is_checked=False),
+            'carts_processing': Cart.objects.filter(cartstatus__status='accepted'),
+            'carts': Cart.objects.exclude(cartstatus=None),
         }
         return render(request, 'account/dashboard/admin/index.html', context)
 
@@ -133,6 +137,17 @@ class DashboardAdminOrders(View):
         return render(request, 'account/dashboard/admin/orders.html', context)
 
 
+class DashboardAdminComments(View):
+
+    @admin_role_required_cbv
+    def get(self, request):
+        context = {
+            'comments': Comment.objects.all(),
+            'comments_need_to_check': Comment.objects.filter(is_accepted=False)
+        }
+        return render(request, 'account/dashboard/admin/comments.html', context)
+
+
 class DashboardUser(LoginRequiredMixin, View):
 
     @user_role_required_cbv
@@ -145,3 +160,13 @@ class DashboardUserOrders(LoginRequiredMixin, View):
     @user_role_required_cbv
     def get(self, request):
         return render(request, 'account/dashboard/user/orders.html')
+
+
+class DashboardUserProductFavorites(LoginRequiredMixin, View):
+
+    @user_role_required_cbv
+    def get(self, request):
+        context = {
+            'products': request.user.get_or_create_product_favorite_list().products.all()
+        }
+        return render(request, 'account/dashboard/user/favorites.html', context)

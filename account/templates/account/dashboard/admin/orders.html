@@ -22,6 +22,43 @@
 {% block Content %}
     <body class="bg">
 
+    {% for cart in carts %}
+        <div class="content-modal order-status">
+            <div class="inner-modal">
+                <div class="content" style="width: 430px;border-radius: 20px;border: 0;">
+                    <form class="p-5" action="{% url 'product:cart_status' cart_id=cart.id %}" method="post">
+                        {% csrf_token %}
+                        <p class="text-center" style="color: #999">
+                            کد رهگیری : {{ cart.get_track_code }}
+                        </p>
+                        <div>
+                            <label>
+                                وضعیت
+                            </label>
+                            <select name="status" class="form-control form-select text-center" required>
+                                {% for status_option in cart.cartstatus.STATUS_OPTIONS %}
+                                    <option value="{{ status_option.0 }}" {% if cart.cartstatus.status == status_option.0 %}selected{% endif %}>{{ status_option.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label>
+                                زمان اماده سازی(دقیقه)
+                            </label>
+                            <input type="number" name="delivery_time" class="form-control" value="{{ cart.cartstatus.delivery_time }}" required>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-success col-12">
+                                ثبت
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
     <!-- START Header General orders-->
     <div class="container-fluid container-admin" style="position:relative ;">
         <header class="header-m-oprator">
@@ -105,7 +142,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-success p-2">
+                                            <button class="btn btn-success p-2 btn-order-status">
                                                 تخمین و وضعیت
                                             </button>
                                         </div>
@@ -203,4 +240,46 @@
     <!-- MAIN JS -->
 
     <script src="{% static 'frontend/js/admin/List-of-orders.js' %}" type="module"></script>
+    <script>
+        // ---
+
+        let btns_orders_status = document.querySelectorAll(".btn-order-status");
+        let orders_status = document.querySelectorAll(".order-status");
+
+        btns_orders_status.forEach((item, index) => {
+            item.addEventListener("click", () => {
+                btns_orders_status.forEach((item) => {
+                    item.classList.remove("active");
+                });
+                orders_status.forEach((item) => {
+                    item.classList.remove("active");
+                });
+                btns_orders_status[index].classList.add("active");
+                orders_status[index].classList.add("active");
+
+                // active default item
+                try {
+                    orders_status[index].querySelector('.products-item').click()
+                } catch (e) {
+                }
+            });
+        });
+
+
+        let overalyModals = document.querySelectorAll(".order-status .inner-modal");
+
+        btns_orders_status.forEach((item, index) => {
+            item.addEventListener("click", () => {
+                orders_status[index].classList.add("active");
+            });
+
+        });
+        overalyModals.forEach((item, index) => {
+            item.addEventListener("click", (e) => {
+                if (e.target.className === "inner-modal") {
+                    orders_status[index].classList.remove("active");
+                }
+            });
+        })
+    </script>
 {% endblock %}

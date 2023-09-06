@@ -22,6 +22,10 @@ class Product(BaseModel):
     class Meta:
         ordering = '-id',
 
+    @property
+    def is_in_stock(self):
+        return True if self.stock > 0 else False
+
     def __str__(self):
         return self.name
 
@@ -36,9 +40,22 @@ class Product(BaseModel):
     def get_price(self):
         return self.price
 
-    @property
-    def is_in_stock(self):
-        return True if self.stock > 0 else False
+    def get_absolute_url(self):
+        return reverse('product:detail', args=(self.id,))
+
+    def get_similar_products(self):
+        return Product.objects.filter(category=self.category)
+
+    def get_comments(self):
+        return self.comment_set.filter(is_accepted=True)
+
+    def get_all_comments(self):
+        return self.comment_set.all()
+
+    def get_rate(self):
+        avg = self.get_comments().aggregate(rate_avg=models.Avg('rate'))['rate_avg'] or 0
+        avg = round(avg,1)
+        return avg
 
 
 class Category(BaseModel):
@@ -320,3 +337,34 @@ class Discount(BaseModel):
 
     def __str__(self):
         return self.code
+
+
+class ProductFavoriteList(BaseModel):
+    user = models.OneToOneField('account.User', on_delete=models.CASCADE)
+    products = models.ManyToManyField('Product')
+
+    def __str__(self):
+        return f'favorite list - {self.user}'
+
+
+class Comment(BaseModel):
+    RATE_OPTIONS = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
+
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    user = models.ForeignKey('account.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    rate = models.SmallIntegerField(choices=RATE_OPTIONS)
+    is_accepted = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = '-id',
+
+    def __str__(self):
+        return f'{self.title[:20]} - {self.product}'

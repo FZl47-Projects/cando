@@ -109,7 +109,8 @@
                         {% if cart.cartstatus.delivery_time %}
                             <span class="fs-6">
                                 زمان تقریبی رسیدن کالا
-                                    <b class="bg-info text-white p-0 px-2" style="border-radius: 5px">{{ cart.cartstatus.delivery_time }}</b>
+                                    <b class="bg-info text-white p-0 px-2"
+                                       style="border-radius: 5px">{{ cart.cartstatus.delivery_time }}</b>
                                 دقیقه
                             </span>
                         {% endif %}
@@ -218,15 +219,17 @@
                         <div class="col-12 col-md-6 p-2 ">
                             <div class="product-item">
                                 <div class="col-4 col-md-4 height">
-                                    <div class="img-product">
-                                        <img src="{{ order.product.get_image_url }}"
-                                             alt="{{ order.product.name }}">
-                                    </div>
+                                    <a href="{{ order.product.get_absolute_url }}">
+                                        <div class="img-product">
+                                            <img src="{{ order.product.get_image_url }}"
+                                                 alt="{{ order.product.name }}">
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="col-5 col-md-4 moshakhaseh">
                                     <div class="name-sweet">
                                         <h4>
-                                            {{ order.product.name }}
+                                            <a href="{{ order.product.get_absolute_url }}">{{ order.product.name }}</a>
                                             ({{ order.count }})
                                         </h4>
                                     </div>

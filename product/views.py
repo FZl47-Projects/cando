@@ -285,6 +285,35 @@ class CartDetail(LoginRequiredMixin, View):
         return render(request, 'product/order-detail.html', context)
 
 
+class CartStatus(View):
+
+    def notify_cart_status(self, cart_obj, status_text):
+        cart_user = cart_obj.user
+        send_sms('cart_status', cart_user.get_phonenumber(), user_name=cart_user.name,
+                 track_code=cart_obj.get_track_code(), status_text=status_text)
+
+    @admin_role_required_cbv
+    def post(self, request, cart_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        cart_obj = get_object_or_404(models.Cart, id=cart_id)
+        cart_status = cart_obj.cartstatus
+        data = request.POST.copy()
+        # set values
+        data['cart'] = cart_obj
+        f = forms.CartStatusForm(data, instance=cart_status)
+        if form_validate_err(request, f) is False:
+            return redirect(referer_url or '/error')
+        f.save()
+        data = f.cleaned_data
+        status = data.get('status')
+        if status == 'accepted':
+            self.notify_cart_status(cart_obj, 'تایید شد')
+        elif status == 'send':
+            self.notify_cart_status(cart_obj, 'در حال خروج از مرکز پردازش و ارسال سفارش است')
+        messages.success(request, 'وضعیت سفارش با موفقیت بروز شد')
+        return redirect(referer_url or '/success')
+
+
 class FactorCakeImage(LoginRequiredMixin, View):
 
     def get(self, request):
@@ -382,4 +411,79 @@ class ShowCaseCreate(View):
             showcase_obj = models.ShowCase.objects.create()
         showcase_obj.products.set(products_objs)
         messages.success(request, 'ویترین با موفقیت بروزرسانی شد')
+        return redirect(referer_url or '/success')
+
+
+class ProductFavoriteAdd(LoginRequiredMixin, View):
+
+    def get(self, request, product_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        product_obj = get_object_or_404(models.Product, id=product_id)
+        user = request.user
+        favorite_list = user.get_or_create_product_favorite_list()
+        favorite_list.products.add(product_obj)
+        messages.success(request, 'محصول با موفقیت از لیست مورد علاقه های شما حذف شد')
+        messages.success(request, 'محصول با موفقیت به لیست مورد علاقه های شما اضافه شد')
+        return redirect(referer_url or '/success')
+
+
+class ProductFavoriteRemove(LoginRequiredMixin, View):
+
+    def get(self, request, product_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        product_obj = get_object_or_404(models.Product, id=product_id)
+        user = request.user
+        favorite_list = user.get_or_create_product_favorite_list()
+        favorite_list.products.remove(product_obj)
+        messages.success(request, 'محصول با موفقیت از لیست مورد علاقه های شما حذف شد')
+        return redirect(referer_url or '/success')
+
+
+class ProductDetail(View):
+
+    def get(self, request, product_id):
+        product_obj = get_object_or_404(models.Product, id=product_id)
+        context = {
+            'product': product_obj
+        }
+        return render(request, 'product/detail.html', context)
+
+
+class CommentAdd(LoginRequiredMixin, View):
+
+    def post(self, request, product_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        product_obj = get_object_or_404(models.Product, id=product_id)
+        data = request.POST.copy()
+        # set values
+        data['product'] = product_obj
+        data['user'] = request.user
+        f = forms.CommentAddForm(data)
+        if form_validate_err(request, f) is False:
+            return redirect(referer_url or '/error')
+        f.save()
+        messages.success(request, 'نظر شما با موفقیت ثبت شد پس از بررسی نمایش داده میشود')
+        return redirect(referer_url or '/success')
+
+
+class CommentAccept(View):
+
+    @admin_role_required_cbv
+    def get(self, request, comment_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        comment_obj = get_object_or_404(models.Comment, id=comment_id)
+        comment_obj.is_accepted = True
+        comment_obj.save()
+        messages.success(request, 'نظر با موفقیت تایید شد')
+        return redirect(referer_url or '/success')
+
+
+class CommentDelete(View):
+
+    @admin_role_required_cbv
+    def get(self, request, comment_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        comment_obj = get_object_or_404(models.Comment, id=comment_id)
+        comment_obj.delete()
+        messages.success(request, 'نظر با موفقیت حذف شد')
         return redirect(referer_url or '/success')

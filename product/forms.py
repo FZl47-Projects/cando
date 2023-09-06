@@ -42,3 +42,15 @@ class FactorCreateNonAddressForm(forms.ModelForm):
     class Meta:
         model = models.Factor
         exclude = ('track_code', 'address')
+
+
+class CartStatusForm(forms.ModelForm):
+    class Meta:
+        model = models.CartStatus
+        fields = '__all__'
+
+
+class CommentAddForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ('product', 'user', 'title', 'description','rate')

@@ -165,7 +165,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 SMS_CONFIG = {
     'API_KEY': os.environ.get('SMS_API_KEY'),
     'API_URL': 'http://rest.ippanel.com/v1/messages/patterns/send',
-    'ORIGINATOR': '98500041500026'
+    'ORIGINATOR': '983000505'
 }
 
 AUTH_USER_MODEL = 'account.User'
@@ -180,12 +180,9 @@ USER_ROLES = (
     'user',
 )
 
-if DEBUG:
-    Q_CLUSTER['workers'] = 2
 
 TRANSPORTATION_CONFIG = {
-    # 'fee': 25_000,
-    'fee': 0,
+    'fee': 25_000,
     'free_if_price_more_than': 300_000,
 }
 
