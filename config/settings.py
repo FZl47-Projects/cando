@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-HOST_ADDRESS = 'app.candoocomplex.com'
+HOST_ADDRESS = 'http://app.candoocomplex.com'
 
 # Application definition
 
