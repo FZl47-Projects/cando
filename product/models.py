@@ -68,10 +68,11 @@ class Category(BaseModel):
         return self.product_set.all()
 
 
-class FactorCakeImage(BaseModel, Image):
+class FactorCakeImage(BaseModel):
     user_name = models.CharField(max_length=200)
     track_code = models.CharField(max_length=100)
     description = models.TextField(null=True)
+    images = models.ManyToManyField('core.Image')
     is_checked = models.BooleanField(default=False)
 
     class Meta:
@@ -79,6 +80,9 @@ class FactorCakeImage(BaseModel, Image):
 
     def __str__(self):
         return self.user_name
+    
+    def get_images(self):
+        return self.images.all()
 
 
 class ShowCase(BaseModel):
@@ -250,6 +254,12 @@ class Order(BaseModel):
 
 
 class CustomOrderProduct(BaseModel):
+    STATUS_OPTIONS = (
+        ('accepted','تایید شد'),
+        ('pending','در حال بررسی'),
+        ('rejected','رد شد')
+    )
+    status = models.CharField(max_length=15,choices=STATUS_OPTIONS,default='pending')
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
     detail = JSONField()
     description = models.TextField(null=True)

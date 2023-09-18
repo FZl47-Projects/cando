@@ -56,21 +56,42 @@ class CustomOrderProductFactorCreate(View):
     @admin_role_required_cbv
     def post(self, request, order_id):
         referer_url = request.META.get('HTTP_REFERER')
-        data = request.POST
-        price = data.get('price')
-        if not price or str(price).isdigit() is False:
-            messages.success(request, 'لطفا فیلد قیمت را به درستی پرنمایید')
-            return redirect(referer_url or '/error')
+        data = request.POST.copy()
         order_obj = get_object_or_404(models.CustomOrderProduct, id=order_id)
         cart = order_obj.user.get_or_create_cart()
-        order_obj.cart = cart
-        order_obj.price = price
-        order_obj.is_checked = True
-        order_obj.save()
+        # set values
+        data['cart'] = cart
+        data['is_checked'] = True
+        data['status'] = 'accepted'
+        f = forms.CustomOrderProductAccept(data,instance=order_obj)
+        if form_validate_err(request, f) is False:
+            return redirect(referer_url or '/error')
+        f.save()
         # send notif
         send_sms('custom_order_estimated', order_obj.user.get_phonenumber(),
                  cart_link=url_with_host(reverse('product:cart')))
         messages.success(request, 'تخمین قیمت سفارش با موفقیت ثبت شد')
+        return redirect(referer_url or '/success')
+
+
+
+class CustomOrderProductReject(View):
+
+    @admin_role_required_cbv
+    def post(self, request, custom_order_id):
+        referer_url = request.META.get('HTTP_REFERER')
+        data = request.POST.copy()
+        # set values
+        data['status'] = 'rejected'
+        order_obj = get_object_or_404(models.CustomOrderProduct, id=custom_order_id)
+        f = forms.CustomOrderProductReject(data,request.FILES, instance=order_obj)
+        if form_validate_err(request, f) is False:
+            return redirect(referer_url or '/error')
+        f.save()
+        user = order_obj.user
+        # send notif
+        send_sms('custom_order_rejected', user.get_phonenumber(),user_name=user.get_full_name())
+        messages.success(request, ' سفارش با موفقیت رد شد')
         return redirect(referer_url or '/success')
 
 
@@ -324,11 +345,19 @@ class FactorCakeImageSubmit(LoginRequiredMixin, View):
 
     def post(self, request):
         referer_url = request.META.get('HTTP_REFERER')
-        data = request.POST
+        data = request.POST.copy()
+        images = request.FILES.getlist('image', [])
+        image_objects = []
+        for image in images:
+            if image:
+                img_obj = Image.objects.create(image=image)
+                image_objects.append(img_obj)
+     
         f = forms.FactorCakeImageForm(data, request.FILES)
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
-        f.save()
+        factor_cake = f.save()
+        factor_cake.images.add(*image_objects)
         messages.success(request, 'عکس طرح کیک با موفقیت ثبت شد')
         return redirect(referer_url or '/success')
 

@@ -41,6 +41,11 @@ def send_sms(sms_type, phonenumber, **kwargs):
             'track-code': kwargs.get('track_code'),
             'status-text': kwargs.get('status_text'),
         }
+    elif sms_type == 'custom_order_rejected':
+        pattern_code = 'nmp7pk60w4vme9w'
+        values = {
+            'user-name':kwargs.get('user_name')
+        }
 
     phonenumber = str(phonenumber).replace('+', '')
     payload = json.dumps({

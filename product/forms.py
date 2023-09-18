@@ -25,7 +25,7 @@ class FactorCakeImageForm(forms.ModelForm):
 
     class Meta:
         model = models.FactorCakeImage
-        fields = '__all__'
+        exclude = ('images',)
 
 
 class FactorCreateForm(forms.ModelForm):
@@ -54,3 +54,15 @@ class CommentAddForm(forms.ModelForm):
     class Meta:
         model = models.Comment
         fields = ('product', 'user', 'title', 'description','rate')
+
+class CustomOrderProductAccept(forms.ModelForm):
+
+    class Meta:
+        model = models.CustomOrderProduct
+        fields = ('note','price','is_checked','cart','status')
+
+class CustomOrderProductReject(forms.ModelForm):
+    note = forms.CharField(max_length=1000,required=False)
+    class Meta:
+        model = models.CustomOrderProduct
+        fields = ('note','status')

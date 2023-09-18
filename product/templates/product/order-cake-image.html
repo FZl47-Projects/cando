@@ -1254,7 +1254,14 @@
 
         body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown .swal2-container.swal2-bottom-right {
             inset: auto 0 0 auto
-        }</style>
+        }
+    
+        .container-field-image-additional{
+            display:flex;
+            justify-content: between;
+            align-items:center
+        }
+    </style>
 {% endblock %}
 
 {% block Content %}
@@ -1319,12 +1326,23 @@
                         </div>
                     </section>
                     <section class="information-form">
-                        <div class="col-12 col-md-12 time p-2">
+                        
+                        <div class="container-image-fields col-9 col-md-9 time p-2">
                             <label>تصویر</label>
-                            <div class="title">حداکثر حجم بارگذاری10مگابایت</div>
-                            <input type="file" name="image" id="imgfile" required>
+                            <div>
+                                <input type="file" class="my-1" name="image" id="imgfile" required="">
+                            </div>
                         </div>
-                    </section>
+                        <div class="col-3 d-flex justify-content-between align-items-center">
+                            <div id="btn-add-image-field" class="p-2"
+                                 style="margin: 10px;margin-top: 50px;color: #18dc3f;cursor: pointer">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <div class="title text-white">حداکثر حجم بارگذاری10مگابایت</div>
+                        </div>
+                    
+                        
+                    </section> 
                     <section class="information-form">
                         <div class="col-12 col-md-12 time p-2">
                             <label>توضیحات</label>
@@ -1342,4 +1360,24 @@
     </div>
 
     </body>
+{% endblock %}
+
+{% block Script %}
+    <script>
+        let btn_add_image_field = document.querySelector('#btn-add-image-field')
+        let container_image_fields = document.querySelector('.container-image-fields')
+        btn_add_image_field.addEventListener('click', function () {
+            let cnt_field = document.createElement('div')
+            cnt_field.classList.add('container-field-image-additional')
+            cnt_field.innerHTML = `
+                        <input type="file" class="my-1" name="image" id="imgfile" required>
+                        <i class="btn-delete-image-field fa fa-trash text-danger" style="margin-right: 15px;"></i>
+                    `
+            container_image_fields.appendChild(cnt_field)
+            cnt_field.querySelector('.btn-delete-image-field').addEventListener('click', function () {
+                this.parentElement.remove()
+            })
+
+        })
+    </script>
 {% endblock %}

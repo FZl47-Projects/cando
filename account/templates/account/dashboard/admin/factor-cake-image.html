@@ -86,7 +86,10 @@
                                                         <span>عکس</span>
                                                     </div>
                                                     <div class="col-6 left p-1">
-                                                        <a class="btn btn-warning p-1 col-12" href="{{ factor.get_image_url }}">عکس</a>
+                                                        {% for image in factor.get_images %}
+                                                                <a class="btn btn-warning p-1 d-block m-1
+                                                                " href="{{ image.get_image_url }}"> عکس {{ forloop.counter }}</a>
+                                                            {% endfor %}
                                                     </div>
 
                                                 </div>

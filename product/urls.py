@@ -6,6 +6,7 @@ urlpatterns = [
     path('custom-order-product', views.CustomOrderProduct.as_view(), name='custom_order_product'),
     path('custom-order-product/<int:order_id>/factor/create', views.CustomOrderProductFactorCreate.as_view(),
          name='custom_order_factor_create'),
+    path('custom-order-product/<int:custom_order_id>',views.CustomOrderProductReject.as_view(),name='custom_order_reject'),
 
     path('factor-cake-image', views.FactorCakeImage.as_view(), name='factor_cake_image'),
     path('factor-cake-image/submit', views.FactorCakeImageSubmit.as_view(), name='factor_cake_image_submit'),
