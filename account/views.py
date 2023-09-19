@@ -162,6 +162,15 @@ class DashboardUserOrders(LoginRequiredMixin, View):
         return render(request, 'account/dashboard/user/orders.html')
 
 
+class DashboardUserCustomOrders(LoginRequiredMixin,View):
+
+    
+    def get(self, request):
+        context = {
+            'orders': CustomOrderProduct.objects.all()
+        }
+        return render(request, 'account/dashboard/user/custom-orders.html', context)
+
 class DashboardUserProductFavorites(LoginRequiredMixin, View):
 
     @user_role_required_cbv
