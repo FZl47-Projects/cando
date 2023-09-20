@@ -202,8 +202,28 @@
         <div class="The-dividing-line"></div>
         <!-- custom-box-category -->
         <div class="col-12 d-flex justify-content-center flex-wrap p-2">
-            <section class="col-12 col-md-8 custom-box-category justify-content-center flex-wrap">
-                <div class="col-12 col-md-4 custom-box-img">
+            <section class="col-12 col-md-12 custom-box-category justify-content-center flex-wrap">
+                <div class="col-12 col-md-3 custom-box-img">
+                    <a href="{% url 'account:dashboard_user__orders' %}">
+                        <div class="inner-custom-box active">
+                            <img src="{% static 'frontend/images/ثبت نام آکادمی.png' %}" alt="">
+                            <div class="des-custom-box">
+                                <p>ثبت نام آکادمی</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-md-3 custom-box-img">
+                    <a href="{% url 'product:factor_cake_image' %}">
+                        <div class="inner-custom-box">
+                            <img src="{% static 'frontend/images/ارسال طرح.png' %}" alt="">
+                            <div class="des-custom-box">
+                                <p>ارسال طرح</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-12 col-md-3 custom-box-img">
                     <a href="{% url 'account:dashboard_user__orders' %}">
                         <div class="inner-custom-box active">
                             <img src="{% static 'frontend/images/index02.png' %}" alt="">
@@ -213,8 +233,7 @@
                         </div>
                     </a>
                 </div>
-
-                <div class="col-12 col-md-4 custom-box-img">
+                <div class="col-12 col-md-3 custom-box-img">
                     <a href="{% url 'product:factor_cake_image' %}">
                         <div class="inner-custom-box">
                             <img src="{% static 'frontend/images/index01.png' %}" alt="">

@@ -1909,6 +1909,21 @@ input {
     filter: brightness(40%);
     cursor: pointer;
 }
+.custom-box-category .custom-box-img .inner-custom-box::after {
+    position: absolute;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.8520658263305322) 0%, rgba(255,255,255,0) 74%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+}
+.custom-box-category .custom-box-img img {
+    position: relative;
+   
+ }
+
 
 .custom-box-category .custom-box-img .inner-custom-box.active {
     filter: brightness(100%);
@@ -1920,6 +1935,7 @@ input {
     bottom: 5px;
     right: 30px;
     color: #fff;
+    z-index: 1000;
 }
 
 .Grouping {
