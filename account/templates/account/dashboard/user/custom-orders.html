@@ -19,7 +19,7 @@
    <div class="container-fluid container-admin" style="position:relative ;">
      <header class="header-m-oprator">
        <div class="title">
-         <span class="back"><img src="../static/frontend/images/black.f.png"
+         <span class="back"><img src="{% static 'frontend/images/black.f.png' %}"
              alt="icon"
              /></span>
          <h5>لیست سفارشات دلخواه</h5>
@@ -153,6 +153,10 @@
                    {% endif %}
                 </form>
                 </div>
+             </div>
+             {% empty %}
+             <div class="container-base-not-found">
+                <p>چیزی یافت نشد</p>
              </div>
             {% endfor %}
         </div>
