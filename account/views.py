@@ -163,11 +163,11 @@ class DashboardUserOrders(LoginRequiredMixin, View):
 
 
 class DashboardUserCustomOrders(LoginRequiredMixin,View):
-
+    # TODO
     
     def get(self, request):
         context = {
-            'orders': CustomOrderProduct.objects.all()
+            'orders': request.user.customorderproduct_set.all()
         }
         return render(request, 'account/dashboard/user/custom-orders.html', context)
 
