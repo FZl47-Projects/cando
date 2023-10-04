@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'account',
     'public',
     'product',
-    'transportation'
+    'transportation',
+    'instruction'
 ]
 
 MIDDLEWARE = [

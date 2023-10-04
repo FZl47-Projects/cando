@@ -10,6 +10,7 @@ urlpatterns = [
     path('u/',include('account.urls',namespace='account')),
     path('t/',include('transportation.urls',namespace='transportation')),
     path('admin/', admin.site.urls),
+    path('i/',include('instruction.urls',namespace='instruction')),
 ]
 
 if settings.DEBUG:
