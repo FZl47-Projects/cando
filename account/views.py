@@ -35,6 +35,10 @@ class Login(View):
             return redirect('account:login')
         login(request, user)
         messages.success(request, 'خوش امدید')
+        try:
+            return redirect(data.get('next'))
+        except:
+            pass
         if user.role in ('super_user',):
             return redirect('account:dashboard_admin')
         return redirect('public:index')
@@ -67,6 +71,10 @@ class Register(View):
         login(request, user)
         messages.success(request, 'حساب شما با موفقیت ساخته شد')
         send_sms('welcome', user.phonenumber, name=user.name)
+        try:
+            return redirect(data.get('next'))
+        except:
+            pass
         return redirect('public:index')
 
 
@@ -162,14 +170,15 @@ class DashboardUserOrders(LoginRequiredMixin, View):
         return render(request, 'account/dashboard/user/orders.html')
 
 
-class DashboardUserCustomOrders(LoginRequiredMixin,View):
+class DashboardUserCustomOrders(LoginRequiredMixin, View):
     # TODO
-    
+
     def get(self, request):
         context = {
             'orders': request.user.customorderproduct_set.all()
         }
         return render(request, 'account/dashboard/user/custom-orders.html', context)
+
 
 class DashboardUserProductFavorites(LoginRequiredMixin, View):
 

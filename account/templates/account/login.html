@@ -37,6 +37,7 @@
             <div class="forms">
                 <form class="form form-login" action="{% url 'account:login' %}" method="post">
                     {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
                     <div class="main-form">
                         <div>
                             <div class="group-form ">
