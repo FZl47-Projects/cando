@@ -6,5 +6,6 @@ urlpatterns = [
     path('error', views.Error.as_view(), name='error'),
     path('success', views.Success.as_view(), name='success'),
 
-    path('', views.Index.as_view(), name='index')
+    path('', views.Index.as_view(), name='index'),
+    path('inst', views.PublicInstructions.as_view(), name='instruction')
 ]

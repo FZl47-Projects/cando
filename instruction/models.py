@@ -14,3 +14,8 @@ class Instruction(models.Model):
     difficulty = models.CharField('Difficulty', choices= difficulty_choices, max_length=20, default='آسان')
     recipe = models.TextField('Recipe', null=True, blank=True)
     ingredients = models.TextField('Ingredients',null=True, blank=True)
+
+class Article(models.Model):
+    title = models.CharField('title', max_length=200)
+    description = models.TextField('Description', null=True, blank=True)
+    img = models.ImageField('Image', null= True, blank= True)

@@ -20,4 +20,6 @@ urlpatterns = [
     path('d/user/orders', views.DashboardUserOrders.as_view(),name='dashboard_user__orders'),
     path('d/user/custom-orders', views.DashboardUserCustomOrders.as_view(),name='dashboard_user__custom_orders'),
     path('d/user/favorites', views.DashboardUserProductFavorites.as_view(),name='dashboard_user__favorites'),
+    path('d/user-list', views.UsersList.as_view(),name='users_list'),
+    path('d/admin-list', views.AdminList.as_view(),name='admin_list'),
 ]

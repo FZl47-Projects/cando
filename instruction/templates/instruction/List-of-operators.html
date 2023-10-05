@@ -1,0 +1,288 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+لیست اپراتورها
+{% endblock %}
+
+{% block Link %}>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/bootstrap.min.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="/assets/frontend/vendors/swiper.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="/assets/frontend/styles/List-of-operators.css" />
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  {& endblock &}
+{% block content%}
+  <body class="bg">
+
+     <!-- START content modal Sales operator-->
+     <div class="content-modal" id="modal-send-notification">
+        <div class="inner-modal">
+          <div class="content">
+            <form class="px-4 pt-3">
+                <div class="col-12 txt-header">
+                    <h6>اعلان به همه اپراتورها</h6>
+                </div>
+              <div class="col-12 px-2 py-2 ">
+                <textarea class="description-textarea " cols="50" rows="7" placeholder="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."></textarea>
+              </div>
+    
+          </form>
+          <div class="birthday-package mt-2" id="btn-send-notification">
+            <p>ارسال اعلان</p>
+          </div>
+          </div>
+        </div>
+    
+      </div>
+ <!-- End content modal Sales operator-->
+
+<!-- START content modal cake operator-->
+<div class="content-modal" id="modal-General-notification">
+    <div class="inner-modal">
+      <div class="content">
+        <form class="px-4 pt-3">
+            <div class="col-12 txt-header">
+                <h6>اعلان عمومی به همه اپراتورها</h6>
+            </div>
+          <div class="col-12 px-2 py-2 ">
+            <textarea class="description-textarea " cols="50" rows="7" placeholder="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."></textarea>
+          </div>
+
+      </form>
+      <div class="birthday-package mt-2" id="btn-send-notification">
+        <p>ارسال اعلان</p>
+      </div>
+      </div>
+    </div>
+
+  </div>
+<!-- End content modal cake operator-->
+
+
+
+
+
+     <!-- START Header list-of-operator-->
+    <div class="container-fluid container-admin" style="position:relative ;">
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="/assets/frontend/images/icon/Group 1900.png"
+              alt="icon"
+              /></span>
+          <h5>لیست اپراتور ها</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+<!--Edn Header list-of-operator-->
+
+      <!-- START MAIN -->
+      <main class="main p-3">
+          <!-- START BTNS  -->
+          <div class="btns">
+            <div class="btn-change col-6 text-center active" id="btn-birth">اپراتور فروش</div>
+            <div class="btn-change col-6 text-center " id="make-sweet">اپراتور کیک</div>
+          </div>
+          <!-- END BTNS  -->
+          <!-- start content Sales operator -->
+          <div class="Sales-operator active">
+            <section class="Sales-operator-item col-12">
+                    <!-- start content search top -->
+                    <div class="search">
+                        <div class="col-12 search-content p-2">
+                            <div class="col-2 image">
+                                <div class="col-6 image-item p-1">
+                                    <img src="/assets/frontend/images/icon/whatsapp.png">
+                                </div>
+                                <div class="col-6 image-item p-1" id="general-notification">
+                                    <img src="/assets/frontend/images/icon/alarm.png">
+                                </div>
+                                
+                            </div>
+                            <div class="col-10 search-item">
+                                <img src="/assets/frontend/images/search.png">
+                                <span>جستجو در کاربران</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- end content search top -->
+
+                    <!-- start strip top -->
+                    <div class="col-12 content-strip p-2 mb-1">
+                        <span class="col-3">نام کاربر</span>
+                        <span class="col-3">شماره تلفن</span>
+                        <span class="col-3">شهر</span>
+                        <div class="col-3 left">
+                        <span class="col-6">پیامک</span>
+                        <span class="col-6">اعلان</span>
+                        </div>
+                    </div>
+                    <!-- end strip top -->
+                    <!-- start content strip  -->
+                    {% for user in users %}
+                    <div class="content-moshakhesat">
+                    <div class="col-12 items ">
+                        <span class="col-3 p-1"> {{user.name}} </span>
+                        <span class="col-3 p-1">{{user.phonenumber}}</span>
+                        <span class="col-3 p-1">کرمان</span>
+                        <div class="col-3 left">
+                        <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                        <img class="border-right" id="notification" src="/assets/frontend/images/icon/alarm.png">
+                        </div>
+                        
+                    </div>
+                    {& endfor &}
+                    
+                    <!-- btn bottom -->
+            </section>
+                    
+          </div>
+            <!-- end content Sales operator -->
+
+              <!-- start content cake operator -->
+              <div class="Sales-operator ">
+                <section class="Sales-operator-item col-12">
+                        <!-- start content search top -->
+                        <div class="search">
+                            <div class="col-12 search-content p-2">
+                                <div class="col-2 image">
+                                    <div class="col-6 image-item p-1">
+                                        <img src="/assets/frontend/images/icon/whatsapp.png">
+                                    </div>
+                                    <div class="col-6 image-item p-1">
+                                        <img src="/assets/frontend/images/icon/alarm.png">
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-10 search-item">
+                                    <img src="/assets/frontend/images/search.png">
+                                    <span>جستجو در کاربران</span>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+                        <!-- end content search top -->
+    
+                        <!-- start strip top -->
+                        <div class="col-12 content-strip p-2 mb-1">
+                            <span class="col-3">نام کاربر</span>
+                            <span class="col-3">شماره تلفن</span>
+                            <span class="col-3">شهر</span>
+                            <div class="col-3 left">
+                            <span class="col-6">پیامک</span>
+                            <span class="col-6">اعلان</span>
+                            </div>
+                        </div>
+                        <!-- end strip top -->
+                        <!-- start content strip  -->
+                        <div class="content-moshakhesat">
+                        <div class="col-12 items ">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 items border_top">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 items border_top">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 items border_top">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 items border_top">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 items border_top">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+                        <div class="col-12 items border_top">
+                            <span class="col-3 p-1">نام و نام خانوادگی</span>
+                            <span class="col-3 p-1">09120020202</span>
+                            <span class="col-3 p-1">کرمان</span>
+                            <div class="col-3 left">
+                            <img class="border-right" src="/assets/frontend/images/icon/whatsapp.png">
+                            <img class="border-right" src="/assets/frontend/images/icon/alarm.png">
+                            </div>
+                            
+                        </div>
+    
+                        </div>
+                        <!-- end content strip  -->
+                        <!-- btn bottom -->
+                        <div class="btn-main col-12" id="btn-send-notification-cake">
+                            <div class="btn-main-content">
+                              <a href="New-operator.html" class="d-flex"> 
+                                <span><img src="/assets/frontend/images/plus1.png"></span>
+                                 <p class="mb-0 me-1">افزودن اپراتور جدید</p>
+                              </a>
+                           
+                            </div>
+                            
+                        </div>
+                        <!-- btn bottom -->
+                </section>
+                        
+              </div>
+               <!-- end content cake operator -->
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="./assets/vendors/bootstrap.min.js"></script>
+
+    <!-- MAIN JS -->
+   
+    <script src="/assets/frontend/js/admin/List-of-operators.js" type="module"></script>
+  </body>
+{% endblock %}

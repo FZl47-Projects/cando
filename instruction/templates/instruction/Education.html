@@ -18,7 +18,7 @@
      <div class="content-modal" id="modal-education-pakage">
         <div class="inner-modal">
           <div class="content height-size">
-            <form class="px-4 pt-2" method="post">
+            <form class="px-4 pt-2" method="post" id="instruction">
               {% csrf_token %}
               <div class="uplode-image mx-4 my-2">
                 <span>
@@ -67,7 +67,7 @@
                   </div>
               </div>
               <div class="birthday-package mt-2" >
-                <button type="submit">تعریف آموزش جدید</button>
+                <button type="submit" name="add-instruction">تعریف آموزش جدید</button>
               </div>
           </form>
           </div>
@@ -82,7 +82,8 @@
   <div class="content-modal" id="modal-add-Article">
     <div class="inner-modal">
       <div class="content">
-        <form class="px-4 pt-2">
+        <form class="px-4 pt-2" method="post">
+          {% csrf_token %}
             <div class="uplode-image mx-4 my-2">
                 <span>
                   <img src="/assets/frontend/images/plus.png">
@@ -90,16 +91,15 @@
                 <p class="mb-0">عکس مقاله را<br> اضافه کنید</p>
               </div>
           <div class="col-12 px-4 py-2 ">
-            <input class="form-control " type="text" name="maghale" id="Article" placeholder="موضوع مقاله" aria-label=".form-control-lg example">
+            <input class="form-control " type="text" name="article-title" id="Article" placeholder="موضوع مقاله" aria-label=".form-control-lg example">
           </div>
           <div class="col-12 px-4 py-2 ">
-            <textarea class="description-textarea " cols="50" rows="7" placeholder="توضیحات"></textarea>
+            <textarea class="description-textarea " name="article-content" cols="50" rows="7" placeholder="توضیحات"></textarea>
           </div>
-
+          <div class="birthday-package mt-2">
+            <button type="submit" name="add-article">تعریف مقاله جدید</button>
+          </div>
       </form>
-      <div class="birthday-package mt-2">
-        <p>تعریف مقاله جدید</p>
-      </div>
       </div>
     </div>
 
@@ -203,6 +203,7 @@
           <div class="content-pakage">
             <section class="category-product">
               <!-- start -->
+              {% for article in articles%}
               <div class="col-12 col-md-6 p-2 pp">
                 <div class="product-item">
                   <div class="col-3 col-md-4 height">
@@ -210,10 +211,10 @@
                         alt=""></div>
                   </div>
                   <div class="col-6 col-md-5 moshakhaseh">
-                    <div class="sweat-name">موضوع مقاله</div>
+                    <div class="sweat-name"> {{article.title}} </div>
                     <div class="description">
                       <div class="description-item col-12">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است...</span>
+                        <span> {{ article.description }}<span>
                       </div>
                     </div>
                   </div>
@@ -227,78 +228,11 @@
                 </div>
   
               </div>
-              <div class="col-12 col-md-6 p-2 pp">
-                <div class="product-item">
-                  <div class="col-3 col-md-4 height">
-                    <div class="img-product"><img src="/assets/frontend/images/pic4.png"
-                        alt=""></div>
-                  </div>
-                  <div class="col-6 col-md-5 moshakhaseh">
-                    <div class="sweat-name">موضوع مقاله</div>
-                    <div class="description">
-                      <div class="description-item col-12">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است...</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-1 bbb">
-                    <div class="cart">
-                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
-                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
-                    </div>
-                  </div>
-  
-                </div>
-  
+              {% empty %}
+              <div class="container-not-found-base">
+                  <p>چیزی یافت نشد</p>
               </div>
-              <div class="col-12 col-md-6 p-2 pp">
-                <div class="product-item">
-                  <div class="col-3 col-md-4 height">
-                    <div class="img-product"><img src="/assets/frontend/images/pic4.png"
-                        alt=""></div>
-                  </div>
-                  <div class="col-6 col-md-5 moshakhaseh">
-                    <div class="sweat-name">موضوع مقاله</div>
-                    <div class="description">
-                      <div class="description-item col-12">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است...</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-1 bbb">
-                    <div class="cart">
-                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
-                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
-                    </div>
-                  </div>
-  
-                </div>
-  
-              </div>
-              <div class="col-12 col-md-6 p-2 pp">
-                <div class="product-item">
-                  <div class="col-3 col-md-4 height">
-                    <div class="img-product"><img src="/assets/frontend/images/pic4.png"
-                        alt=""></div>
-                  </div>
-                  <div class="col-6 col-md-5 moshakhaseh">
-                    <div class="sweat-name">موضوع مقاله</div>
-                    <div class="description">
-                      <div class="description-item col-12">
-                        <span>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است...</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-1 bbb">
-                    <div class="cart">
-                      <div class="cart-image-trash"><img src="/assets/frontend/images/trash.png" alt=""></div>
-                     <div class="cart-image-edit"><img src="/assets/frontend/images/edit.png" alt=""></div>
-                    </div>
-                  </div>
-  
-                </div>
-  
-              </div>
+              {% endfor %}
             </section>
             <!-- start btn bottom -->
             <div class="btn-main col-12 " id="new-Article-btn">

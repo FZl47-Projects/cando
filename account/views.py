@@ -128,9 +128,14 @@ class DashboardAdminFactorCakeImage(View):
 
     @admin_role_required_cbv
     def get(self, request):
+        factors = FactorCakeImage.objects.all()
+        search_content = request.GET.get('search-content')
+        if search_content:
+            factors = factors.filter(track_code=search_content)
         context = {
-            'factors': FactorCakeImage.objects.all()
+            'factors': factors
         }
+        
         return render(request, 'account/dashboard/admin/factor-cake-image.html', context)
 
 
@@ -188,3 +193,17 @@ class DashboardUserProductFavorites(LoginRequiredMixin, View):
             'products': request.user.get_or_create_product_favorite_list().products.all()
         }
         return render(request, 'account/dashboard/user/favorites.html', context)
+class UsersList(View):
+    def get(self, request):
+        users = models.User.objects.filter(role='user')
+        context = {
+            'users': users
+        }
+        return render(request, 'account/dashboard/admin/list-of-users.html', context)
+class AdminList(View):
+    def get(self, request):
+        users = models.User.objects.filter(role='admin')
+        context = {
+            'users': users
+        }
+        return render(request, 'account/dashboard/admin/list-of-users.html', context)
