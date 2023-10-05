@@ -60,6 +60,7 @@ class User(AbstractUser):
     last_name = None
     email = models.EmailField("email address", null=True, default=None)
     phonenumber = PhoneNumberField(region='IR', unique=True)
+    is_phonenumber_confirmed = models.BooleanField(default=False)
     # type users|roles
     role = models.CharField(max_length=20, choices=ROLE_USER_OPTIONS, default='user')
 

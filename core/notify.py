@@ -46,6 +46,16 @@ def send_sms(sms_type, phonenumber, **kwargs):
         values = {
             'user-name':kwargs.get('user_name')
         }
+    elif sms_type == 'reset_password':
+        pattern_code = '2qdim141kvoh98r'
+        values = {
+            'code': kwargs.get('code')
+        }
+    elif sms_type == 'confirmation_code':
+        pattern_code = '2qdim141kvoh98r'
+        values = {
+            'code': kwargs.get('code')
+        }
 
     phonenumber = str(phonenumber).replace('+', '')
     payload = json.dumps({

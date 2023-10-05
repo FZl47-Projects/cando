@@ -16,6 +16,46 @@
 
 {% endblock %}
 
+{% block Style %}
+    <style>
+        .search-item{
+            margin: auto;
+            margin-top: 23px;
+            border-radius: 10px;
+            color: #fff;
+            background-color: #444;
+            border: 1px solid #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:  10px;
+        }
+        
+
+        .search-item input{
+            width: 100%;
+            padding: 10px;
+            display: block;
+            padding: 10px;
+            margin: auto;
+            border: none;
+            outline: none;
+        }
+
+        .search-item input::placeholder{
+            color: #aaa;
+        }
+
+        .search-item button{
+            background-color: #222;
+            color: #fff;
+            padding: 8px;
+            width: 70px;
+            border-radius: 10px;
+        }
+    </style>
+{% endblock %}
+
 {% block Content %}
     <body class="bg">
 
@@ -26,19 +66,19 @@
           <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
                                   alt="icon"
           /> 
-          <br>
-          <br>
-          <br>
-          <br>
+     
         </span>
                 <h5>عکس های طرح بر روی کیک</h5>
             </div>
             <div class="The-dividing-line"></div>
         </header>
         <!--Edn Header Package Price request-->
-        <form class="search-item bg-danger" method="get">
-            <input type="text" name="search-content" style="color: #fff;" id="search-bar">
-            <label for="search-bar">:جستجو </label>
+        <form class="search-item col-12 col-md-6" method="get">
+            <div class="col-10">
+                
+                <input type="text" name="search-content" style="color: #fff;" id="search-bar" placeholder="جست و جو">
+            </div>
+            
             <button type="submit">
                 search
             </button>

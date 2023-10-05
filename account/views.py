@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from core.utils import form_validate_err
+from core.utils import form_validate_err, random_int
 from core.notify import send_sms
 from account.auth.decorators import admin_role_required_cbv, user_role_required_cbv
 from product.models import (
@@ -14,6 +14,8 @@ from product.models import (
     Comment
 )
 from . import forms, models
+from config.settings import RESET_PASSWORD_CONFIG
+from requests import request
 
 
 class Login(View):
@@ -69,13 +71,56 @@ class Register(View):
             password=data.get('password')
         )
         login(request, user)
-        messages.success(request, 'حساب شما با موفقیت ساخته شد')
-        send_sms('welcome', user.phonenumber, name=user.name)
+
         try:
             return redirect(data.get('next'))
         except:
             pass
+        return redirect('account:confirmation_code')
+        
+
+class ConfirmationCode(View):
+    template_name= 'account/confirmation.html'
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+    def post(self, request):
+        post = request.POST
+        user = request.user
+        code=random_int(size=RESET_PASSWORD_CONFIG.CODE_LENGTH)
+        redis.set_value('confirmation_code{user.phonenumber}',code)
+        send_sms('confirmation_code', user.phonenumber, code=code)
+        entry_code = request.POST.get('confirmation_code')
+        code = get_value('confirmation_code{user.phonenumber}')
+        if entry_code == code:
+            user.is_phonenumber_confirmed = True
+            messages.success(request, 'حساب شما با موفقیت ساخته شد')
+            send_sms('welcome', user.phonenumber, name=user.name)
+        messages.success(request, 'کد وارد شده صحیح نمی باشد')
         return redirect('public:index')
+        
+class ResetPassword(View):
+    template_name= 'account/reset_password.html'
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+    def post(self, request):
+        post = request.POST
+        user = request.user
+        code=random_int(size=RESET_PASSWORD_CONFIG.CODE_LENGTH)
+        redis.set_value('reset_password{user.phonenumber}',code)
+        send_sms('reset_password', user.phonenumber, code=code)
+        entry_code = request.POST.get('reset_password')
+        code = get_value('reset_password{user.phonenumber}')
+        if entry_code == code:
+            return redirect('account:change_password')
+        messages.success(request, 'کد وارد شده صحیح نمی باشد')
+        return redirect('account:reset_password')
+
+
+
 
 
 # Dashboard admin

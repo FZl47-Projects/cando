@@ -1,0 +1,78 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+
+{% endblock %}
+
+{% block Link %}
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/Register.css' %}"/>
+
+    <link rel="stylesheet" href="{% static 'frontend/static/css/main.css' %}">
+{% endblock %}
+
+{% block Content %}
+    <body class="bg">
+
+
+    <div class="container-fluid container-admin" style="position:relative ;">
+
+
+        <!-- START MAIN -->
+        <main class="main p-3">
+            <!-- START logo register-->
+            <section class="logo">
+                <img src="{% static 'frontend/images/logo.png' %}">
+            </section>
+
+
+            <div class="forms">
+                <form class="form form-signup" method="post" action="{% url 'account:register' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    <div class="main-form">
+                        <div>
+                            <div class="group-form ">
+                                <input type="tel" id="phonenumber-signUp" name="phonenumber">
+                                <label for="name-signUp">شماره همراه</label>
+                            </div>
+                            <small> </small>
+                        </div>
+                    <div class="btn-koli">
+                        <button type="submit" class="btn-submit">ثبت </button>
+                        <div class="d-flex justify-content-center align-items-center py-3 form-text-3 ">
+                            <a href="{% url 'account:login' %}?next={{ request.GET.next }}" class="col-12 text-center mx-auto d-block" style="text-decoration:none">ورود</a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    </body>
+{% endblock %}
+
+{% block Script %}
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+
+    <!-- PERSIAN TOOLS PACKAGE -->
+    <script
+            src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js"></script>
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+    <script src="{% static 'frontend/js/Services.js' %}" type="module"></script>
+    <script src="{% static 'frontend/js/Register.js' %}" type="module"></script>
+    <script>
+
+    </script>
+{% endblock %}

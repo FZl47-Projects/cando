@@ -185,6 +185,7 @@ USER_ROLES = (
 )
 
 
+
 TRANSPORTATION_CONFIG = {
     'fee': 25_000,
     'free_if_price_more_than': 300_000,
@@ -200,3 +201,8 @@ ZP_API_STARTPAY = f"https://{'sandbox' if SANDBOX else 'www'}.zarinpal.com/pg/St
 ZP_DESCRIPTION = """
     خرید از شیرینی سرای کندو
 """
+
+REDIS_CONFIG = {
+    'HOST': 'localhost',
+    'PORT': '6379'
+}
