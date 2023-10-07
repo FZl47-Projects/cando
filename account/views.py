@@ -72,6 +72,10 @@ class Register(View):
             password=data.get('password')
         )
         login(request, user)
+        code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
+        print(code)
+        send_sms('confirmation_code', user.phonenumber, code=code)
+        set_value_expire('confirmation_code{user.phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
 
         try:
             return redirect(data.get('next'))
@@ -89,10 +93,6 @@ class SignUpConfirmationCode(View):
     def post(self, request):
         post = request.POST
         user = request.user
-        code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
-        print(code)
-        set_value_expire('confirmation_code{user.phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
-        send_sms('confirmation_code', user.phonenumber, code=code)
         entry_code = request.POST.get('confirmation_code')
         code = get_value('confirmation_code{user.phonenumber}')
         if entry_code != code:
@@ -113,7 +113,7 @@ class GetPhoneNumber(View):
         phonenumber = request.POST.get('phonenumber', None)
         set_value_expire('{phonenumber}', phonenumber, RESET_PASSWORD_CONFIG['TIMEOUT'])
         code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
-        #print(code)
+        print(code)
         send_sms('confirmation_code', phonenumber, code=code)
         set_value_expire('confirmation_code{phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
         return redirect('account:reset_password')
@@ -134,6 +134,7 @@ class ResetPasswordConfirmationCode(View):
         if entry_code != code:
             messages.error(request, 'کد وارد شده صحیح نمی باشد')
             return redirect('account:reset_password')
+        remove_key('confirmation_code{phonenumber}')
         return redirect('account:change_password')
 
 
