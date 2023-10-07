@@ -153,6 +153,7 @@ class ResetPassword(View):
         phonenumber= get_value('{phonenumber}')
         user= models.User.objects.get(phonenumber=phonenumber)
         user.set_password(new_password)
+        user.save()
         return redirect('account:login')
 
 
