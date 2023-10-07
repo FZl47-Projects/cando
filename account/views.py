@@ -76,6 +76,7 @@ class Register(View):
         print(code)
         send_sms('confirmation_code', user.phonenumber, code=code)
         set_value_expire('confirmation_code{user.phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
+        
 
         try:
             return redirect(data.get('next'))
@@ -127,9 +128,9 @@ class ResetPasswordConfirmationCode(View):
 
     def post(self, request):
         phonenumber= get_value('{phonenumber}')
-        print(phonenumber)
+        #print(phonenumber)
         entry_code = request.POST.get('reset_confirmation_code')
-        print(entry_code)
+        #print(entry_code)
         code = get_value('confirmation_code{phonenumber}')
         if entry_code != code:
             messages.error(request, 'کد وارد شده صحیح نمی باشد')
@@ -150,10 +151,8 @@ class ResetPassword(View):
             return render(request, self.template_name)
         new_password= data.get('new_password', None)
         phonenumber= get_value('{phonenumber}')
-        print(phonenumber)
         user= models.User.objects.get(phonenumber=phonenumber)
         user.set_password(new_password)
-        user.save()
         return redirect('account:login')
 
 
