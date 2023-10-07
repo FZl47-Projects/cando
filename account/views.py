@@ -145,11 +145,11 @@ class ResetPassword(View):
     def get(self, request):
         return render(request, self.template_name)
     def post(self, request):
-        data = request.POST
-        f = forms.ResetPasswordForm(data)
-        if form_validate_err(request, f) is False:
-            return render(request, self.template_name)
-        new_password= data.get('new_password', None)
+        new_password= request.POST.get('new_password')
+        new_password2= request.POST.get('new_password2')
+        if new_password!=new_password2:
+            messages.error(request, 'رمز های وارد شده یکسان نمی باشند')
+            return redirect('account:change_password')
         phonenumber= get_value('{phonenumber}')
         user= models.User.objects.get(phonenumber=phonenumber)
         user.set_password(new_password)
