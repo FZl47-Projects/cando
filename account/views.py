@@ -79,7 +79,7 @@ class Register(View):
             pass
         return redirect('account:confirmation_code')
         
-
+#confirm phone nmuber for signup
 class SignUpConfirmationCode(View):
     template_name= 'account/confirmation.html'
     def get(self, request):
@@ -104,7 +104,7 @@ class SignUpConfirmationCode(View):
         return redirect('public:index')
         
         
-
+#get phone number to sned reset password code
 class GetPhoneNumber(View):
     template_name='account/reset_password.html'
     def get(self, request):
@@ -112,24 +112,24 @@ class GetPhoneNumber(View):
     def post(self, request):
         phonenumber = request.POST.get('phonenumber', None)
         set_value_expire('{phonenumber}', phonenumber, RESET_PASSWORD_CONFIG['TIMEOUT'])
+        code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
+        #print(code)
+        send_sms('confirmation_code', phonenumber, code=code)
+        set_value_expire('confirmation_code{phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
         return redirect('account:reset_password')
 
 
-
+#send and check code
 class ResetPasswordConfirmationCode(View):
     template_name= 'account/reset_password_confirm.html'
     def get(self, request):
         return render(request, self.template_name)
 
-
     def post(self, request):
         phonenumber= get_value('{phonenumber}')
-        #print(phonenumber)
-        code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
-        #print(code)
-        set_value_expire('confirmation_code{phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
-        send_sms('confirmation_code', phonenumber, code=code)
+        print(phonenumber)
         entry_code = request.POST.get('reset_confirmation_code')
+        print(entry_code)
         code = get_value('confirmation_code{phonenumber}')
         if entry_code != code:
             messages.error(request, 'کد وارد شده صحیح نمی باشد')
@@ -137,7 +137,7 @@ class ResetPasswordConfirmationCode(View):
         return redirect('account:change_password')
 
 
-
+#change password
 class ResetPassword(View):
     template_name= 'account/change_password.html'
     def get(self, request):
@@ -149,6 +149,7 @@ class ResetPassword(View):
             return render(request, self.template_name)
         new_password= data.get('new_password', None)
         phonenumber= get_value('{phonenumber}')
+        print(phonenumber)
         user= models.User.objects.get(phonenumber=phonenumber)
         user.set_password(new_password)
         user.save()
