@@ -16,6 +16,7 @@ from product.models import (
 from . import forms, models
 from config.settings import RESET_PASSWORD_CONFIG
 from requests import request
+from core.redis import set_value_expire, remove_key, get_value
 
 
 class Login(View):
@@ -88,36 +89,70 @@ class ConfirmationCode(View):
     def post(self, request):
         post = request.POST
         user = request.user
-        code=random_int(size=RESET_PASSWORD_CONFIG.CODE_LENGTH)
-        redis.set_value('confirmation_code{user.phonenumber}',code)
+        code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
+        print(code)
+        set_value_expire('confirmation_code{user.phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
         send_sms('confirmation_code', user.phonenumber, code=code)
         entry_code = request.POST.get('confirmation_code')
         code = get_value('confirmation_code{user.phonenumber}')
-        if entry_code == code:
-            user.is_phonenumber_confirmed = True
-            messages.success(request, 'حساب شما با موفقیت ساخته شد')
-            send_sms('welcome', user.phonenumber, name=user.name)
-        messages.success(request, 'کد وارد شده صحیح نمی باشد')
+        if entry_code != code:
+            messages.error(request, 'کد وارد شده صحیح نمی باشد')
+            return redirect('account:confirmation_code')
+        user.is_phonenumber_confirmed = True
+        messages.success(request, 'حساب شما با موفقیت ساخته شد')
+        send_sms('welcome', user.phonenumber, name=user.name)
         return redirect('public:index')
         
+        
+
+class GetPhoneNumber(View):
+    template_name='account/reset_password.html'
+    def get(self, request):
+        return render(request, self.template_name)
+    def post(self, request):
+        phonenumber = request.POST.get('phonenumber', None)
+        set_value_expire('{phonenumber}', phonenumber, RESET_PASSWORD_CONFIG['TIMEOUT'])
+        return redirect('account:reset_password')
+
+
+
 class ResetPassword(View):
-    template_name= 'account/reset_password.html'
+    template_name= 'account/reset_password_confirm.html'
     def get(self, request):
         return render(request, self.template_name)
 
 
     def post(self, request):
-        post = request.POST
-        user = request.user
-        code=random_int(size=RESET_PASSWORD_CONFIG.CODE_LENGTH)
-        redis.set_value('reset_password{user.phonenumber}',code)
-        send_sms('reset_password', user.phonenumber, code=code)
-        entry_code = request.POST.get('reset_password')
-        code = get_value('reset_password{user.phonenumber}')
-        if entry_code == code:
-            return redirect('account:change_password')
-        messages.success(request, 'کد وارد شده صحیح نمی باشد')
-        return redirect('account:reset_password')
+        phonenumber= get_value('{phonenumber}')
+        #print(phonenumber)
+        code=random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
+        #print(code)
+        set_value_expire('confirmation_code{phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
+        send_sms('confirmation_code', phonenumber, code=code)
+        entry_code = request.POST.get('reset_confirmation_code')
+        code = get_value('confirmation_code{phonenumber}')
+        if entry_code != code:
+            messages.error(request, 'کد وارد شده صحیح نمی باشد')
+            return redirect('account:get_phonenumber')
+        return redirect('account:change_password')
+
+
+
+class ChangePassword(View):
+    template_name= 'account/change_password.html'
+    def get(self, request):
+        return render(request, self.template_name)
+    def post(self, request):
+        phonenumber= get_value('{phonenumber}')
+        user= models.User.objects.get(phonenumber=phonenumber)
+        new_password= request.POST.get('new_password', None)
+        new_password2= request.POST.get('new_password2', None)
+        if new_password!= new_password2:
+            messages.error(request, 'رمزهای وارد شده یکسان نمی باشند')
+            return redirect('account:get_phonenumber')
+        user.set_password(new_password)
+        user.save()
+        return redirect('account:login')
 
 
 

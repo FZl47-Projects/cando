@@ -32,23 +32,19 @@
 
 
             <div class="forms">
-                <form class="form form-signup" method="post" action="{% url 'account:register' %}">
+                <form class="form form-signup" method="post" action="{% url 'account:confirmation_code' %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.GET.next }}">
                     <div class="main-form">
                         <div>
                             <div class="group-form ">
-                                <input type="tel" id="phonenumber-signUp" name="phonenumber">
-                                <label for="name-signUp">شماره همراه</label>
+                                <input type="text" id="confirmation_code_signUp" name="confirmation_code">
+                                <label for="name-signUp">کد تایید</label>
                             </div>
                             <small> </small>
                         </div>
                     <div class="btn-koli">
                         <button type="submit" class="btn-submit">ثبت </button>
-                        <div class="d-flex justify-content-center align-items-center py-3 form-text-3 ">
-                            <a href="{% url 'account:login' %}?next={{ request.GET.next }}" class="col-12 text-center mx-auto d-block" style="text-decoration:none">ورود</a>
-                        </div>
-
                     </div>
                 </form>
             </div>

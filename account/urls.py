@@ -16,6 +16,10 @@ urlpatterns = [
     
     path('reset_password',views.ResetPassword.as_view(),name='reset_password'),
 
+    path('get_phonenumber',views.GetPhoneNumber.as_view(),name='get_phonenumber'),
+
+    path('change_password',views.ChangePassword.as_view(),name='change_password'),
+    
     # Dashboard's
     jls_extract_var('d/admin',views.DashboardAdmin.as_view(),name='dashboard_admin'),
 

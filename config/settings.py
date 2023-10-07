@@ -206,3 +206,4 @@ REDIS_CONFIG = {
     'HOST': 'localhost',
     'PORT': '6379'
 }
+
