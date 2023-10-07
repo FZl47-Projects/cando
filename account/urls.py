@@ -12,13 +12,13 @@ urlpatterns = [
 
     path('register',views.Register.as_view(),name='register'),
 
-    path('confirmation_code',views.ConfirmationCode.as_view(),name='confirmation_code'),
+    path('confirmation_code',views.SignUpConfirmationCode.as_view(),name='confirmation_code'),
     
-    path('reset_password',views.ResetPassword.as_view(),name='reset_password'),
+    path('reset_password',views.ResetPasswordConfirmationCode.as_view(),name='reset_password'),
 
     path('get_phonenumber',views.GetPhoneNumber.as_view(),name='get_phonenumber'),
 
-    path('change_password',views.ChangePassword.as_view(),name='change_password'),
+    path('change_password',views.ResetPassword.as_view(),name='change_password'),
     
     # Dashboard's
     jls_extract_var('d/admin',views.DashboardAdmin.as_view(),name='dashboard_admin'),

@@ -80,7 +80,7 @@ class Register(View):
         return redirect('account:confirmation_code')
         
 
-class ConfirmationCode(View):
+class SignUpConfirmationCode(View):
     template_name= 'account/confirmation.html'
     def get(self, request):
         return render(request, self.template_name)
@@ -116,7 +116,7 @@ class GetPhoneNumber(View):
 
 
 
-class ResetPassword(View):
+class ResetPasswordConfirmationCode(View):
     template_name= 'account/reset_password_confirm.html'
     def get(self, request):
         return render(request, self.template_name)
@@ -133,23 +133,23 @@ class ResetPassword(View):
         code = get_value('confirmation_code{phonenumber}')
         if entry_code != code:
             messages.error(request, 'کد وارد شده صحیح نمی باشد')
-            return redirect('account:get_phonenumber')
+            return redirect('account:reset_password')
         return redirect('account:change_password')
 
 
 
-class ChangePassword(View):
+class ResetPassword(View):
     template_name= 'account/change_password.html'
     def get(self, request):
         return render(request, self.template_name)
     def post(self, request):
+        data = request.POST
+        f = forms.ResetPasswordForm(data)
+        if form_validate_err(request, f) is False:
+            return render(request, self.template_name)
+        new_password= data.get('new_password', None)
         phonenumber= get_value('{phonenumber}')
         user= models.User.objects.get(phonenumber=phonenumber)
-        new_password= request.POST.get('new_password', None)
-        new_password2= request.POST.get('new_password2', None)
-        if new_password!= new_password2:
-            messages.error(request, 'رمزهای وارد شده یکسان نمی باشند')
-            return redirect('account:get_phonenumber')
         user.set_password(new_password)
         user.save()
         return redirect('account:login')
