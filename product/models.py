@@ -54,7 +54,7 @@ class Product(BaseModel):
 
     def get_rate(self):
         avg = self.get_comments().aggregate(rate_avg=models.Avg('rate'))['rate_avg'] or 0
-        avg = round(avg,1)
+        avg = round(avg, 1)
         return avg
 
 
@@ -80,7 +80,7 @@ class FactorCakeImage(BaseModel):
 
     def __str__(self):
         return self.user_name
-    
+
     def get_images(self):
         return self.images.all()
 
@@ -255,11 +255,11 @@ class Order(BaseModel):
 
 class CustomOrderProduct(BaseModel):
     STATUS_OPTIONS = (
-        ('accepted','تایید شد'),
-        ('pending','در حال بررسی'),
-        ('rejected','رد شد')
+        ('accepted', 'تایید شد'),
+        ('pending', 'در حال بررسی'),
+        ('rejected', 'رد شد')
     )
-    status = models.CharField(max_length=15,choices=STATUS_OPTIONS,default='pending')
+    status = models.CharField(max_length=15, choices=STATUS_OPTIONS, default='pending')
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
     detail = JSONField()
     description = models.TextField(null=True)
@@ -286,7 +286,7 @@ class CustomOrderProduct(BaseModel):
         return {
             'product': 'سفارش دلخواه',
             'product_price': self.price,
-            'product_image': self.get_image_cover(),
+            'product_image': self.get_image_cover().get_image_url(),
             'product_category': 'دسته بندی سفارش دلخواه',
             'count': 1
         }

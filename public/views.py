@@ -6,7 +6,10 @@ from instruction.models import Instruction, Article
 
 class Success(View):
     def get(self, request):
-        return HttpResponse('عملیات با موفقیت انجام شد')
+        context = {
+            'message': request.GET.get('message', None)
+        }
+        return render(request, 'public/success.html',context)
 
 
 class Error(View):
@@ -24,15 +27,15 @@ class Index(View):
         }
         return render(request, 'public/home.html', context)
 
+
 class PublicInstructions(View):
-    template_name = 'instruction\instruction.html'
+    template_name = 'instruction/instruction.html'
+
     def get(self, request):
         articles = Article.objects.all()
         instructions = Instruction.objects.all()
         context = {
-            'instructions':instructions,
-            'articles':articles
+            'instructions': instructions,
+            'articles': articles
         }
         return render(request, self.template_name, context)
-
-        

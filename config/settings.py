@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 HOST_ADDRESS = 'http://app.candoocomplex.com'
-CSRF_TRUSTED_ORIGINS = ['http://app.candoocomplex.com','https://app.candoocomplex.com']
+CSRF_TRUSTED_ORIGINS = ['http://app.candoocomplex.com', 'https://app.candoocomplex.com']
 
 # Application definition
 
@@ -132,7 +132,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = '/var/www/html/cando/static'
 
 MEDIA_URL = 'media/'
-#MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_ROOT = '/var/www/html/cando/media'
 
 # Default primary key field type
@@ -184,8 +184,6 @@ USER_ROLES = (
     'user',
 )
 
-
-
 TRANSPORTATION_CONFIG = {
     'fee': 25_000,
     'free_if_price_more_than': 300_000,
@@ -206,4 +204,3 @@ REDIS_CONFIG = {
     'HOST': 'localhost',
     'PORT': '6379'
 }
-
