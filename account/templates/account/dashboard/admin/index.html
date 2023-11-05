@@ -211,13 +211,13 @@
                     <div class="uplode-image mx-4 my-2">
                         <h4>ویترین</h4>
                     </div>
-                    {% if products.count > 0 %}
+                    {% if showcase_products.count > 0 %}
                         <div class="m-4">
                             <label for="">
                                 محصولات مورد نظر را انتخاب کنید
                             </label>
                             <select class="form-control form-select p-2" multiple name="products" id="">
-                                {% for product in products %}
+                                {% for product in showcase_products %}
                                     <option value="{{ product.id }}"
                                             {% if product in showcase.get_products %}selected{% endif %}>{{ product.name }}</option>
                                 {% endfor %}

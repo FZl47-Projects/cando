@@ -364,8 +364,7 @@ class FactorCakeImageSubmit(LoginRequiredMixin, View):
             return redirect(referer_url or '/error')
         factor_cake = f.save()
         factor_cake.images.add(*image_objects)
-        messages.success(request, 'عکس طرح کیک با موفقیت ثبت شد')
-        return redirect(referer_url or '/success')
+        return redirect(f"{reverse('public:success')}?message=عکس طرح کیک با موفقیت ثبت شد")
 
 
 class ProductCreate(View):
@@ -457,7 +456,6 @@ class ProductFavoriteAdd(LoginRequiredMixin, View):
         user = request.user
         favorite_list = user.get_or_create_product_favorite_list()
         favorite_list.products.add(product_obj)
-        messages.success(request, 'محصول با موفقیت از لیست مورد علاقه های شما حذف شد')
         messages.success(request, 'محصول با موفقیت به لیست مورد علاقه های شما اضافه شد')
         return redirect(referer_url or '/success')
 
