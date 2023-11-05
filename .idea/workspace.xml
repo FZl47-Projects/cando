@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="84594771-052b-41e5-9130-cd30acbbdf23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/dashboard/admin/factor-cake-image.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/dashboard/admin/factor-cake-image.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/account/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/dashboard/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/public/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +146,7 @@
       <workItem from="1698691562924" duration="684000" />
       <workItem from="1698715759976" duration="6328000" />
       <workItem from="1698970078982" duration="284000" />
-      <workItem from="1699147789405" duration="1886000" />
+      <workItem from="1699147789405" duration="3457000" />
     </task>
     <servers />
   </component>

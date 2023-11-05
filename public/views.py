@@ -22,7 +22,7 @@ class Index(View):
     def get(self, request):
         context = {
             'showcase': ShowCase.objects.first(),
-            'categories': Category.objects.all(),
+            'categories': Category.objects.all().exclude(type_name='showcase'),
             'products': Product.objects.all()[:10]
         }
         return render(request, 'public/home.html', context)
