@@ -308,7 +308,8 @@ class Factor(BaseModel):
     address = models.ForeignKey('transportation.Address', null=True, on_delete=models.SET_NULL)
     delivery_type = models.CharField(choices=DELIVERY_TYPE_OPTIONS, max_length=10)
     process_to_payment = models.BooleanField(default=False)  # True if processing to payment(redirected to bank portal)
-    ...
+    created_time = models.DateTimeField(auto_now_add=True)
+    modified_time = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = '-id',
@@ -321,6 +322,13 @@ class Factor(BaseModel):
 
     def get_price_rial(self):
         return self.price * 10
+    
+    @classmethod
+    def create(cls, factor, user):
+        if factor.process_to_payment:
+            return cls.objects.create(
+                user=user, factor=factor, price=factor.price
+            )
 
 
 class FactorPayment(BaseModel):
@@ -378,3 +386,4 @@ class Comment(BaseModel):
 
     def __str__(self):
         return f'{self.title[:20]} - {self.product}'
+

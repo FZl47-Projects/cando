@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'public',
     'product',
     'transportation',
-    'instruction'
+    'instruction',
+    'finance'
 ]
 
 MIDDLEWARE = [
@@ -207,3 +208,8 @@ REDIS_CONFIG = {
     'PORT': '6379'
 }
 
+ZARINPAL = {
+    'gateway_request_url': 'https://www.zarinpal.com/sevices/WebGate/wsdl',
+    'gateway_callback_url': 'https://www.127.0.0.1:8000/finance/verify',
+    'merchant_id': 00
+}
