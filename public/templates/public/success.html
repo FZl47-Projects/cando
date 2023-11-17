@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>موفق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vazir-font/28.0.0/font-face.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+
+        * {
+            font-family: Vazir;
+        }
+
+        body {
+            background: #091e2f;
+        }
+
+        #card {
+            position: relative;
+            top: 120px;
+            display: block;
+            margin: auto;
+            text-align: center;
+            font-family: "Source Sans Pro", sans-serif;
+        }
+
+        #upper-side {
+            padding: 2em;
+            background-color: #8BC34A;
+            display: block;
+            color: #fff;
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+
+        #checkmark {
+            font-weight: lighter;
+            fill: #fff;
+            margin: -3.5em auto auto 20px;
+        }
+
+        #status {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.3em;
+            margin-top: -0.2em;
+            margin-bottom: 0;
+        }
+
+        #lower-side {
+            padding: 2em 2em 5em 2em;
+            background: #fff;
+            display: block;
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        #message {
+            color: #757575;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #8bc34a;
+            color: #fff;
+            margin: auto;
+            margin-top: 10px;
+            padding: 0.8em 3em;
+            -webkit-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+            -moz-box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+            box-shadow: 0px 15px 30px rgba(50, 50, 50, 0.21);
+            border-radius: 25px;
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+
+        .btn:hover {
+            background: #03f29b;
+            color: #fff;
+            -webkit-box-shadow: 0px 15px 30px rgba(60, 60, 60, 0.4);
+            -moz-box-shadow: 0px 15px 30px rgba(60, 60, 60, 0.4);
+            box-shadow: 0px 15px 30px rgba(60, 60, 60, 0.4);
+            -webkit-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+        }
+
+        .checkmark{
+            font-size: 500%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="card" class="animated fadeIn col-11 col-md-5 col-lg-4">
+    <div id="upper-side">
+        <i class="checkmark fa fa-check-circle"></i>
+        <h3 id="status">موفق</h3>
+    </div>
+    <div id="lower-side">
+        <p id="message">
+            {{ message|default:'عملیات با موفقیت انجام شد' }}
+        </p>
+        <a href="{% url 'account:dashboard_user' %}" class="btn">داشبورد</a>
+        <a href="{% url 'public:index' %}" class="btn">خانه</a>
+    </div>
+</div>
+</body>
+</html>

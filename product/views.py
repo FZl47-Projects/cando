@@ -2,6 +2,7 @@ import json, requests
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404, reverse, Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 from django.views.generic import View
 from django.conf import settings
 from core.models import Image
@@ -9,6 +10,8 @@ from core.utils import form_validate_err, url_with_host
 from core.notify import send_sms
 from account.auth.decorators import admin_role_required_cbv
 from . import models, forms
+
+User = get_user_model()
 
 
 class CustomOrderProduct(LoginRequiredMixin, View):
@@ -47,8 +50,12 @@ class CustomOrderProduct(LoginRequiredMixin, View):
             description=description
         )
         custom_ord_product_obj.images.add(*image_objects)
-        messages.success(request, 'سفارش شما با موفقیت ثبت شد')
-        return redirect('public:index')
+
+        # send notif
+        super_users = User.super_user.all()
+        for user in super_users:
+            send_sms('new_custom_order_registered', user.get_phonenumber())
+        return redirect(f"{reverse('public:success')}?message=سفارش شما با موفقیت ثبت شد")
 
 
 class CustomOrderProductFactorCreate(View):
@@ -63,7 +70,7 @@ class CustomOrderProductFactorCreate(View):
         data['cart'] = cart
         data['is_checked'] = True
         data['status'] = 'accepted'
-        f = forms.CustomOrderProductAccept(data,instance=order_obj)
+        f = forms.CustomOrderProductAccept(data, instance=order_obj)
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
         f.save()
@@ -72,7 +79,6 @@ class CustomOrderProductFactorCreate(View):
                  cart_link=url_with_host(reverse('product:cart')))
         messages.success(request, 'تخمین قیمت سفارش با موفقیت ثبت شد')
         return redirect(referer_url or '/success')
-
 
 
 class CustomOrderProductReject(View):
@@ -84,13 +90,13 @@ class CustomOrderProductReject(View):
         # set values
         data['status'] = 'rejected'
         order_obj = get_object_or_404(models.CustomOrderProduct, id=custom_order_id)
-        f = forms.CustomOrderProductReject(data,request.FILES, instance=order_obj)
+        f = forms.CustomOrderProductReject(data, request.FILES, instance=order_obj)
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
         f.save()
         user = order_obj.user
         # send notif
-        send_sms('custom_order_rejected', user.get_phonenumber(),user_name=user.get_full_name())
+        send_sms('custom_order_rejected', user.get_phonenumber(), user_name=user.get_full_name())
         messages.success(request, ' سفارش با موفقیت رد شد')
         return redirect(referer_url or '/success')
 
@@ -352,14 +358,13 @@ class FactorCakeImageSubmit(LoginRequiredMixin, View):
             if image:
                 img_obj = Image.objects.create(image=image)
                 image_objects.append(img_obj)
-     
+
         f = forms.FactorCakeImageForm(data, request.FILES)
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
         factor_cake = f.save()
         factor_cake.images.add(*image_objects)
-        messages.success(request, 'عکس طرح کیک با موفقیت ثبت شد')
-        return redirect(referer_url or '/success')
+        return redirect(f"{reverse('public:success')}?message=عکس طرح کیک با موفقیت ثبت شد")
 
 
 class ProductCreate(View):
@@ -451,7 +456,6 @@ class ProductFavoriteAdd(LoginRequiredMixin, View):
         user = request.user
         favorite_list = user.get_or_create_product_favorite_list()
         favorite_list.products.add(product_obj)
-        messages.success(request, 'محصول با موفقیت از لیست مورد علاقه های شما حذف شد')
         messages.success(request, 'محصول با موفقیت به لیست مورد علاقه های شما اضافه شد')
         return redirect(referer_url or '/success')
 

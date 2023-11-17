@@ -172,13 +172,14 @@
                                     </div>
                                    <div class="text-center text-white">
                                        <h6>تخمین قیمت</h6>
-                                        <input type="number" name="price" required class="form-control" placeholder="قیمت">
+                                        <input type="number" name="price" required class="form-control" placeholder="قیمت" input-amount-spread spread-label="spread-price-el-{{ forloop.counter }}">
+                                       <p class="text-left m-1" id="spread-price-el-{{ forloop.counter }}"></p>
                                    </div>
                                 </div>
                              
                                 <div class="col-11">
                                     <h6 class="text-white">  توضیحات ادمین </h6>
-                                        <textarea required name="note" class="form-control col-12"></textarea>
+                                        <textarea name="note" class="form-control col-12"></textarea>
                                 </div>
                                 {% if order.status == 'pending' %}
                                 <div class="btn btn-danger my-1">

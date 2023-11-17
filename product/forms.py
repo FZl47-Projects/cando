@@ -53,16 +53,20 @@ class CartStatusForm(forms.ModelForm):
 class CommentAddForm(forms.ModelForm):
     class Meta:
         model = models.Comment
-        fields = ('product', 'user', 'title', 'description','rate')
+        fields = ('product', 'user', 'title', 'description', 'rate')
+
 
 class CustomOrderProductAccept(forms.ModelForm):
+    note = forms.CharField(max_length=1000, required=False)
 
     class Meta:
         model = models.CustomOrderProduct
-        fields = ('note','price','is_checked','cart','status')
+        fields = ('note', 'price', 'is_checked', 'cart', 'status')
+
 
 class CustomOrderProductReject(forms.ModelForm):
-    note = forms.CharField(max_length=1000,required=False)
+    note = forms.CharField(max_length=1000, required=False)
+
     class Meta:
         model = models.CustomOrderProduct
-        fields = ('note','status')
+        fields = ('note', 'status')
