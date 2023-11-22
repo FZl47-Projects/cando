@@ -11,6 +11,7 @@ urlpatterns = [
     path('t/',include('transportation.urls',namespace='transportation')),
     path('admin/', admin.site.urls),
     path('i/',include('instruction.urls',namespace='instruction')),
+    path('f/',include('finance.urls',namespace='finance')),
 ]
 
 if settings.DEBUG:

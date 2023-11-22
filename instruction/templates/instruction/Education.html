@@ -18,13 +18,16 @@
      <div class="content-modal" id="modal-education-pakage">
         <div class="inner-modal">
           <div class="content height-size">
-            <form class="px-4 pt-2" method="post" id="instruction">
+            <form class="px-4 pt-2" method="post" id="instruction" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="uplode-image mx-4 my-2">
                 <span>
+                  عکس
                   <img src="/assets/frontend/images/plus.png">
                 </span>
-                <p class="mb-0">عکس آموزش را<br> اضافه کنید</p>
+                <div class="col-12 px-4 py-2 ">
+                  <input class="form-control  " type="file" name="image" id="topic-edu" aria-label=".form-control-lg example">
+                </div>
               </div>
             <div class="col-12 px-4 py-2 ">
               <input class="form-control  " type="text" name="amozesh" id="topic-edu" placeholder="موضوع آموزش" aria-label=".form-control-lg example">

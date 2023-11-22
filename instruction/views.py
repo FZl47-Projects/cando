@@ -23,7 +23,8 @@ class Instructions (View):
             time = post.get('zaman', False)
             difficulty = post.get('brand', False)
             recipe = post.get('recipe')
-            instruction = Instruction(title=title, ingredients=ingredients, time=time, difficulty=difficulty, recipe=recipe)
+            img = request.FILES.get('image',False)
+            instruction = Instruction(title=title, ingredients=ingredients, time=time, difficulty=difficulty, recipe=recipe, img=img)
             instruction.save()
 
         elif 'add-article' in post:

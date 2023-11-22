@@ -17,6 +17,7 @@ from . import forms, models
 from config.settings import RESET_PASSWORD_CONFIG
 from requests import request
 from core.redis import set_value_expire, remove_key, get_value
+from django.http import Http404
 
 
 class Login(View):
@@ -117,6 +118,10 @@ class GetPhoneNumber(View):
 
     def post(self, request):
         phonenumber = request.POST.get('phonenumber', None)
+        try:
+            user = models.User.objects.get(phonenumber=phonenumber)
+        except models.User.DoesNotExist:
+            raise Http404("Given phonenumer not found....")
         set_value_expire('{phonenumber}', phonenumber, RESET_PASSWORD_CONFIG['TIMEOUT'])
         code = random_int(size=RESET_PASSWORD_CONFIG['CODE_LENGTH'])
         print(code)
