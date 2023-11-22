@@ -64,7 +64,9 @@ class Register(View):
         data = request.POST
         f = forms.RegisterUserFullForm(data)
         if form_validate_err(request, f) is False:
-            return render(request, self.template_name)
+            referer_url = request.META.get('HTTP_REFERER')
+            return redirect(referer_url or '/')
+            # return render(request, self.template_name)
         data = f.cleaned_data
         user = models.User.objects.create_user(
             name=data.get('name'),
@@ -78,10 +80,11 @@ class Register(View):
         set_value_expire('confirmation_code{user.phonenumber}', code, RESET_PASSWORD_CONFIG['TIMEOUT'])
 
         try:
-            return redirect(data.get('next'))
+            return redirect(request.POST.get('next'))
         except:
             pass
-        return redirect('account:confirmation_code')
+        # return redirect('account:confirmation_code')
+        return redirect('public:index')
 
 
 # confirm phone nmuber for signup

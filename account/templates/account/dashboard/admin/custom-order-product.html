@@ -42,158 +42,184 @@
                     <!-- start -->
                     {% for order in orders %}
                         <div class="col-12 col-md-6 px-1 py-1">
-                            <form action="{% url 'product:custom_order_factor_create' order_id=order.id %}" method="post">
-                            {% csrf_token %}
+                            <form action="{% url 'product:custom_order_factor_create' order_id=order.id %}"
+                                  method="post">
+                                {% csrf_token %}
                                 <div class="price-item ">
-                                <div class="p-3 col-12">
-                                    <div class="col-12 detail">
+                                    <div class="p-3 col-12">
+                                        <div class="col-12 detail">
 
-                                        <div class="col-12 detail-item p-2">
-                                            <label class=" col-4">تاریخ و زمان سفارش:</label>
-                                            <input class="col-8 text-left" type="text" name="ِDate" id="date-item"
-                                                   placeholder="شنبه 23 آبان-9 تا 12 صبح" value="{{ order.get_created_at_timepast }}" title="{{ order.created_at }}" disabled>
+                                            <div class="col-12 detail-item p-2">
+                                                <label class=" col-4">تاریخ و زمان سفارش:</label>
+                                                <input class="col-8 text-left" type="text" name="ِDate" id="date-item"
+                                                       placeholder="شنبه 23 آبان-9 تا 12 صبح"
+                                                       value="{{ order.get_created_at_timepast }}"
+                                                       title="{{ order.created_at }}" disabled>
+                                            </div>
+                                            <div class="col-12 detail-item p-2">
+                                                <label class=" col-4">کاربر:</label>
+                                                <input class="col-8 text-left" type="text" name="Delivery"
+                                                       id="Delivery-information"
+                                                       placeholder="نام ونام خانوادگی 09122254545"
+                                                       value="{{ order.user.name }}-{{ order.user.get_raw_phonenumber }}"
+                                                       disabled>
+                                            </div>
+                                            <div class="col-12 detail-item p-2">
+                                                <label class=" col-4">وضعیت</label>
+                                                <input class="col-8 text-left" type="text" name="Delivery"
+                                                       id="Delivery-information"
+                                                       value="{{ order.get_status_display }}" disabled>
+                                            </div>
                                         </div>
-                                        <div class="col-12 detail-item p-2">
-                                            <label class=" col-4">کاربر:</label>
-                                            <input class="col-8 text-left" type="text" name="Delivery" id="Delivery-information"
-                                                   placeholder="نام ونام خانوادگی 09122254545" value="{{ order.user.name }}-{{ order.user.get_raw_phonenumber }}" disabled>
-                                        </div>
-                                        <div class="col-12 detail-item p-2">
-                                            <label class=" col-4">وضعیت</label>
-                                            <input class="col-8 text-left" type="text" name="Delivery" id="Delivery-information"
-                                                   value="{{ order.get_status_display }}" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="moshakhasat py-1">
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="moshakhasat-item ">
-                                                    <div class="col-6 right p-1">
-                                                        <span>کیلو گرم</span>
-                                                    </div>
-                                                    <div class="col-6 left p-1">
-                                                        <input type="text" name="value-weight" id="weight"
-                                                               placeholder="چهار" value="{{ order.detail.weight }}" disabled>
+                                        <div class="col-12">
+                                            <div class="moshakhasat py-1">
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="moshakhasat-item ">
+                                                        <div class="col-6 right p-1">
+                                                            <span>وزن</span>
+                                                        </div>
+                                                        <div class="col-6 left p-1">
+                                                            <input type="text" name="value-weight" id="weight"
+                                                                   placeholder="چهار" value="{{ order.detail.weight }}"
+                                                                   disabled>
+                                                            <span class="font-60">کیلوگرم</span>
+                                                        </div>
 
                                                     </div>
 
                                                 </div>
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="moshakhasat-item ">
+                                                        <div class="col-6 right p-1">
+                                                            <span>اسفنج</span>
 
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="moshakhasat-item ">
-                                                    <div class="col-6 right p-1">
-                                                        <span>اسفنج</span>
+                                                        </div>
+                                                        <div class="col-6 left p-1">
+                                                            <input type="text" name="value-sponge" id="sponge"
+                                                                   placeholder="وانیل"
+                                                                   value="{{ order.detail.taste_spongy }}" disabled>
+                                                        </div>
 
-                                                    </div>
-                                                    <div class="col-6 left p-1">
-                                                        <input type="text" name="value-sponge" id="sponge"
-                                                               placeholder="وانیل" value="{{ order.detail.taste_spongy }}" disabled>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="moshakhasat-item ">
-                                                    <div class="col-6 right p-1">
-                                                        <span>فیلینگ</span>
-                                                    </div>
-                                                    <div class="col-6 left p-1">
-                                                        <input type="text" name="value-Filling" id="Filling"
-                                                               placeholder="موز و گردو" value="{{ order.detail.filing_cake }}" disabled>
                                                     </div>
 
                                                 </div>
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="moshakhasat-item ">
+                                                        <div class="col-6 right p-1">
+                                                            <span>فیلینگ</span>
+                                                        </div>
+                                                        <div class="col-6 left p-1">
+                                                            <input type="text" name="value-Filling" id="Filling"
+                                                                   placeholder="موز و گردو"
+                                                                   value="{{ order.detail.filing_cake }}" disabled>
+                                                        </div>
 
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="moshakhasat-item ">
-                                                    <div class="col-6 right p-1">
-                                                        <span>خامه</span>
-                                                    </div>
-                                                    <div class="col-6 left p-1">
-                                                        <input type="text" name="value-chocolate" id="chocolate"
-                                                               placeholder="شکلات" value="{{ order.detail.taste_cream }}" disabled>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="moshakhasat-item ">
-                                                    <div class="col-6 right p-1">
-                                                        <span>خامه</span>
-                                                    </div>
-                                                    <div class="col-6 left p-1">
-                                                        <input type="text" name="value-cream" id="cream"
-                                                               placeholder="زیاد" value="{{ order.detail.amount_cream }}" disabled>
                                                     </div>
 
                                                 </div>
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="moshakhasat-item ">
+                                                        <div class="col-6 right p-1">
+                                                            <span>خامه</span>
+                                                        </div>
+                                                        <div class="col-6 left p-1">
+                                                            <input type="text" name="value-chocolate" id="chocolate"
+                                                                   placeholder="شکلات"
+                                                                   value="{{ order.detail.taste_cream }}" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="moshakhasat-item ">
+                                                        <div class="col-6 right p-1">
+                                                            <span>زمان تحویل</span>
+                                                        </div>
+                                                        <div class="col-6 left p-1">
+                                                            <span class="datetime-convert-date d-block">{{ order.detail.date_receive }}</span>
+                                                            <span>{{ order.detail.hour }}:{{ order.detail.minute }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="moshakhasat-item ">
+                                                        <div class="col-6 right p-1">
+                                                            <span>مقدار خامه</span>
+                                                        </div>
+                                                        <div class="col-6 left p-1">
+                                                            <input type="text" name="value-cream" id="cream"
+                                                                   placeholder="زیاد"
+                                                                   value="{{ order.detail.amount_cream }}" disabled>
+                                                        </div>
 
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="download ">
-                                                    <div class="col-12  p-1">
-                                                        <p>{{ order.detail.type_order }}</p>
-                                                        <span class="pe-2">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="download ">
+                                                        <div class="col-12  p-1">
+                                                            <p>{{ order.detail.type_order }}</p>
+                                                            <span class="pe-2">
                                                             {% for image in order.get_images %}
-                                                                <a class="btn btn-warning p-1" href="{{ image.get_image_url }}"> عکس {{ forloop.counter }}</a>
+                                                                <a class="btn btn-warning p-1"
+                                                                   href="{{ image.get_image_url }}"> عکس {{ forloop.counter }}</a>
                                                             {% endfor %}
                                                         </span>
+                                                        </div>
+
                                                     </div>
 
                                                 </div>
-
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="description">
-                                                    <div class="col-12  p-1">
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="description">
+                                                        <div class="col-12  p-1">
                                                         <span class="pe-2">
                                                             {{ order.detail.writing_on_cake }}
                                                         </span>
+                                                        </div>
+
                                                     </div>
 
                                                 </div>
-
-                                            </div>
-                                            <div class="col-6 py-1 px-1">
-                                                <div class="description">
-                                                    <div class="col-12 p-1">
+                                                <div class="col-6 py-1 px-1">
+                                                    <div class="description">
+                                                        <div class="col-12 p-1">
                                                         <span class="pe-2">
                                                             {{ order.detail.description }}
                                                         </span>
-                                                    </div>
+                                                        </div>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="text-center text-white">
+                                            <h6>تخمین قیمت</h6>
+                                            <input type="number" name="price" required class="form-control"
+                                                   placeholder="قیمت" input-amount-spread
+                                                   spread-label="spread-price-el-{{ forloop.counter }}">
+                                            <p class="text-left m-1" id="spread-price-el-{{ forloop.counter }}"></p>
+                                        </div>
                                     </div>
-                                   <div class="text-center text-white">
-                                       <h6>تخمین قیمت</h6>
-                                        <input type="number" name="price" required class="form-control" placeholder="قیمت" input-amount-spread spread-label="spread-price-el-{{ forloop.counter }}">
-                                       <p class="text-left m-1" id="spread-price-el-{{ forloop.counter }}"></p>
-                                   </div>
-                                </div>
-                             
-                                <div class="col-11">
-                                    <h6 class="text-white">  توضیحات ادمین </h6>
-                                        <textarea name="note" class="form-control col-12"></textarea>
-                                </div>
-                                {% if order.status == 'pending' %}
-                                <div class="btn btn-danger my-1">
-                                    <button class="btn text-white col-12 p-2 cart-image-edit" type="button">رد سفارش</button>
-                                </div>
-                                {% endif %}
-                                <div class="col-12 btn btn-bottom text-white">
-                                    <button class="btn text-white col-12 p-2 ">ثبت قیمت و ایجاد فاکتور</button>
 
+                                    <div class="col-11">
+                                        <h6 class="text-white"> توضیحات ادمین </h6>
+                                        <textarea name="note" class="form-control col-12"></textarea>
+                                    </div>
+                                    {% if order.status == 'pending' %}
+                                        <div class="btn btn-danger my-1">
+                                            <button class="btn text-white col-12 p-2 cart-image-edit" type="button">رد
+                                                سفارش
+                                            </button>
+                                        </div>
+                                    {% endif %}
+                                    <div class="col-12 btn btn-bottom text-white">
+                                        <button class="btn text-white col-12 p-2 ">ثبت قیمت و ایجاد فاکتور</button>
+
+                                    </div>
                                 </div>
-                            </div>
                             </form>
                         </div>
-                        {% empty %}
+                    {% empty %}
                         <div class="container-not-found-base">
                             <p>چیزی یافت نشد</p>
                         </div>
@@ -206,32 +232,34 @@
     </div>
 
     {% for order in orders %}
-    <div class="content-modal product-edit-modal " id="product-edit-modal">
-        <div class="inner-modal">
-            <div class="content">
-                <form class="px-4 pt-2" action="{% url 'product:custom_order_reject' custom_order_id=order.id %}" method="post" enctype="multipart/form-data">
-                   {% csrf_token %}
-                    <div class="uplode-image mx-4 my-2">
+        <div class="content-modal product-edit-modal " id="product-edit-modal">
+            <div class="inner-modal">
+                <div class="content">
+                    <form class="px-4 pt-2" action="{% url 'product:custom_order_reject' custom_order_id=order.id %}"
+                          method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="uplode-image mx-4 my-2">
                     <span>
                         <img src="{% static 'frontend/images/plus.png' %}">
                     </span>
-                        <p class="mb-0">
-                             رد سفارش دلخواه
-                        </p>
-                    </div>
-                   
-                    <div class="col-12 px-4 py-2 ">
-                        <textarea class="description-textarea form-control" required="" name="note" cols="50" rows="4" placeholder="توضیحات"></textarea>
-                    </div>
-           
-         
-                    <button class="btn birthday-package mt-2 col-12 position-relative">
-                        <p>رد سفارش</p>
-                    </button>
-                </form>
+                            <p class="mb-0">
+                                رد سفارش دلخواه
+                            </p>
+                        </div>
+
+                        <div class="col-12 px-4 py-2 ">
+                            <textarea class="description-textarea form-control" required="" name="note" cols="50"
+                                      rows="4" placeholder="توضیحات"></textarea>
+                        </div>
+
+
+                        <button class="btn birthday-package mt-2 col-12 position-relative">
+                            <p>رد سفارش</p>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
     {% endfor %}
 
@@ -248,20 +276,20 @@
     <script src="{% static 'frontend/js/admin/Price-request.js' %}" type="module"></script>
     <script>
         let btnseditModal = document.querySelectorAll(".cart-image-edit");
-let modalseditproduct = document.querySelectorAll(".product-edit-modal");
-let overalyModalseditproduct = document.querySelectorAll("#product-edit-modal .inner-modal");
+        let modalseditproduct = document.querySelectorAll(".product-edit-modal");
+        let overalyModalseditproduct = document.querySelectorAll("#product-edit-modal .inner-modal");
 
-btnseditModal.forEach((item, index) => {
-    item.addEventListener("click", () => {
-        modalseditproduct[index].classList.add("active");
-    });
-});
-overalyModalseditproduct.forEach((item, index) => {
-    item.addEventListener("click", (e) => {
-        if (e.target.className === "inner-modal") {
-            modalseditproduct[index].classList.remove("active");
-        }
-    });
-})
+        btnseditModal.forEach((item, index) => {
+            item.addEventListener("click", () => {
+                modalseditproduct[index].classList.add("active");
+            });
+        });
+        overalyModalseditproduct.forEach((item, index) => {
+            item.addEventListener("click", (e) => {
+                if (e.target.className === "inner-modal") {
+                    modalseditproduct[index].classList.remove("active");
+                }
+            });
+        })
     </script>
 {% endblock %}

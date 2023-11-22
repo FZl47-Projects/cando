@@ -17,6 +17,25 @@
 
     <link rel="stylesheet" href="{% static 'frontend/static/css/lib/persian-datepicker.min.css' %}">
     <link rel="stylesheet" href="{% static 'frontend/static/css/main.css' %}">
+
+    <style>
+        input::placeholder {
+            color: #999;
+        }
+
+        textarea::placeholder {
+            color: #999;
+        }
+
+        textarea {
+            color: #fff;
+        }
+
+        select {
+            background: #262626 !important;
+            color: #fff !important;
+        }
+    </style>
 {% endblock %}
 
 {% block Content %}
@@ -165,9 +184,9 @@
                                         انبه و گردو
                                     </div>
                                 </div>
-                            
+
                             </div>
-                            <div >
+                            <div>
                                 <div class="image-taste col-3 p-1 filing-div" id="filing-div">
                                     <div class="img " id="filing-img">
                                         <img src="{% static 'frontend/images/banana.png' %}">
@@ -266,13 +285,11 @@
                             <label>میزان خامه</label>
                             <div class="range-item col-12">
                                 <div class="col-12 select-range">
-                                    <input type="range" id="amount-cream" name="amount_cream" list="amount" step="50">
-                                    <datalist id="amount">
-                                        <option value="0" label="کم">کم</option>
-                                        <option value="50" label="متوسط">متوسط</option>
-                                        <option value="100" label="زیاد">زیاد</option>
-
-                                    </datalist>
+                                    <select name="amount_cream" id="amount-cream" class="form-select" required>
+                                        <option value="کم">کم</option>
+                                        <option value="متوسط">متوسط</option>
+                                        <option value="زیاد">زیاد</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -281,19 +298,18 @@
                             <label>وزن کیک(کیلوگرم)</label>
                             <div class="range-item col-12">
                                 <div class="col-12 select-range">
-                                    <input type="range" id="cake-weight" name="weight" list="wlist" >
-                                    <datalist id="wlist">
-                                        <option value="2" label="2">2</option>
-                                        <option value="3" label="3">3</option>
-                                        <option value="4" label="4">4</option>
-                                        <option value="5" label="5">5</option>
-                                        <option value="6" label="6">6</option>
-                                        <option value="7" label="7">7</option>
-                                        <option value="8" label="8">8</option>
-                                        <option value="9" label="9">9</option>
-                                        <option value="10" label="10">10</option>
-                                        <option value="بیشتر از 10" label="بالای10">بیشتر از 10</option>
-                                    </datalist>
+                                    <select name="weight" id="cake-weight" class="form-select" required>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="بیشتر از 10">بیشتر از 10</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

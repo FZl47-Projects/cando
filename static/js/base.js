@@ -147,6 +147,17 @@ for (let dt_el of all_datetime_convert) {
 }
 
 
+let all_datetime_date_convert = document.querySelectorAll('.datetime-convert-date')
+for (let dt_el of all_datetime_date_convert) {
+    let dt = dt_el.innerHTML
+    dt_el.setAttribute('datetime', dt)
+    let dt_persian = new Date(dt).toLocaleDateString('fa-IR');
+    if (dt_persian != 'Invalid Date') {
+        dt_el.innerHTML = dt_persian
+    }
+}
+
+
 // price elements
 document.querySelectorAll('.price-el').forEach((el) => {
     let p = el.innerText
