@@ -2,172 +2,170 @@
 {% load static %}
 
 {% block Title %}
-سفارشات دلخواه
+    سفارشات دلخواه
 {% endblock %}
 
 
 {% block Link %}
     <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{% static 'frontend/styles/custom-orders.css' %}" />
+    <link rel="stylesheet" href="{% static 'frontend/styles/custom-orders.css' %}"/>
 {% endblock %}
 
 {% block Content %}
-<body class="bg">
+    <body class="bg">
     <!-- START Header General orders-->
-   <div class="container-fluid container-admin" style="position:relative ;">
-     <header class="header-m-oprator">
-       <div class="title">
+    <div class="container-fluid container-admin" style="position:relative ;">
+        <header class="header-m-oprator">
+            <div class="title">
          <span class="back"><img src="{% static 'frontend/images/black.f.png' %}"
-             alt="icon"
-             /></span>
-         <h5>لیست سفارشات دلخواه</h5>
-       </div>
-       <div class="The-dividing-line"></div>
-     </header>
-      <!--Edn Header General orders-->
+                                 alt="icon"
+         /></span>
+                <h5>لیست سفارشات دلخواه</h5>
+            </div>
+            <div class="The-dividing-line"></div>
+        </header>
+        <!--Edn Header General orders-->
 
-     <!-- START MAIN -->
-     <main class="main p-3">
-        <div class="custum-orders-container">
-            {% for order in orders %}
-            <div class=" col-12 col-md-6 p-2">
-                <div class="oredr-sec">
-                <form action="">
-                    <div class="date d-flex justify-content-between p-2">
-                     <span>تاریخ و زمان</span>
-                     <span class="datetime-convert">{{ order.get_created_at }}</span>
-                    </div>
-                    <div class="status d-flex justify-content-between p-2">
-                       <span>وضعیت</span>
-                       <div>
-                        <span> {{ order.get_status_display }}</span>
-                       {% if order.status == 'accepted' %}
-                            <span>
+        <!-- START MAIN -->
+        <main class="main p-3">
+            <div class="custum-orders-container">
+                {% for order in orders %}
+                    <div class=" col-12 col-md-6 p-2">
+                        <div class="oredr-sec">
+                            <form action="">
+                                <div class="date d-flex justify-content-between p-2">
+                                    <span>تاریخ و زمان</span>
+                                    <span class="datetime-convert">{{ order.get_created_at }}</span>
+                                </div>
+                                <div class="status d-flex justify-content-between p-2">
+                                    <span>وضعیت</span>
+                                    <div>
+                                        <span> {{ order.get_status_display }}</span>
+                                        {% if order.status == 'accepted' %}
+                                            <span>
                                 و در حال اماده سازی
                             </span>
-                       {% endif %}
-                       </div>
-                    </div>
-                    <div class="orders d-flex flex-wrap p-2">
-                      <div class="col-12 col-md-6 p-1" >
-                       <div class="w-100 d-flex each-item-order">
-                           <div class="inner-each-item-order col-6">
-                            نوع سفارش
-                           </div>
-                           <div class="inner-each-item-order col-6">
-                                {{ order.detail.type_order }}
-                           </div>
-                       </div>
-                      </div>
-                      <div class="col-12 col-md-6 p-1" >
-                       <div class="w-100 d-flex each-item-order">
-                           <div class="inner-each-item-order col-6">
-                             طعم اسفنج
-                           </div>
-                           <div class="inner-each-item-order col-6">
-                                {{ order.detail.taste_spongy }}
-                           </div>
-                       </div>
-                      </div>  
-                      <div class="col-12 col-md-6 p-1" >
-                       <div class="w-100 d-flex each-item-order">
-                           <div class="inner-each-item-order col-6">
-                             فیلینگ کیک
-                           </div>
-                           <div class="inner-each-item-order col-6">
-                                {{ order.detail.filing_cake }}
-                           </div>
-                       </div>
-                      </div>  
-                      <div class="col-12 col-md-6 p-1" >
-                       <div class="w-100 d-flex each-item-order">
-                           <div class="inner-each-item-order col-6">
-                             میزان خامه
-                           </div>
-                           <div class="inner-each-item-order col-6">
-                                {{ order.detail.amount_cream }}
-                           </div>
-                       </div>
-                      </div> 
-                      <div class="col-12 col-md-6 p-1" >
-                       <div class="w-100 d-flex each-item-order">
-                           <div class="inner-each-item-order col-6">
-                            طعم خامه
-                           </div>
-                           <div class="inner-each-item-order col-6">
-                                {{ order.detail.taste_cream }}
-                           </div>
-                       </div>
-                      </div> 
-                      <div class="col-12 col-md-6 p-1" >
-                       <div class="w-100 d-flex each-item-order">
-                           <div class="inner-each-item-order col-6">
-                             وزن کیک
-                           </div>
-                           <div class="inner-each-item-order col-6">
-                                {{ order.detail.weight }}
-                           </div>
-                       </div>
-                      </div> 
-                      <div class="col-12 p-1" >
-                        <div class="w-100 d-flex each-item-order">
-                            <div class="inner-each-item-order col-3">
-                              توضیح روی کیک
-                            </div>
-                            <div class="inner-each-item-order col-9">
-                                 {{ order.detail.writing_on_cake|default:"-" }}
-                            </div>
-                        </div>
-                       </div> 
-                      <div class="col-12 p-1" >
-                        {% for image in order.get_images %}
-                            <a style="margin:5px;" href="{{ image.get_image_url }}"> عکس {{ forloop.counter }}</a>
-                        {% endfor %}
-                      </div>    
-                     
-                    </div>
-                    <div class="price d-flex justify-content-between p-2">
-                     <span>قیمت حدودی:</span>
-                     <div >
-                        <span class="price-el">{{ order.price }}</span>
-                        <span>تومان</span>
-                        <div>
-                            -+ 0.5 کیلوگرم
-                        </div>
-                     </div>
-                    </div>
-                    <div class="sec-des p-1">
-                        <div>توضیحات ادمین :</div>
-                        <div class="description">{{ order.note }}</div>
-                    </div>
-                   {% if order.status == 'accepted' %}
-                    <div class="register-form">
-                        <a href="{% url 'product:cart' %}" class="text-white text-decoration-none">سبد خرید</a>
-                    </div>
-                    {% else %}
-                    <div class="register-form">
-                        رد شده    
-                    </div>
-                   {% endif %}
-                </form>
-                </div>
-             </div>
-             {% empty %}
-             <div class="container-not-found-base">
-                <p>چیزی یافت نشد</p>
-             </div>
-            {% endfor %}
-        </div>
-     </main>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="orders d-flex flex-wrap p-2">
+                                    <div class="col-12 col-md-6 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-6">
+                                                نوع سفارش
+                                            </div>
+                                            <div class="inner-each-item-order col-6">
+                                                {{ order.detail.type_order }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-6">
+                                                طعم اسفنج
+                                            </div>
+                                            <div class="inner-each-item-order col-6">
+                                                {{ order.detail.taste_spongy }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-6">
+                                                فیلینگ کیک
+                                            </div>
+                                            <div class="inner-each-item-order col-6">
+                                                {{ order.detail.filing_cake }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-6">
+                                                میزان خامه
+                                            </div>
+                                            <div class="inner-each-item-order col-6">
+                                                {{ order.detail.amount_cream }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-6">
+                                                طعم خامه
+                                            </div>
+                                            <div class="inner-each-item-order col-6">
+                                                {{ order.detail.taste_cream }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-6">
+                                                وزن کیک
+                                            </div>
+                                            <div class="inner-each-item-order col-6">
+                                                {{ order.detail.weight }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-1">
+                                        <div class="w-100 d-flex each-item-order">
+                                            <div class="inner-each-item-order col-3">
+                                                توضیح روی کیک
+                                            </div>
+                                            <div class="inner-each-item-order col-9">
+                                                {{ order.detail.writing_on_cake|default:"-" }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-1">
+                                        {% for image in order.get_images %}
+                                            <a style="margin:5px;" href="{{ image.get_image_url }}">
+                                                عکس {{ forloop.counter }}</a>
+                                        {% endfor %}
+                                    </div>
 
-   </div>  
- </body>
+                                </div>
+                                <div class="price d-flex justify-content-between p-2">
+                                    <span>قیمت حدودی:</span>
+                                    <div>
+                                        <span class="price-el">{{ order.price }}</span>
+                                        <span>تومان</span>
+                                        <div>
+                                            -+ 0.5 کیلوگرم
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sec-des p-1">
+                                    <div>توضیحات ادمین :</div>
+                                    <div class="description">{{ order.note }}</div>
+                                </div>
+                                {% if order.status == 'accepted' %}
+                                    <div class="register-form">
+                                        <a href="{% url 'product:cart' %}" class="text-white text-decoration-none">سبد
+                                            خرید</a>
+                                    </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="container-not-found-base">
+                        <p>چیزی یافت نشد</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+
+    </div>
+    </body>
 {% endblock %}
 
 {% block Script %}
-   <!--BOOTSTRAP -->
-   <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
-   <!-- MAIN JS -->
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+    <!-- MAIN JS -->
 {% endblock %}
