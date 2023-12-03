@@ -50,7 +50,7 @@
                                 <img src="{% static 'frontend/images/icon/karbar.png' %}" alt="">
                             </div>
                             <div class="col-10 value p-1">
-                                <div class="name-sweet"><a href="User-account-information.html">اطلاعات حساب کاربری</a>
+                                <div class="name-sweet"><a href="{% url 'account:dashboard_user__detail' %}">اطلاعات حساب کاربری</a>
                                 </div>
                             </div>
                         </div>
@@ -60,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 col-md-4 p-2 ">
                     <div class="profile-item down">
                         <a href="{% url 'account:dashboard_user__orders' %}" class="profile-item col-12">
@@ -96,7 +97,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 p-2 ">
+                <div class="col-12 col-md-4 p-2 d-none">
                     <div class="profile-item down">
                         <div class="text-img col-11 ">
                             <div class="col-1 image-btn left p-1">
@@ -149,7 +150,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 p-2 ">
+                <div class="col-12 col-md-4 p-2 d-none">
                     <div class="profile-item down">
                         <div class="text-img col-11 ">
                             <div class="col-1 image-btn left p-1">

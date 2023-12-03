@@ -39,6 +39,8 @@ urlpatterns = [
 
     path('d/user', views.DashboardUser.as_view(),name='dashboard_user'),
 
+    path('d/user/detail', views.DashboardUserDetail.as_view(),name='dashboard_user__detail'),
+
     path('d/user/orders', views.DashboardUserOrders.as_view(),name='dashboard_user__orders'),
 
     path('d/user/custom-orders', views.DashboardUserCustomOrders.as_view(),name='dashboard_user__custom_orders'),

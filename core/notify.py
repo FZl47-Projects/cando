@@ -70,6 +70,13 @@ def send_sms(sms_type, phonenumber, **kwargs):
         values = {}
         return pattern_code, values
 
+    def handler_new_order_paid_for_admin():
+        pattern_code = 'c1dvvvu191v4in0'
+        values = {
+            'ref-id': kwargs.get('ref_id')
+        }
+        return pattern_code, values
+
     HANDLERS_DICT = {
         'welcome': handler_welcome,
         'register_code': handler_register_code,
@@ -81,6 +88,7 @@ def send_sms(sms_type, phonenumber, **kwargs):
         'confirmation_code': handler_confirmation_code,
         # admin | superuser
         'new_custom_order_registered': handler_new_custom_order_registered,
+        'new_order_paid_for_admin': handler_new_order_paid_for_admin,
     }
 
     HANDLER = HANDLERS_DICT.get(sms_type, None)

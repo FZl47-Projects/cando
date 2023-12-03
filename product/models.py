@@ -54,12 +54,12 @@ class Product(BaseModel):
 
     def get_rate(self):
         avg = self.get_comments().aggregate(rate_avg=models.Avg('rate'))['rate_avg'] or 0
-        avg = round(avg,1)
+        avg = round(avg, 1)
         return avg
 
 
 class Category(BaseModel):
-    type_name = models.CharField(max_length=100)
+    type_name = models.CharField(max_length=100, null=True)
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -81,7 +81,7 @@ class FactorCakeImage(BaseModel):
 
     def __str__(self):
         return self.user_name
-    
+
     def get_images(self):
         return self.images.all()
 
@@ -256,11 +256,11 @@ class Order(BaseModel):
 
 class CustomOrderProduct(BaseModel):
     STATUS_OPTIONS = (
-        ('accepted','تایید شد'),
-        ('pending','در حال بررسی'),
-        ('rejected','رد شد')
+        ('accepted', 'تایید شد'),
+        ('pending', 'در حال بررسی'),
+        ('rejected', 'رد شد')
     )
-    status = models.CharField(max_length=15,choices=STATUS_OPTIONS,default='pending')
+    status = models.CharField(max_length=15, choices=STATUS_OPTIONS, default='pending')
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
     detail = JSONField()
     description = models.TextField(null=True)
@@ -323,7 +323,7 @@ class Factor(BaseModel):
 
     def get_price_rial(self):
         return self.price * 10
-    
+
     @classmethod
     def create(cls, factor, user):
         if factor.process_to_payment:
@@ -388,6 +388,7 @@ class Comment(BaseModel):
     def __str__(self):
         return f'{self.title[:20]} - {self.product}'
 
+
 class CandyBox(BaseModel):
     user = models.ForeignKey('account.User', on_delete=models.CASCADE, related_name='user_boxes')
     weight = models.PositiveIntegerField('Weight', default=2)
@@ -404,13 +405,15 @@ class Candy(BaseModel):
 
     def __str__(self):
         return self.name
-    
+
+
 class BoxRow(BaseModel):
     box = models.ForeignKey('CandyBox', on_delete=models.CASCADE, related_name='box_rows')
     candy = models.ForeignKey('Candy', on_delete=models.PROTECT, related_name='candy_rows')
 
     class Meta:
         ordering = '-id',
+
 
 class Pakage(BaseModel):
     name = models.CharField('Name', max_length=200)
@@ -426,5 +429,3 @@ class Pakage(BaseModel):
 
     def __str__(self):
         return self.name
-
-

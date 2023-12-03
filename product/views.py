@@ -295,6 +295,10 @@ class FactorPaymentVerify(LoginRequiredMixin, View):
         )
         messages.success(request, 'سفارش شما با موفقیت پرداخت و ثبت شد')
         send_sms('factor_paid', user.get_phonenumber(), ref_id=ref_id)
+        # send notif
+        super_users = User.super_user.all()
+        for user in super_users:
+            send_sms('new_order_paid_for_admin', user.get_phonenumber(), ref_id=ref_id)
         return redirect(cart.get_status_absolute_url())
 
 

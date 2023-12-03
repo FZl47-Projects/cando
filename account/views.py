@@ -224,7 +224,9 @@ class DashboardAdminFactorCakeImage(View):
         factors = FactorCakeImage.objects.all()
         search_content = request.GET.get('search_content')
         if search_content:
-            factors = factors.filter(track_code=search_content)
+            lookup = Q(track_code__icontains=search_content) | Q(user_name__icontains=search_content) | Q(
+                description__icontains=search_content)
+            factors = factors.filter(lookup)
         context = {
             'factors': factors
         }
@@ -236,9 +238,22 @@ class DashboardAdminOrders(View):
 
     @admin_role_required_cbv
     def get(self, request):
+        carts = models.Cart.objects.exclude(factor__factorpayment=None).exclude(cartstatus__status='delivered')
+        carts_delivered = models.Cart.objects.filter(cartstatus__status='delivered')
+        # carts
+        search_carts = request.GET.get('search_carts')
+        if search_carts:
+            lookup = Q(user__name__icontains=search_carts) | Q(user__phonenumber__icontains=search_carts) | Q(factor__factorpayment__ref_id=search_carts)
+            carts = carts.filter(lookup)
+        # carts_delivered
+        search_carts_delivered = request.GET.get('search_carts_delivered')
+        if search_carts_delivered:
+            lookup = Q(user__name__icontains=search_carts_delivered) | Q(user__phonenumber__icontains=search_carts_delivered) | Q(factor__factorpayment__ref_id=search_carts)
+            carts_delivered = carts_delivered.filter(lookup)
+
         context = {
-            'carts': models.Cart.objects.exclude(factor__factorpayment=None).exclude(cartstatus__status='delivered'),
-            'carts_delivered': models.Cart.objects.filter(cartstatus__status='delivered'),
+            'carts': carts,
+            'carts_delivered': carts_delivered,
         }
         return render(request, 'account/dashboard/admin/orders.html', context)
 
@@ -286,6 +301,23 @@ class DashboardUserProductFavorites(LoginRequiredMixin, View):
             'products': request.user.get_or_create_product_favorite_list().products.all()
         }
         return render(request, 'account/dashboard/user/favorites.html', context)
+
+
+class DashboardUserFactorImages(LoginRequiredMixin, View):
+
+    @user_role_required_cbv
+    def get(self, request):
+        context = {
+            'factors': request.user.factor_set.all()
+        }
+        return render(request, 'account/dashboard/user/favorites.html', context)
+
+
+class DashboardUserDetail(LoginRequiredMixin, View):
+
+    @user_role_required_cbv
+    def get(self, request):
+        return render(request, 'account/dashboard/user/user-detail.html')
 
 
 class UsersList(View):

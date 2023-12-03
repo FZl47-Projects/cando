@@ -1,0 +1,119 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    اطلاعات کاربری - {{ user.get_full_name }}
+{% endblock %}
+
+{% block Link %}
+    <link rel="stylesheet" href="{% static 'frontend/vendors/bootstrap.min.css' %}"/>
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="{% static 'frontend/vendors/swiper.css' %}"/>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="{% static 'frontend/styles/profile.css' %}"/>
+
+    <!-- AXIOS PACKAGE -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% endblock %}
+
+{% block Content %}
+  <body class="bg">
+
+      <!-- START Header user-account-information -->
+    <div class="container-fluid container-admin" style="position:relative ;">
+
+      <header class="header-m-oprator">
+        <div class="title">
+          <span class="back"><img src="{% static 'frontend/images/icon/Group 1900.png' %}"
+              alt="icon"
+              /></span>
+          <h5>اطلاعات حساب کاربری</h5>
+        </div>
+        <div class="The-dividing-line"></div>
+      </header>
+       <!-- end Header user-account-information -->
+<!-- START MENU-BOTTOM -->
+<div class="menu-bottom">
+  <ul class="list-bottom">
+    <li class="item-bottom active">
+      <a href="#">
+        <img src="{% static 'frontend/images/icon/users.png' %}" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="{% static 'frontend/images/icon/home.png' %}" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="{% static 'frontend/images/icon/Bag.png' %}" alt="icon" />
+      </a>
+    </li>
+    <li class="item-bottom">
+      <a href="#">
+        <img src="{% static 'frontend/images/icon/hat.png' %}" alt="icon" />
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- END MENU-BOTTOM -->
+      <!-- START MAIN -->
+      <main class="main">
+
+       <!-- start content information account -->
+          <section class="information-account">
+              <div class="information-account-content">
+                <div class="col-3 image ">
+                  <img src="{% static 'frontend/images/icon/admin.png' %}">
+                </div>
+              <!-- start -->
+              <div class="col-12 col-md-4 p-2 ">
+                <div class="information-item p-1">
+                      <div class="col-6  p-1 value">
+                          <span>نام و نام خانوادگی</span>
+                      </div>
+                    <div class="col-6 p-1 value-item">
+                      <input type="text" name="name" id="Fname" placeholder="ویرایش" value="{{ user.get_full_name }}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 p-2 ">
+                  <div class="information-item p-1">
+                        <div class="col-5  p-1 value">
+                            <span>شهر </span>
+                        </div>
+                      <div class="col-7 p-1 value-item">
+                        <input type="text" name="ncity" id="city" placeholder="ویرایش" value="کرمان" readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-4 p-2 ">
+                  <div class="information-item p-1">
+                        <div class="col-5  p-1 value">
+                            <span>شماره تماس</span>
+                        </div>
+                      <div class="col-7 p-1 value-item">
+                        <input type="text" name="phone" id="phoneN" placeholder="0912-002-0202" value="{{ user.get_raw_phonenumber }}" readonly>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </section>
+      </main>
+
+    </div>
+
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+
+    <!-- MAIN JS -->
+  </body>
+{% endblock %}
+
+{% block Script %}
+    <!--BOOTSTRAP -->
+    <script src="{% static 'frontend/vendors/bootstrap.min.js' %}"></script>
+{% endblock %}

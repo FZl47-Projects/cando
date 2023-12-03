@@ -19,6 +19,46 @@
 {% endblock %}
 
 
+{% block Style %}
+    <style>
+        .search-item {
+            margin: auto;
+            margin-top: 23px;
+            border-radius: 10px;
+            color: #fff;
+            background-color: #444;
+            border: 1px solid #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px;
+        }
+
+
+        .search-item input {
+            width: 100%;
+            padding: 5px;
+            display: block;
+            margin: auto;
+            border: none;
+            outline: none;
+        }
+
+        .search-item input::placeholder {
+            color: #aaa;
+        }
+
+        .search-item button {
+            background-color: #222;
+            color: #fff;
+            padding: 8px;
+            width: 90px;
+            border-radius: 10px;
+        }
+    </style>
+{% endblock %}
+
+
 {% block Content %}
     <body class="bg">
 
@@ -37,7 +77,8 @@
                             </label>
                             <select name="status" class="form-control form-select text-center" required>
                                 {% for status_option in cart.cartstatus.STATUS_OPTIONS %}
-                                    <option value="{{ status_option.0 }}" {% if cart.cartstatus.status == status_option.0 %}selected{% endif %}>{{ status_option.1 }}</option>
+                                    <option value="{{ status_option.0 }}"
+                                            {% if cart.cartstatus.status == status_option.0 %}selected{% endif %}>{{ status_option.1 }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -45,7 +86,8 @@
                             <label>
                                 زمان اماده سازی(دقیقه)
                             </label>
-                            <input type="number" name="delivery_time" class="form-control" value="{{ cart.cartstatus.delivery_time }}" required>
+                            <input type="number" name="delivery_time" class="form-control"
+                                   value="{{ cart.cartstatus.delivery_time }}" required>
                         </div>
                         <div class="mt-4">
                             <button class="btn btn-success col-12">
@@ -84,7 +126,19 @@
             <!-- End content General orders  -->
             <!-- start content showcase of the day  -->
             <div class="content-price active">
-                <section class="category-price p-1 col-12">
+                <section class="category-price p-1 col-12 d-block">
+                    <div>
+                        <form class="search-item col-12 col-md-6" method="get">
+                            <div class="col-10">
+                                <input type="text" name="search_carts" value="{{ request.GET.search_carts }}"
+                                       style="color: #fff;" id="search-bar"
+                                       placeholder="نام کاربر ، شماره کاربر ، کد رهگیری ..">
+                            </div>
+                            <button type="submit">
+                                جست و جو
+                            </button>
+                        </form>
+                    </div>
                     <!-- start -->
                     {% for cart in carts %}
                         <div class="col-12 col-md-6 px-1 py-1">
@@ -162,8 +216,19 @@
                 </section>
             </div>
             <div class="content-price">
-                <section class="category-price p-1 col-12">
-                    <!-- start -->
+                <section class="category-price p-1 col-12 d-block">
+                    <div>
+                        <form class="search-item col-12 col-md-6" method="get">
+                            <div class="col-10">
+                                <input type="text" name="search_carts_delivered" value="{{ request.GET.search_carts_delivered }}"
+                                       style="color: #fff;" id="search-bar"
+                                       placeholder="نام کاربر ، شماره کاربر ، کد رهگیری ..">
+                            </div>
+                            <button type="submit">
+                                جست و جو
+                            </button>
+                        </form>
+                    </div>
                     {% for cart in carts_delivered %}
                         <div class="col-12 col-md-6 px-1 py-1">
                             <div class="price-item ">
