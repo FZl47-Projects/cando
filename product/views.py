@@ -416,7 +416,8 @@ class CategoryCreate(View):
     @admin_role_required_cbv
     def post(self, request):
         referer_url = request.META.get('HTTP_REFERER')
-        data = request.POST
+        data = request.POST.copy()
+        data.setdefault('type_name', data.get('name'))
         f = forms.CategoryCreateForm(data, request.FILES)
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
