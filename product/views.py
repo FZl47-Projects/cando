@@ -128,7 +128,7 @@ class CartAdd(LoginRequiredMixin, View):
             # product is duplicate
             pass
         messages.success(request, 'محصول به سبد خرید اضافه شد')
-        return redirect(referer_url or '/success')
+        return redirect('product:cart')
 
 
 class CartRemoveOrder(LoginRequiredMixin, View):
