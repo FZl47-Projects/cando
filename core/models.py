@@ -14,9 +14,18 @@ def upload_image_src(instance, path):
     return f'images/{tm}/{random_str()}.{frmt}'
 
 
+class BaseModelManager(models.Manager):
+
+    def get_queryset(self, *args, **kwargs):
+        return super(BaseModelManager, self).get_queryset().filter(_is_deleted=False)
+
+
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    _is_deleted = models.BooleanField(default=False)
+
+    objects = BaseModelManager()
 
     class Meta:
         abstract = True

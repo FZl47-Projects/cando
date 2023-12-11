@@ -70,10 +70,14 @@ class CustomOrderProductFactorCreate(View):
         data['cart'] = cart
         data['is_checked'] = True
         data['status'] = 'accepted'
+
         f = forms.CustomOrderProductAccept(data, instance=order_obj)
         if form_validate_err(request, f) is False:
             return redirect(referer_url or '/error')
-        f.save()
+        order = f.save(commit=False)
+        # TODO: need to refactor
+        order.detail['weight'] = data.get('weight', '-')
+        order.save()
         # send notif
         send_sms('custom_order_estimated', order_obj.user.get_phonenumber(),
                  cart_link=url_with_host(reverse('product:cart')))
@@ -184,7 +188,7 @@ class CartProcessPayment(LoginRequiredMixin, View):
             messages.error(request, f"محصولی در سبد خرید شما یافت نشد")
             return redirect('product:cart')
         # orders_is_available is True or product name
-        if orders_is_available is not True:
+        if not orders_is_available:
             messages.error(request, f" محصول {orders_is_available} ناموجود است ")
             return redirect('product:cart')
 
@@ -207,6 +211,7 @@ class CartProcessPayment(LoginRequiredMixin, View):
         factor_obj = f.save()
         send_sms('factor_created', user.get_phonenumber(),
                  factor_link=url_with_host(factor_obj.get_payment_link()))
+
         return redirect(factor_obj.get_payment_link())
 
 
@@ -306,7 +311,7 @@ class CartDetail(LoginRequiredMixin, View):
 
     def get(self, request, cart_id):
         user = request.user
-        cart = get_object_or_404(models.Cart, id=cart_id, is_active=False)
+        cart = get_object_or_404(models.Cart, id=cart_id)
         # only owner cart can access and admin
         if cart.user != user and user.is_admin is False:
             raise Http404
@@ -314,6 +319,16 @@ class CartDetail(LoginRequiredMixin, View):
             'cart': cart
         }
         return render(request, 'product/order-detail.html', context)
+
+
+class CartDelete(LoginRequiredMixin, View):
+
+    @admin_role_required_cbv
+    def post(self, request, cart_id):
+        cart = get_object_or_404(models.Cart, id=cart_id)
+        cart.delete()
+        messages.success(request, 'سفارش با موفقیت حذف شد')
+        return redirect('account:dashboard_admin__orders')
 
 
 class CartStatus(View):
@@ -343,6 +358,52 @@ class CartStatus(View):
             self.notify_cart_status(cart_obj, 'در حال خروج از مرکز پردازش و ارسال سفارش است')
         messages.success(request, 'وضعیت سفارش با موفقیت بروز شد')
         return redirect(referer_url or '/success')
+
+
+class CartManualPayment(View):
+
+    @admin_role_required_cbv
+    def post(self, request, cart_id):
+        cart = get_object_or_404(models.Cart, id=cart_id)
+        data = request.POST.copy()
+        user = cart.user
+        # set values
+        data.setdefault('price', cart.get_total_price_for_payment())
+        data['user'] = user
+        data['cart'] = cart
+        data['shipping_fee'] = cart.get_shipping_fee()
+        data['detail'] = cart.get_dict_detail_orders()
+        delivery_type = data.get('delivery_type')
+        if delivery_type == 'online':
+            f = forms.FactorCreateForm(data)
+        elif delivery_type == 'in-person':
+            f = forms.FactorCreateNonAddressForm(data)
+        else:
+            return redirect(cart.get_absolute_url() or '/error')
+        if form_validate_err(request, f) is False:
+            return redirect(cart.get_absolute_url() or '/error')
+        factor_obj = f.save()
+        send_sms('factor_created', user.get_phonenumber(),
+                 factor_link=url_with_host(factor_obj.get_payment_link()))
+
+        models.FactorPayment.objects.create(
+            factor=factor_obj,
+            ref_id='-',
+            price_paid=factor_obj.price
+        )
+        # update stock products
+        cart.decrease_stock_products()
+        cart.is_active = False
+        cart.save()
+        models.CartStatus.objects.create(
+            cart=cart
+        )
+        models.CartManualPayment.objects.create(
+            cart=cart,
+            price=data['price']
+        )
+        messages.success(request, 'پرداخت سفارش به صورت دستی با موفقیت انجام شد')
+        return redirect(cart.get_absolute_url())
 
 
 class FactorCakeImage(LoginRequiredMixin, View):

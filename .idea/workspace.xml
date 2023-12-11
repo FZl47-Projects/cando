@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="84594771-052b-41e5-9130-cd30acbbdf23" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/account/dashboard/admin/custom-order-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/dashboard/admin/custom-order-product.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/account/dashboard/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/dashboard/admin/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/account/dashboard/admin/orders.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/dashboard/admin/orders.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/templates/product/order-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/product/templates/product/order-detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/product/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +57,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/cando/account/templates/account/dashboard/user&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Project-Company/Smarten/vala&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -161,7 +170,9 @@
       <workItem from="1701643531859" duration="2837000" />
       <workItem from="1701712867699" duration="1185000" />
       <workItem from="1701731334865" duration="61000" />
-      <workItem from="1702211368362" duration="153000" />
+      <workItem from="1702211368362" duration="195000" />
+      <workItem from="1702211916253" duration="858000" />
+      <workItem from="1702236487131" duration="16032000" />
     </task>
     <servers />
   </component>

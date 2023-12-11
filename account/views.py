@@ -212,7 +212,7 @@ class DashboardAdminCustomOrders(View):
     @admin_role_required_cbv
     def get(self, request):
         context = {
-            'orders': CustomOrderProduct.objects.filter(is_checked=False)
+            'orders': CustomOrderProduct.objects.all()
         }
         return render(request, 'account/dashboard/admin/custom-order-product.html', context)
 
@@ -240,20 +240,32 @@ class DashboardAdminOrders(View):
     def get(self, request):
         carts = models.Cart.objects.exclude(factor__factorpayment=None).exclude(cartstatus__status='delivered')
         carts_delivered = models.Cart.objects.filter(cartstatus__status='delivered')
+        carts_pending_payment = models.Cart.objects.filter(factor__factorpayment=None)
         # carts
         search_carts = request.GET.get('search_carts')
         if search_carts:
-            lookup = Q(user__name__icontains=search_carts) | Q(user__phonenumber__icontains=search_carts) | Q(factor__factorpayment__ref_id=search_carts)
+            lookup = Q(user__name__icontains=search_carts) | Q(user__phonenumber__icontains=search_carts) | Q(
+                factor__factorpayment__ref_id=search_carts)
             carts = carts.filter(lookup)
         # carts_delivered
         search_carts_delivered = request.GET.get('search_carts_delivered')
         if search_carts_delivered:
-            lookup = Q(user__name__icontains=search_carts_delivered) | Q(user__phonenumber__icontains=search_carts_delivered) | Q(factor__factorpayment__ref_id=search_carts)
+            lookup = Q(user__name__icontains=search_carts_delivered) | Q(
+                user__phonenumber__icontains=search_carts_delivered) | Q(
+                factor__factorpayment__ref_id=search_carts_delivered)
             carts_delivered = carts_delivered.filter(lookup)
+        # search_carts_pending_payment
+        search_carts_pending_payment = request.GET.get('search_carts_pending_payment')
+        if search_carts_pending_payment:
+            lookup = Q(user__name__icontains=search_carts_pending_payment) | Q(
+                user__phonenumber__icontains=search_carts_pending_payment) | Q(
+                factor__factorpayment__ref_id=search_carts_pending_payment)
+            carts_pending_payment = carts_delivered.filter(lookup)
 
         context = {
             'carts': carts,
             'carts_delivered': carts_delivered,
+            'carts_pending_payment': carts_pending_payment
         }
         return render(request, 'account/dashboard/admin/orders.html', context)
 

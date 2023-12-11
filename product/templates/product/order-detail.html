@@ -46,45 +46,127 @@
 {% block Content %}
     <body>
 
-    <!-- start modal Order details -->
-    <div class="content-modal" id="modal-Order-details">
-        <div class="inner-modal">
-            <div class="content">
-                <div class="content-price active">
-                    <section class="category-price p-1">
-                        <div class="col-12 px-1 py-1">
-                            <div class="price-item ">
-                                <div class="col-12 detail">
-                                    <div class="col-12 detail-item p-2">
-                                        <label class=" col-4">کد رهگیری:</label>
-                                        <input class="col-8" type="text" name="code" id="code-rahgiri"
-                                               placeholder="45880215">
-                                    </div>
-                                    <div class="col-12 detail-item p-2">
-                                        <label class=" col-4">تاریخ و زمان سفارش:</label>
-                                        <input class="col-8" type="text" name="value-date" id="date-kharid"
-                                               placeholder="شنبه 23 آبان-9 تا 12 صبح">
-                                    </div>
-                                    <div class="col-12 detail-item p-2">
-                                        <label class=" col-4">اطلاعات تحویل گیرنده:</label>
-                                        <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
-                                               placeholder="نام ونام خانوادگی 09122254545">
-                                    </div>
-                                    <div class="col-12 detail-item p-2">
-                                        <input class="col-12 adres" type="text" name="value-address" id="address"
-                                               placeholder="کرمان،نرسیده به بلوار،خیابان فیروزه جنب مطب قهاری،پلاک25">
-                                    </div>
-
-
-                                </div>
-                            </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-status-order" tabindex="-1" aria-labelledby="modal-status-order"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="p-5" action="{% url 'product:cart_status' cart_id=cart.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-status-order">تغییر وضعیت سفارش</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center" style="color: #999">
+                            کد رهگیری : {{ cart.get_track_code }}
+                        </p>
+                        <div>
+                            <label>
+                                وضعیت
+                            </label>
+                            <select name="status" class="form-control form-select text-center" required>
+                                {% for status_option in cart.cartstatus.STATUS_OPTIONS %}
+                                    <option value="{{ status_option.0 }}"
+                                            {% if cart.cartstatus.status == status_option.0 %}selected{% endif %}>{{ status_option.1 }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                    </section>
+                        <div>
+                            <label>
+                                زمان تا تحویل(دقیقه)
+                            </label>
+                            <input type="text" name="delivery_time" class="form-control"
+                                   value="{{ cart.cartstatus.delivery_time|default:'' }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-primary col-3">ثبت</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-    <!-- end modal Order details -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-payment-order" tabindex="-1" aria-labelledby="modal-payment-order"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="p-5" action="{% url 'product:cart_manual_payment' cart_id=cart.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-payment-order">پرداخت سفارش</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label>
+                                مبلغ
+                            </label>
+                            <input type="number" name="price" class="form-control"
+                                   value="{{ cart.get_total_price_for_payment }}" required input-amount-spread
+                                   spread-label="spread-price-el">
+                            <p class="text-left m-1" id="spread-price-el"></p>
+                        </div>
+                        <div class="my-1">
+                            <label>
+                                نوع دریافت
+                            </label>
+                            <select name="delivery_type" required class="form-control">
+                                <option value="in-person">تحویل حضوری</option>
+                                <option value="online">تحویل درب منزل</option>
+                            </select>
+                            <div id="cnt-choice-address" class="my-2 d-none">
+                                <label>
+                                    ادرس
+                                </label>
+                                <select name="address" class="form-control">
+                                    {% for address in cart.user.get_addresses %}
+                                        <option value="{{ address.id }}">{{ address.address|truncatechars:30 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="my-1">
+                            <label>
+                                توضیحات
+                            </label>
+                            <textarea name="note" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-primary col-3">پرداخت</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal-delete-order" tabindex="-1" aria-labelledby="modal-delete-order"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="p-5" action="{% url 'product:cart_delete' cart_id=cart.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-delete-order">حذف سفارش</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <h5 class="text-danger">ایا از حذف سفارش اطمینان دارید ؟ با حذف سفارش دیگر به ان دسترسی
+                                نخواهید داشت</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                        <button type="submit" class="btn btn-danger col-5">بله ! حذف سفارش</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="container-fluid container-admin" style="position:relative ;">
         <!-- start header -->
@@ -149,10 +231,27 @@
                                 <span class="py-2">تحویل به مشتری</span>
                             </div>
                         </div>
-
                     </div>
                     <div class="line"></div>
                 </div>
+                {% if user.is_admin %}
+                    <div class="text-left my-3 mx-2">
+                        {% if not cart.factor.factorpayment %}
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modal-payment-order">
+                                پرداخت به صورت دستی
+                            </button>
+                        {% endif %}
+                        <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal"
+                                data-bs-target="#modal-status-order">
+                            تخمین و وضعیت
+                        </button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modal-delete-order">
+                            حذف سفارش
+                        </button>
+                    </div>
+                {% endif %}
                 <section class="category-price p-1">
                     <div class="col-12 px-1 py-1">
                         <div class="price-item ">
@@ -181,28 +280,30 @@
                     <div class="col-12 px-1 py-1">
                         <div class="price-item ">
                             <div class="col-12 detail">
+                                {% if cart.factor.address %}
+                                    <div class="col-12 detail-item p-2">
+                                        <label class=" col-4">ادرس:</label>
+                                        <input class="col-8" type="text" name="code" id="code-rahgiri"
+                                               placeholder="45880215" value="{{ cart.factor.address.address }}">
+                                    </div>
+                                    <div class="col-12 detail-item p-2">
+                                        <label class=" col-4"> پلاک :</label>
+                                        <input class="col-8" type="text" name="value-date" id="date-kharid"
+                                               placeholder="شنبه 23 آبان-9 تا 12 صبح"
+                                               value="{{ cart.factor.address.plate }}">
+                                    </div>
+                                    <div class="col-12 detail-item p-2">
+                                        <label class=" col-4">کد پستی :</label>
+                                        <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
+                                               placeholder="نام ونام خانوادگی 09122254545"
+                                               value="{{ cart.factor.address.postal_code }}">
+                                    </div>
+                                {% endif %}
                                 <div class="col-12 detail-item p-2">
-                                    <label class=" col-4">ادرس:</label>
-                                    <input class="col-8" type="text" name="code" id="code-rahgiri"
-                                           placeholder="45880215" value="{{ cart.factor.address.address }}">
-                                </div>
-                                <div class="col-12 detail-item p-2">
-                                    <label class=" col-4"> پلاک :</label>
-                                    <input class="col-8" type="text" name="value-date" id="date-kharid"
-                                           placeholder="شنبه 23 آبان-9 تا 12 صبح"
-                                           value="{{ cart.factor.address.plate }}">
-                                </div>
-                                <div class="col-12 detail-item p-2">
-                                    <label class=" col-4">کد پستی :</label>
+                                    <label class=" col-4">توضیحات :</label>
                                     <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
                                            placeholder="نام ونام خانوادگی 09122254545"
-                                           value="{{ cart.factor.address.postal_code }}">
-                                </div>
-                                <div class="col-12 detail-item p-2">
-                                    <label class=" col-4">توضیحات مشتری :</label>
-                                    <input class="col-8" type="text" name="value-kharid" id="darsad-kharid"
-                                           placeholder="نام ونام خانوادگی 09122254545"
-                                           value="{{ cart.factor.note|default:'بدون توضیحات' }}">
+                                           value="{{ cart.factor.note|default:'بدون توضیحات' }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -267,7 +368,11 @@
                                     <div class="the-details">
                                         {{ order.description }}
                                         <hr>
-                                        {{ order.note }}
+                                        <div>
+                                            <span> توضیحات ادمین : </span>
+                                            {{ order.note|default:'-' }}
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-3 p-2 price">
@@ -276,10 +381,15 @@
                                         <p class="text">تومان</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     {% endfor %}
+
+                    {% if not cart.get_custom_orders and not cart.get_orders %}
+                        <div class="container-not-found-base">
+                            <p>محصولی در سبد خرید وجود ندارد</p>
+                        </div>
+                    {% endif %}
                 </section>
                 <div class="col-12 p-2">
                     <div class="line"></div>
@@ -309,28 +419,29 @@
                                     </div>
 
                                 </div>
-                                <div class="col-12 border-b p-2">
-                                    <div class="list-item credit" id="texts-etebar">
-                                        <span>هزینه ارسال</span>
-                                        <div>
-                                            <span class="price-el">{{ cart.factor.shipping_fee }}</span>
-                                            <span>تومان</span>
+                                {% if cart.factor.factorpayment %}
+                                    <div class="col-12 border-b p-2">
+                                        <div class="list-item credit" id="texts-etebar">
+                                            <span>هزینه ارسال</span>
+                                            <div>
+                                                <span class="price-el">{{ cart.factor.shipping_fee }}</span>
+                                                <span>تومان</span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                </div>
-                                <div class="col-12  p-2">
-                                    <div class="list-item">
-                                        <span>جمع سبد خرید</span>
-                                        <div>
+                                    </div>
+                                    <div class="col-12  p-2">
+                                        <div class="list-item">
+                                            <span>جمع سبد خرید</span>
+                                            <div>
                                             <span class="price-el">
                                             {{ cart.factor.price }}
                                         </span>
-                                            <span>تومان</span>
+                                                <span>تومان</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
+                                {% endif %}
                             </div>
 
                         </div>
@@ -376,6 +487,21 @@
             status_type_send.classList.add('active')
             status_type_delivered.classList.add('active')
         }
+
+
+        let inp_delivery_type = document.querySelector('select[name=delivery_type]')
+        let cnt_choice_address = document.querySelector('#cnt-choice-address')
+        inp_delivery_type.addEventListener('input', function () {
+            let t = this.value
+            if (t == 'online') {
+                cnt_choice_address.classList.remove('d-none')
+                cnt_choice_address.querySelector('select').setAttribute('required', '')
+            } else {
+                cnt_choice_address.classList.add('d-none')
+                cnt_choice_address.querySelector('select').removeAttribute('required')
+            }
+        })
+
     </script>
 
 {% endblock %}

@@ -30,6 +30,8 @@ urlpatterns = [
     path('cart/payment/verify', views.FactorPaymentVerify.as_view(), name='factor_payment_verify'),
     path('cart/<int:cart_id>', views.CartDetail.as_view(), name='cart_detail'),
     path('cart/<int:cart_id>/status', views.CartStatus.as_view(), name='cart_status'),
+    path('cart/<int:cart_id>/delete', views.CartDelete.as_view(), name='cart_delete'),
+    path('cart/<int:cart_id>/manual-payment', views.CartManualPayment.as_view(), name='cart_manual_payment'),
 
     path('favorite/<int:product_id>/add', views.ProductFavoriteAdd.as_view(), name='favorite_add'),
     path('favorite/<int:product_id>/remove', views.ProductFavoriteRemove.as_view(), name='favorite_remove'),

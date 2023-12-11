@@ -206,33 +206,9 @@
     <div class="content-modal" id="modal-add-showcase-of-the-day">
         <div class="inner-modal">
             <div class="content" style="width: 550px;">
-                <form class="" action="{% url 'product:showcase_create' %}" method="post">
-                    {% csrf_token %}
-                    <div class="uplode-image mx-4 my-2">
-                        <h4>ویترین</h4>
-                    </div>
-                    {% if showcase_products.count > 0 %}
-                        <div class="m-4">
-                            <label for="">
-                                محصولات مورد نظر را انتخاب کنید
-                            </label>
-                            <select class="form-control form-select p-2" multiple name="products" id="">
-                                {% for product in showcase_products %}
-                                    <option value="{{ product.id }}"
-                                            {% if product in showcase.get_products %}selected{% endif %}>{{ product.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="birthday-package mt-2">
-                            <button class="btn col-12 text-white" type="submit">ثبت</button>
-                        </div>
-                    {% else %}
-                        <div class="container-not-found-base">
-                            <p>محصولی یافت نشد</p>
-                            <a href="{% url 'account:dashboard_admin__products' %}" class="text-primary">ایجاد محصول</a>
-                        </div>
-                    {% endif %}
-                </form>
+                <div class="container-not-found-base">
+                    <a href="{% url 'account:dashboard_admin__products' %}" class="text-primary">ایجاد محصول</a>
+                </div>
             </div>
         </div>
 

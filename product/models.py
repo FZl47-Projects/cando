@@ -183,7 +183,9 @@ class Cart(BaseModel):
 
     def get_receiver_user_info(self):
         address = self.factor.address
-        return f'{address.receiver_phonenumber} - {address.receiver_name}'
+        if address:
+            return f'{address.receiver_phonenumber} - {address.receiver_name}'
+        return 'تحویل حضوری'
 
     def decrease_stock_products(self):
         orders = self.get_orders()
@@ -207,6 +209,9 @@ class Cart(BaseModel):
         except:
             return ''
 
+    def get_all_orders_count(self):
+        return self.get_orders().count() + self.get_custom_orders().count()
+
 
 class CartStatus(BaseModel):
     STATUS_OPTIONS = (
@@ -217,7 +222,7 @@ class CartStatus(BaseModel):
     )
     status = models.CharField(max_length=20, choices=STATUS_OPTIONS, default='checking')
     cart = models.OneToOneField('Cart', on_delete=models.CASCADE)
-    delivery_time = models.IntegerField(null=True)  # approximate delivery time by minute
+    delivery_time = models.CharField(max_length=20)  # approximate delivery time by minute
 
     class Meta:
         ordering = '-id',
@@ -227,6 +232,17 @@ class CartStatus(BaseModel):
 
     def get_status_label(self):
         return self.get_status_display()
+
+
+class CartManualPayment(BaseModel):
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
+    price = models.PositiveBigIntegerField()
+
+    class Meta:
+        ordering = '-id',
+
+    def __str__(self):
+        return f'{self.cart} - {self.price}'
 
 
 class Order(BaseModel):
@@ -284,13 +300,19 @@ class CustomOrderProduct(BaseModel):
         return self.get_images().first()
 
     def get_dict_detail(self):
-        return {
+        d = {
             'product': 'سفارش دلخواه',
             'product_price': self.price,
-            'product_image': self.get_image_cover(),
             'product_category': 'دسته بندی سفارش دلخواه',
             'count': 1
         }
+        if self.get_image_cover():
+            try:
+                product_image = self.get_image_cover().image.get_image_url()
+            except Exception as e:
+                product_image = ''
+            d['product_image'] = product_image
+        return d
 
 
 class Factor(BaseModel):
