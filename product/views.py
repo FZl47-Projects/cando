@@ -193,16 +193,19 @@ class CartProcessPayment(LoginRequiredMixin, View):
             return redirect('product:cart')
 
         # set values
-        total_price = cart.get_total_price_for_payment()
         data['user'] = user
         data['cart'] = cart
-        data['price'] = total_price
-        data['shipping_fee'] = cart.get_shipping_fee()
         data['detail'] = cart.get_dict_detail_orders()
         delivery_type = data.get('delivery_type')
         if delivery_type == 'online':
+            total_price = cart.get_total_price_for_payment(shipping_type='online')
+            data['price'] = total_price
+            data['shipping_fee'] = cart.get_shipping_fee()
             f = forms.FactorCreateForm(data)
         elif delivery_type == 'in-person':
+            total_price = cart.get_total_price_for_payment(shipping_type='in-person')
+            data['price'] = total_price
+            data['shipping_fee'] = 0
             f = forms.FactorCreateNonAddressForm(data)
         else:
             return redirect(referer_url or '/error')
@@ -304,7 +307,7 @@ class FactorPaymentVerify(LoginRequiredMixin, View):
         super_users = User.super_user.all()
         for user in super_users:
             send_sms('new_order_paid_for_admin', user.get_phonenumber(), ref_id=ref_id)
-        return redirect(cart.get_status_absolute_url())
+        return redirect(cart.get_absolute_url())
 
 
 class CartDetail(LoginRequiredMixin, View):

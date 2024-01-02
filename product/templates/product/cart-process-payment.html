@@ -225,7 +225,7 @@
 
                                     <span class="font-80">(ارسال های بالا <span class="price-el">{{ settings.TRANSPORTATION_CONFIG.free_if_price_more_than }}</span> تومان)</span>
                                 {% else %}
-                                    <span class="price-el">{{ settings.TRANSPORTATION_CONFIG.fee }}</span>
+                                    <span class="price-el" id="fee-el" fee="{{ settings.TRANSPORTATION_CONFIG.fee }}">{{ settings.TRANSPORTATION_CONFIG.fee }}</span>
                                     <span>تومان</span>
                                 {% endif %}
                             </span>

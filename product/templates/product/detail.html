@@ -239,33 +239,37 @@
                 </div>
 
                 <div class="footer">
-                    <div class="row p-2 footer-item">
-                        <div class="col-5 col-md-2 col-sm-3 btn-bottom">
-                            <a href="{% url 'product:cart_add' product_id=product.id %}" class="col-12">
-                                <div class=" p-1 text-btn">
-                                    افزودن به سبد خرید
-                                </div>
-                            </a>
-                        </div>
-                        <div class=" col-3 col-md-2 g-0 fs-6 txt-left">
-                            <div>
-                                <p>قیمت :</p>
+                    {% if product.is_in_stock %}
+                        <div class="row p-2 footer-item">
+                            <div class="col-5 col-md-2 col-sm-3 btn-bottom">
+                                <a href="{% url 'product:cart_add' product_id=product.id %}" class="col-12">
+                                    <div class=" p-1 text-btn">
+                                        افزودن به سبد خرید
+                                    </div>
+                                </a>
+                            </div>
+                            <div class=" col-3 col-md-2 g-0 fs-6 txt-left">
                                 <div>
-                                    <span class="price-el">{{ product.price }}</span>
-                                    <span>تومان</span>
+                                    <p>قیمت :</p>
+                                    <div>
+                                        <span class="price-el">{{ product.price }}</span>
+                                        <span>تومان</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    {% else %}
+                        <div class="row p-2 footer-item d-block text-center">
+                            <div class=" col-12 g-0 fs-6 text-center">
+                                <div class="text-danger fs-4">
+                                    محصول ناموجود میباشد
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
-
             </section>
-
-
             <!-- end section-bottom -->
-
-
         </main>
 
     </div>

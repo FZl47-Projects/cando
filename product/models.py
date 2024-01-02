@@ -140,12 +140,15 @@ class Cart(BaseModel):
     def get_total_price(self):
         return self.get_orders_price() + self.get_custom_orders_price()
 
-    def get_total_price_for_payment(self):
+    def get_total_price_for_payment(self,shipping_type='online'):
         """
             calculate discount and shipping price or ..
         """
         cart_total = self.get_total_price()
-        fee = self.get_shipping_fee()
+        if shipping_type == 'in-person':
+            fee = 0
+        else:
+            fee = self.get_shipping_fee()
         total = cart_total + fee
         return total
 
@@ -232,6 +235,7 @@ class CartStatus(BaseModel):
 
     def get_status_label(self):
         return self.get_status_display()
+
 
 
 class CartManualPayment(BaseModel):

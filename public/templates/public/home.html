@@ -252,8 +252,9 @@
         <!-- dastebandi -->
         <div class="col-12 Grouping p-2 " style="margin-top: 15px;">
             {% for category in categories %}
-                <div class="col-2 group-item mx-1 p-1 btn-change-category {% if forloop.first %}active{% endif %}">
-                    <span>{{ category.name }}</span></div>
+                <div class="col-2 group-item mx-1 p-3 btn-change-category {% if forloop.first %}active{% endif %}">
+                    <span class="fs-5">{{ category.name }}</span>
+                </div>
             {% endfor %}
         </div>
 
