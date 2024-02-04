@@ -21,6 +21,20 @@
 {% endblock %}
 
 {% block Style %}
+
+    <style type="text/css" media="print">
+        /*
+        #btns-action {
+            display: none;
+        }
+
+        #payment-detail {
+            display: none;
+        }
+        */
+
+    </style>
+
     <style>
         .status-type {
             font-size: 110%;
@@ -235,13 +249,16 @@
                     <div class="line"></div>
                 </div>
                 {% if user.is_admin %}
-                    <div class="text-left my-3 mx-2">
+                    <div class="text-left my-3 mx-2" id="btns-action">
                         {% if not cart.factor.factorpayment %}
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modal-payment-order">
                                 پرداخت به صورت دستی
                             </button>
                         {% endif %}
+                        <button type="button" class="btn btn-secondary" onclick="print_factor()">
+                            پرینت فاکتور
+                        </button>
                         <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal"
                                 data-bs-target="#modal-status-order">
                             تخمین و وضعیت
@@ -351,7 +368,7 @@
 
                     {% for order in cart.get_custom_orders %}
                         <div class="col-12 col-md-6 p-2 ">
-                            <div class="product-item">
+                            <div class="product-item" style="height: auto">
                                 <div class="col-4 col-md-4 height">
                                     <div class="img-product">
                                         <img src="{{ order.get_image_cover.get_image_url }}"
@@ -368,11 +385,49 @@
                                     <div class="the-details">
                                         {{ order.description }}
                                         <hr>
-                                        <div>
-                                            <span> توضیحات ادمین : </span>
-                                            {{ order.note|default:'-' }}
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="m-1">
+                                                <div>
+                                                    <span> توضیحات ادمین : </span>
+                                                    {{ order.note|default:'-' }}
+                                                </div>
+                                                <div>
+                                                    <span> وزن : </span>
+                                                    {{ order.detail.weight|default:'-' }}
+                                                </div>
+                                                <div>
+                                                    <span> اسفنج : </span>
+                                                    {{ order.detail.taste_spongy|default:'-' }}
+                                                </div>
+                                                <div>
+                                                    <span> فیلینگ : </span>
+                                                    {{ order.detail.filing_cake|default:'-' }}
+                                                </div>
+                                            </div>
+                                            <div class="m-1">
+                                                <div>
+                                                    <span> خامه : </span>
+                                                    {{ order.detail.taste_cream|default:'-' }}
+                                                </div>
+                                                <div>
+                                                    <span>مقدار خامه :</span>
+                                                    {{ order.detail.amount_cream|default:'-' }}
+                                                </div>
+                                                <div>
+                                                    <span>نوشته روی کیک : </span>
+                                                    {{ order.detail.writing_on_cake|default:'-' }}
+                                                </div>
+                                                <div>
+                                                    <span>عکس های پیوست : </span>
+                                                    {% for image in order.get_images %}
+                                                        <a href="{{ image.get_image_url }}" class="btn btn-warning p-1">
+                                                            عکس
+                                                            {{ forloop.counter }}
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-3 p-2 price">
@@ -419,29 +474,41 @@
                                     </div>
 
                                 </div>
-                                {% if cart.factor.factorpayment %}
-                                    <div class="col-12 border-b p-2">
-                                        <div class="list-item credit" id="texts-etebar">
-                                            <span>هزینه ارسال</span>
-                                            <div>
-                                                <span class="price-el">{{ cart.factor.shipping_fee }}</span>
-                                                <span>تومان</span>
-                                            </div>
-                                        </div>
+                                <div id="payment-detail">
+                                    {% with factorpayment=cart.factor.factorpayment %}
+                                        {% if factorpayment %}
+                                            <div class="col-12 border-b p-2">
+                                                <div class="list-item credit" id="texts-etebar">
+                                                    <span>هزینه ارسال</span>
+                                                    <div>
+                                                        <span class="price-el">{{ cart.factor.shipping_fee }}</span>
+                                                        <span>تومان</span>
+                                                    </div>
+                                                </div>
 
-                                    </div>
-                                    <div class="col-12  p-2">
-                                        <div class="list-item">
-                                            <span>جمع سبد خرید</span>
-                                            <div>
-                                            <span class="price-el">
-                                            {{ cart.factor.price }}
-                                        </span>
-                                                <span>تومان</span>
                                             </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
+                                            <div class="col-12  p-2">
+                                                <div class="list-item">
+                                                    <span>کد رهگیری درگاه بانکی</span>
+                                                    <div>
+                                                        {{ factorpayment.ref_id }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12  p-2">
+                                                <div class="list-item">
+                                                    <span>جمع سبد خرید</span>
+                                                    <div>
+                                                <span class="price-el">
+                                                {{ factorpayment.price_paid }}
+                                                </span>
+                                                        <span>تومان</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
                             </div>
 
                         </div>
@@ -501,6 +568,10 @@
                 cnt_choice_address.querySelector('select').removeAttribute('required')
             }
         })
+
+        function print_factor() {
+            window.print()
+        }
 
     </script>
 
